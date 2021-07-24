@@ -118,7 +118,7 @@ function showWriteForm(){
 							<% } %>
 							<!-- 이전 페이지 그룹으로 이동 -->
 							<% if((currentPage -10 ) < startPage && (currentPage - 10) > 1){ %>
-									<a href="/sesmi/blist?page=<%= startPage - 10 %>">[이전그룹] </a> &nbsp;
+									<a href="/semi/blist?page=<%= startPage - 10 %>">[이전그룹] </a> &nbsp;
 							<% }else{ %>
 									[이전그룹] &nbsp;
 							<% } %>
