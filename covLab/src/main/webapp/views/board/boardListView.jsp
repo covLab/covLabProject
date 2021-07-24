@@ -71,7 +71,7 @@ function showWriteForm(){
 									<option value="searchboarddate">작성일</option>
 								</select> &nbsp;
 								<input id="searchKeyword" name="searchKeyword" type="text">
-								<input type="submit" value="검색 ">
+								<input type="submit" value="검색 " class="btn btn-primary">
 							</div>
 							
 							<table class="display table table-borderd table-hover">
@@ -118,7 +118,7 @@ function showWriteForm(){
 							<% } %>
 							<!-- 이전 페이지 그룹으로 이동 -->
 							<% if((currentPage -10 ) < startPage && (currentPage - 10) > 1){ %>
-									<a href="/first/blist?page=<%= startPage - 10 %>">[이전그룹] </a> &nbsp;
+									<a href="/sesmi/blist?page=<%= startPage - 10 %>">[이전그룹] </a> &nbsp;
 							<% }else{ %>
 									[이전그룹] &nbsp;
 							<% } %>
@@ -145,7 +145,11 @@ function showWriteForm(){
 							<% } %>
 							
 							<div align="right">
-							<button onclick="showWriteForm();">글쓰기</button>
+							<% if(false){ //로그인 안했을 때 %>
+							<button 로그인 창으로 넘어가기>글쓰기</button>
+							<% }else{  %>
+							<button onclick="showWriteForm();" class="btn btn-primary wrtie">글쓰기</button>
+							<% } %>
 							</div>
 						</div>
 					</div>

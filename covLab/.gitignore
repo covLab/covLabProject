@@ -35,5 +35,4 @@ hs_err_pid*
 .loadpath
 .buildpath
 /bin/
-*.java
 /build/

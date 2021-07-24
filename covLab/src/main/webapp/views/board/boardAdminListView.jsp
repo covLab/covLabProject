@@ -7,7 +7,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>게시판</title>
-<!--Focus Admin: Creative Admin Dashboard  -->
 
 <%@ include file="../common/stylesheet.jsp"%>
 <%@ include file="../common/sidebar.jsp"%>
