@@ -58,7 +58,7 @@ public class BoardDao {
 
 			while (rset.next()) {
 				Board board = new Board();
-
+				
 				board.setBoardNo(rset.getInt("board_no"));
 				board.setBoardTitle(rset.getString("board_title"));
 				board.setBoardWriter(rset.getString("board_writer"));
