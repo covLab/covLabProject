@@ -70,7 +70,6 @@
 			title : "현위치"
 		});
 
-
 		var locations = [ [ '강남구보건소	02-3423-5555', 37.5162581, 127.042214 ],
 				[ '삼성서울병원	02-3410-2114', 37.4881568, 127.0855952 ],
 				[ '연세대학교의과대학강남세브란스병원	02-2019-3114', 37.4927454, 127.0463152 ],
@@ -122,11 +121,24 @@
 			outDiv.innerHTML = "에러발생 : " + err.code;
 		}
 	}
+	
+	function checkOnlyOne(element) {
+		  
+		  const checkboxes 
+		      = document.getElementsByName("list_order");
+		  
+		  checkboxes.forEach((cb) => {
+		    cb.checked = false;
+		  })
+		  
+		  element.checked = true;
+		}
 </script>
 </head>
 
 <body onload="javascript:locationTest();">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+		rel='stylesheet' type='text/css' />
 </head>
 <body>
 	<div class="content-wrap">
@@ -159,6 +171,16 @@
 				</div>
 				<!-- /# row -->
 				<section id="main-content">
+					<form action="list_option.jsp">
+						<input type='checkbox' name='list_order' value='dist'  onclick='checkOnlyOne(this)'/>거리순 <input
+							type='checkbox' name='list_order' value='amnt' onclick='checkOnlyOne(this)'/>수량순 <select
+							name="list_option_key" onchange="handleOnList(this)">
+							<option value="none">=== 선택 ===</option>
+							<option value="dist">화이자</option>
+							<option value="dist">얀센</option>
+							<option value="dist">AZ</option>
+						</select>
+					</form>
 					<div class="row">
 
 
