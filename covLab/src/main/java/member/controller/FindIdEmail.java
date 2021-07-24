@@ -32,17 +32,28 @@ public class FindIdEmail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
 		
-		String email = request.getParameter("email");
+		String useremail = request.getParameter("useremail");
+		String username = request.getParameter("username");
+		String userid= new MemberService().searchUserIdEmail(useremail,username);
+		System.out.print(useremail + username);
 		
-		
-		int idCount= new MemberService().searchUser(email);
-		System.out.print(email);
-		RequestDispatcher view = null;
-		if(idCount > 0 ) { //팝업창
-			   response.sendRedirect("/semi/views/member/");
+		if(userid != null ) {
+			RequestDispatcher view =request.getRequestDispatcher("views/member/findid.jsp");
+			request.setAttribute("userid", userid);
+			  view.forward(request, response);
+			 System.out.println(userid);
+		}else {
+			
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+					request.setAttribute("message", 
+							"회원 정보가 잘못 입력되었거나, 없습니다.");
+					view.forward(request, response);
+				
+					
+					
 		}
-
-
+       
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -37,7 +37,7 @@ request.setCharacterEncoding("utf-8");
 		
 		
 		int idCount = new MemberService().searchEmail(useremail);
-		
+		System.out.println(useremail);
 		String returnValue = null;  
 		if(idCount != 0) {
 			returnValue = "ok";
