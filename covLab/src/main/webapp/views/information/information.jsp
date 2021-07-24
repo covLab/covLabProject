@@ -137,7 +137,9 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
 <a class="btn" href="qna.jsp">QnA</a>
 <hr>
 <!-- 3. 실시간 뉴스 -->
-<h6>크롤링으로 실시간 뉴스 가져오기</h6>
+<h6>크롤링으로 실시간 뉴스 가져오기
+ㅡ로민어ㅣ머ㅣㅇ붖ㄷㅂㄱㄱㄷㄱ</h6>
+
 
 <hr>
 

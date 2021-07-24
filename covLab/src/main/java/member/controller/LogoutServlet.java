@@ -2,27 +2,24 @@ package member.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import member.model.servcie.MemberService;
-import member.model.vo.Member;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class MemberCheckServlet
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet("/mcheck")
-public class MemberCheckServlet extends HttpServlet {
+@WebServlet("/logout")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberCheckServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +28,17 @@ public class MemberCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		// 로그아웃 처리용 컨트롤러
 		
-		String username = request.getParameter("username");
-		String userrn = request.getParameter("userrn");
+		//request 에 등록되어 있는 세션객체의 ID 를 이용해서
+		//세션객체를 조회함
+		HttpSession session = request.getSession(false);
 		
-		int idCount= new MemberService().searchUser(username, userrn);
-		System.out.print(username + userrn);
-		RequestDispatcher view = null;
-		if(idCount > 0 ) { //이미 등록된 회원
-			   response.sendRedirect("/semi/views/member/login.jsp");
-		}else { //없는회원
-			 response.sendRedirect("/semi/views/member/enroll.html");
-			    //view.forward(request, response);
+		//해당 세션객체가 존재하면, 세션객체를 없앰
+		if(session != null) {
+			session.invalidate();
+			//index.jsp 페이지로 이동함
+			response.sendRedirect("indes.jsp");
 		}
 	}
 

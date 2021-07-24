@@ -1,8 +1,8 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +13,16 @@ import member.model.servcie.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberCheckServlet
+ * Servlet implementation class IdCheckServlet
  */
-@WebServlet("/mcheck")
-public class MemberCheckServlet extends HttpServlet {
+@WebServlet("/idcheck")
+public class IdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberCheckServlet() {
+    public IdCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +31,26 @@ public class MemberCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+         String username = request.getParameter("username");
+		 String userrn = request.getParameter("userrn");
+		//Member member = new MemberService().selectCheckId2(username, userrn);
 		
-		String username = request.getParameter("username");
-		String userrn = request.getParameter("userrn");
+        int idCount = new MemberService().selectCheckId2(username, userrn);
+       
+		String returnValue = null;  
 		
-		int idCount= new MemberService().searchUser(username, userrn);
-		System.out.print(username + userrn);
-		RequestDispatcher view = null;
-		if(idCount > 0 ) { //이미 등록된 회원
-			   response.sendRedirect("/semi/views/member/login.jsp");
-		}else { //없는회원
-			 response.sendRedirect("/semi/views/member/enroll.html");
-			    //view.forward(request, response);
+		if(idCount != 0) {
+			returnValue = "ok";
+		}else {
+			returnValue = "duplicate";
 		}
+		
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(returnValue);
+		out.flush();
+		out.close();
 	}
 
 	/**

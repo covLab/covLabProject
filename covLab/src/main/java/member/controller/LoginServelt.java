@@ -1,6 +1,10 @@
 package member.controller;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,25 +42,25 @@ public class LoginServelt extends HttpServlet {
 		String userid = request.getParameter("userid");
 		String userpw = request.getParameter("userpw");
 
-		//String  cryptoUserpwd = null;
-//				try {
-//					MessageDigest md = MessageDigest.getInstance("SHA-512");
-//					
-//					byte[] pwdValues = userpwd.getBytes(Charset.forName("UTF-8"));
-//					
-//					md.update(pwdValues);
-//				
-//					cryptoUserpwd = Base64.getEncoder().encodeToString(pwdValues);
-//		
-//					System.out.println(cryptoUserpwd);
-//					System.out.println(cryptoUserpwd.length());
-//					
-//				} catch (NoSuchAlgorithmException e) {
-//					e.printStackTrace();
-//				}
+		String  cryptoUserpw = null;
+				try {
+					MessageDigest md = MessageDigest.getInstance("SHA-512");
+					
+					byte[] pwValues = userpw.getBytes(Charset.forName("UTF-8"));
+					
+					md.update(pwValues);
+				
+					cryptoUserpw = Base64.getEncoder().encodeToString(pwValues);
+		
+					System.out.println(cryptoUserpw);
+					System.out.println(cryptoUserpw.length());
+					
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+				}
 		
 		
-		Member member = new MemberService().selectLogin(userid, userpw);
+		Member member = new MemberService().selectLogin(userid, cryptoUserpw);
 		
 		
 		if(member != null && member.getUserGrade().equals("U")) { //로그인 성공
