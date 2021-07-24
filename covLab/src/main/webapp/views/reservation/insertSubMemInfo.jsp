@@ -23,26 +23,9 @@ input:focus {
 }
 </style>
 <script type="text/javascript">
-	function agree(serial, rn, reg, rev){
+	function insertSub(){
 		
-	 	if (document.getElementById("agreeCheck").checked != true){
-	 		alert("약관에 동의하십시오.");
-		}else{
-			var url="/semi/insertres";
-			var fnm = document.info;
-			var serial_num = fnm.serial_num.value;
-			var user_rn =fnm.user_rn.value;
-			var reg_bus_no = fnm.reg_bus_no.value;
-			var rev_date = fnm.rev_date.value
-			
-			window.name = "subMemInfoPopupPage";
-			
-	        fnm.method = "post";
-	        fnm.action = url;
-	        alert("실행");
-	        
-	        fnm.submit();
-		}
+	 	
 	 	
 	}
 </script>
@@ -75,7 +58,7 @@ input:focus {
 						<input type="hidden" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" id="serial">
 						<input type="hidden" name="reg_bus_no" value=<%=hp.getReg_bus_no()%> class="inputBox" id="reg">
 						<input type="hidden" name="user_no" value=<%=mb.getUserNo()%> class="inputBox" id="no"> 
-						<input type="button" onclick="insertSub('no', 'serial', 'reg', 'ioc')" value="예약하기">
+						<input type="button" onclick="insertSub()" value="예약하기">
 
 					</form>
 
