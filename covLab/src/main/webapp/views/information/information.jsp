@@ -31,379 +31,229 @@
 
 <%@ include file="../common/sidebar.jsp"%>
 <%@ include file="../common/topbar.jsp"%>
+<style>
+/* 자동배너 부분 */
+html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
+    *, *:before, *:after { box-sizing: inherit; }
+    .clearfix:after { content: ''; display: block; clear: both; float: none; }
+    .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
+    .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
+    .link:hover, .link:focus { color: #9fd6c2; }
+    /* container - body */
+    #container { width: 1000px; margin: auto; }
+    .slide_wrap { position: relative; width: 400px; margin: auto; padding-bottom: 30px; }
+    .slide_box { width: 100%; margin: auto; overflow-x: hidden; }
+    /*밑에가 슬라이드 이미지 칸에 대한 부분*/
+    .slide_content { display: table; float: left; width: 400px; height: 400px; }
+    /*밑에가 슬라이드 내의 글자*/
+    .slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
+    .slide_content.slide01 { background: #ddbdff; }
+    .slide_content.slide02 { background: #9fd6c2; }
+    .slide_content.slide03 { background: #abe2f7; }
+    .slide_content.slide04 { background: #f08c78; }
+    /* .slide_content.slide05 { background: #fbdb65; } */
+    .slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: white; background: navy; border: 1px solid #ddd; cursor: pointer; }
+    .slide_btn_box > .slide_btn_prev { left: -100px; }
+    .slide_btn_box > .slide_btn_next { right: -100px; }
+    .slide_pagination { position: absolute; left: 50%; bottom: 0; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+    .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
+    .slide_pagination .dot.dot_active { background: #333; }
+    .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
+ 
+ /* 두번째 버튼 부분 */ 
+ .btn {
+  text-decoration: none;
+  font-size:15pt;  
+  background-color: navy;
+  color: white;
+  padding:10px 20px 10px 20px;
+  margin:10px;
+  display:inline-block;
+  border-radius: 10px;
+  transition:all 0.2s;
+  text-shadow:0px -2px black;
+ }
+ .btn:active {
+  transform:translateY(5px);
+ }
+</style>
+
 
 </head>
 
+
 <body>
+<h5>뉴스 /  백신 정보</h5>
+<hr>
 
+<!-- 1. 코로나/백신 정보 (자동 슬라이드) -->
+<h6>자동 배너, 코로나 확진자 수/백신접종현황/예방접종 사전예약 날짜/QnA</h6>
 
-
-    <div class="content-wrap">
-        <div class="main">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-8 p-r-0 title-margin-right">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <h1>Hello, <span>Welcome Here</span></h1>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">UI-Tab</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                </div>
-                <!-- /# row -->
-                <section id="main-content">
-                    <div class="row">
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-body">
-											<h4 class="card-title">Default Tab</h4>
-											<!-- Nav tabs -->
-											<ul class="nav nav-tabs" role="tablist">
-												<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-												<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-												<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-											</ul>
-											<!-- Tab panes -->
-											<div class="tab-content tabcontent-border">
-												<div class="tab-pane active" id="home" role="tabpanel">
-													<div class="p-20">
-														<h5>Best Clean Tab ever</h5>
-														<h6>you can use it with the small code</h6>
-														<p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
-													</div>
-												</div>
-												<div class="tab-pane  p-20" id="profile" role="tabpanel">2</div>
-												<div class="tab-pane p-20" id="messages" role="tabpanel">3</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-body p-b-0">
-											<h4 class="card-title">Customtab Tab</h4>
-										<!-- Nav tabs -->
-										<ul class="nav nav-tabs customtab" role="tablist">
-											<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-											<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-											<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages2" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-										</ul>
-										<!-- Tab panes -->
-										<div class="tab-content">
-											<div class="tab-pane active" id="home2" role="tabpanel">
-												<div class="p-20">
-													<h5>Best Clean Tab ever</h5>
-													<h6>you can use it with the small code</h6>
-													<p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
-												</div>
-											</div>
-											<div class="tab-pane  p-20" id="profile2" role="tabpanel">2</div>
-											<div class="tab-pane p-20" id="messages2" role="tabpanel">3</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- row -->
-							<!-- row -->
-							<div class="row">
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-body">
-											<h4 class="card-title">Vertical Tab</h4>
-											<!-- Nav tabs -->
-											<div class="vtabs">
-												<ul class="nav nav-tabs tabs-vertical" role="tablist">
-													<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home4" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span> </a> </li>
-													<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile4" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-													<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages4" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-												</ul>
-												<!-- Tab panes -->
-												<div class="tab-content">
-													<div class="tab-pane active" id="home4" role="tabpanel">
-														<div class="p-20">
-															<h5>Best Clean Tab ever</h5>
-															<h6>you can use it with the small code</h6>
-															<p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
-														</div>
-													</div>
-													<div class="tab-pane p-20" id="profile4" role="tabpanel">2</div>
-													<div class="tab-pane p-20" id="messages4" role="tabpanel">3</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-body">
-											<h4 class="card-title">Customtab vertical Tab</h4>
-											<!-- Nav tabs -->
-											<div class="vtabs customvtab">
-												<ul class="nav nav-tabs tabs-vertical" role="tablist">
-													<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home3" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span> </a> </li>
-													<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile3" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-													<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages3" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-												</ul>
-												<!-- Tab panes -->
-												<div class="tab-content">
-													<div class="tab-pane active" id="home3" role="tabpanel">
-														<div class="p-20">
-															<h5>Best Clean Tab ever</h5>
-															<h6>you can use it with the small code</h6>
-															<p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
-														</div>
-													</div>
-													<div class="tab-pane  p-20" id="profile3" role="tabpanel">2</div>
-													<div class="tab-pane p-20" id="messages3" role="tabpanel">3</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- row -->
-							<!-- row -->
-							<div class="row">
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-body">
-											<h4 class="card-title m-b-40">Tab with dropdown</h4>
-											<ul class="nav nav-tabs" id="myTab" role="tablist">
-												<li class="nav-item"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home5" role="tab" aria-controls="home5" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-												<li class="nav-item"> <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile5" role="tab" aria-controls="profile"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a></li>
-												<li class="nav-item dropdown">
-													<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-														<span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Dropdown</span>
-													</a>
-													<div class="dropdown-menu"> <a class="dropdown-item" id="dropdown1-tab" href="#dropdown1" role="tab" data-toggle="tab" aria-controls="dropdown1">@fat</a> <a class="dropdown-item" id="dropdown2-tab" href="#dropdown2" role="tab" data-toggle="tab" aria-controls="dropdown2">@mdo</a> </div>
-												</li>
-											</ul>
-											<div class="tab-content tabcontent-border p-20" id="myTabContent">
-												<div role="tabpanel" class="tab-pane fade show active" id="home5" aria-labelledby="home-tab">
-													<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-												</div>
-												<div class="tab-pane fade" id="profile5" role="tabpanel" aria-labelledby="profile-tab">
-													<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-												</div>
-												<div class="tab-pane fade" id="dropdown1" role="tabpanel" aria-labelledby="dropdown1-tab">
-													<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-												</div>
-												<div class="tab-pane fade" id="dropdown2" role="tabpanel" aria-labelledby="dropdown2-tab">
-													<p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-body p-b-0">
-											<h4 class="card-title">Customtab2 Tab</h4>
-											<!-- Nav tabs -->
-											<ul class="nav nav-tabs customtab2" role="tablist">
-												<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home7" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-												<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile7" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-												<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages7" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
-											</ul>
-											<!-- Tab panes -->
-											<div class="tab-content">
-												<div class="tab-pane active" id="home7" role="tabpanel">
-													<div class="p-20">
-														<h5>Best Clean Tab ever</h5>
-														<h6>you can use it with the small code</h6>
-														<p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
-													</div>
-												</div>
-												<div class="tab-pane  p-20" id="profile7" role="tabpanel">2</div>
-												<div class="tab-pane p-20" id="messages7" role="tabpanel">3</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- row -->
-							<div class="row">
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-body">
-											<h4 class="card-title">Nav Pills Tabs</h4>
-											<ul class="nav nav-pills m-t-30 m-b-30">
-												<li class=" nav-item"> <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Tab One</a> </li>
-												<li class="nav-item"> <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Tab Two</a> </li>
-												<li class="nav-item"> <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="true">Tab Three</a> </li>
-											</ul>
-											<div class="tab-content br-n pn">
-												<div id="navpills-1" class="tab-pane active">
-													<div class="row">
-														<div class="col-md-4"> <img src="assets/images/c1.jpg" class="img-fluid thumbnail m-r-15"> </div>
-														<div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-															<p>
-																<br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-														</div>
-													</div>
-												</div>
-												<div id="navpills-2" class="tab-pane">
-													<div class="row">
-														<div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-															<p>
-																<br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-														</div>
-														<div class="col-md-4"> <img src="assets/images/c1.jpg" class="img-fluid thumbnail mr25"> </div>
-													</div>
-												</div>
-												<div id="navpills-3" class="tab-pane">
-													<div class="row">
-														<div class="col-md-4"> <img src="assets/images/c1.jpg" class="img-fluid thumbnail mr25"> </div>
-														<div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-															<p>
-																<br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-body">
-											<h4 class="card-title">Nav Pills Tabs</h4>
-											<ul class="nav nav-pills m-t-30 justify-content-end m-b-30">
-												<li class=" nav-item"> <a href="#navpills2-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Tab One</a> </li>
-												<li class="nav-item"> <a href="#navpills2-2" class="nav-link" data-toggle="tab" aria-expanded="false">Tab Two</a> </li>
-												<li class="nav-item"> <a href="#navpills2-3" class="nav-link" data-toggle="tab" aria-expanded="true">Tab Three</a> </li>
-											</ul>
-											<div class="tab-content br-n pn">
-												<div id="navpills2-1" class="tab-pane active">
-													<div class="row">
-														<div class="col-md-4"> <img src="assets/images/c1.jpg" class="img-fluid thumbnail m-r-15"> </div>
-														<div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-															<p>
-																<br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-														</div>
-													</div>
-												</div>
-												<div id="navpills2-2" class="tab-pane">
-													<div class="row">
-														<div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-															<p>
-																<br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-														</div>
-														<div class="col-md-4"> <img src="assets/images/c1.jpg" class="img-fluid thumbnail mr25"> </div>
-													</div>
-												</div>
-												<div id="navpills2-3" class="tab-pane">
-													<div class="row">
-														<div class="col-md-4"> <img src="assets/images/c1.jpg" class="img-fluid thumbnail mr25"> </div>
-														<div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-															<p>
-																<br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-body">
-											<h4 class="card-title">Tab with icon</h4>
-											<!-- Nav tabs -->
-											<ul class="nav nav-tabs" role="tablist">
-												<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home8" role="tab"><span><i class="ti-home"></i></span></a> </li>
-												<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile8" role="tab"><span><i class="ti-user"></i></span></a> </li>
-												<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages8" role="tab"><span><i class="ti-email"></i></span></a> </li>
-											</ul>
-											<!-- Tab panes -->
-											<div class="tab-content tabcontent-border">
-												<div class="tab-pane active" id="home8" role="tabpanel">
-													<div class="p-20">
-														<h5>Best Clean Tab ever</h5>
-														<h6>you can use it with the small code</h6>
-														<p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
-													</div>
-												</div>
-												<div class="tab-pane  p-20" id="profile8" role="tabpanel">2</div>
-												<div class="tab-pane p-20" id="messages8" role="tabpanel">3</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-body">
-											<h4 class="card-title">Customtab vertical Tab</h4>
-											<!-- Nav tabs -->
-											<div class="vtabs ">
-												<ul class="nav nav-tabs tabs-vertical" role="tablist">
-													<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home9" role="tab"><span><i class="ti-home"></i></span></a> </li>
-													<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile9" role="tab"><span><i class="ti-user"></i></span></a> </li>
-													<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages9" role="tab"><span><i class="ti-email"></i></span></a> </li>
-												</ul>
-												<!-- Tab panes -->
-												<div class="tab-content">
-													<div class="tab-pane active" id="home9" role="tabpanel">
-														<div class="p-20">
-															<h5>Best Clean Tab ever</h5>
-															<h6>you can use it with the small code</h6>
-															<p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
-														</div>
-													</div>
-													<div class="tab-pane  p-20" id="profile9" role="tabpanel">2</div>
-													<div class="tab-pane p-20" id="messages9" role="tabpanel">3</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>	
-
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="footer">
-                                <p>2018 Â© Admin Board. - <a href="#">example.com</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
+<!-- 자동배너 (이미지 넣고, 수정해야함) -->
+  <div id="container">
+    <div class="slide_wrap">
+      <div class="slide_box">
+        <div class="slide_list clearfix">
+          <div class="slide_content slide01">
+            <p>1</p>
+          </div>
+          <div class="slide_content slide02">
+            <p>2</p>
+          </div>
+          <div class="slide_content slide03">
+            <p>3</p>
+          </div>
+          <div class="slide_content slide04">
+            <p>4</p>
+          </div>
+         <!--<div class="slide_content slide05">
+            <p>5</p>
+          </div>  --> 
         </div>
+        <!-- // .slide_list -->
+      </div>
+      <!-- // .slide_box -->
+      <div class="slide_btn_box">
+        <button type="button" class="slide_btn_prev">이전</button>
+        <button type="button" class="slide_btn_next">다음</button>
+      </div>
+      <!-- // .slide_btn_box -->
+      <ul class="slide_pagination"></ul>
+      <!-- // .slide_pagination -->
     </div>
+    <!-- // .slide_wrap -->
+  </div>
+  <!-- // .container -->
+
+
+
+<hr>
+
+<!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
+<h6>버튼을 클릭하면 해당 페이지로 이동함</h6>
+<a class="btn" href="coronaInfo.jsp">코로나 정보</a>
+<a class="btn" href="vaccinInfo.jsp">백신 정보</a>
+<a class="btn" href="vaccination.jsp">예방접종 정보</a>
+<a class="btn" href="qna.jsp">QnA</a>
+<hr>
+<!-- 3. 실시간 뉴스 -->
+<h6>크롤링으로 실시간 뉴스 가져오기</h6>
+
+<hr>
+
 
 
 
     
+  
     <!-- jquery vendor -->
     <script src="/semi/resources/js/lib/jquery.min.js"></script>
     <script src="/semi/resources/js/lib/jquery.nanoscroller.min.js"></script>
-    <!-- nano scroller -->
-    <script src="/semi/resources/js/lib/menubar/sidebar.js"></script>
-    <script src="/semi/resources/js/lib/preloader/pace.min.js"></script>
-    <!-- sidebar -->
-    
-    <!-- bootstrap -->
-
-
     <script src="/semi/resources/js/lib/bootstrap.min.js"></script><script src="assets/js/scripts.js"></script>
     <!-- scripit init-->
 
+<!-- 자동배너 부분의 스크립트 -->
+<script>
+    (function () {
+      const slideList = document.querySelector('.slide_list');  // Slide parent dom
+      const slideContents = document.querySelectorAll('.slide_content');  // each slide dom
+      const slideBtnNext = document.querySelector('.slide_btn_next'); // next button
+      const slideBtnPrev = document.querySelector('.slide_btn_prev'); // prev button
+      const pagination = document.querySelector('.slide_pagination');
+      const slideLen = slideContents.length;  // slide length
+      const slideWidth = 400; // slide width
+      const slideSpeed = 300; // slide speed
+      const startNum = 0; // initial slide index (0 ~ 4)
+      
+      slideList.style.width = slideWidth * (slideLen + 2) + "px";
+      
+      // Copy first and last slide
+      let firstChild = slideList.firstElementChild;
+      let lastChild = slideList.lastElementChild;
+      let clonedFirst = firstChild.cloneNode(true);
+      let clonedLast = lastChild.cloneNode(true);
+
+      // Add copied Slides
+      slideList.appendChild(clonedFirst);
+      slideList.insertBefore(clonedLast, slideList.firstElementChild);
+
+      // Add pagination dynamically
+      let pageChild = '';
+      for (var i = 0; i < slideLen; i++) {
+        pageChild += '<li class="dot';
+        pageChild += (i === startNum) ? ' dot_active' : '';
+        pageChild += '" data-index="' + i + '"><a href="#"></a></li>';
+      }
+      pagination.innerHTML = pageChild;
+      const pageDots = document.querySelectorAll('.dot'); // each dot from pagination
+
+      slideList.style.transform = "translate3d(-" + (slideWidth * (startNum + 1)) + "px, 0px, 0px)";
+
+      let curIndex = startNum; // current slide index (except copied slide)
+      let curSlide = slideContents[curIndex]; // current slide dom
+      curSlide.classList.add('slide_active');
+
+      /** Next Button Event */
+      slideBtnNext.addEventListener('click', function() {
+        if (curIndex <= slideLen - 1) {
+          slideList.style.transition = slideSpeed + "ms";
+          slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 2)) + "px, 0px, 0px)";
+        }
+        if (curIndex === slideLen - 1) {
+          setTimeout(function() {
+            slideList.style.transition = "0ms";
+            slideList.style.transform = "translate3d(-" + slideWidth + "px, 0px, 0px)";
+          }, slideSpeed);
+          curIndex = -1;
+        }
+        curSlide.classList.remove('slide_active');
+        pageDots[(curIndex === -1) ? slideLen - 1 : curIndex].classList.remove('dot_active');
+        curSlide = slideContents[++curIndex];
+        curSlide.classList.add('slide_active');
+        pageDots[curIndex].classList.add('dot_active');
+      });
+
+      /** Prev Button Event */
+      slideBtnPrev.addEventListener('click', function() {
+        if (curIndex >= 0) {
+          slideList.style.transition = slideSpeed + "ms";
+          slideList.style.transform = "translate3d(-" + (slideWidth * curIndex) + "px, 0px, 0px)";
+        }
+        if (curIndex === 0) {
+          setTimeout(function() {
+            slideList.style.transition = "0ms";
+            slideList.style.transform = "translate3d(-" + (slideWidth * slideLen) + "px, 0px, 0px)";
+          }, slideSpeed);
+          curIndex = slideLen;
+        }
+        curSlide.classList.remove('slide_active');
+        pageDots[(curIndex === slideLen) ? 0 : curIndex].classList.remove('dot_active');
+        curSlide = slideContents[--curIndex];
+        curSlide.classList.add('slide_active');
+        pageDots[curIndex].classList.add('dot_active');
+      });
+
+      /** Pagination Button Event */
+      let curDot;
+      Array.prototype.forEach.call(pageDots, function (dot, i) {
+        dot.addEventListener('click', function (e) {
+          e.preventDefault();
+          curDot = document.querySelector('.dot_active');
+          curDot.classList.remove('dot_active');
+          
+          curDot = this;
+          this.classList.add('dot_active');
+
+          curSlide.classList.remove('slide_active');
+          curIndex = Number(this.getAttribute('data-index'));
+          curSlide = slideContents[curIndex];
+          curSlide.classList.add('slide_active');
+          slideList.style.transition = slideSpeed + "ms";
+          slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
+        });
+      });
+    })();
+  </script>
 
 
 </body>
-
-</html>
