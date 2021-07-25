@@ -25,6 +25,9 @@ function requestDelete(){
 	       return;
 	   }
 	}
+function requestReply(){
+	location.href = "/semi/views/board/commentsWriteForm.jsp?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>"
+}
 
 </script>
 
@@ -116,7 +119,7 @@ function requestDelete(){
 						
 						<% } %>
 						<hr>
-						<form action="/semi/cwrite?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>" method="post">
+						<form action="/semi/cwrite" method="post">
 						<table align="center">
 	
 								<tr>
