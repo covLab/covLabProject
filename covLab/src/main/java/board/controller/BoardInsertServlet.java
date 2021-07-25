@@ -1,4 +1,3 @@
-@@ -1,76 +0,0 @@
 package board.controller;
 
 import java.io.File;
@@ -40,7 +39,6 @@ public class BoardInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// �Խñ� ���
 
 		request.setCharacterEncoding("utf-8");
 		
@@ -50,16 +48,15 @@ public class BoardInsertServlet extends HttpServlet {
 		board.setBoardWriter(request.getParameter("writer"));
 		board.setBoardContent(request.getParameter("content"));
 
-		
-		// 6. ���� �޼ҵ�� �����ϰ� ����ޱ�
+
 		int result = new BoardService().insertBoard(board);
 
-		// 7. ���� ����� ����/���� ������ ��������
+
 		if (result > 0) {
 			response.sendRedirect("blist?page=1");
 		} else {
 			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "�ı� ��� ����...");
+			request.setAttribute("message", "게시글 작성 실패");
 			view.forward(request, response);
 		}
 	}

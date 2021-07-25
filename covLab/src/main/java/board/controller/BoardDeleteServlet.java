@@ -1,12 +1,16 @@
-@@ -1,62 +0,0 @@
 package board.controller;
 
+import java.io.File;
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import board.model.service.BoardService;
 
 /**
  * Servlet implementation class BoardDeleteServlet
@@ -29,23 +33,18 @@ public class BoardDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// �Խñ�(����, ���, ����) ���� ó���� ��Ʈ�ѷ�
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
-		int boardLevel = Integer.parseInt(request.getParameter("level"));
+		int currentPage = Integer.parseInt(request.getParameter("page"));
+		//int boardLevel = Integer.parseInt(request.getParameter("level"));
 
-		// ���� �޼ҵ�� ����
-		// ���� ����� ������ ��, ���� ������ ���ϵ� ���� ó����
-		if (new BoardService().deleteBoard(boardNum, boardLevel) > 0) {
-			// ���� ����� ������ ��, ���� ������ ���ϵ� ���� ó����
-			String renameFileName = request.getParameter("rfile");
-			if (renameFileName != null) {
-				String savePath = request.getSession().getServletContext().getRealPath("/resources/board_upfiles");
-				new File(savePath + "\\" + renameFileName).delete();
-			}
-			response.sendRedirect("/first/blist?page=1");
+		
+		if (new BoardService().deleteBoard(boardNo) > 0) {
+
+			response.sendRedirect("/semi/blist?page="+currentPage);
+			
 		} else {
 			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", boardNum + "�� �� ���� ����..");
+			request.setAttribute("message", boardNo + "번 글 삭제 실패..");
 			view.forward(request, response);
 		}
 	}
