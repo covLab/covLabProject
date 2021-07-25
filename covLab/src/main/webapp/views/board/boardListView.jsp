@@ -30,7 +30,7 @@
 
 <script type="text/javascript">
 function showWriteForm(){
-	location.href="/semi/views/board/boardWirteForm.jsp";
+	location.href="/semi/views/board/boardWriteForm.jsp";
 }
 </script>
 </head>
@@ -93,7 +93,7 @@ function showWriteForm(){
 									%>
 									<tr>
 										<td><%=b.getBoardNo()%></td>
-										<td><%=b.getBoardTitle()%></td>
+										<td><a href="/semi/bdetail?bno=<%= b.getBoardNo() %>&page=<%= currentPage %>"><%=b.getBoardTitle()%></a></td>
 										<td><%=b.getBoardWriter()%></td>
 										<td><%=b.getBoardDate()%></td>
 										<td><%=b.getViewCnt()%></td>

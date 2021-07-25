@@ -1,7 +1,7 @@
-@@ -1,78 +0,0 @@
 package board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.comments.model.service.CommentsService;
+import board.comments.model.vo.Comments;
 import board.model.service.BoardService;
 import board.model.vo.Board;
 
@@ -34,34 +36,42 @@ public class BoardDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// �Խñ� �󼼺��� ó���� ��Ʈ�ѷ�
+		
 		
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		
-		// ������ ó���� ���� ����
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
 
-		// ���� ��ü �޼ҵ� �����ϰ� ����ޱ�
+
 		BoardService bservice = new BoardService();
 
-		// �ش� �ۿ� ���� ��ȸ�� 1���� : update
 		bservice.addReadCount(boardNo);
 
-		// �ش� �Խñ� ���� ���� : select
 		Board board = bservice.selectBoard(boardNo);
+		//System.out.println(board);
+		
+		CommentsService cservice = new CommentsService();
+		ArrayList<Comments> clist = cservice.selectComments(boardNo);
 
+		Comments comments = cservice.selectRef(boardNo);
+		//System.out.println(comments);
+		
+		
 		RequestDispatcher view = null;
 		if (board != null) {
 			view = request.getRequestDispatcher("views/board/boardDetailView.jsp");
 			request.setAttribute("board", board);
 			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("clist", clist);
+			request.setAttribute("comments", comments);
+			
 			view.forward(request, response);
 		} else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", boardNo + "�� �Խñ� ����ȸ ����...");
+			request.setAttribute("message", boardNo + "번 글 상세조회 실패..");
 			view.forward(request, response);
 		}
 	}

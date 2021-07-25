@@ -46,7 +46,7 @@ public class BoardDao {
 				+ "(select rownum rnum, board_no, board_title, board_writer, board_content, board_date, view_cnt, recommend_cnt "
 				+ "from "
 				+ "(select * from board "
-				+ "order by board_date desc)) "
+				+ "order by board_no desc)) "
 				+ "where rnum between ? and ?";
 
 		try {
@@ -84,7 +84,7 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "delete from board where boardno = ?";
+		String query = "delete from board where board_no = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -129,15 +129,13 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 
 		String query = "update board set view_cnt = view_cnt + 1 " + "where board_no = ?";
-
+		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, boardNo);
 
 			result = pstmt.executeUpdate();
 
-			
-			result= pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
