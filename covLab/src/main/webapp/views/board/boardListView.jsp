@@ -32,6 +32,7 @@
 function showWriteForm(){
 	location.href="/semi/views/board/boardWriteForm.jsp";
 }
+
 </script>
 </head>
 
@@ -62,17 +63,19 @@ function showWriteForm(){
                                 </div> -->
 						<!-- <div class="bootstrap-data-table-panel">-->
 						<div class="table-responsive">
-							<div>
+							
+							<div><form method="get" action="/semi/bsearch">
 								<select id="searchForm" name="searchCondition">
 									<option value="selectnone">== 검색 ==</option>
 									<option value="searchboardno">글 번호</option>
 									<option value="searchboardtitle">제 목</option>
 									<option value="searchboardwriter">작성자</option>
-									<option value="searchboarddate">작성일</option>
 								</select> &nbsp;
+								<label>검색어</label>
 								<input id="searchKeyword" name="searchKeyword" type="text">
-								<input type="submit" value="검색 " class="btn btn-primary">
-							</div>
+								<input type="submit" value="검색" class="btn btn-primary">
+							</form></div>
+							
 							
 							<table class="display table table-borderd table-hover">
 
