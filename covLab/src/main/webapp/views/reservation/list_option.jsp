@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+//데이터 받아오는 코드
 function handleOnList(e) {
 	  // 선택된 데이터 가져오기
 	  const value = e.value;
