@@ -132,13 +132,11 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
 <!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
 <h6>버튼을 클릭하면 해당 페이지로 이동함</h6>
 <a class="btn" href="coronaInfo.jsp">코로나 정보</a>
-<a class="btn" href="vaccinInfo.jsp">백신 정보</a>
-<a class="btn" href="vaccination.jsp">예방접종 정보</a>
+<a class="btn" href="vaccinInfo.jsp">백신/예방접종 정보</a>
 <a class="btn" href="qna.jsp">QnA</a>
 <hr>
 <!-- 3. 실시간 뉴스 -->
-<h6>크롤링으로 실시간 뉴스 가져오기
-ㅡ로민어ㅣ머ㅣㅇ붖ㄷㅂㄱㄱㄷㄱ</h6>
+<h6>크롤링으로 실시간 뉴스 가져오기</h6>
 
 
 <hr>
