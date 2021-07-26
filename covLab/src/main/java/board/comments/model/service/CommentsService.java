@@ -9,7 +9,7 @@ import board.comments.model.dao.CommentsDao;
 import board.comments.model.vo.Comments;
 
 public class CommentsService {
-	
+
 	CommentsDao cdao = new CommentsDao();
 
 	public ArrayList<Comments> selectComments(int boardRef) {
@@ -29,7 +29,19 @@ public class CommentsService {
 	public int insertComments(Comments comments) {
 		Connection conn = getConnection();
 		int result = cdao.insertComments(conn, comments);
-		if(result >0 ) {
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+			close(conn);		
+		}
+		return result;
+	}
+
+	public int deleteComments(int comNo, int boardRef, int cLevel) {
+		Connection conn = getConnection();
+		int result = cdao.deleteComments(conn, comNo, boardRef, cLevel);
+		if(result>0) {
 			commit(conn);
 		}else {
 			rollback(conn);
@@ -37,5 +49,4 @@ public class CommentsService {
 		close(conn);
 		return result;
 	}
-
 }

@@ -18,16 +18,25 @@
 function moveUpdateView() {
 	location.href = "/semi/bupview?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>";
 }
-function requestDelete(){
-	   if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-	      location.href = "/semi/bdelete?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>";
-	   }else{   //취소
-	       return;
-	   }
-	}
-function requestReply(){
-	location.href = "/semi/views/board/commentsWriteForm.jsp?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>"
+// 게시글 삭제
+function requestBoardDelete(){
+   if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+      location.href = "/semi/bdelete?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>";
+   }else{   //취소
+       return;
+   }
 }
+// 댓글 삭제 
+function requestCommentsDelete(){
+	if (confirm("정말 삭제하시겠습니까??") == true){
+		location.href = "/semi/cdelete?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>&cno=<%= comments.getComNo()%>&clevel=<%=comments.getComLevel()%>";
+	}else{
+		return;
+	}
+}
+<%-- function requestReply(){
+	location.href = "/semi/views/board/commentsWriteForm.jsp?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>"
+} --%>
 
 </script>
 
@@ -54,11 +63,11 @@ function requestReply(){
 
 						<table align="center">
 							<tr>
-								<th>제 목</th>
+								<th width="100">제 목</th>
 								<td><%= board.getBoardTitle() %></td>
 							</tr>
 							<tr>
-								<th>작성자</th>
+								<th width="200">작성자</th>
 								<td><%= board.getBoardWriter() %></td>
 							</tr>
 							<tr>
@@ -79,9 +88,9 @@ function requestReply(){
 									<%-- <% if(loginMember != null){ 
 											if(loginMember.getUserName().equals(board.getBoardWriter())) { //본인글일때%>
 											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
-											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
+											<button onclick="requestBoardDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
 									<% }else if(loginMember.getUserGrade().equals("U")){ %>
-											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;	
+											<button onclick="requestBoardDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;	
 											<button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp;
 									<% } else { //로그인했는데 본인글이 아닐때 %>
 										
@@ -90,7 +99,7 @@ function requestReply(){
 									
 									<%-- 테스트용 버튼 --%>
 											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
-											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
+											<button onclick="requestBoardDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
 									
 								</th>
 							</tr>
@@ -101,11 +110,28 @@ function requestReply(){
 						<%-- 댓글이 있을 때 --%>
 						<% if (clist != null){ %>
 						<% for(Comments c : clist){ %>
-						<hr>
+						
+						<% if(c.getComLevel() == c.getComNo()){ %>
+							<hr>		
+						<% } else { %><br><% } %>
 						<table align="center">
+
 							<tr>
-								<th>아이디</th>
-								<td><%= c.getComWriter() %></td>
+								<td width="50px" rowspan="3" valign="top">
+								<% if(c.getComLevel() != c.getComNo()){ //원글의 댓글 %>
+									&nbsp; &nbsp; └ &nbsp; &nbsp;
+								<% }else{ %>
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+								<% } %>
+								</td>
+								<th width="100">아이디</th>
+								<td width="200" align="right"><%= c.getComWriter() %></td>
+								<td rowspan="3" width="130" align="right">
+									<input type="button" value="답글달기" class="btn btn-primary">
+									<!-- 작성자와 로그인한 사람이 같을 경우 -->
+									<br>
+									<button onclick="requestCommentsDelete(); return false;" class="btn btn-danger">댓글삭제</button>
+								</td>
 							</tr>
 							<tr>
 								<th>작성일시</th>
@@ -113,13 +139,16 @@ function requestReply(){
 							</tr>
 							<tr>
 								<th>댓글 내용</th>
-								<td><%= c.getComContent() %></td>
+								<td align="center"><%= c.getComContent() %></td>
 							</tr>	
 						</table>
 						
 						<% } %>
 						<hr>
+						
 						<form action="/semi/cwrite" method="post">
+						<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
+						<input type="hidden" name="page" value="<%= currentPage %>">
 						<table align="center">
 	
 								<tr>
@@ -127,11 +156,11 @@ function requestReply(){
 								</tr>
 								<tr>
 									<td>작성자 :</td>
-									<td><input type="text" id="writer" size="50"></td>
+									<td><input type="text" name="writer" size="50"></td>
 								</tr>
 								<tr>
 									<td>내 용 : </td>
-									<td><textarea rows="5" cols="50" id="content"></textarea></td>
+									<td><textarea rows="5" cols="50" name="content"></textarea></td>
 								</tr>
 								
 								<tr align="center">
