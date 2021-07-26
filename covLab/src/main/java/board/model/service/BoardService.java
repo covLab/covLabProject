@@ -80,6 +80,24 @@ public class BoardService {
 		return result;
 	}
 
+	public int getSearchListCount(String sCondition, String sKeyword) {
+		Connection conn = getConnection();
+		int listCount = bdao.getSearchListCount(conn, sCondition, sKeyword);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Board> selectSearchList(int startRow, int endRow, String sCondition, String sKeyword) {
+		Connection conn = getConnection();
+		ArrayList<Board> list = bdao.selectSearchList(conn, startRow, endRow, sCondition, sKeyword);
+		close(conn);
+		return list;
+	}
+
+	
+
+
+
 	
 	
 
