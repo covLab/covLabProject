@@ -43,7 +43,7 @@ public class cancelReservation extends HttpServlet {
 		res.setSerial_num(request.getParameter("serial_num"));
 		res.setReg_bus_no(request.getParameter("reg_bus_no"));
 		res.setRev_date(rev_date);
-		res.setUser_no(request.getParameter("user_rn"));
+		res.setUser_rn(request.getParameter("user_rn"));
 		
 		int result = rservice.deleteReservation(res);
 		
@@ -59,7 +59,7 @@ public class cancelReservation extends HttpServlet {
 			view = request.getRequestDispatcher(
 					"views/reservation/complete.jsp");
 			request.setAttribute("message", 
-					res.getUser_no() + "예약 취소 실패!");
+					res.getUser_rn() + "예약 취소 실패!");
 			view.forward(request, response);
 		}
 	}

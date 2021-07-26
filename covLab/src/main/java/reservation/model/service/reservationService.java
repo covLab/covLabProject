@@ -4,6 +4,7 @@ import static common.JDBCTemp.close;
 import static common.JDBCTemp.getConnection;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import reservation.model.dao.reservationDao;
 import reservation.model.vo.Hospital;
@@ -57,4 +58,32 @@ public class reservationService {
 		return result;
 	}
 	
+	public int insertSubMember(int sub_user_no,Members mb) {
+		Connection conn = getConnection();
+		int result = rdao.insertSubMember(conn, sub_user_no, mb);
+		close(conn);
+		return result;
+	}
+	
+	public Members selectOneSubMember(int sub_user_no) {
+		Connection conn = getConnection();
+		Members mb = rdao.selectOneSubMember(conn, sub_user_no);
+		close(conn);
+		return mb;
+	}
+	
+	public int checkSubReservation(String user_rn) {
+		Connection conn = getConnection();
+		int check = rdao.checkSubReservation(conn, user_rn);
+		close(conn);
+		return check;
+	}
+	
+	
+	public ArrayList<Members> selectOneSubUserRn(int user_no) {
+		Connection conn = getConnection();
+		ArrayList<Members> sub_list = rdao.selectOneSubUserRn(conn, user_no);
+		close(conn);
+		return sub_list;
+	}
 }

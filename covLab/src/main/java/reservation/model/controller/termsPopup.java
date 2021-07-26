@@ -38,10 +38,11 @@ public class termsPopup extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
+		request.setCharacterEncoding("utf-8");
 		System.out.println("------약관 팝업 서블릿------");
 		//서비스 생성
 		reservationService rservice = new reservationService();
+		Members mb = new Members();
 		
 		//테스트용 세션 받아오기
 		HttpSession session = request.getSession(true);
@@ -54,18 +55,14 @@ public class termsPopup extends HttpServlet {
 		//테스트용 reg_bus_no 받아오기
 		String reg_bus_no = request.getParameter("reg_bus_no");
 		System.out.println("reg_bus_no : "+reg_bus_no);
-		
+//		
+		int sub_user_no = Integer.parseInt(request.getParameter("sub_user_no").toString());
+		System.out.println("sub_user_no : "+sub_user_no);
 		//테스트용 날짜 데이터 받아오기
 		String ioc_date = request.getParameter("ioc_date");
 		
-
-//		String date = request.getParameter("rev_date"); 
-//		Timestamp rev_date =Timestamp.valueOf(date);
-		
-		
-		//mb 객체에 유저 정보 담기
-		System.out.println("user_id2 : "+user_id);
-		Members mb = rservice.selectOneMember(user_id);
+		mb = rservice.selectOneMember(user_id);
+		Members sub_mb = rservice.selectOneSubMember(sub_user_no);
 		
 		//vac 객체에 백신 정보 담기
 		System.out.println("serial_num2 : "+serial_num);
@@ -75,22 +72,78 @@ public class termsPopup extends HttpServlet {
 		System.out.println("reg2 : "+reg_bus_no);
 		Hospital hp = rservice.selectOneHp(reg_bus_no);
 		
-		System.out.println("-------hp 객체 확인------");
-			
+		System.out.println("user_id2 : "+user_id);
 		
 		RequestDispatcher view = null;
-
-		view = request.getRequestDispatcher(
-				"views/reservation/termsPopupPage.jsp");
 		
-		request.setAttribute("hp", hp);
-		request.setAttribute("mb", mb);
-		request.setAttribute("vac", vac);
-		request.setAttribute("ioc_date", ioc_date);
 		
-		view.forward(request, response);
-		
+		if(!request.getParameter("sub_user_name").equals("null")) {
+			String user_name = request.getParameter("sub_user_name");
+			String user_rn = request.getParameter("sub_user_rn");	
+			String user_address = request.getParameter("sub_user_address");
+			String user_phone = request.getParameter("sub_user_phone");
+			
+			
+			System.out.println("user_name : "+mb.getUserName().getClass().getName());
+			System.out.println("user_rn : "+mb.getUserRn());
+			System.out.println("user_address : "+mb.getUserAddress());
+			System.out.println("user_phone : "+mb.getUserPhone());
+			
+			int result = rservice.insertSubMember(sub_user_no, mb);
+			
+			if(result >0) {
+				request.setAttribute("sub_user_no", sub_user_no);
+				
+			}else {
+				view = request.getRequestDispatcher(
+						"views/common/error.jsp");
+				request.setAttribute("message", 
+						sub_user_no + "대리유저 회원가입 실패!");
+				view.forward(request, response);
+			}
+		}else {
+			mb = rservice.selectOneMember(user_id);
+			
+			request.setAttribute("hp", hp);
+			request.setAttribute("vac", vac);
+			request.setAttribute("ioc_date", ioc_date);
+			request.setAttribute("mb", mb);
+			request.setAttribute("sub_user_no", sub_user_no);
+			
+			
+			if(mb!=null) {
+				
+				view = request.getRequestDispatcher(
+						"views/reservation/termsPopupPage.jsp");
+				view.forward(request, response);
+			}else {
+				view = request.getRequestDispatcher(
+						"views/common/error.jsp");
+				request.setAttribute("message", 
+						user_id + "유저 데이터 불러오기 실패!");
+				view.forward(request, response);
+			}
 		}
+		int checkRes = rservice.checkReservation(mb.getUserRn());
+		int checkSubRes = rservice.checkSubReservation(sub_mb.getUserRn());
+		
+			
+//			mb.setUserName(request.getParameter("user_name").toString());
+//			mb.setUserRn(request.getParameter("user_rn").toString());
+//			mb.setUserAddress(request.getParameter("user_address").toString());
+//			mb.setUserPhone(request.getParameter("user_phone").toString());
+			
+			
+			
+			
+				
+			
+//		String date = request.getParameter("rev_date"); 
+//		Timestamp rev_date =Timestamp.valueOf(date);
+				
+	}
+		
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

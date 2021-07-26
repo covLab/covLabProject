@@ -36,9 +36,10 @@ public class insertSubMemInfo extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
+		request.setCharacterEncoding("utf-8");
 		reservationService rservice = new reservationService();
-		
+		System.out.println("인서트 서브밋");
 		HttpSession session = request.getSession(true);
 		String user_id = (String) session.getAttribute("user_id");
 		
@@ -52,6 +53,9 @@ public class insertSubMemInfo extends HttpServlet {
 		//테스트용 날짜 데이터 받아오기
 		String ioc_date = request.getParameter("ioc_date");
 		
+		//테스트용 서브유저 no
+		String sub_user_no = request.getParameter("sub_user_no");
+		System.out.println("sub_user_no : "+sub_user_no);
 
 //		String date = request.getParameter("rev_date"); 
 //		Timestamp rev_date =Timestamp.valueOf(date);
@@ -78,7 +82,7 @@ public class insertSubMemInfo extends HttpServlet {
 		
 		RequestDispatcher view = null;
 		view = request.getRequestDispatcher(
-				"views/reservation/insertSubMemInfo.jsp");
+				"views/reservation/termsPopupPage.jsp");
 		view.forward(request, response);
 	}
 

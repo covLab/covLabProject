@@ -72,6 +72,11 @@ input:focus {
 								class="inputBox">
 						</div>
 						<div class="form-group">
+							<label for="user_phone">전화번호 : </label><input type="text"
+								name="user_phone" value="<%=mb.getUserPhone()%>" readonly
+								class="inputBox">
+						</div>
+						<div class="form-group">
 							<label for="">기관명 : </label> <input type="text" name="hp_name"
 								value="<%=hp.getHp_name()%>" readonly class="inputBox">
 						</div>
@@ -83,8 +88,13 @@ input:focus {
 							<label>예약 날짜 : </label> <input type="text" name="ioc_date"
 								value="<%= request.getAttribute("ioc_date") %>" readonly class="inputBox" id="ioc">
 						</div>
+						<div class="form-group">
+							<label>서브 유저 넘버 : </label> <input type="text" name="sub_user_no"
+								value="<%= request.getAttribute("sub_user_no") %>" readonly class="inputBox" id="sub_user_no">
+						</div>
 						<input type="hidden" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" id="serial">
 						<input type="hidden" name="reg_bus_no" value=<%= hp.getReg_bus_no() %> class="inputBox" id="reg">
+						<input type="hidden" name="sub_user_name" value = "null" class="inputBox" id="sub_user_name">
 						<!-- 						<div class="form-group">
 							<label for="">예약일시 : </label> <input type="text" name="rev_date"
 								value="2021-06-29 09:30:00" readonly id="inputBox"> <br>

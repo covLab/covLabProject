@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +11,8 @@
 <%@ include file="../common/stylesheet.jsp"%>
 <%@ include file="../common/sidebar.jsp"%>
 <%@ include file="../common/topbar.jsp"%>
+<%@ include file="../common/script.jsp"%>
+
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css' />

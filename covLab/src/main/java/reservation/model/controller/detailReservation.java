@@ -2,6 +2,7 @@ package reservation.model.controller;
 
 import java.io.Console;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,12 +52,31 @@ public class detailReservation extends HttpServlet {
 		Members mb = rservice.selectOneMember(user_id);
 		String user_rn = mb.getUserRn();
 		
+		ArrayList<Members> sub_list = rservice.selectOneSubUserRn(mb.getUserNo());
 		//병원 정보 가져오기
 		Hospital hp = rservice.selectOneHp(reg_bus_no);
-		
 		int checkRes = rservice.checkReservation(user_rn);
 		
-		System.out.println("check : "+checkRes);
+		int checkSubRes = 0;
+		
+		System.out.println("sub_list.size() : " + sub_list.size());
+		
+		if(sub_list.size() > 0) {
+			for(Members sub_mb : sub_list) {
+				System.out.println("sub_mb.getUserRn() : "+sub_mb.getUserRn());
+				checkSubRes = rservice.checkSubReservation(sub_mb.getUserRn());
+				
+				int sub_user_no = sub_mb.getSubUserNo();
+				request.setAttribute("sub_user_no", sub_user_no);
+				
+				if(checkSubRes >0) {
+					break;
+				}
+			}
+		}
+
+		System.out.println("checkRes : "+checkRes);
+		System.out.println("checkSubRes : "+checkSubRes);
 		
 		RequestDispatcher view = null;
 		if(hp != null) {
@@ -65,8 +85,8 @@ public class detailReservation extends HttpServlet {
 			
 			request.setAttribute("hp", hp);
 			request.setAttribute("checkRes", checkRes);
-			
-			
+			request.setAttribute("mb", mb);
+			request.setAttribute("checkSubRes", checkSubRes);
 			
 			view.forward(request, response);
 		}else {

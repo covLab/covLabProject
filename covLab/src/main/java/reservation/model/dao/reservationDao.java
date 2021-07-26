@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import reservation.model.vo.Hospital;
 import reservation.model.vo.Members;
@@ -90,14 +91,15 @@ public class reservationDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "insert into reservation values (?,default,?,?,systimestamp,?,null,default)";
+		String query = "insert into reservation values (?,?,?,?,systimestamp,?,null,default)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, res.getSerial_num());	
-			pstmt.setString(2, res.getUser_no());	
-			pstmt.setString(3, res.getReg_bus_no());	
-			pstmt.setTimestamp(4, res.getIoc_date());	
+			pstmt.setString(2, res.getSub_ok());	
+			pstmt.setString(3, res.getUser_rn());	
+			pstmt.setString(4, res.getReg_bus_no());	
+			pstmt.setTimestamp(5, res.getIoc_date());	
 			
 			result = pstmt.executeUpdate();
 			System.out.println("result: " + result);
@@ -149,7 +151,7 @@ public class reservationDao {
 		ResultSet rset = null;
 		int check = 0;
 		
-		String query = "select count(*) from reservation where user_no = ? and state = 'W' ";
+		String query = "select count(*) from reservation where user_rn = ? and state = 'W' and sub_ok = 'N' ";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -177,11 +179,11 @@ public class reservationDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "update reservation set state ='C' where user_no =? and state = 'W'";
+		String query = "update reservation set state ='C' ,can_date = systimestamp where user_rn =? and state = 'W'";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, res.getUser_no());	
+			pstmt.setString(1, res.getUser_rn());	
 			
 			result = pstmt.executeUpdate();
 			System.out.println("result: " + result);
@@ -195,6 +197,144 @@ public class reservationDao {
 		
 		return result;
 	}
+	
+	public int insertSubMember(Connection conn,int sub_user_no, Members mb) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query ="insert into members values (board_seq.nextval, ?, default, default, ?, ?,default,?, ?, default, default, default)";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, sub_user_no);
+			pstmt.setString(2, mb.getUserName());
+			pstmt.setString(3, mb.getUserRn());
+			pstmt.setString(4, mb.getUserPhone());
+			pstmt.setString(5, mb.getUserAddress());
+			
+			result=pstmt.executeUpdate();
+			System.out.println("DAO 리저트 "+result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public Members selectOneSubMember(Connection conn, int sub_user_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Members mb = null;
+		
+		String query = "select * from members where sub_user_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, sub_user_no);			
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next() ) {
+				mb = new Members();
+				
+				mb.setUserId(rset.getString("user_id"));
+				mb.setUserPw(rset.getString("user_pw"));
+				mb.setUserName(rset.getString("user_name"));
+				mb.setUserRn(rset.getString("user_rn"));
+				mb.setUserAddress(rset.getString("user_address"));
+				mb.setUserEmail(rset.getString("user_email"));
+				mb.setUserGrade(rset.getString("user_grade"));
+				mb.setUserNo(rset.getInt("user_no"));
+				mb.setUserPhone(rset.getString("user_phone"));
+				mb.setSubUserNo(sub_user_no);
+				mb.setInoCnt(rset.getInt("ino_cnt"));
+				mb.setSmsAgr(rset.getString("sms_agr"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return mb;
+	}
+	
+	public int checkSubReservation(Connection conn, String user_rn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int check = 0;
+		
+		String query = "select count(*) from reservation where user_rn = ? and state = 'W' and sub_ok = 'Y' ";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user_rn);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				check = rset.getInt(1);
+				System.out.println("check : " + check);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return check;
+	}
+	
+	
+	public ArrayList<Members> selectOneSubUserRn(Connection conn, int user_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Members> sub_list = new ArrayList<Members>();
+		
+		String query = "select * from members where sub_user_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, user_no);			
+			
+			rset = pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				Members sub_mb = new Members();
+				
+				sub_mb.setUserId(rset.getString("user_id"));
+				sub_mb.setUserPw(rset.getString("user_pw"));
+				sub_mb.setUserName(rset.getString("user_name"));
+				sub_mb.setUserRn(rset.getString("user_rn"));
+				sub_mb.setUserAddress(rset.getString("user_address"));
+				sub_mb.setUserEmail(rset.getString("user_email"));
+				sub_mb.setUserGrade(rset.getString("user_grade"));
+				sub_mb.setUserNo(rset.getInt("user_no"));
+				sub_mb.setUserPhone(rset.getString("user_phone"));
+				sub_mb.setSubUserNo(rset.getInt("sub_user_no"));
+				sub_mb.setInoCnt(rset.getInt("ino_cnt"));
+				sub_mb.setSmsAgr(rset.getString("sms_agr"));
+				
+				sub_list.add(sub_mb);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return sub_list;
+	}
+	
 	
 	
 }

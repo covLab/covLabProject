@@ -30,13 +30,13 @@
     	var fnm = document.info;
 		var serial_num = fnm.serial.value;
 		var reg_bus_no = fnm.reg.value;
-		var ioc_date = fnm.ioc.value 
+		var ioc_date = fnm.ioc.value;
     	
         var url = "/semi/tpop";
         var name = "termsPopupPage";
         var option = "width = 500, height = 500, top = 300, left = 800, location = no"
         
-        fnm.action = url;
+        fnm.action = url; 
         fnm.target = "termsPopupPage";
         
         window.open('', name, option);
@@ -62,17 +62,20 @@
     }
     
     function subMemInfoPopup(serial,reg,ioc){
+    	
     	var fnm = document.info;
+    	
 		var serial_num = fnm.serial.value;
 		var reg_bus_no = fnm.reg.value;
-		var ioc_date = fnm.ioc.value 
+		var ioc_date = fnm.ioc.value;
 
-		var url = "/semi/insertsub";
+		var url = "/semi/movesub";
         var name = "subMemInfoPopupPage";
         var option = "width = 500, height = 500, top = 300, left = 800, location = no"
         
        	fnm.action = url;
         fnm.target = "subMemInfoPopupPage";
+        
         window.open('', name, option);
         fnm.submit();
     }
@@ -141,7 +144,15 @@ outline:none;
 											<br>
 											<a href = "javascript:void(0)" target = "_blank" onclick="reservationDatePopup()">날짜 선택</a>
 										</div>
-										<input type="hidden" name="reg_bus_no" value=<%= hp.getReg_bus_no() %> class="inputBox" id="reg">
+										<div class="form-group">
+											<label for="">sub_user_no : </label> 
+											<input type="text" name="sub_user_no" value="<%=request.getAttribute("sub_user_no") %>" readonly class="inputBox" id="sub_user_np">
+											<br>
+											<a href = "javascript:void(0)" target = "_blank" onclick="reservationDatePopup()">날짜 선택</a>
+										</div>
+					
+										<input type="hidden" name="reg_bus_no" value="<%= hp.getReg_bus_no() %>" class="inputBox" id="reg">
+										<input type="hidden" name="sub_user_name" value="null" class="inputBox" id="sub_user_name">
 									<div class="form-row  text-center">
 									
 									<% if (Integer.parseInt(request.getAttribute("checkRes").toString()) >=1 ){  %>
@@ -155,8 +166,11 @@ outline:none;
 									<%}else{ %>
 										<a onclick= "subMemInfoPopup('serial','reg', 'ioc' )" class="btn">예약</a>
 									<%} %> --%>
-									<a onclick= "subMemInfoPopup('serial','reg', 'ioc' )" class="btn">대리예약</a>
-									
+									<% if(Integer.parseInt(request.getAttribute("checkSubRes").toString()) >=1 ){%>
+										<a onclick= "cancelRes('serial','reg', 'ioc' )" class="btn">대리예약취소</a>
+									<%}else{ %>
+										<a onclick= "subMemInfoPopup('serial','reg', 'ioc' )" class="btn">대리예약</a>
+									<%} %>
 									</div>
 									</form>
 

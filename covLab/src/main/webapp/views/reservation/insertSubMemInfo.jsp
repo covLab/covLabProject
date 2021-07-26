@@ -13,6 +13,8 @@ Vaccine vac = (Vaccine) request.getAttribute("vac");
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script type="text/javascript" src="/semi/resources/js/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 .inputBox {
 	border: none;
@@ -25,8 +27,11 @@ input:focus {
 <script type="text/javascript">
 	function insertSub(){
 		
-	 	
-	 	
+		// var param = document.info[0].value;  입력창 첫번째꺼나옴
+		var fnm = document.info;
+		var url = "/semi/tpop";
+		fnm.action = url;
+	 	fnm.submit(); 
 	}
 </script>
 </head>
@@ -39,25 +44,29 @@ input:focus {
 				<div class="card-body">
 					<h5 class="card-title text-center">접종자 정보 입력</h5>
 
-					<form action="/semi/insertres" method="post" name="info">
+					<form action="" method="post" name="info" id= "info">
 					
 						<div class="form-group">
-							<label for="user_name">이름 : </label> <input type="text"
-								name="user_name">
+							<label for="sub_user_name">이름 : </label> <input type="text"
+								name="sub_user_name">
 						</div>
 						<div class="form-group">
-							<label for="user_rn">주민번호 : </label><input type="text"
-								name="user_rn"  id="rn">
+							<label for="sub_user_rn">주민번호 : </label><input type="text"
+								name="sub_user_rn"  id="sub_user_rn">
 						</div>
 						<div class="form-group">
-							<label for="user_address">주소 : </label><input type="text"
-								name="user_address">
+							<label for="sub_user_address">주소 : </label><input type="text"
+								name="sub_user_address">
 						</div>
-						
-						<input type="hidden" name="ioc_date" value=<%= request.getAttribute("ioc_date") %> class="inputBox" id="ioc">
-						<input type="hidden" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" id="serial">
-						<input type="hidden" name="reg_bus_no" value=<%=hp.getReg_bus_no()%> class="inputBox" id="reg">
-						<input type="hidden" name="user_no" value=<%=mb.getUserNo()%> class="inputBox" id="no"> 
+						<div class="form-group">
+							<label for="sub_user_phone">전화번호 : </label><input type="text"
+								name="sub_user_phone">
+						</div>
+						<input type="text" name="ioc_date" value="<%= request.getAttribute("ioc_date") %> " class="inputBox" id="ioc" readonly><br>
+						<input type="text" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" id="serial"><br>
+						<input type="text" name="reg_bus_no" value=<%=hp.getReg_bus_no()%> class="inputBox" id="reg"><br>
+						<input type="text" name="user_no" value=<%=mb.getUserNo()%> class="inputBox" id="no"> <br>
+						<input type="text" name="sub_user_no" value=<%=mb.getUserNo()%> class="inputBox" id="subno"> <br>
 						<input type="button" onclick="insertSub()" value="예약하기">
 
 					</form>
