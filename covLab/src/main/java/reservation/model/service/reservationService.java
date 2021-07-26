@@ -4,6 +4,7 @@ import static common.JDBCTemp.close;
 import static common.JDBCTemp.getConnection;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import reservation.model.dao.reservationDao;
 import reservation.model.vo.Hospital;
@@ -21,6 +22,13 @@ public class reservationService {
 		return hp;
 	}
 	
+	public ArrayList<Hospital> selectAllHps(){
+		Connection conn = getConnection();
+		ArrayList<Hospital> hps=rdao.selectAllHps(conn);
+		close(conn);
+		return hps;
+	}
+
 	public Members selectOneMember(String user_id) {
 		Connection conn = getConnection();
 		Members mb = rdao.selectOneMember(conn, user_id);
