@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import board.comments.model.vo.Comments;
 import board.model.vo.Board;
 
 
@@ -46,7 +47,7 @@ public class BoardDao {
 				+ "(select rownum rnum, board_no, board_title, board_writer, board_content, board_date, view_cnt, recommend_cnt "
 				+ "from "
 				+ "(select * from board "
-				+ "order by board_date desc)) "
+				+ "order by board_no desc)) "
 				+ "where rnum between ? and ?";
 
 		try {
@@ -84,7 +85,7 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "delete from board where boardno = ?";
+		String query = "delete from board where board_no = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -129,15 +130,13 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 
 		String query = "update board set view_cnt = view_cnt + 1 " + "where board_no = ?";
-
+		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, boardNo);
 
 			result = pstmt.executeUpdate();
 
-			
-			result= pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -203,6 +202,129 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+
+	public int getSearchListCount(Connection conn, String sCondition, String sKeyword) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String field = "";
+		int bno = 0; 
+
+		switch (sCondition) {
+		case "searchboardno":
+			field = "board_no";
+			bno = Integer.parseInt(sKeyword);
+			break;
+		case "searchboardtitle":
+			field = "board_title";
+			break;
+		case "searchboardwriter":
+			field = "board_writer";
+			break;
+		}
+		
+		String query = "select count(*) from board where "+field+" like ? ";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			if(bno == 0) {
+				pstmt.setString(1, "%"+sKeyword+"%");
+			}else {
+				pstmt.setInt(1, bno);
+			}
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				listCount = rset.getInt(1); // select 절의 첫번째 항목 : count(*)
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<Board> selectSearchList(Connection conn, int startRow, int endRow, String sCondition, String sKeyword) {
+		ArrayList<Board> list = new ArrayList<Board>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "";
+		switch (sCondition) {
+		case "searchboardno":
+			query = "select * from "
+					+ "(select rownum rnum, board_no, board_title, board_writer, board_content, board_date, view_cnt, recommend_cnt "
+					+ "from "
+					+ "(select * from board "
+					+ "where board_no = ? "
+					+ "order by board_no desc)) "
+					+ "where rnum between ? and ?";
+			break;
+		case "searchboardtitle":
+			sCondition = "board_title";
+			query = "select * from "
+					+ "(select rownum rnum, board_no, board_title, board_writer, board_content, board_date, view_cnt, recommend_cnt "
+					+ "from "
+					+ "(select * from board "
+					+ "where board_title like ? "
+					+ "order by board_no desc)) "
+					+ "where rnum between ? and ?";
+			break;
+		case "searchboardwriter":
+			sCondition = "board_writer";
+			query = "select * from "
+					+ "(select rownum rnum, board_no, board_title, board_writer, board_content, board_date, view_cnt, recommend_cnt "
+					+ "from "
+					+ "(select * from board "
+					+ "where board_writer like ? "
+					+ "order by board_no desc)) "
+					+ "where rnum between ? and ?";
+			break;
+		}
+			
+		System.out.println("sCondition : "+sCondition);
+		System.out.println("sKeyword : "+sKeyword);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			if(sCondition.equals("searchboardno")) {
+				pstmt.setInt(1, Integer.parseInt(sKeyword));
+			}else {
+				pstmt.setString(1, "%"+sKeyword+"%");
+			}
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Board board = new Board();
+				
+				board.setBoardNo(rset.getInt("board_no"));
+				board.setBoardTitle(rset.getString("board_title"));
+				board.setBoardWriter(rset.getString("board_writer"));
+				board.setBoardContent(rset.getString("board_content"));
+				board.setBoardDate(rset.getDate("board_date"));
+				board.setViewCnt(rset.getInt("view_cnt"));
+				board.setRecommendCnt(rset.getInt("recommend_cnt"));
+
+				list.add(board);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
 	}
 	
 }

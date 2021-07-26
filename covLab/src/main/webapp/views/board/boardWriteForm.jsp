@@ -43,7 +43,7 @@
 							</tr>
 							<tr>
 								<th>내 용</th>
-								<td><textarea rows="10" cols="51" name="content"></textarea></td>
+								<td><textarea rows="10" cols="50" name="content"></textarea></td>
 							</tr>
 							<tr align="center">
 								<th colspan="2">
