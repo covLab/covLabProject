@@ -27,8 +27,6 @@ public class MemberService {
 		return member;
 	}
 
-<<<<<<< Updated upstream
-=======
 	public int insertMember(Member member) {
 		Connection conn = getConnection();
 		int result = mdao.insertMember(conn, member);
@@ -55,16 +53,40 @@ public class MemberService {
 		return idCount;
 	}
 
-	public int searchEmail(String useremail) {
+	public String searchUserIdEmail(String useremail, String username) {
 		Connection conn =getConnection();
-		int idCount =mdao.searchEmail(conn, useremail);
+		String userid =mdao.searchUserIdEmail(conn, useremail, username);
 		close(conn);
-		return idCount;
-	}
+		return userid;
 	}
 
->>>>>>> Stashed changes
+	public String searchUserIdPhone(String userphone, String username) {
+		Connection conn =getConnection();
+		String userid =mdao.searchUserIdPhone(conn, userphone, username);
+		close(conn);
+		return userid;
+	}
+
+	public Member searchpwd(String userid, String useremail) {
+		Connection conn =getConnection();
+		Member member =mdao.searchpwd(conn, userid, useremail);
+		close(conn);
+		return member;
+	}
+
+	public int updateTempPw(String AuthenticationKey,String useremail, String userid) {
+		Connection conn = getConnection();
+		int result = mdao.updateTempPw(conn, AuthenticationKey, useremail, userid);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+}
 	
 
-}
+
 
