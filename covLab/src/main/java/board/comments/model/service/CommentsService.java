@@ -49,4 +49,11 @@ public class CommentsService {
 		close(conn);
 		return result;
 	}
+
+	public Comments selectComment(int comNo) {
+		Connection conn = getConnection();
+		Comments comments = cdao.selectComment(conn, comNo);
+		close(conn);
+		return comments;
+	}
 }

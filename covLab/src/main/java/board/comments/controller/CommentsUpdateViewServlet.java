@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.comments.model.service.CommentsService;
+import board.comments.model.vo.Comments;
 
 /**
- * Servlet implementation class CommentsDeleteServlet
+ * Servlet implementation class CommentsUpdateViewServlet
  */
-@WebServlet("/cdelete")
-public class CommentsDeleteServlet extends HttpServlet {
+@WebServlet("/cupview")
+public class CommentsUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentsDeleteServlet() {
+    public CommentsUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +31,25 @@ public class CommentsDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//댓글 삭제
 		int boardRef = Integer.parseInt(request.getParameter("bno"));
 		int currentPage = Integer.parseInt(request.getParameter("page"));
 		int comNo = Integer.parseInt(request.getParameter("cno"));
-		int cLevel = Integer.parseInt(request.getParameter("clevel"));
-		System.out.println("boardref : "+boardRef +", currentpage : "+currentPage+", comno : "+comNo+", clevel : "+cLevel);
+		int comLevel = Integer.parseInt(request.getParameter("clevel"));
 		
+		Comments comments = new CommentsService().selectComment(comNo);
 		
-		
-		if(new CommentsService().deleteComments(comNo, boardRef, cLevel)>0) {
-			response.sendRedirect("/semi/bdetail?bno="+boardRef+"&page="+currentPage);
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", boardRef+"번 글의 댓글 삭제 실패...");
+		RequestDispatcher view = null;
+		if(comments != null) {
+			view = request.getRequestDispatcher("views/board/commentsUpdateView.jsp");
+			request.setAttribute("comments", comments);
+			request.setAttribute("page", currentPage);
+			request.setAttribute("comNo", comNo);
+			request.setAttribute("comLevel", comLevel);
+			
+			view.forward(request, response);
+		} else {
+			view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", boardRef+"번째 글 댓글번호 "+comNo+"번 수정 실패...");
 			view.forward(request, response);
 		}
 		

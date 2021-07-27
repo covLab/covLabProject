@@ -108,16 +108,52 @@ public class CommentsDao {
 		int result =0;
 		PreparedStatement pstmt = null;
 		
-		String query = "delete from comments ";
-		
-		if(comNo == cLevel) {//게시글의 댓글
-			query += "where com_no = ?";
-		}else {//댓글의 대댓글
-			query += "where "
-		}
-		
-		
+		String query = "delete from comments where com_no = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, comNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}		
 		return result;
+	}
+
+	public Comments selectComment(Connection conn, int comNo) {
+		Comments comments = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String qeury = "select * from comments where com_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(qeury);
+			pstmt.setInt(1, comNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				comments = new Comments();
+				
+				comments.setComNo(comNo);
+				comments.setBoardRef(rset.getInt("board_ref"));
+				comments.setComWriter(rset.getString("com_writer"));
+				comments.setComDate(rset.getDate("com_date"));
+				comments.setComContent(rset.getString("com_content"));
+				comments.setComLevel(rset.getInt("com_level"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return comments;
 	}
 	
 	
