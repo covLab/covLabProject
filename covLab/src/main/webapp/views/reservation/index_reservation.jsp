@@ -172,16 +172,11 @@
 			outDiv.innerHTML = "에러발생 : " + err.code;
 		}
 	}
+	
 	//체크박스 값 하나만 선택되게 하는 함수
 	function checkOnlyOne(element) {
-		  
-		  const checkboxes 
-		      = document.getElementsByName("list_order");
-		  
-		  checkboxes.forEach((cb) => {
-		    cb.checked = false;
-		  })
-		  
+		  const checkboxes = document.getElementsByName("list_order");
+		  checkboxes.forEach((cb) => { cb.checked = false })
 		  element.checked = true;
 		}
 	
@@ -198,15 +193,15 @@
         dist = dist * 60 * 1.1515
         if (unit=="K") { dist = dist * 1.609344 }
         if (unit=="N") { dist = dist * 0.8684 }
-        return dist
+        return dist;
 	}
 
 </script>
 </head>
 
 <body onload="javascript:locationTest();">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans'
-		rel='stylesheet' type='text/css' />
+<!-- 	<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+		rel='stylesheet' type='text/css' /> -->
 </head>
 <body>
 	<div class="content-wrap">
@@ -240,9 +235,14 @@
 				<!-- /# row -->
 				<section id="main-content">
 					<form action="list_option.jsp">
+					
 						<input type='checkbox' name='list_order' value='dist'
-							onclick='checkOnlyOne(this)' />거리순 <input type='checkbox'
+							onclick='checkOnlyOne(this)' />거리순 
+							
+						<input type='checkbox'
 							name='list_order' value='amnt' onclick='checkOnlyOne(this)' />수량순
+							
+							
 						<select name="list_option_key" onchange="handleOnList(this)">
 							<option value="none">=== 선택 ===</option>
 							<option value="dist">화이자</option>
