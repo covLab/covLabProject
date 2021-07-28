@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.servcie.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class FindIdEmailServlet
  */
-@WebServlet("/memailcheck")
+@WebServlet("/emailcheck")
 public class EmailCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,12 +35,13 @@ public class EmailCheck extends HttpServlet {
 request.setCharacterEncoding("utf-8");
 		
 		String useremail = request.getParameter("useremail");
+		String userid = request.getParameter("userid");
 		
-		
-		int idCount = new MemberService().searchEmail(useremail);
+		Member member = new MemberService().searchpwd(userid ,useremail);
 		System.out.println(useremail);
+		System.out.println(userid);
 		String returnValue = null;  
-		if(idCount != 0) {
+		if(member != null) {
 			returnValue = "ok";
 		}else {
 			returnValue = "no";

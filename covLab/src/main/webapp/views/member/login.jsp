@@ -44,12 +44,12 @@
                                 </form>
                                 <div>
                                 <label class="pull-left">
-										<a href="/semi/views/member/finduseremail.jsp">아이디 찾기</a>
+										<a href="/semi/views/member/findUserEmail.jsp">아이디 찾기</a>
 									</label>
 									<br><br>
 									
                                 <label class="pull-left">
-										<a href="/semi/views/member/findpasswordemail.jsp">비밀번호 찾기</a>
+										<a href="/semi/views/member/findPasswordEmail.jsp">비밀번호 찾기</a>
 									</label>
 									<br>
 									</div>

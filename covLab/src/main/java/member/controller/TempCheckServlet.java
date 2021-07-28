@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import member.model.servcie.MemberService;
 
 /**
- * Servlet implementation class JavaSend
+ * Servlet implementation class TempCheckServlet
  */
-@WebServlet("/searchId.do")
-public class JavaSend extends HttpServlet {
+@WebServlet("/ctemp")
+public class TempCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JavaSend() {
+    public TempCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,21 +30,27 @@ public class JavaSend extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//임시비밀번호 체크
+		 String curpd = request.getParameter("curpd");
+		 
+		//Member member = new MemberService().selectCheckId2(username, userrn);
 		
+       int reuslt = new MemberService().selectCheckpd(curpd);
+      
+		String returnValue = null;  
 		
-			Member member = MemberService.searchIdPw(m);
-			if(member != null) {
-				model.addAttribute("msg", "회원님의 아이디를 이메일로 전송하였습니다.");
-				model.addAttribute("loc", "/searchIdPw.do");
-				sendEmailID(member.getMId(), member.getMEmail());
-			}else {
-				model.addAttribute("msg", "일치하는 정보가 없습니다.");
-				model.addAttribute("loc", "/searchIdPw.do");
-			}
-			return "common/msg";
+		if(reuslt != 0 ) {
+			returnValue = "ok";
+		}else {
+			returnValue = "no";
 		}
-
-
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(returnValue);
+		out.flush();
+		out.close();
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

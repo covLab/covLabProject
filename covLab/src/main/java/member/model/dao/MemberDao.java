@@ -258,26 +258,76 @@ public class MemberDao {
 		return member;
 	}
 
-	public int updateTempPw(Connection conn, String AuthenticationKey ,String useremail, String userid) {
+	public int updatePw(Connection conn, String cryptoUserpw, String userid) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String query = "update members set user_pw = ? where user_id = ? and where user_email = ?";
+		String query = "update members set user_pw = ? where user_id = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, AuthenticationKey);
-			pstmt.setString(2, useremail);
-			pstmt.setString(3, userid);
-			
-			
-			
+			pstmt.setString(1, cryptoUserpw);
+			pstmt.setString(2, userid);
+		
+			result= pstmt.executeUpdate();
+			System.out.println("reuslt : " + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+	 
 		return result;
+	}
+
+	public int updateTempPw(Connection conn, String cryptoUserpw, String userid, String useremail) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update members set user_pw = ? where user_id = ? and user_email = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, cryptoUserpw);
+			pstmt.setString(2, userid);
+			pstmt.setString(3, useremail);
+		
+			result= pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+	 
+		return result;
+	}
+
+	public int selectCheckpd(Connection conn, String curpd) {
+		int reuslt = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset =null;
+		
+		String query = "select count(user_pw) from members where user_pw = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, curpd);
+			
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				reuslt = rset.getInt(1);
+				
+				System.out.println("reuslt : " + reuslt);
+			}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+	   
+	return reuslt;
 	}
 }
