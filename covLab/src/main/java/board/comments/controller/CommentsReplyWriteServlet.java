@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.View;
 
 import board.comments.model.service.CommentsService;
+import board.comments.model.vo.Comments;
 
 /**
- * Servlet implementation class CommentsDeleteServlet
+ * Servlet implementation class CommentsReplyWriteServlet
  */
-@WebServlet("/cdelete")
-public class CommentsDeleteServlet extends HttpServlet {
+@WebServlet("/creplywrite")
+public class CommentsReplyWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentsDeleteServlet() {
+    public CommentsReplyWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,30 +31,35 @@ public class CommentsDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//댓글 삭제
+		//답글 등록
+		
+		//1. 전송온 값에 한글이 있으며 인코딩 처리함
 		request.setCharacterEncoding("utf-8");
 		
-		int comNo = Integer.parseInt(request.getParameter("comNo"));
-		System.out.println("comNo : "+comNo);
-		int boardRef = Integer.parseInt(request.getParameter("boardRef"));
-		System.out.println("boardRef : "+boardRef);
+		//2. 전송온 값 꺼내서 변수 | 객체에 기록 저장
+		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		int currentPage = Integer.parseInt(request.getParameter("page"));
-		System.out.println("page : "+currentPage);
+		int comLevel =Integer.parseInt(request.getParameter("cno"));
+		
+		Comments comments = new Comments();
+		
+		comments.setComWriter(request.getParameter("writer"));
+		comments.setComContent(request.getParameter("content"));
+		comments.setBoardRef(boardNo);
+		comments.setComLevel(comLevel);
+		
+		System.out.println("comment : "+comments);
 		
 		CommentsService cservice = new CommentsService();
-		int result = cservice.deleteComments(comNo);
+		int result = cservice.insertReplyComments(comments);
 		
-		
-		RequestDispatcher view = null;
-		if(result > 0) {
-			response.sendRedirect("/semi/bdetail?bno="+boardRef+"&page="+currentPage);
-			
+		if(result > 0 ) {
+			response.sendRedirect("/semi/bdetail?bno="+boardNo+"&page="+currentPage);
 		}else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", boardRef+"번 글의 댓글 삭제 실패...");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", boardNo+"번 게시글 댓글 등록 실패...");
 			view.forward(request, response);
 		}
-		
 	}
 
 	/**

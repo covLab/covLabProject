@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.View;
 
 import board.comments.model.service.CommentsService;
+import board.comments.model.vo.Comments;
 
 /**
- * Servlet implementation class CommentsDeleteServlet
+ * Servlet implementation class CommentsReplyUpdateServlet
  */
-@WebServlet("/cdelete")
-public class CommentsDeleteServlet extends HttpServlet {
+@WebServlet("/cupdate")
+public class CommentsUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentsDeleteServlet() {
+    public CommentsUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,30 +31,27 @@ public class CommentsDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//댓글 삭제
+
 		request.setCharacterEncoding("utf-8");
 		
-		int comNo = Integer.parseInt(request.getParameter("comNo"));
-		System.out.println("comNo : "+comNo);
-		int boardRef = Integer.parseInt(request.getParameter("boardRef"));
-		System.out.println("boardRef : "+boardRef);
+		Comments comments = new Comments();
+		
+		comments.setComNo(Integer.parseInt(request.getParameter("comNo")));
+		comments.setComContent(request.getParameter("content"));
+		comments.setBoardRef(Integer.parseInt(request.getParameter("boardRef")));
+		
 		int currentPage = Integer.parseInt(request.getParameter("page"));
-		System.out.println("page : "+currentPage);
 		
-		CommentsService cservice = new CommentsService();
-		int result = cservice.deleteComments(comNo);
+		System.out.println("cupdate : "+comments);
+		int result = new CommentsService().updateComments(comments);
 		
-		
-		RequestDispatcher view = null;
 		if(result > 0) {
-			response.sendRedirect("/semi/bdetail?bno="+boardRef+"&page="+currentPage);
-			
+			response.sendRedirect("bdetail?bno="+comments.getBoardRef()+"&page="+currentPage);
 		}else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", boardRef+"번 글의 댓글 삭제 실패...");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", comments.getBoardRef()+"번 글 "+comments.getComNo()+"번 댓글 수정 실패...");
 			view.forward(request, response);
 		}
-		
 	}
 
 	/**

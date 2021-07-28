@@ -50,11 +50,8 @@ public class BoardUpdateServlet extends HttpServlet {
 		int result = new BoardService().updateBoard(board);
 
 		
-		if (result > 0) {
-			
-			//response.sendRedirect("blist?page="+currentPage);
-			
-			
+		if (result > 0) {		
+
 			response.sendRedirect("bdetail?bno=" + board.getBoardNo() +"&page="+currentPage);
 			
 		} else {

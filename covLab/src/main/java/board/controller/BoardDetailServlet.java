@@ -58,7 +58,8 @@ public class BoardDetailServlet extends HttpServlet {
 
 		Comments comments = cservice.selectRef(boardNo);
 		//System.out.println(comments);
-		
+		//System.out.println("clist : "+clist);
+		//System.out.println("commnts : "+comments);
 		
 		RequestDispatcher view = null;
 		if (board != null) {
@@ -66,8 +67,9 @@ public class BoardDetailServlet extends HttpServlet {
 			request.setAttribute("board", board);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("clist", clist);
+			if(comments!=null) {
 			request.setAttribute("comments", comments);
-			
+			}
 			view.forward(request, response);
 		} else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
