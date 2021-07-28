@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>first</title>
+<title>covLab</title>
 </head>
 <body>
 <h1>서버에 문제가 발생하였습니다. 바로 해결하도록 하겠습니다. : </h1>

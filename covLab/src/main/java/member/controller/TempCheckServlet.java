@@ -1,25 +1,27 @@
-	package member.controller;
+package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import member.model.servcie.MemberService;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class TempCheckServlet
  */
-@WebServlet("/logout")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/ctemp")
+public class TempCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public TempCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,20 +30,27 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 로그아웃 처리용 컨트롤러
+		//임시비밀번호 체크
+		 String curpd = request.getParameter("curpd");
+		 
+		//Member member = new MemberService().selectCheckId2(username, userrn);
 		
-		//request 에 등록되어 있는 세션객체의 ID 를 이용해서
-		//세션객체를 조회함
-		HttpSession session = request.getSession(false);
+       int reuslt = new MemberService().selectCheckpd(curpd);
+      
+		String returnValue = null;  
 		
-		//해당 세션객체가 존재하면, 세션객체를 없앰
-		if(session != null) {
-			session.invalidate();
-			//index.jsp 페이지로 이동함
-			response.sendRedirect("index.jsp");
+		if(reuslt != 0 ) {
+			returnValue = "ok";
+		}else {
+			returnValue = "no";
 		}
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(returnValue);
+		out.flush();
+		out.close();
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

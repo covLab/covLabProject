@@ -1,4 +1,4 @@
-package member.controller;
+package board.comments.controller;
 
 import java.io.IOException;
 
@@ -9,19 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.servcie.MemberService;
+import board.comments.model.service.CommentsService;
+import board.comments.model.vo.Comments;
 
 /**
- * Servlet implementation class FindIdEmail
+ * Servlet implementation class CommentsReplyUpdateServlet
  */
-@WebServlet("/findidemail")
-public class FindIdEmail extends HttpServlet {
+@WebServlet("/cupdate")
+public class CommentsUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindIdEmail() {
+    public CommentsUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,30 +31,29 @@ public class FindIdEmail extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
+
+		request.setCharacterEncoding("utf-8");
 		
-		String useremail = request.getParameter("useremail");
-		String username = request.getParameter("username");
-		String userid= new MemberService().searchUserIdEmail(useremail,username);
-		System.out.print(useremail + username);
+		Comments comments = new Comments();
 		
-		if(userid != null ) {
-			RequestDispatcher view =request.getRequestDispatcher("views/member/findId.jsp");
-			request.setAttribute("userid", userid);
-			  view.forward(request, response);
-			 System.out.println(userid);
+		comments.setComNo(Integer.parseInt(request.getParameter("comNo")));
+		comments.setComContent(request.getParameter("content"));
+		comments.setBoardRef(Integer.parseInt(request.getParameter("boardRef")));
+		
+		int currentPage = Integer.parseInt(request.getParameter("page"));
+		
+		System.out.println("cupdate : "+comments);
+		int result = new CommentsService().updateComments(comments);
+		
+		if(result > 0) {
+			response.sendRedirect("bdetail?bno="+comments.getBoardRef()+"&page="+currentPage);
 		}else {
-			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-					request.setAttribute("message", 
-							"회원 정보가 잘못 입력되었거나, 없습니다.");
-					view.forward(request, response);
-				
-					
-					
+			request.setAttribute("message", comments.getBoardRef()+"번 글 "+comments.getComNo()+"번 댓글 수정 실패...");
+			view.forward(request, response);
 		}
-       
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
