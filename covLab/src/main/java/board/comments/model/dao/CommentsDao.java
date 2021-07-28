@@ -87,7 +87,7 @@ public class CommentsDao {
 		PreparedStatement pstmt = null;
 		String query = "INSERT INTO COMMENTS VALUES "
 				+ " ((select max(com_no) + 1 from comments), ?, ?, sysdate, ?, (select max(com_no) + 1 from comments))";
-		System.out.println("3");
+		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, comments.getBoardRef());
@@ -104,7 +104,7 @@ public class CommentsDao {
 		return result;
 	}
 
-	public int deleteComments(Connection conn, int comNo, int boardRef, int cLevel) {
+	public int deleteComments(Connection conn, int comNo) {
 		int result =0;
 		PreparedStatement pstmt = null;
 		
@@ -154,6 +154,49 @@ public class CommentsDao {
 			close(pstmt);
 		}
 		return comments;
+	}
+
+	public int updateComments(Connection conn, Comments comments) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update comments set com_content = ? "
+				+ "where com_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, comments.getComContent());
+			pstmt.setInt(2, comments.getComNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertReplyComments(Connection conn, Comments comments) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO COMMENTS VALUES "
+				+ " ((select max(com_no) + 1 from comments), ?, ?, sysdate, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, comments.getBoardRef());
+			pstmt.setString(2, comments.getComWriter());
+			pstmt.setString(3, comments.getComContent());
+			pstmt.setInt(4, comments.getComLevel());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	

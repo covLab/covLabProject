@@ -14,7 +14,37 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>백신 후기</title>
+
 <script type="text/javascript">
+//httpRequest 객체 생성
+function getXMLHttpRequest(){
+	var httpRequest = null;
+
+	if(window.ActiveXObject){
+		try{
+			httpRequest = new ActiveXObject("Msxml2.XMLHTTP");	
+		} catch(e) {
+			try{
+				httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e2) { httpRequest = null; }
+		}
+	}
+	else if(window.XMLHttpRequest){
+		httpRequest = new window.XMLHttpRequest();
+	}
+	return httpRequest;	
+}
+function checkFunc(){
+	if(httpRequest.readyState == 4){
+		// 결과값을 가져온다.
+		var resultText = httpRequest.responseText;
+		if(resultText == 1){ 
+			document.location.reload(); // 상세보기 창 새로고침
+		}
+	}
+}
+
+//게시글 수정
 function moveUpdateView() {
 	location.href = "/semi/bupview?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>";
 }
@@ -28,10 +58,73 @@ function requestBoardDelete(){
    }
 }
 
+//댓글---------------------
+<%-- //댓글 수정
+function moveCommentsUpdateView(){
+	location.href = "/semi/cupview?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>&cno=<%= c.getComNo()%>&clevel=<%=c.getComLevel()%>";
+} --%>
+//댓글 수정
+function moveCommentsUpdate(comNo, boardRef, page){
+	var param = "comNo="+comNo+"&boardRef="+boardRef+"&page="+page;
+	console.log("cNo:"+comNo);
+	console.log("boardref:"+boardRef);
+	console.log("page:"+page);
+	
+	location.href = "/semi/cupview?"+param;
+
+	
+	/* httpRequest = getXMLHttpRequest();
+	httpRequest.onreadystatechange = checkFunc;
+	httpRequest.open("POST", "cupview", true);
+	httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+	httpRequest.send(param);
+ */
+}
+
+//댓글 삭제
+function requestCommentsDelete(comNo, boardRef, page){
+	if (confirm("댓글을 정말 삭제하시겠습니까??") == true){
+		console.log("cNo : "+comNo);
+		console.log("boardRef : "+boardRef);
+		console.log("page: "+page);
+		
+		deleteComments(comNo, boardRef, page);
+	}else{
+		return;
+	}
+}
+function deleteComments(comNo, boardRef, page){
+	var param = "comNo="+comNo+"&boardRef="+boardRef+"&page="+page;
+	console.log("cNo:"+comNo);
+	console.log("boardref:"+boardRef);
+	console.log("page:"+page);
+	
+	httpRequest = getXMLHttpRequest();
+	httpRequest.onreadystatechange = checkFunc;
+	httpRequest.open("POST", "cdelete", true);
+	httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+	httpRequest.send(param);
+	console.log("end");
+	location.reload();
+}
+
+
+/* //답글 폼 보이기
+$(document).ready(function(){
+	//기본값 설정
+	$("#reply").hide();
+	
+/* 	//버튼 클릭시 보이기 및 숨기기
+	$("a.showReplyForm").click(function(){
+		$("#reply").show();
+		$(this).hide();
+	}); 
+}); */
+
+//답글 작성
 <%-- function requestReply(){
 	location.href = "/semi/views/board/commentsWriteForm.jsp?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>"
 } --%>
-
 </script>
 
 <%@ include file="../common/stylesheet.jsp"%>
@@ -124,36 +217,16 @@ function requestBoardDelete(){
 									<% if(c.getComLevel() == c.getComNo()){ // 답글이면 안보이게%>
 									<!-- <input type="button" value="답글달기" class="btn btn-primary"
 										onclick="move"> -->
-									<button class="btn btn-primary" id="replyButton" onclick="showreplyForm(<%= c.getComNo() %>)">답글달기</button>
-									<script type="text/javascript">
-									function showreplyForm(comlevel){
-										console.log("comNo : ");
-										if($('#reply').css('display')=='none'){
-											$('#reply').show();
-											
-										}else{
-											$('#reply').hide();
-										}
-									}
-									</script>
+									<%-- <button class="btn btn-primary" id="replyButton" onclick="showreplyForm(<%= c.getComNo() %>)">답글달기</button>
+									 --%>
+									 <a href="#" onclick="show">[답변]</a>
+									 
 									<% } %>
 									<!-- 작성자와 로그인한 사람이 같을 경우 -->
 									<br>
-									<button onclick="moveCommentsUpdateView(); return false;" class="btn btn-primary">수정하기</button><br>
-									<button onclick="requestCommentsDelete(); return false;" class="btn btn-danger">댓글삭제</button>
-									<script type="text/javascript">
-									function moveCommentsUpdateView(){
-										location.href = "/semi/cupview?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>&cno=<%= c.getComNo()%>&clevel=<%=c.getComLevel()%>";
-									}
-									function requestCommentsDelete(){
-										if (confirm("댓글을 정말 삭제하시겠습니까??") == true){
-											console.log("clevel : "+<%= comments.getComLevel() %>);
-											location.href = "/semi/cdelete?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>&cno=<%= c.getComNo()%>&clevel=<%=c.getComLevel()%>";
-										}else{
-											return;
-										}
-									}
-									</script>
+									<a href="#" onclick="moveCommentsUpdate(<%= c.getComNo() %>, <%= c.getBoardRef() %>, <%= currentPage %>); return false;">[수정하기]</a><br>
+									<a href="#" onclick="requestCommentsDelete(<%= c.getComNo() %>, <%= c.getBoardRef() %>, <%= currentPage %>);return false;">[댓글삭제]</a>
+							
 									
 								</td>
 							</tr>
@@ -167,15 +240,29 @@ function requestBoardDelete(){
 							</tr>	
 						</table>
 						
-						<% } %>
-
-
-
+						
+						
+						
+						<% if(c.getComLevel() == c.getComNo()){ //원글의 댓글 %>
+						<br>
+						<%-- <div align="center" id="reply" style="display:none;">
+						<div>
+							<input type="text" name="writer" size="50"><br>
+							<textarea rows="3" cols="50" name="content" placeholder="댓글 내용을 입력하세요"></textarea>
+						</div>
+						<div>
+							<input type="submit" value="댓글달기" class="btn btn-primary"> &nbsp; 
+							<input type="reset" value="작성취소" class="btn btn-default"> &nbsp; 
+							<input type="button" value="목록" class="btn btn-default"
+									onclick="javascript:location.href='/semi/blist?page=<%= currentPage %>'; return false;">
+						</div>
+						</div> --%>
 						<!-- 답글달기 폼 -->
-						<form action="/semi/creplywrite" method="post" id="reply"><br>
+						<form action="/semi/creplywrite" method="post">
 						<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
 						<input type="hidden" name="page" value="<%= currentPage %>">
-						<table align="center">
+						<input type="hidden" name="cno" value="<%= c.getComNo() %>">
+						<table align="center" id="reply">
 	
 								<tr>
 									<th colspan="2">답글달기</th>
@@ -199,7 +286,13 @@ function requestBoardDelete(){
 							</tr>
 								
 						</table>
-						</form>
+						</form> 
+						
+						
+						<% } %>
+						
+						
+						<% } %>
 						
 						
 						<hr>
@@ -218,7 +311,7 @@ function requestBoardDelete(){
 								</tr>
 								<tr>
 									<td>내 용 : </td>
-									<td><textarea rows="5" cols="50" name="content"></textarea></td>
+									<td><textarea rows="5" cols="50" name="content" placeholder="내용을 입력하세요"></textarea></td>
 								</tr>
 								
 								<tr align="center">

@@ -58,8 +58,8 @@ public class BoardDetailServlet extends HttpServlet {
 
 		Comments comments = cservice.selectRef(boardNo);
 		//System.out.println(comments);
-		System.out.println("clist : "+clist);
-		System.out.println("commnts : "+comments);
+		//System.out.println("clist : "+clist);
+		//System.out.println("commnts : "+comments);
 		
 		RequestDispatcher view = null;
 		if (board != null) {

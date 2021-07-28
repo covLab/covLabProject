@@ -13,16 +13,16 @@ import board.comments.model.service.CommentsService;
 import board.comments.model.vo.Comments;
 
 /**
- * Servlet implementation class CommentsUpdateViewServlet
+ * Servlet implementation class CommentsReplyWriteServlet
  */
-@WebServlet("/cupview")
-public class CommentsUpdateViewServlet extends HttpServlet {
+@WebServlet("/creplywrite")
+public class CommentsReplyWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentsUpdateViewServlet() {
+    public CommentsReplyWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,28 +31,35 @@ public class CommentsUpdateViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		//답글 등록
+		
+		//1. 전송온 값에 한글이 있으며 인코딩 처리함
+		request.setCharacterEncoding("utf-8");
+		
+		//2. 전송온 값 꺼내서 변수 | 객체에 기록 저장
+		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		int currentPage = Integer.parseInt(request.getParameter("page"));
-		int comNo = Integer.parseInt(request.getParameter("comNo"));
-		int boardRef = Integer.parseInt(request.getParameter("boardRef"));
-
-		Comments comments = new CommentsService().selectComment(comNo);
+		int comLevel =Integer.parseInt(request.getParameter("cno"));
+		
+		Comments comments = new Comments();
+		
+		comments.setComWriter(request.getParameter("writer"));
+		comments.setComContent(request.getParameter("content"));
+		comments.setBoardRef(boardNo);
+		comments.setComLevel(comLevel);
+		
 		System.out.println("comment : "+comments);
 		
-		RequestDispatcher view = null;
-		if(comments != null) {
-			view = request.getRequestDispatcher("views/board/commentsUpdateView.jsp");
-			request.setAttribute("comments", comments);
-			request.setAttribute("page", currentPage);
-			//request.setAttribute("comNo", comNo);
-			
-			view.forward(request, response);
-		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", boardRef+"번째 글 댓글번호 "+comNo+"번 수정 실패...");
+		CommentsService cservice = new CommentsService();
+		int result = cservice.insertReplyComments(comments);
+		
+		if(result > 0 ) {
+			response.sendRedirect("/semi/bdetail?bno="+boardNo+"&page="+currentPage);
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", boardNo+"번 게시글 댓글 등록 실패...");
 			view.forward(request, response);
 		}
-		
 	}
 
 	/**

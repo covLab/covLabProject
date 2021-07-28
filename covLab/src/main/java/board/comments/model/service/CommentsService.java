@@ -38,9 +38,9 @@ public class CommentsService {
 		return result;
 	}
 
-	public int deleteComments(int comNo, int boardRef, int cLevel) {
+	public int deleteComments(int comNo) {
 		Connection conn = getConnection();
-		int result = cdao.deleteComments(conn, comNo, boardRef, cLevel);
+		int result = cdao.deleteComments(conn, comNo);
 		if(result>0) {
 			commit(conn);
 		}else {
@@ -55,5 +55,29 @@ public class CommentsService {
 		Comments comments = cdao.selectComment(conn, comNo);
 		close(conn);
 		return comments;
+	}
+
+	public int updateComments(Comments comments) {
+		Connection conn = getConnection();
+		int result = cdao.updateComments(conn, comments);
+		if(result >0 ) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int insertReplyComments(Comments comments) {
+		Connection conn = getConnection();
+		int result = cdao.insertReplyComments(conn, comments);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+			close(conn);		
+		}
+		return result;
 	}
 }
