@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -113,12 +114,37 @@ public class FindPasswordEmailServlet extends HttpServlet {
 
 			Transport.send(msg);
 			System.out.println("이메일 전송");
-
+			System.out.println(AuthenticationKey);
 		} catch (Exception e) {
 			e.printStackTrace();// TODO: handle exception
 		}
 		HttpSession saveKey = request.getSession();
 		saveKey.setAttribute("AuthenticationKey", AuthenticationKey);
+		
+		
+		
+		String cryptoUserpw = null;
+		try {
+			MessageDigest md = 
+					MessageDigest.getInstance("SHA-512");
+		
+			byte[] pwValues = 
+					AuthenticationKey.getBytes(Charset.forName("UTF-8"));
+			
+			md.update(pwValues);
+			
+			cryptoUserpw = Base64.getEncoder()
+							.encodeToString(pwValues);
+		
+			System.out.println(cryptoUserpw);
+			System.out.println(cryptoUserpw.length());
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		member.setUserPw(cryptoUserpw);
+		int result = new MemberService().updateTempPw(cryptoUserpw, userid, useremail);
+		System.out.println("서블릿"+cryptoUserpw);
 		// 패스워드 바꿀때 뭘 바꿀지 조건에 들어가는 id
 		/*
 		 * req.setAttribute("id", memberId);
@@ -126,11 +152,17 @@ public class FindPasswordEmailServlet extends HttpServlet {
 		 * (req, resp);
 		 */
       
-		
-		 if(member != null) {
+//		PrintWriter out = response.getWriter();  
+//		response.setContentType("text/html");  
+//		out.println("<script type=\"text/javascript\">");  
+//		out.println("alert('deadbeef');");  
+//		out.println("</script>");
+		 if(member != null && result>0) {
+			  RequestDispatcher view = request.getRequestDispatcher("views/member/loginOrChange.jsp");
+			  request.setAttribute("userid", userid);
+			  request.setAttribute("AuthenticationKey", AuthenticationKey);
+			  view.forward(request, response);
 			  
-				response.sendRedirect("/semi/views/member/login.jsp");
-				 System.out.println(userid);
 			}else {	
 				RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
 						request.setAttribute("message", 
@@ -138,6 +170,9 @@ public class FindPasswordEmailServlet extends HttpServlet {
 						view.forward(request, response);
 				}
 	
+
+
+
 	}
 
 	

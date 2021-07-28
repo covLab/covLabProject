@@ -73,7 +73,8 @@ public class LoginServelt extends HttpServlet {
 			session.setAttribute("loginMember", member);
 			
 			//로그인 성공시 내보낼 페이지 지정
-			response.sendRedirect("/semi/index.jsp");
+			response.sendRedirect("index.jsp");
+			
 			
 		}else { //로그인 실패
 			
