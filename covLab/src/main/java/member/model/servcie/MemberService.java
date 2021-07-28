@@ -74,16 +74,39 @@ public class MemberService {
 		return member;
 	}
 
-	public int updateTempPw(String AuthenticationKey,String useremail, String userid) {
+	public int updatePw(String cryptoUserpw, String userid) {
 		Connection conn = getConnection();
-		int result = mdao.updateTempPw(conn, AuthenticationKey, useremail, userid);
+		int result = mdao.updatePw(conn, cryptoUserpw, userid);
+		
 		if(result > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
 		close(conn);
+		 
 		return result;
+	}
+
+	public int updateTempPw(String cryptoUserpw, String userid, String useremail) {
+		Connection conn = getConnection();
+		int result = mdao.updateTempPw(conn, cryptoUserpw, userid, useremail);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		 
+		return result;
+	}
+
+	public int selectCheckpd(String curpd) {
+		Connection conn =getConnection();
+		int reuslt =mdao.selectCheckpd(conn, curpd);
+		close(conn);
+		return reuslt;
 	}
 }
 	
