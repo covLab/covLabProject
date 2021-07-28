@@ -37,6 +37,7 @@ public class insertReservation extends HttpServlet {
 		System.out.println("인서트");
 
 		request.setCharacterEncoding("utf-8");
+		
 		Reservation res = new Reservation();
 		reservationService rservice = new reservationService();
 		
@@ -44,9 +45,7 @@ public class insertReservation extends HttpServlet {
 //		String user_id = (String) session.getAttribute("user_id");
 		
 		//테스트용 날짜 받아오기
-		System.out.println(request.getParameter("serial_num"));
 		String date = request.getParameter("ioc_date");
-		System.out.println(date);
 		Timestamp ioc_date = Timestamp.valueOf(date);
 		System.out.println("ioc_date:"+ioc_date);
 		
@@ -65,29 +64,33 @@ public class insertReservation extends HttpServlet {
 		res.setSerial_num(request.getParameter("serial_num"));
 		res.setReg_bus_no(request.getParameter("reg_bus_no"));
 		res.setIoc_date(ioc_date);
+		res.setUser_rn(request.getParameter("user_rn"));
+		
+		//등록 타입
+		String resType = request.getParameter("resType");
 		
 		System.out.println("시리얼 넘버 : "+res.getSerial_num());
 		System.out.println("사업자 번호 : "+res.getReg_bus_no());
 		System.out.println("예약 날짜 : "+res.getIoc_date());
-		System.out.println("등록자 주민번호 : "+res.getUser_rn());
+		System.out.println("등록자 주민번호 : "+request.getParameter("user_rn"));
 		
 		
-		if(request.getParameter("sub_user_name").equals("null")) {
-			System.out.println("sub OK : "+res.getSub_ok());
-			res.setUser_rn(request.getParameter("user_rn"));
+		if(resType.equals("self")){
 			res.setSub_ok("N");
-		}else {
-
 			System.out.println("sub OK : "+res.getSub_ok());
-			res.setUser_rn(request.getParameter("sub_user_rn"));
+			
+		}else {
 			res.setSub_ok("Y");
+			System.out.println("sub OK : "+res.getSub_ok());
+			
 		}
-		
+
 		//int checkRes = rservice.checkReservation(res.getUser_rn());
 		
 		int result = rservice.insertReservation(res);
 		
 		System.out.println("결과 : "+result);
+		
 		RequestDispatcher view = null;
 		
 		if(result >0) {
@@ -106,9 +109,6 @@ public class insertReservation extends HttpServlet {
 			view.forward(request, response);
 		}
 		
-		int sub_user_no = Integer.parseInt(request.getParameter("sub_user_no"));
-		System.out.println("sub_user_no : "+sub_user_no);
-			
 			
 			
 	}

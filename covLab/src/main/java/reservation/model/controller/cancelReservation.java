@@ -33,6 +33,9 @@ public class cancelReservation extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+
+		
+		request.setCharacterEncoding("utf-8");
 		System.out.println("c res");
 		Reservation res = new Reservation();
 		reservationService rservice = new reservationService();
@@ -44,8 +47,8 @@ public class cancelReservation extends HttpServlet {
 		res.setReg_bus_no(request.getParameter("reg_bus_no"));
 		res.setRev_date(rev_date);
 		res.setUser_rn(request.getParameter("user_rn"));
-		
-		int result = rservice.deleteReservation(res);
+		System.out.println("user_rn"+res.getUser_rn());
+		int result = rservice.deleteReservation(res.getUser_rn());
 		
 		System.out.println("삭제 결과 : "+result);
 		RequestDispatcher view = null;

@@ -66,7 +66,7 @@ input:focus {
 						<input type="text" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" id="serial"><br>
 						<input type="text" name="reg_bus_no" value=<%=hp.getReg_bus_no()%> class="inputBox" id="reg"><br>
 						<input type="text" name="user_no" value=<%=mb.getUserNo()%> class="inputBox" id="no"> <br>
-						<input type="text" name="sub_user_no" value=<%=mb.getUserNo()%> class="inputBox" id="subno"> <br>
+						<input type="text" name="resType" value=<%=request.getAttribute("resType")%> class="inputBox" id="resType"> <br>
 						<input type="button" onclick="insertSub()" value="예약하기">
 
 					</form>

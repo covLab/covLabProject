@@ -38,6 +38,9 @@ public class detailReservation extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		request.setCharacterEncoding("utf-8");
+		
 		reservationService rservice = new reservationService();
 		
 //		String reg_bus_no = request.getParameter("reg_bus_no");
@@ -51,10 +54,14 @@ public class detailReservation extends HttpServlet {
 		String user_id = (String) session.getAttribute("user_id");
 		Members mb = rservice.selectOneMember(user_id);
 		String user_rn = mb.getUserRn();
+		System.out.println("user_rn : "+user_rn);
 		
-		ArrayList<Members> sub_list = rservice.selectOneSubUserRn(mb.getUserNo());
+		
 		//병원 정보 가져오기
 		Hospital hp = rservice.selectOneHp(reg_bus_no);
+		
+		// 대리예약 정보 가져오기 위한 대리유저 정보
+		ArrayList<Members> sub_list = rservice.selectOneSubUserRn(mb.getUserNo());
 		int checkRes = rservice.checkReservation(user_rn);
 		
 		int checkSubRes = 0;
@@ -66,8 +73,8 @@ public class detailReservation extends HttpServlet {
 				System.out.println("sub_mb.getUserRn() : "+sub_mb.getUserRn());
 				checkSubRes = rservice.checkSubReservation(sub_mb.getUserRn());
 				
-				int sub_user_no = sub_mb.getSubUserNo();
-				request.setAttribute("sub_user_no", sub_user_no);
+				int user_no = sub_mb.getSubUserNo();
+				request.setAttribute("user_no", user_no);
 				
 				if(checkSubRes >0) {
 					break;

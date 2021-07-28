@@ -18,67 +18,54 @@
 <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <script src="http://maps.google.com/maps/api/js?q=seoul&key=AIzaSyCZ8XJruaL1nd6GJOryueJE_Av5O6mU5H0" type="text/javascript"></script>
-<script>
-    function reservationDatePopup(){
-        var url = "/semi/reservationDatePopup";
-        var name = "reservationDatePopup";
-        var option = "width = 500, height = 500, top = 300, left = 800, location = no"
-        window.open(url, name, option);
-    }
-    
-    function termsPopup(serial,reg,ioc){
-    	var fnm = document.info;
-		var serial_num = fnm.serial.value;
-		var reg_bus_no = fnm.reg.value;
-		var ioc_date = fnm.ioc.value;
-    	
-        var url = "/semi/tpop";
-        var name = "termsPopupPage";
-        var option = "width = 500, height = 500, top = 300, left = 800, location = no"
-        
-        fnm.action = url; 
-        fnm.target = "termsPopupPage";
-        
-        window.open('', name, option);
-        fnm.submit();
-    }
-    
-    function cancelRes(){
-    	var fnm = document.info;
-		var serial_num = fnm.serial.value;
-		var reg_bus_no = fnm.reg.value;
-		var ioc_date = fnm.ioc.value 
-    	
-        var url = "/semi/cpop";
-        var name = "cancelPopupPage";
-        var option = "width = 500, height = 500, top = 300, left = 800, location = no"
-        
+<script type="text/javascript">
+function reservationDatePopup(){
+    var url = "/semi/reservationDatePopup";
+    var name = "reservationDatePopup";
+    var option = "width = 500, height = 500, top = 300, left = 800, location = no"
+    window.open(url, name, option);
+}
 
-        fnm.action = url;
-        fnm.target = "cancelPopupPage";
-        
-        window.open('', name, option);
-        fnm.submit();
-    }
-    
-    function subMemInfoPopup(serial,reg,ioc){
-    	
-    	var fnm = document.info;
-    	
-		var serial_num = fnm.serial.value;
-		var reg_bus_no = fnm.reg.value;
-		var ioc_date = fnm.ioc.value;
-
+function termsPopup(){
+	var fnm = document.info;
+	
+	fnm.resType.value = event.srcElement.value;
+	alert(fnm.resType.value);
+	
+	if(fnm.resType.value == "self"){
+	    var url = "/semi/tpop";
+	    var name = "termsPopupPage";
+    	var target = "termsPopupPage";
+	}else{
 		var url = "/semi/movesub";
-        var name = "subMemInfoPopupPage";
-        var option = "width = 500, height = 500, top = 300, left = 800, location = no"
-        
-       	fnm.action = url;
-        fnm.target = "subMemInfoPopupPage";
-        
-        window.open('', name, option);
-        fnm.submit();
-    }
+	    var name = "subMemInfoPopupPage";
+	    var target = "subMemInfoPopupPage";
+	}
+    var option = "width = 500, height = 500, top = 300, left = 800, location = no"
+    
+    fnm.action = url; 
+    fnm.target = target;
+    window.open('', name, option);
+    fnm.submit();
+}
+
+
+function cancelRes(){
+	var fnm = document.info;
+	
+	fnm.resType.value = event.srcElement.value;
+	alert(fnm.resType.value);
+    var url = "/semi/cpop";
+    var name = "cancelPopupPage";
+    var option = "width = 500, height = 500, top = 300, left = 800, location = no"
+
+    fnm.action = url;
+    fnm.target = "cancelPopupPage";
+    
+    window.open('', name, option);
+    fnm.submit();
+}
+
 </script>
 <style type="text/css">
 
@@ -145,20 +132,23 @@ outline:none;
 											<a href = "javascript:void(0)" target = "_blank" onclick="reservationDatePopup()">날짜 선택</a>
 										</div>
 										<div class="form-group">
-											<label for="">sub_user_no : </label> 
-											<input type="text" name="sub_user_no" value="<%=request.getAttribute("sub_user_no") %>" readonly class="inputBox" id="sub_user_np">
+											<label for="">user_no : </label> 
+											<input type="text" name="user_no" value="<%=request.getAttribute("user_no") %>" readonly class="inputBox" id="user_no">
 											<br>
 											<a href = "javascript:void(0)" target = "_blank" onclick="reservationDatePopup()">날짜 선택</a>
 										</div>
 					
-										<input type="hidden" name="reg_bus_no" value="<%= hp.getReg_bus_no() %>" class="inputBox" id="reg">
-										<input type="hidden" name="sub_user_name" value="null" class="inputBox" id="sub_user_name">
+										<input type="hidden" name="reg_bus_no" value="<%= hp.getReg_bus_no() %>" class="inputBox">
+										<input type="hidden" name="resType" value="null" class="inputBox">
+										<!--  
+										<input type="hidden" name="sub_user_rn" value="null" class="inputBox" id="sub_user_rn">
+										-->
 									<div class="form-row  text-center">
 									
 									<% if (Integer.parseInt(request.getAttribute("checkRes").toString()) >=1 ){  %>
-										<a onclick= "cancelRes('serial','reg', 'ioc' )" class="btn">예약취소</a>
+										<button onclick= "cancelRes()" class="btn" value="self" id="canBtn">예약취소</button>
 									<%}else{ %>
-										<a onclick= "termsPopup('serial','reg', 'ioc' )" class="btn">예약</a>
+										<button onclick= "termsPopup()" class="btn" value="self" id="resBtn">예약</button>
 									<%} %>
 									
 									<%-- <% if (Integer.parseInt(request.getAttribute("checkSub").toString()) >=1 ){  %>
@@ -166,10 +156,11 @@ outline:none;
 									<%}else{ %>
 										<a onclick= "subMemInfoPopup('serial','reg', 'ioc' )" class="btn">예약</a>
 									<%} %> --%>
+									
 									<% if(Integer.parseInt(request.getAttribute("checkSubRes").toString()) >=1 ){%>
-										<a onclick= "cancelRes('serial','reg', 'ioc' )" class="btn">대리예약취소</a>
+										<button onclick= "cancelRes()"class="btn" value="sub" id="canBtn">대리예약취소</button>
 									<%}else{ %>
-										<a onclick= "subMemInfoPopup('serial','reg', 'ioc' )" class="btn">대리예약</a>
+										<button onclick= "termsPopup()" class="btn" value="sub" id="resBtn">대리예약</button>
 									<%} %>
 									</div>
 									</form>

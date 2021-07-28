@@ -58,9 +58,9 @@ public class reservationService {
 		return check;
 	}
 	
-	public int deleteReservation(Reservation res) {
+	public int deleteReservation(String user_rn) {
 		Connection conn = getConnection();
-		int result = rdao.deleteReservation(conn, res);
+		int result = rdao.deleteReservation(conn, user_rn);
 		close(conn);
 		return result;
 	}
@@ -72,9 +72,9 @@ public class reservationService {
 		return result;
 	}
 	
-	public Members selectOneSubMember(int sub_user_no) {
+	public Members selectOneSubMember(String user_rn) {
 		Connection conn = getConnection();
-		Members mb = rdao.selectOneSubMember(conn, sub_user_no);
+		Members mb = rdao.selectOneSubMember(conn, user_rn);
 		close(conn);
 		return mb;
 	}

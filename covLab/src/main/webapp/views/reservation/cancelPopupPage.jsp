@@ -23,15 +23,10 @@ input:focus {
 }
 </style>
 <script type="text/javascript">
-function cancel(serial, rn, reg, rev){
+function cancel(){
 	
 	var url="/semi/cancelres";
 	var fnm = document.info;
-	
-	var serial_num = fnm.serial_num.value;
-	var user_rn =fnm.user_rn.value;
-	var reg_bus_no = fnm.reg_bus_no.value;
-	var rev_date = fnm.rev_date.value
 	
     fnm.method = "post";
 	fnm.action = url;
@@ -86,10 +81,8 @@ function cancel(serial, rn, reg, rev){
 							<a href="javascript:void(0)" target="_blank"
 								onclick="reservationDatePopup()">날짜 선택</a>
 						</div> -->
-						<input type="hidden" name="reg_bus_no"
-							value=<%=hp.getReg_bus_no()%> class="inputBox">
 
-						<input type="button" onclick ="cancel('serial', 'rn', 'reg', 'rev')" value="예약취소">
+						<input type="button" onclick ="cancel()" value="예약취소">
 
 					</form>
 

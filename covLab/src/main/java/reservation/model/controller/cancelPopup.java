@@ -2,6 +2,7 @@ package reservation.model.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,10 +39,11 @@ public class cancelPopup extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
+		request.setCharacterEncoding("utf-8");
 		//서비스 생성
 		reservationService rservice = new reservationService();
-		
+		System.out.println("------------예약 취소 서블릿-------------");
+		System.out.println("유저번호 :"+request.getParameter("user_no"));
 		//테스트용 세션 받아오기
 		HttpSession session = request.getSession(true);
 		String user_id = (String) session.getAttribute("user_id");
@@ -62,38 +64,46 @@ public class cancelPopup extends HttpServlet {
 //		Timestamp rev_date =Timestamp.valueOf(date);
 		
 		
-		Members mb = null;
-		
-		
-		
-		if(!request.getParameter("sub_user_name").equals("null")) {
-			int sub_user_no = Integer.parseInt(request.getParameter("sub_user_no").toString());
-			
-			mb = rservice.selectOneSubMember(sub_user_no);
-		}else {
-			mb = rservice.selectOneMember(user_id);
-		}
-		//mb 객체에 유저 정보 담기
-		System.out.println("user_id2 : "+user_id);
-		
-		//vac 객체에 백신 정보 담기
-		System.out.println("serial_num2 : "+serial_num);
+		Members mb = new Members();
 		Vaccine vac = rservice.selectOneVac(serial_num);
-		
-		//hp 객체에 기관 정보 담기
-		System.out.println("reg2 : "+reg_bus_no);
 		Hospital hp = rservice.selectOneHp(reg_bus_no);
 		
-		System.out.println("-------hp 객체 확인------");
-			
 		RequestDispatcher view = null;
+		
+		String resType =request.getParameter("resType");
+		System.out.println("cPop resType : "+resType);
+		if(resType.equals("self")) {
+			
+			mb = rservice.selectOneMember(user_id);
+		}else {
+			int user_no = Integer.parseInt(request.getParameter("user_no").toString());
+			ArrayList<Members> mb_list = rservice.selectOneSubUserRn(user_no);
+			
+			for(Members sub_mb : mb_list) {
+				
+				System.out.println("sub_mb.getUserRn() : "+sub_mb.getUserRn());
+				
+				int subResCheck = rservice.checkSubReservation(sub_mb.getUserRn());
+				System.out.println("subResCheck :"+subResCheck);
+				
+				if(subResCheck > 0) {
+					mb = rservice.selectOneSubMember(sub_mb.getUserRn());
+					break;
+					
+				} /*
+					 * else { view = request.getRequestDispatcher( "views/common/error.jsp");
+					 * request.setAttribute("message", "예약중인 대리 유저 없음!"); view.forward(request,
+					 * response); }
+					 */
+			}
+		}
 
 		view = request.getRequestDispatcher(
 				"views/reservation/cancelPopupPage.jsp");
 		
-		request.setAttribute("hp", hp);
 		request.setAttribute("mb", mb);
 		request.setAttribute("vac", vac);
+		request.setAttribute("hp", hp);
 		request.setAttribute("ioc_date", ioc_date);
 		
 		view.forward(request, response);

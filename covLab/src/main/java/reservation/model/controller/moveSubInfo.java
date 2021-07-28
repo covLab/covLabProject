@@ -35,7 +35,10 @@ public class moveSubInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//서비스 생성
+		request.setCharacterEncoding("utf-8");
+		//서비스 생성
 		reservationService rservice = new reservationService();
+		System.out.println("------------movesub 서블릿-------------");
 		
 		//테스트용 세션 받아오기
 		HttpSession session = request.getSession(true);
@@ -51,11 +54,12 @@ public class moveSubInfo extends HttpServlet {
 		
 		//테스트용 날짜 데이터 받아오기
 		String ioc_date = request.getParameter("ioc_date");
-
 		System.out.println("ioc_Date : "+ioc_date);
 //		String date = request.getParameter("rev_date"); 
 //		Timestamp rev_date =Timestamp.valueOf(date);
 		
+		// resType 받기
+		String resType = request.getParameter("resType");
 		
 		//mb 객체에 유저 정보 담기
 		System.out.println("user_id2 : "+user_id);
@@ -80,7 +84,7 @@ public class moveSubInfo extends HttpServlet {
 		request.setAttribute("mb", mb);
 		request.setAttribute("vac", vac);
 		request.setAttribute("ioc_date", ioc_date);
-		
+		request.setAttribute("resType", resType);
 		view.forward(request, response);
 	}
 

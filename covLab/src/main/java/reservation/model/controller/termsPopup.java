@@ -39,10 +39,11 @@ public class termsPopup extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.setCharacterEncoding("utf-8");
+		
+		
 		System.out.println("------약관 팝업 서블릿------");
 		//서비스 생성
 		reservationService rservice = new reservationService();
-		Members mb = new Members();
 		
 		//테스트용 세션 받아오기
 		HttpSession session = request.getSession(true);
@@ -55,85 +56,85 @@ public class termsPopup extends HttpServlet {
 		//테스트용 reg_bus_no 받아오기
 		String reg_bus_no = request.getParameter("reg_bus_no");
 		System.out.println("reg_bus_no : "+reg_bus_no);
-//		
-		int sub_user_no = Integer.parseInt(request.getParameter("sub_user_no").toString());
-		System.out.println("sub_user_no : "+sub_user_no);
+
+		
 		//테스트용 날짜 데이터 받아오기
 		String ioc_date = request.getParameter("ioc_date");
 		
-		mb = rservice.selectOneMember(user_id);
-		Members sub_mb = rservice.selectOneSubMember(sub_user_no);
+//		mb = rservice.selectOneMember(user_id);
+//		Members sub_mb = rservice.selectOneSubMember(sub_user_no);
+			
 		
 		//vac 객체에 백신 정보 담기
-		System.out.println("serial_num2 : "+serial_num);
 		Vaccine vac = rservice.selectOneVac(serial_num);
 		
 		//hp 객체에 기관 정보 담기
-		System.out.println("reg2 : "+reg_bus_no);
 		Hospital hp = rservice.selectOneHp(reg_bus_no);
 		
-		System.out.println("user_id2 : "+user_id);
+		//mb 정보 객체 생성
+		Members mb = new Members();
+		
+		//버튼 타입
+		String resType = request.getParameter("resType");
+		System.out.println("resType : "+resType);
+		//user_no 받아오기
+		int user_no = Integer.parseInt(request.getParameter("user_no").toString());
 		
 		RequestDispatcher view = null;
 		
-		
-		if(!request.getParameter("sub_user_name").equals("null")) {
-			String user_name = request.getParameter("sub_user_name");
-			String user_rn = request.getParameter("sub_user_rn");	
-			String user_address = request.getParameter("sub_user_address");
-			String user_phone = request.getParameter("sub_user_phone");
-			
-			
-			System.out.println("user_name : "+mb.getUserName().getClass().getName());
-			System.out.println("user_rn : "+mb.getUserRn());
-			System.out.println("user_address : "+mb.getUserAddress());
-			System.out.println("user_phone : "+mb.getUserPhone());
-			
-			int result = rservice.insertSubMember(sub_user_no, mb);
-			
-			if(result >0) {
-				request.setAttribute("sub_user_no", sub_user_no);
-				
-			}else {
-				view = request.getRequestDispatcher(
-						"views/common/error.jsp");
-				request.setAttribute("message", 
-						sub_user_no + "대리유저 회원가입 실패!");
-				view.forward(request, response);
-			}
-		}else {
+		if(resType.equals("self")) {
 			mb = rservice.selectOneMember(user_id);
-			
-			request.setAttribute("hp", hp);
-			request.setAttribute("vac", vac);
-			request.setAttribute("ioc_date", ioc_date);
-			request.setAttribute("mb", mb);
-			request.setAttribute("sub_user_no", sub_user_no);
-			
-			
-			if(mb!=null) {
+					
+		}else {
+				String user_name = request.getParameter("sub_user_name");
+				String user_rn = request.getParameter("sub_user_rn");	
+				String user_address = request.getParameter("sub_user_address");
+				String user_phone = request.getParameter("sub_user_phone");
 				
-				view = request.getRequestDispatcher(
-						"views/reservation/termsPopupPage.jsp");
-				view.forward(request, response);
-			}else {
-				view = request.getRequestDispatcher(
-						"views/common/error.jsp");
-				request.setAttribute("message", 
-						user_id + "유저 데이터 불러오기 실패!");
-				view.forward(request, response);
-			}
+				mb.setUserName(user_name);
+				mb.setUserRn(user_rn);
+				mb.setUserAddress(user_address);
+				mb.setUserPhone(user_phone);
+				
+				
+				System.out.println("user_name : "+mb.getUserName());
+				System.out.println("user_rn : "+mb.getUserRn());
+				System.out.println("user_address : "+mb.getUserAddress());
+				System.out.println("user_phone : "+mb.getUserPhone());
+				
+				//sub 유저 데이터 삽입
+				int result = rservice.insertSubMember(user_no, mb);
+				System.out.println("result : "+result);
+				
+				if(result > 0) {
+					request.setAttribute("user_no", user_no);
+					
+					
+				}
+			
 		}
-		int checkRes = rservice.checkReservation(mb.getUserRn());
-		int checkSubRes = rservice.checkSubReservation(sub_mb.getUserRn());
 		
+		
+		request.setAttribute("hp", hp);
+		request.setAttribute("vac", vac);
+		request.setAttribute("ioc_date", ioc_date);
+		request.setAttribute("mb", mb);
+		request.setAttribute("resType", resType);
+		
+		if(mb!=null) {
 			
-//			mb.setUserName(request.getParameter("user_name").toString());
-//			mb.setUserRn(request.getParameter("user_rn").toString());
-//			mb.setUserAddress(request.getParameter("user_address").toString());
-//			mb.setUserPhone(request.getParameter("user_phone").toString());
+			view = request.getRequestDispatcher(
+					"views/reservation/termsPopupPage.jsp");
+			view.forward(request, response);
+		}else {
 			
-			
+			view = request.getRequestDispatcher(
+					"views/common/error.jsp");
+			request.setAttribute("message", 
+					user_id + "유저 데이터 불러오기 실패!");
+			view.forward(request, response);
+		}
+		
 			
 			
 				

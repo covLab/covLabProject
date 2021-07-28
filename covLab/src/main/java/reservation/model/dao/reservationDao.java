@@ -175,7 +175,7 @@ public class reservationDao {
 	}
 	
 	
-	public int deleteReservation(Connection conn, Reservation res) {
+	public int deleteReservation(Connection conn, String user_rn) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -183,7 +183,7 @@ public class reservationDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, res.getUser_rn());	
+			pstmt.setString(1,user_rn);	
 			
 			result = pstmt.executeUpdate();
 			System.out.println("result: " + result);
@@ -222,16 +222,16 @@ public class reservationDao {
 		return result;
 	}
 
-	public Members selectOneSubMember(Connection conn, int sub_user_no) {
+	public Members selectOneSubMember(Connection conn, String user_rn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Members mb = null;
 		
-		String query = "select * from members where sub_user_no = ?";
+		String query = "select * from members where user_rn = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, sub_user_no);			
+			pstmt.setString(1, user_rn);			
 			
 			rset = pstmt.executeQuery();
 			
@@ -241,13 +241,13 @@ public class reservationDao {
 				mb.setUserId(rset.getString("user_id"));
 				mb.setUserPw(rset.getString("user_pw"));
 				mb.setUserName(rset.getString("user_name"));
-				mb.setUserRn(rset.getString("user_rn"));
+				mb.setUserRn(user_rn);
 				mb.setUserAddress(rset.getString("user_address"));
 				mb.setUserEmail(rset.getString("user_email"));
 				mb.setUserGrade(rset.getString("user_grade"));
 				mb.setUserNo(rset.getInt("user_no"));
 				mb.setUserPhone(rset.getString("user_phone"));
-				mb.setSubUserNo(sub_user_no);
+				mb.setSubUserNo(rset.getInt("sub_user_no"));
 				mb.setInoCnt(rset.getInt("ino_cnt"));
 				mb.setSmsAgr(rset.getString("sms_agr"));
 			}
@@ -277,7 +277,6 @@ public class reservationDao {
 			
 			if(rset.next()) {
 				check = rset.getInt(1);
-				System.out.println("check : " + check);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -336,5 +335,35 @@ public class reservationDao {
 	}
 	
 	
-	
+
+	public ArrayList<Hospital> selectAllHps(Connection conn) {
+		ArrayList<Hospital> hps = new ArrayList<Hospital>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from hospital;";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Hospital hp = new Hospital();
+
+				hp.setHp_name(rset.getString("hp_name"));
+				hp.setHp_address(rset.getString("hp_address"));
+				hp.setHp_phone(rset.getString("hp_phone"));
+
+				hps.add(hp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return hps;
+	}
 }

@@ -23,17 +23,17 @@ input:focus {
 }
 </style>
 <script type="text/javascript">
-	function agree(serial, rn, reg, rev){
+	function agree(){
 		
 	 	if (document.getElementById("agreeCheck").checked != true){
 	 		alert("약관에 동의하십시오.");
 		}else{
 			var url="/semi/insertres";
 			var fnm = document.info;
-			var serial_num = fnm.serial_num.value;
+/* 			var serial_num = fnm.serial_num.value;
 			var user_rn =fnm.user_rn.value;
 			var reg_bus_no = fnm.reg_bus_no.value;
-			var ioc_date = fnm.ioc.value
+			var ioc_date = fnm.ioc.value */
 			
 	        fnm.method = "post";
 	        fnm.action = url;
@@ -86,23 +86,21 @@ input:focus {
 						</div>
 						<div class="form-group">
 							<label>예약 날짜 : </label> <input type="text" name="ioc_date"
-								value="<%= request.getAttribute("ioc_date") %>" readonly class="inputBox" id="ioc">
+								value="<%= request.getAttribute("ioc_date") %>" readonly class="inputBox">
 						</div>
 						<div class="form-group">
 							<label>서브 유저 넘버 : </label> <input type="text" name="sub_user_no"
-								value="<%= request.getAttribute("sub_user_no") %>" readonly class="inputBox" id="sub_user_no">
+								value="<%= request.getAttribute("sub_user_no") %>" readonly class="inputBox">
 						</div>
-						<input type="hidden" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" id="serial">
-						<input type="hidden" name="reg_bus_no" value=<%= hp.getReg_bus_no() %> class="inputBox" id="reg">
-						<input type="hidden" name="sub_user_name" value = "null" class="inputBox" id="sub_user_name">
+						<input type="hidden" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" >
+						<input type="hidden" name="reg_bus_no" value=<%= hp.getReg_bus_no() %> class="inputBox" >
+						<input type="hidden" name="resType" value=<%= request.getAttribute("resType") %> class="inputBox">
 						<!-- 						<div class="form-group">
 							<label for="">예약일시 : </label> <input type="text" name="rev_date"
 								value="2021-06-29 09:30:00" readonly id="inputBox"> <br>
 							<a href="javascript:void(0)" target="_blank"
 								onclick="reservationDatePopup()">날짜 선택</a>
 						</div> -->
-						<input type="hidden" name="reg_bus_no"
-							value=<%=hp.getReg_bus_no()%> class="inputBox">
 
 						<textarea class="form-control h-25" rows="10">
 						제1조(목적) 이 법은 사업자가 그 거래상의 지위를 남용하여 불공정한 내용의 약관(約款)을 작성하여 거래에 사용하는 것을 방지하고 불공정한 내용의 약관을 규제함으로써 건전한 거래질서를 확립하고, 이를 통하여 소비자를 보호하고 국민생활을 균형 있게 향상시키는 것을 목적으로 한다.
@@ -117,7 +115,7 @@ input:focus {
 						<div class="text-center">
 							<input type="checkbox" id="agreeCheck" ><span>약관에 동의합니다.</span>
 						</div>
-						<input type="button" onclick="agree('serial', 'rn', 'reg', 'ioc')" value="예약확인">
+						<input type="button" onclick="agree()" value="예약확인">
 
 					</form>
 
