@@ -11,14 +11,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>백신예약사이트 CovLab</title>
-<!--Focus Admin: Creative Admin Dashboard  -->
-<%@ include file="../common/stylesheet.jsp"%>
-<%@ include file="../common/sidebar.jsp"%>
-<%@ include file="../common/topbar.jsp"%>
-<!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <script src="http://maps.google.com/maps/api/js?q=seoul&key=AIzaSyCZ8XJruaL1nd6GJOryueJE_Av5O6mU5H0" type="text/javascript"></script>
-<script type="text/javascript">
+    
+       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    
+<!--Focus Admin: Creative Admin Dashboard  -->
+<%@ include file="../common/stylesheet.jsp"%>
+<%@ include file="../common/sidebar.jsp" %>
+<%@ include file="../common/topbar.jsp"%>
+<!-- GOOGLE FONTS-->
+    
+<script>
+	
+$('#datepicker').datepicker({
+    uiLibrary: 'bootstrap4'
+});
+
 function reservationDatePopup(){
     var url = "/semi/reservationDatePopup";
     var name = "reservationDatePopup";
@@ -126,18 +138,28 @@ outline:none;
 											<label for="">백신 : </label> <input type="text" name="serial_num" value="PF0002" readonly class="inputBox" id="serial">
 										</div>
 										<div class="form-group">
-											<label for="">예약일시 : </label> 
-											<input type="text" name="ioc_date" value="2021-06-29 10:30:00" readonly class="inputBox" id="ioc">
-											<br>
-											<a href = "javascript:void(0)" target = "_blank" onclick="reservationDatePopup()">날짜 선택</a>
+											<label for="">예약일시 : </label> <input type="text"
+												name="ioc_date" value="2021-06-29 10:30:00" readonly
+												class="inputBox" id="ioc"> <br> <a
+												href="javascript:void(0)" target="_blank"
+												onclick="reservationDatePopup()">날짜 선택</a>
 										</div>
 										<div class="form-group">
-											<label for="">user_no : </label> 
-											<input type="text" name="user_no" value="<%=request.getAttribute("user_no") %>" readonly class="inputBox" id="user_no">
-											<br>
-											<a href = "javascript:void(0)" target = "_blank" onclick="reservationDatePopup()">날짜 선택</a>
+											<label for="">user_no : </label> <input type="text"
+												name="user_no" value="<%=request.getAttribute("user_no")%>"
+												readonly class="inputBox" id="user_no"> <br>
+											<div>
+												단일 달력<br/> 
+												<input type="text" id="datepicker">
+											</div>
+											<br />
+											<br />
+											<br /> 
+
+											<a href="javascript:void(0)" target="_blank"
+												onclick="reservationDatePopup()">날짜 선택</a>
 										</div>
-					
+
 										<input type="hidden" name="reg_bus_no" value="<%= hp.getReg_bus_no() %>" class="inputBox">
 										<input type="hidden" name="resType" value="null" class="inputBox">
 										<!--  
@@ -285,4 +307,5 @@ outline:none;
 
 	<%@ include file="../common/script.jsp"%>
 </body>
+											
 </html>

@@ -1,6 +1,5 @@
 package reservation.model.controller;
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import member.model.vo.Member;
 import reservation.model.service.reservationService;
 import reservation.model.vo.Hospital;
 import reservation.model.vo.Members;

@@ -31,7 +31,7 @@ public class CommentWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		//ajax 를 통해 전송온 값 꺼내기 : post
 		//1. 전송온 값에 한글이 있으며 인코딩 처리함
 		request.setCharacterEncoding("utf-8");
 		
@@ -39,14 +39,17 @@ public class CommentWriteServlet extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		int currentPage = Integer.parseInt(request.getParameter("page"));
 		
+		CommentsService cservice = new CommentsService();
 		Comments comments = new Comments();
 		
 		comments.setComWriter(request.getParameter("writer"));
 		comments.setComContent(request.getParameter("content"));
 		comments.setBoardRef(boardNo);
+		//댓글 레벨을 어쩌죠..
+		//comments.setComLevel()
 		
-		CommentsService cservice = new CommentsService();
 		int result = cservice.insertComments(comments);
+		
 		
 		if(result > 0 ) {
 			response.sendRedirect("/semi/bdetail?bno="+boardNo+"&page="+currentPage);

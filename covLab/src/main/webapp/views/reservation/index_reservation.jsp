@@ -1,5 +1,4 @@
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- import="java.util.ArrayList, reservation.model.vo.Hospital" -->
 <%
@@ -66,6 +65,7 @@
 		
 		var latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 		 
+
 		// 지도 옵션 
 		var mapOption = {
 			zoom : 11.5,
@@ -83,7 +83,6 @@
 			map : map,
 			title : "현위치"
 		});
-		
 		//지도에 표시될 병원 리스트
 /* 		var locations = [ [ '강남구보건소	02-3423-5555', 37.5162581, 127.042214 ],
 				[ '삼성서울병원	02-3410-2114', 37.4881568, 127.0855952 ],
@@ -151,9 +150,11 @@
 				}
 				return 0;
 			});
-			console.log(newLocList);
 			
+			console.log(newLocList);
 	}
+	
+
 /* 			google.maps.event.addListener(marker, 'click',
 					(function(marker, i) {
 						return function() {
@@ -171,13 +172,18 @@
 			outDiv.innerHTML = "에러발생 : " + err.code;
 		}
 	}
-	
 	//체크박스 값 하나만 선택되게 하는 함수
 	function checkOnlyOne(element) {
-		  const checkboxes = document.getElementsByName("list_order");
-		  checkboxes.forEach((cb) => { cb.checked = false }))
+		  
+		  const checkboxes 
+		      = document.getElementsByName("list_order");
+		  
+		  checkboxes.forEach((cb) => {
+		    cb.checked = false;
+		  })
+		  
 		  element.checked = true;
-	}
+		}
 	
 	function getDistance(lat1, lon1, lat2, lon2, unit) {
         var radlat1 = Math.PI * lat1/180
@@ -192,15 +198,15 @@
         dist = dist * 60 * 1.1515
         if (unit=="K") { dist = dist * 1.609344 }
         if (unit=="N") { dist = dist * 0.8684 }
-        return dist;
+        return dist
 	}
 
 </script>
 </head>
 
 <body onload="javascript:locationTest();">
-	<!-- 	<link href='http://fonts.googleapis.com/css?family=Open+Sans'
-		rel='stylesheet' type='text/css' /> -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+		rel='stylesheet' type='text/css' />
 </head>
 <body>
 	<div class="content-wrap">
@@ -234,12 +240,9 @@
 				<!-- /# row -->
 				<section id="main-content">
 					<form action="list_option.jsp">
-
 						<input type='checkbox' name='list_order' value='dist'
 							onclick='checkOnlyOne(this)' />거리순 <input type='checkbox'
 							name='list_order' value='amnt' onclick='checkOnlyOne(this)' />수량순
-
-
 						<select name="list_option_key" onchange="handleOnList(this)">
 							<option value="none">=== 선택 ===</option>
 							<option value="dist">화이자</option>
@@ -248,6 +251,8 @@
 						</select>
 					</form>
 					<div class="row">
+
+
 						<div class="col-lg-3 p-0">
 							<div class="card">
 								<div class="card-body">
@@ -277,7 +282,12 @@
 						</div>
 						<div class="col-lg-9 p-0">
 							<div id="map" style="width: 95%; height: 600px;"></div>
+
+
+
+
 						</div>
+
 					</div>
 			</div>
 

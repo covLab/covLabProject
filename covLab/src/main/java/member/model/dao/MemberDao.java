@@ -1,6 +1,6 @@
 package member.model.dao;
 
-import static common.JDBCTemp.close;
+import static common.JDBCTemp.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -80,6 +80,8 @@ public class MemberDao {
 		   
 		return member;
 	}
+<<<<<<< Updated upstream
+=======
 
 	public int insertMember(Connection conn, Member member) {
 		int result = 0;
@@ -165,26 +167,23 @@ public class MemberDao {
 	return idCount;
 }
 
-	public String searchUserIdEmail(Connection conn , String useremail, String username) {
-		
-		String userid = null;
+	public int searchEmail(Connection conn, String useremail) {
+		int idCount = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset =null;
 		
-		String query = "select user_id from members where user_email = ? and user_name = ?";
+		String query = "select count(user_email) from members where user_email = ? ";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			
 			pstmt.setString(1, useremail);
-			pstmt.setString(2, username);
 			
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
+				idCount = rset.getInt(1);
 				
-				userid = rset.getString("user_id");
-				
-				System.out.println("userid : " + userid);
+				System.out.println("idCount : " + idCount);
 			}
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -193,141 +192,8 @@ public class MemberDao {
 		close(pstmt);
 	}
 	   
-	return userid;
+	return idCount;
 }
 
-	public String searchUserIdPhone(Connection conn, String userphone, String username) {
-		String userid = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset =null;
-		
-		String query = "select user_id from members where user_phone = ? and user_name = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setString(1, userphone);
-			pstmt.setString(2, username);
-			
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				
-				userid = rset.getString("user_id");
-				
-				System.out.println("userid : " + userid);
-			}
-	} catch (Exception e) {
-		e.printStackTrace();
-	}finally {
-		close(rset);
-		close(pstmt);
-	}
-	   
-	return userid;
-
-}
-
-	public Member searchpwd(Connection conn, String userid, String useremail) {
-		Member member = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset =null;
-		
-		String query = "select * from members where user_id = ? and user_email = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setString(1, userid);
-			pstmt.setString(2, useremail);
-			
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				member = new Member();
-				
-				member.setUserId(userid);
-				member.setUserPw(useremail);
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		   
-		return member;
-	}
-
-	public int updatePw(Connection conn, String cryptoUserpw, String userid) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String query = "update members set user_pw = ? where user_id = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, cryptoUserpw);
-			pstmt.setString(2, userid);
-		
-			result= pstmt.executeUpdate();
-			System.out.println("reuslt : " + result);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-	 
-		return result;
-	}
-
-	public int updateTempPw(Connection conn, String cryptoUserpw, String userid, String useremail) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String query = "update members set user_pw = ? where user_id = ? and user_email = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, cryptoUserpw);
-			pstmt.setString(2, userid);
-			pstmt.setString(3, useremail);
-		
-			result= pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-	 
-		return result;
-	}
-
-	public int selectCheckpd(Connection conn, String curpd) {
-		int reuslt = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rset =null;
-		
-		String query = "select count(user_pw) from members where user_pw = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setString(1, curpd);
-			
-			
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				reuslt = rset.getInt(1);
-				
-				System.out.println("reuslt : " + reuslt);
-			}
-	} catch (Exception e) {
-		e.printStackTrace();
-	}finally {
-		close(rset);
-		close(pstmt);
-	}
-	   
-	return reuslt;
-	}
+>>>>>>> Stashed changes
 }
