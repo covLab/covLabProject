@@ -3,7 +3,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- app-profile => myInfo_mem -->
+<script src="/semi/resources/js/address.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript"src="/semi/resources/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+function validate(){
+    var nuserpwd = document.getElementById("nuserpwd").value;
+	var nuserpwc = document.getElementById("nuserpwc").value;
+    
+      if(nuserpwd !== nuserpwc){ //비번확인
+		alert("암호와 암호확인의 값이 일치하지 않습니다.");
+		document.getElementById("nuserpwc").value = "";
+		document.getElementById("nuserpwd").select();
+		return false;  //전송 취소함
+	}else{
+		alert("수정되었습니다. 다시 로그인 해주세요;");
+	}
+      var phone = document.getElementById("phone").value;
+      var rep =/^01[01679]-[0-9]{3,4}-[0-9]{4}$/; 
+  	if(!rep.test(phone)){
+  		alert("핸드폰 번호 입력을 다시 해주세요.");
+  		return false;
+  	} 
+  
+}
+	
+	  
 
+
+
+</script>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,6 +68,7 @@
                                           <% char ch = loginMember.getUserRn().charAt(7); %>
                                            <% if( ch == '1' || ch == '3'){ Gender = "남자"; %>
                                            <% }else{  Gender = "여자";} %>
+                                            
   <div class="content-wrap">
     <div class="main">
       <div class="container-fluid">
@@ -46,21 +77,20 @@
             <div class="page-header">
               <div class="page-title">
                 <h1><%= loginMember1.getUserName() %>님
-                  <span>반갑습니다</span>
+                  
                 </h1>
               </div>
             </div>
           </div>
           <!-- /# column -->
+         
           <div class="col-lg-4 p-l-0 title-margin-left">
             <div class="page-header">
               <div class="page-title">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item">
-                    <a href="/semi/views/member/userUpdate.jsp">정보변경 /</a>
-                  </li>
-                   <br>    &nbsp; 
-                  <li class="breadcrumb-item active"><a href ="#">회원탈퇴</a></li>
+                  <li class="breadcrumb-item" >  <a href="/semi/">홈 /</a></li>
+                  <Br>&nbsp; 
+                 <li class="breadcrumb-item" ><a href="../../myInfo.jsp">취소하기</a></li>
                 </ol>
               </div>
             </div>
@@ -84,67 +114,91 @@
                           <% } %>
                         </div>
                         <div class="user-work">
-                          <h4>백신 예약 정보</h4>
+                          
                           <div class="work-content">
-                            <h3>백신 종류</h3>
+                       
                             <!-- <p>123, South Mugda</p>
                             <p>New York, 1214</p> -->
                           </div>
                           <div class="work-content">
-                            <h3>예약 병원</h3>
+                         
                           <!--   <p>123, South Mugda</p>
                             <p>New York, 1214</p> -->
                           </div>
                           <div class="work-content">
-                            <h3>예약 시간</h3>
+                           
                             <!-- <p>123, South Mugda</p>
                             <p>New York, 1214</p> -->
                           </div>
                         </div>
                        
                       </div>
+                    
                       <div class="col-lg-8">
                         <div class="user-profile-name">이 름   <%= loginMember.getUserName() %></div>
-                        
                         <div class="user-send-message">
-                          <button class="btn btn-primary " type="button">
-                            예약 상세 확인</button>
-                        </div>
+                          </div>
                         <div class="custom-tab user-profile-tab">
+                        <form action="/semi/uupdate" method="post" onsubmit="return validate();">
                           <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
                               <a href="#1" aria-controls="1" role="tab" data-toggle="tab">내 정보</a>
                             </li>
                           </ul>
+                       
                           <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="1">
                               <div class="contact-information">
-                                <h4>연락처 및 알림</h4>
+                                <!-- <h4>연락처 및 알림</h4> -->
+                                
+                           
+                             <div class="phone-content">
+                                  <span class="contact-title">이름:</span>
+                                  <input type="text" name="username" id="username" class="phone-number" value="<%= loginMember.getUserName() %>" readonly>
+                                </div>
+                                <div class="phone-content">
+                                  <span class="contact-title">아이디:</span>
+                                  <input type="text" name="userid" id="userid" class="phone-number" value="<%= loginMember.getUserId() %>" readonly>
+                                </div>
+                                 <div class="phone-content">
+                                  <span class="contact-title">새 비밀번호:</span>
+                                  <input type="password" name="nuserpwd" id="nuserpwd" class="phone-number">
+                                </div>
+                                <div class="phone-content">
+                                  <span class="contact-title">새 비밀번호 확인:</span>
+                                  <input type="password" name="nuserpwc" id="nuserpwc" class="phone-number" >
+                                </div>
                                 <div class="phone-content">
                                   <span class="contact-title">전화번호:</span>
-                                  <span class="phone-number"><%= loginMember.getUserPhone() %></span>
+                                  <input type="text" name="phone" id="phone" class="phone-number" value="<%= loginMember.getUserPhone() %>">
                                 </div>
                                 <div class="address-content">
                                   <span class="contact-title">주소:</span>
-                                  <span class="mail-address"><%= loginMember.getUserAddress() %></span>
-                                </div>
+                                   <input type="text" name="address"id="sample6_address"  class="mail-address" placeholder="주소"value="<%= loginMember.getUserAddress() %>">
+                                    </div>
+                                       <div class="address-content">
+                                     <span class="contact-title"></span>
+                                       <input type="text" name="address1"id="sample6_postcode" class="mail-address" placeholder="우편번호">
+                                       <input type="button"name="address2"  class="mail-address"onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                                    </div>
+                                    <div class="address-content">
+                                     <span class="contact-title"></span>
+                                    <input type="text" name="address3"id="sample6_detailAddress" class="mail-address" placeholder="상세주소">
+                                    </div>
+                                    <div class="address-content">
+                                     <span class="contact-title"></span>
+                                    <input type="text" name="address4"id="sample6_extraAddress" class="mail-address" placeholder="참고항목">
+                                     </div>
+                                   <Br>
                                 <div class="email-content">
                                   <span class="contact-title">이메일:</span>
-                                  <span class="contact-email"><%= loginMember.getUserEmail() %></span>
+                                  <input type="email" name="email" id="email" class="mail-address" value="<%= loginMember.getUserEmail() %>">
                                 </div>
-                                <div class="website-content">
-                                  <span class="contact-title">웹사이트:</span>
-                                  <span class="contact-website">www.Admin Board.com</span>
-                                </div>
-                                <div class="skype-content">
-                                  <span class="contact-title">Skype:</span>
-                                  <span class="contact-skype">Admin Board</span>
-                                </div>
-                              </div>
-                              <div class="basic-information">
+                        
+                               <div class="basic-information">
                                 <h4>기본 정보</h4>
                                 <div class="birthday-content">
-                                  <span class="contact-title">주민번호</span>
+                                  <span class="contact-title">주민번호:</span>
                                    <% String userrn = loginMember.getUserRn(); %>
                                   <% char[] rn= new char[userrn.length()]; %>
                                   <%  for(int i = 0 ; i < userrn.length(); i++) {%>
@@ -164,8 +218,13 @@
                                 </div>
                               </div>
                             </div>
+                          
                           </div>
                         </div>
+                        <button class="btn btn-primary " type="submit"  >
+                            수정하기  </button>
+                            
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -173,13 +232,13 @@
               </div>
             </div>
           </div>
+          </div>
           <%@ include file="../common/footer.jsp"%>
           
          </section>
       </div>
     </div>
   </div>
-
 
 
 
