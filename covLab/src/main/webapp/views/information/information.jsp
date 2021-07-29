@@ -83,11 +83,38 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
 
 
 <body>
-<h5>뉴스 /  백신 정보</h5>
-<hr>
-
-<!-- 1. 코로나/백신 정보 (자동 슬라이드) -->
-<h6>자동 배너, 코로나 확진자 수/백신접종현황/예방접종 사전예약 날짜/QnA</h6>
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 p-r-0 title-margin-right">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <h1>뉴스 /  백신 정보 <span>게시판</span></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-4 p-l-0 title-margin-left">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Table-Row-Select</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+                <section id="main-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-title">
+                                <!-- 1. 코로나/백신 정보 (자동 슬라이드) -->
+                                    <h4>자동 배너, 코로나 확진자 수/백신접종현황/예방접종 사전예약 날짜/QnA</h4>
 
 <!-- 자동배너 (이미지 넣고, 수정해야함) -->
   <div id="container">
@@ -106,9 +133,6 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
           <div class="slide_content slide04">
             <p>4</p>
           </div>
-         <!--<div class="slide_content slide05">
-            <p>5</p>
-          </div>  --> 
         </div>
         <!-- // .slide_list -->
       </div>
@@ -124,28 +148,33 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
     <!-- // .slide_wrap -->
   </div>
   <!-- // .container -->
-
-
-
-<hr>
-
-<!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
-<h6>버튼을 클릭하면 해당 페이지로 이동함</h6>
+  <hr>
+  
+  <!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
+<h4>버튼을 클릭하면 해당 페이지로 이동함</h4>
+<br>
 <a class="btn" href="coronaInfo.jsp">코로나 정보</a>
 <a class="btn" href="vaccinInfo.jsp">백신/예방접종 정보</a>
 <a class="btn" href="qna.jsp">QnA</a>
 <hr>
+
 <!-- 3. 실시간 뉴스 -->
-<h6>크롤링으로 실시간 뉴스 가져오기</h6>
-
-
-<hr>
-
-
-
-
-    
+<h4>크롤링으로 실시간 뉴스 가져오기</h4>
   
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /# card -->
+                        </div>
+                        <!-- /# column -->
+                    </div>
+                    <!-- /# row -->
+                </section>
+            </div>
+<!-- ---------------------------------------------------------------------------------------- -->
+
+
     <!-- jquery vendor -->
     <script src="/semi/resources/js/lib/jquery.min.js"></script>
     <script src="/semi/resources/js/lib/jquery.nanoscroller.min.js"></script>
