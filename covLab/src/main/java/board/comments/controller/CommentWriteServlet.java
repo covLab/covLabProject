@@ -47,7 +47,7 @@ public class CommentWriteServlet extends HttpServlet {
 		
 		CommentsService cservice = new CommentsService();
 		int result = cservice.insertComments(comments);
-		
+		System.out.println("comments : "+comments);
 		if(result > 0 ) {
 			response.sendRedirect("/semi/bdetail?bno="+boardNo+"&page="+currentPage);
 		}else {
