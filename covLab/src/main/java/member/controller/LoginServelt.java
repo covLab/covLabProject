@@ -63,7 +63,7 @@ public class LoginServelt extends HttpServlet {
 		Member member = new MemberService().selectLogin(userid, cryptoUserpw);
 		
 		
-		if(member != null && member.getUserGrade().equals("U")) { //로그인 성공
+		if(member != null ) { //로그인 성공
 			
 			HttpSession session = request.getSession();
 			System.out.println("생성된 세션 객체의 id : "
@@ -83,11 +83,7 @@ public class LoginServelt extends HttpServlet {
 							"views/common/error.jsp");
 			
 			
-			if(member != null 
-					&& member.getUserGrade().equals("A")) {
-				request.setAttribute("message", 
-						"로그인 제한된 회원입니다. 관리자에게 문의하세요.");
-			}
+			
 			
 			if(member == null) {
 				request.setAttribute("message", 
