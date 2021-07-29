@@ -41,7 +41,7 @@
 						</div>
 						<div class="dropdown dib">
 							<div class="header-icon" data-toggle="dropdown">
-								<span class="user-avatar" onclick="javascript:location.href='/semi/views/member/login.jsp'">로그인 해주세요
+								<span class="user-avatar" onclick="javascript:location.href='/semi/views/member/login.jsp'">로그인
 								</span>
 								</div>
 							</div>
@@ -154,7 +154,7 @@
 														Screen</span>
 											</a></li>
 											
-											<li onclick="javascript:location.href='logout';"><i class="ti-power-off" ></i> <span >로그아웃</span>
+											<li onclick="javascript:location.href='/semi/logout';" ><i class="ti-power-off" ></i> <span >로그아웃</span>
 										</li>
 										</ul>
 									</div>
