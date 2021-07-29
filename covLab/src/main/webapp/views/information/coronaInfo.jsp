@@ -56,18 +56,46 @@
 
 
 <body>
-<h4>코로나 정보</h4>
-<hr border=2>
 
-<a class="btn" href="#coronainfo01">코로나19란?</a>
-<a class="btn" href="#coronainfo02">코로나의 증상</a>
-<a class="btn" href="#coronainfo03">코로나의 예방법</a>
-
-<hr>
-<!-- 윗부분은 목록을 만들고 a 태그로 각 번호의 목록으로 이동하게 만듬 -->
-
-<!-- 각 목록의 내용을 번호를 붙여서 작성 -->
-<h5>1. 확진자 수/격리해제 수/검사중 수/사망자 수 (실시간, 누적 모두)</h5>
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 p-r-0 title-margin-right">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <h1>뉴스 /  백신 정보 <span>게시판</span></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-4 p-l-0 title-margin-left">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Table-Row-Select</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+                <section id="main-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-title">
+									<h4>코로나 정보</h4>
+										<hr border=2>
+										<a class="btn" href="#coronainfo01">코로나19란?</a>
+										<a class="btn" href="#coronainfo02">코로나의 증상</a>
+									  	<a class="btn" href="#coronainfo03">코로나의 예방법</a>
+									  	<hr>
+									  	<br>
+									  	
+									  	<h5>1. 확진자 수/격리해제 수/검사중 수/사망자 수 (실시간, 누적 모두)</h5>
 <hr>
 <h5 id="coronainfo01">2. 코로나19란?</h5>
 <p class="ta_r mgt36">* 현재까지 알려진 정보(2021년 3월 2일 기준) </p>
@@ -169,6 +197,23 @@
 </ul>
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+										
+										
+										
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /# card -->
+                        </div>
+                        <!-- /# column -->
+                    </div>
+                    <!-- /# row -->
+                </section>
+            </div>
+            
+            
+<!-- ----------------------------------------------------------------------------------- -->
 
                 <!-- /# row -->
                 <section id="main-content">

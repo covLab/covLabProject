@@ -54,7 +54,38 @@
 </style>
 
 <body>
-<h4>백신/예방접종 정보</h4>
+
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 p-r-0 title-margin-right">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <h1>뉴스 /  백신 정보 <span>게시판</span></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-4 p-l-0 title-margin-left">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Table-Row-Select</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+                <section id="main-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-title">
+                                    <h4>백신/예방접종 정보</h4>
 <hr>
 
 <a class="btn" href="#vaccineinfo01">우리나라에 들어오는 백신</a>
@@ -124,7 +155,7 @@
 <hr>
 <h5 id="vaccineinfo02">*예방접종 이후*</h5>
 <div>
-	<h4>1. 예방접종 이후 주의 사항</h4>
+	<h4>1. 예방접종 이후 주의 사항</h4><br>
 	<img src="../../resources/images/vaccination01.jpg">
 	<br>
 	<br>
@@ -142,10 +173,10 @@
 
 <hr width="40% "align="left">
 <div>
-	<h4>2. 예방접종 이후 이상반응</h4>
+	<h4>2. 예방접종 이후 이상반응</h4><br>
 	<img src="../../resources/images/vaccination02.png" ><br>
 	<br>
-<table border="1" width="1300" height="600">
+<table border="1" width="1100" height="600">
 	<tr>
 		<td>발열증상</td>
 		<td><ul>
@@ -185,7 +216,7 @@
 
 <div>
 	<h4>** 백신별 예방접종 후 이상반응 **</h4>
-		<table border="1" width="1500" height="700">
+		<table border="1" width="1100" height="700">
 			<tr>
 				<td rowspan="3">구분</td>
 				<td colspan="2">전달체 백신(바이러스 벡터)</td>
@@ -298,7 +329,7 @@
 
 <div>
 <hr width="40%" align="left">
-	<h4>3. 이상반응 나타날 시 대처법</h4>
+	<h4>3. 이상반응 나타날 시 대처법</h4><br>
 	<img src="../../resources/images/vaccination06.png">
 	<br>
 	<br>
@@ -335,6 +366,29 @@
 </div>
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+  
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /# card -->
+                        </div>
+                        <!-- /# column -->
+                    </div>
+                    <!-- /# row -->
+                </section>
+            </div>
+            
+<!-- -------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
                 <!-- /# row -->
                 <section id="main-content">
                     <div class="row">
