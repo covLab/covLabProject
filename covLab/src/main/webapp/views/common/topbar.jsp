@@ -154,7 +154,7 @@
 														Screen</span>
 											</a></li>
 											
-											<li><i class="ti-power-off"  onclick="javascript:location.href='logout';"></i> <span>로그아웃</span>
+											<li onclick="javascript:location.href='logout';"><i class="ti-power-off" ></i> <span >로그아웃</span>
 										</li>
 										</ul>
 									</div>
