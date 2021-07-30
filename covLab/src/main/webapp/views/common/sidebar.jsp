@@ -38,7 +38,7 @@ Member loginMember = (Member) session.getAttribute("loginMember");
 									관리 페이지 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
 								<ul>
 									<li><a href="/semi/blistadmin?page=1">접종 후기 관리</a></li>
-									<li><a href="/semi/mmanage">회원 관리</a></li>
+									<li><a href="/semi/mlist">회원 관리</a></li>
 									<li><a href="/semi/bcmanage">백신 관리</a></li>
 								</ul></li>
 						

@@ -5,6 +5,8 @@ import static common.JDBCTemp.close;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import member.model.vo.Member;
 public class MemberDao {
@@ -355,6 +357,44 @@ public class MemberDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Member> selectList(Connection conn) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from members";
+		
+		try {
+			stmt = conn.createStatement();			
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setUserNo(rset.getInt("user_no"));
+				member.setSubUserNo(rset.getInt("sub_user_no"));
+				member.setUserId(rset.getString("user_id"));
+				member.setUserPw(rset.getString("user_pw"));
+				member.setUserName(rset.getString("user_name"));
+				member.setUserRn(rset.getString("user_rn"));
+				member.setUserEmail(rset.getString("user_email"));
+				member.setUserPhone(rset.getString("user_phone"));
+				member.setUserAddress(rset.getString("user_address"));
+				member.setUserGrade(rset.getString("user_grade"));
+				member.setSmsAgr(rset.getString("sms_agr"));
+				member.setInoCnt(rset.getInt("ino_cnt"));
+				
+				list.add(member);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		return list;
 	}
 	
 }

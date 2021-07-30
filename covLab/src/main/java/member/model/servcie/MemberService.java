@@ -6,6 +6,7 @@ import static common.JDBCTemp.getConnection;
 import static common.JDBCTemp.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
@@ -119,6 +120,13 @@ public class MemberService {
 		}
 		close(conn);
 		return result;
+	}
+
+	public ArrayList<Member> selectList() {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectList(conn);
+		close(conn);
+		return list;
 	}
 }
 	

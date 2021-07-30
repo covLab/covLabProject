@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import board.model.service.BoardService;
 
 /**
@@ -38,6 +37,7 @@ public class BoardAdminDeleteServlet extends HttpServlet {
       String checkedList = request.getParameter("checkedArray");
       System.out.println("checkedList : "+checkedList);
 
+      JSONArray array = JSONArray.fromObject(jsonData);
   
       // 출력할 페이지 작성
       int currentPage = 1;
