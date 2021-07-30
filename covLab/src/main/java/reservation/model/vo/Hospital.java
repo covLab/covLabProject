@@ -7,7 +7,8 @@ public class Hospital implements java.io.Serializable{
 	private String hp_name;
 	private String hp_address;
 	private String hp_phone;
-	
+	private float hp_latitude;
+	private float hp_longitude;
 	
 	public String getReg_bus_no() {
 		return reg_bus_no;
@@ -36,14 +37,26 @@ public class Hospital implements java.io.Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-	public Hospital(String reg_bus_no, String hp_name, String hp_address, String hp_phone) {
+	public float getHp_latitude() {
+		return hp_latitude;
+	}
+	public void setHp_latitude(float hp_latitude) {
+		this.hp_latitude = hp_latitude;
+	}
+	public float getHp_longitude() {
+		return hp_longitude;
+	}
+	public void setHp_longitude(float hp_longitude) {
+		this.hp_longitude = hp_longitude;
+	}
+	public Hospital(String reg_bus_no, String hp_name, String hp_address, String hp_phone, float hp_latitude, float hp_longitude) {
 		super();
 		this.reg_bus_no = reg_bus_no;
 		this.hp_name = hp_name;
 		this.hp_address = hp_address;
 		this.hp_phone = hp_phone;
+		this.hp_latitude=hp_latitude;
+		this.hp_longitude=hp_longitude;
 	}
 	public Hospital() {
 		super();

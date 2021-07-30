@@ -2,6 +2,7 @@ package reservation.model.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,11 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import reservation.model.service.reservationService;
 import reservation.model.vo.Hospital;
+import reservation.model.vo.VaccineData;
 
 /**
  * Servlet implementation class indexReservation
  */
-@WebServlet("/indexReservation")
+@WebServlet("/indexres")
 public class indexReservation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,15 +40,19 @@ public class indexReservation extends HttpServlet {
 		/*
 		 * response.getWriter().append("Served at: ").append(request.getContextPath());
 		 */
+		//병원용 서비스 객체 생성
 		reservationService rservice = new reservationService();
-
-		ArrayList<Hospital> hps = rservice.selectAllHps();
-
+		
+		List<Hospital> hps = rservice.selectAllHps();
+		List <VaccineData> vds=rservice.selectAllVds();
+		
 		RequestDispatcher view = null;
-		if (hps.size() > 0) {
-			view = request.getRequestDispatcher("views/reservation/index_reservation.jsp");
+		if (hps.size() > 0 && vds.size()>0) {
+			view = request.getRequestDispatcher("views/reservation/index_reservation1.jsp");
 
 			request.setAttribute("hps", hps);
+			request.setAttribute("vds", vds);
+//			request.setAttribute("hp_name", hp_name);
 
 			view.forward(request, response);
 		} else {

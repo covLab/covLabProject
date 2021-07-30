@@ -1,15 +1,17 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!-- import="java.util.ArrayList, reservation.model.vo.Hospital" -->
+	pageEncoding="UTF-8"
+	import="java.util.ArrayList, reservation.model.vo.Hospital, reservation.model.vo.VaccineData"%>
 <%
-	//ArrayList <Hospital> hps =(ArrayList<Hospital>)request.getAttribute("hps");
-	//String hp_name=request.getAttribute("hp_name");
+	ArrayList<Hospital> hps = (ArrayList<Hospital>)request.getAttribute("hps");
+	ArrayList<VaccineData> vds = (ArrayList<VaccineData>) request.getAttribute("vds");
 
-	/* hp.setHp_name(rset.getString("hp_name"));
-	hp.setHp_address(rset.getString("hp_address"));
-	hp.setHp_phone(rset.getString("hp_phone")); */
-%>
+ 	String hp_name=((String)request.getAttribute("hp_name"));
+	String hp_address=((String)request.getAttribute("hp_address"));
+	String hp_phone=((String)request.getAttribute("hp_phone"));
+	float hp_latitude=((float)request.getAttribute("hp_latitude"));
+	float hp_longitude=((float)request.getAttribute("hp_longitude"));
+	int remain=((int)request.getAttribute("remain")); 
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +54,9 @@
 	function locationTest() {
 		navigator.geolocation.getCurrentPosition(handleLocation, handleError);
 	}
-	
+	for (var i=0;i++;i<hps.length){
+		console.log(hps[i]);
+	}
 	var locations=[
 		{hp_name: "강남구보건소", hp_address: "서울 강남구 선릉로 668", hp_phone: "02-3423-5555" ,hp_latitude: 37.5162581, hp_longitude: 127.042214},
 		{hp_name: "삼성서울병원", hp_address: "서울 강남구 일원로 81", hp_phone: "02-3410-2114" ,hp_latitude: 37.4881568, hp_longitude: 127.0855952},
@@ -276,6 +280,12 @@
 					<div class="row">
 
 						<div class="col-lg-3 p-0">
+							<!--반복문  -->
+							<script>
+						for (var i=0;i<sortedLocations.length;i++){
+							 
+						}
+						</script>
 							<div class="card">
 								<div class="card-body">
 									<div class="row">
@@ -310,53 +320,54 @@
 							</div>
 
 
-						<div class="card">
-							<div class="card-body">
-								<div class="row">
-									<div class="col">
-										<span>병원명 </span>
-										<script>
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<div class="col">
+											<span>병원명 </span>
+											<script>
 											document.write(sortedLocations[1].hp_name);
 											</script>
+										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col">
-										<span>주소</span>
-										<script>
+									<div class="row">
+										<div class="col">
+											<span>주소</span>
+											<script>
 											document.write(sortedLocations[1].hp_address);
 											</script>
+										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col">
-										<span>전화번호</span>
-										<script>
+									<div class="row">
+										<div class="col">
+											<span>전화번호</span>
+											<script>
 											document.write(sortedLocations[1].hp_phone);
 											</script>
+										</div>
+									</div>
+									<div class="col text-center">
+										<a href="detail_reservation.jsp"
+											class="btn btn-primary pl-5 pr-5">예약</a>
 									</div>
 								</div>
-								<div class="col text-center">
-									<a href="detail_reservation.jsp"
-										class="btn btn-primary pl-5 pr-5">예약</a>
-								</div>
+
+
+
+
 							</div>
+						</div>
 
 
-
+						<div class="col-lg-9 p-0">
+							<div id="map" style="width: 95%; height: 600px;"></div>
 						</div>
 					</div>
-
-
-					<div class="col-lg-9 p-0">
-						<div id="map" style="width: 95%; height: 600px;"></div>
-					</div>
 			</div>
-		</div>
 
-		<%@ include file="../common/footer.jsp"%>
-		</section>
-	</div>
+			<%@ include file="../common/footer.jsp"%>
+			</section>
+		</div>
 	</div>
 	</div>
 
