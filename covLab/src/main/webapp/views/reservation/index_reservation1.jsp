@@ -5,12 +5,12 @@
 	ArrayList<Hospital> hps = (ArrayList<Hospital>)request.getAttribute("hps");
 	ArrayList<VaccineData> vds = (ArrayList<VaccineData>) request.getAttribute("vds");
 
- 	String hp_name=((String)request.getAttribute("hp_name"));
+/*  	String hp_name=((String)request.getAttribute("hp_name"));
 	String hp_address=((String)request.getAttribute("hp_address"));
 	String hp_phone=((String)request.getAttribute("hp_phone"));
 	float hp_latitude=((float)request.getAttribute("hp_latitude"));
 	float hp_longitude=((float)request.getAttribute("hp_longitude"));
-	int remain=((int)request.getAttribute("remain")); 
+	int remain=((int)request.getAttribute("remain"));  */
 %> 
 <!DOCTYPE html>
 <html>

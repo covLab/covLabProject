@@ -11,6 +11,7 @@ import reservation.model.vo.Hospital;
 import reservation.model.vo.Members;
 import reservation.model.vo.Reservation;
 import reservation.model.vo.Vaccine;
+import reservation.model.vo.VaccineData;
 
 public class reservationDao {
 
@@ -45,6 +46,71 @@ public class reservationDao {
 		}
 		
 		return hp;
+	}
+	
+	public ArrayList<Hospital> selectAllHps(Connection conn) {
+		ArrayList<Hospital> list= new ArrayList<Hospital>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+	
+		String query = "SELECT * FROM HOSPITAL";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {		
+				Hospital hp = new Hospital();
+				
+				hp.setReg_bus_no(rset.getString("reg_bus_no"));
+				hp.setHp_name(rset.getString("hp_name"));
+				hp.setHp_address(rset.getString("hp_address"));
+				hp.setHp_phone(rset.getString("hp_phone"));
+				hp.setHp_latitude(rset.getFloat("hp_latitude"));
+				hp.setHp_longitude(rset.getFloat("hp_longitude"));
+
+				list.add(hp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}	
+		return list;
+	}
+	
+	public ArrayList<VaccineData> selectAllVds(Connection conn) {
+		ArrayList<VaccineData> list= new ArrayList<VaccineData>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+	
+		String query = "SELECT * FROM VACCINE_DATA";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {		
+				VaccineData vd = new VaccineData();
+
+				vd.setSerial_num(rset.getString("serial_num"));
+				vd.setReg_bus_no(rset.getString("reg_bus_no"));
+				vd.setRel_date(rset.getTimestamp("rel_date"));
+				vd.setRemain(rset.getInt("remain"));
+				vd.setSell_by_date(rset.getDate("sell_by_date"));
+
+				list.add(vd);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}	
+		return list;
 	}
 	
 	public Members selectOneMember(Connection conn, String user_id) {
@@ -183,7 +249,7 @@ public class reservationDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1,user_rn);	
+			pstmt.setString(1, user_rn);	
 			
 			result = pstmt.executeUpdate();
 			System.out.println("result: " + result);
@@ -277,6 +343,7 @@ public class reservationDao {
 			
 			if(rset.next()) {
 				check = rset.getInt(1);
+				System.out.println("check : " + check);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -335,35 +402,5 @@ public class reservationDao {
 	}
 	
 	
-
-	public ArrayList<Hospital> selectAllHps(Connection conn) {
-		ArrayList<Hospital> hps = new ArrayList<Hospital>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String query = "select * from hospital;";
-
-		try {
-			pstmt = conn.prepareStatement(query);
-
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Hospital hp = new Hospital();
-
-				hp.setHp_name(rset.getString("hp_name"));
-				hp.setHp_address(rset.getString("hp_address"));
-				hp.setHp_phone(rset.getString("hp_phone"));
-
-				hps.add(hp);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return hps;
-	}
+	
 }

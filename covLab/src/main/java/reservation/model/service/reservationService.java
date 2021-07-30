@@ -24,16 +24,16 @@ public class reservationService {
 		return hp;
 	}
 
-	public List<Hospital> selectAllHps() {
+	public ArrayList<Hospital> selectAllHps() {
 		Connection conn = getConnection();
-		List<Hospital> hps = rdao.selectAllHps(conn);
+		ArrayList<Hospital> hps = rdao.selectAllHps(conn);
 		close(conn);
 		return hps;
 	}
 	
-	public List<VaccineData> selectAllVds() {
+	public ArrayList<VaccineData> selectAllVds() {
 		Connection conn = getConnection();
-		List<VaccineData> vds = rdao.selectAllVds(conn);
+		ArrayList<VaccineData> vds = rdao.selectAllVds(conn);
 		close(conn);
 		return vds;
 	}
@@ -65,13 +65,10 @@ public class reservationService {
 		close(conn);
 		return check;
 	}
-<<<<<<< Updated upstream
+
 	
 	public int deleteReservation(String user_rn) {
-=======
 
-	public int deleteReservation(Reservation res) {
->>>>>>> Stashed changes
 		Connection conn = getConnection();
 		int result = rdao.deleteReservation(conn, user_rn);
 		close(conn);
@@ -84,13 +81,9 @@ public class reservationService {
 		close(conn);
 		return result;
 	}
-<<<<<<< Updated upstream
-	
-	public Members selectOneSubMember(String user_rn) {
-=======
 
-	public Members selectOneSubMember(int sub_user_no) {
->>>>>>> Stashed changes
+	public Members selectOneSubMember(String user_rn) {
+
 		Connection conn = getConnection();
 		Members mb = rdao.selectOneSubMember(conn, user_rn);
 		close(conn);
