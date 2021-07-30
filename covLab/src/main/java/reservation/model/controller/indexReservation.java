@@ -43,8 +43,10 @@ public class indexReservation extends HttpServlet {
 		//병원용 서비스 객체 생성
 		reservationService rservice = new reservationService();
 		
-		List<Hospital> hps = rservice.selectAllHps();
-		List <VaccineData> vds=rservice.selectAllVds();
+		ArrayList<Hospital> hps = rservice.selectAllHps();
+		ArrayList <VaccineData> vds=rservice.selectAllVds();
+		System.out.println(hps);
+		System.out.println(vds);
 		
 		RequestDispatcher view = null;
 		if (hps.size() > 0 && vds.size()>0) {
@@ -60,7 +62,7 @@ public class indexReservation extends HttpServlet {
 			request.setAttribute("message",  " 페이지에 대한 병원 조회 실패..");
 			view.forward(request, response);
 		}
-
+		
 	}
 
 	/**
