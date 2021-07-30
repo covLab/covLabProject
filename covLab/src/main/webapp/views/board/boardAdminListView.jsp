@@ -49,12 +49,12 @@ $(document).ready(function(){
       
       console.log("checkedArray : "+checkedArray);
       
-   /* /*    var objParams = {
+  	  var objParams = {
          "checkedList" : checkedArray
       } 
     
       console.log("objParams : "+objParams);
-      */
+      
       
       
       //ajax 호출

@@ -6,9 +6,6 @@
 	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
 	ArrayList<Comments> clist = (ArrayList<Comments>)request.getAttribute("clist");
 	Comments comments = (Comments)request.getAttribute("comments");
-	//줄바꿈
-	pageContext.setAttribute("br", "<br/>");
-	pageContext.setAttribute("cn", "\n");
 %>
 <!DOCTYPE html>
 <html>
@@ -174,7 +171,7 @@ $(document).ready(function(){
 							</tr>
 							<tr>
 								<th>내 용</th>
-								<td><%= board.getBoardContent() %></td>
+								<td><pre><%= board.getBoardContent() %></pre></td>
 							</tr>		
 						</table>
 						
@@ -191,7 +188,7 @@ $(document).ready(function(){
 												<button onclick="requestBoardDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;	
 												<button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp;
 										<% } else { //로그인했는데 본인글이 아닐때 %>
-												<button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp; 
+												<!-- <button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp; --> 
 										<% } %>
 									<% } %>
 									<%-- 테스트용 버튼
@@ -249,7 +246,7 @@ $(document).ready(function(){
 							</tr>
 							<tr>
 								<th>댓글 내용</th>
-								<td align="center"><%= c.getComContent() %></td>
+								<td align="center"><pre><%= c.getComContent() %></pre></td>
 							</tr>	
 						</table>
 						
@@ -288,7 +285,7 @@ $(document).ready(function(){
 								</tr>
 								<tr>
 									<td>내 용 : </td>
-									<td><textarea rows="5" cols="50" name="content" placeholder="답글 내용을 입력하세요"></textarea></td>
+									<td><textarea rows="5" cols="50" name="content" placeholder="답글 내용을 입력하세요" wrap="hard"></textarea></td>
 								</tr>
 								
 								<tr align="center">
@@ -333,7 +330,7 @@ $(document).ready(function(){
 								</tr>
 								<tr>
 									<td>내 용 : </td>
-									<td><textarea rows="5" cols="50" name="content" placeholder="내용을 입력하세요"></textarea></td>
+									<td><textarea rows="5" cols="50" name="content" placeholder="내용을 입력하세요" wrap="hard"></textarea></td>
 								</tr>
 								
 								<tr align="center">
