@@ -51,6 +51,61 @@
  .btn:active {
   transform:translateY(5px);
  }
+ 
+ 
+ /*아코디언 메뉴 부분*/
+ dl.faq button {
+  margin: 0;
+  padding: 0;
+  margin-top: 1em;
+  font-weight: bold;
+  font-size: 110%;
+  border: thin solid transparent;
+  background-color: transparent;
+  padding-left: 0.125em;
+}
+
+dl dd {
+  margin: 0;
+  padding: 0;
+  margin-left: 1.5em;
+}
+
+dl.faq .desc {
+  margin: 0;
+  padding: 0.5em;
+  font-size: 110%;
+  display: none;
+  background-color: #fffedb;
+}
+
+dl.faq button:hover,
+dl.faq button:focus {
+  background-color: #eee;
+}
+
+dl.faq button:focus {
+  border-color: #630;
+}
+
+dl.faq button:hover {
+  text-decoration: underline;
+}
+
+dl.faq button:active {
+  background-color: #bbb;
+}
+
+dl.faq button[aria-expanded="false"]::before {
+  content: url('../images/right-arrow-brown.png');
+  padding-right: 0.35em;
+}
+
+dl.faq button[aria-expanded="true"]::before {
+  content: url('../images/down-arrow-brown.png');
+  padding-right: 0.35em;
+}
+ 
 </style>
 
 <body>
@@ -88,17 +143,19 @@
                                     <h4>백신/예방접종 정보</h4>
 <hr>
 
-<a class="btn" href="#vaccineinfo01">우리나라에 들어오는 백신</a>
-<a class="btn" href="#vaccineinfo02">예방접종 이후 증상</a>
+<a class="btn" href="#vaccineinfo02">우리나라에 들어오는 백신</a>
+<a class="btn" href="#vaccineinfo03">예방접종 주의사항</a>
 
 <hr>
 <!-- 윗부분은 목록을 만들고 a 태그로 각 번호의 목록으로 이동하게 만듬 -->
 
 <!-- 각 목록의 내용을 번호를 붙여서 작성 -->
-<h5>*백신 접종 현황 (1차 접종 / 백신 접종 완료)*</h5>
+<h5 id="#vaccineinfo01">1. 백신 접종 현황 (1차 접종 / 백신 접종 완료)</h5>
+<p><a href="#top">맨 위로 이동</a></p>
 <hr>
-<h5 id="vaccineinfo01">*우리나라에 들어오는 백신*</h5>
-<table border="1" height="60%" width="80%">
+
+<h5 id="vaccineinfo02">2. 우리나라에 들어오는 백신</h5>
+<table border="1" height="600" width="1200">
 	<tr align="center">
 		<td>백신이름</td>
 		<td>아스트라제네카</td>
@@ -153,62 +210,111 @@
 </table>
  <p><a href="#top">맨 위로 이동</a></p>
 <hr>
-<h5 id="vaccineinfo02">*예방접종 이후*</h5>
+<h5 id="vaccineinfo03">3 예방접종 주의사항</h5>
+<br>
 <div>
-	<h4>1. 예방접종 이후 주의 사항</h4><br>
-	<img src="../../resources/images/vaccination01.jpg">
+	<h4>* 예방접종할 때 주의 사항</h4><br>
+	<a href="https://www.youtube.com/watch?v=APOt56usrt4"><img src="../../resources/images/info_video.jpg"></a>
 	<br>
-	<br>
-	<ul>
-		<li><font size="4">접종받은 기관에서 15~30분 가량 머무르며 즉각적으로 나타날 수 있는 이상반응의 발생여부를 관찰합니다.</font></li>
-		<li><font size="4">예방접종 이후 최소 3일동안은 몸 상태를 주의 깊게 살펴야 합니다.</font></li>
-		<li><font size="4">예방접종을 한 당일에는 간단한 샤워는 가능하지만 반식욕, 사우나, 찜질방, 수영 등은 피하고 충분한 휴식을 취합니다.</font></li>
-		<li><font size="4">접종 1~2일 후에는 금주하고, 접종 부위는 청결하게 유지하며 긁지 않도록 합니다.</font></li>
-		<li><font size="4">만약 예방접종 후 고열, 두드러기, 호흡곤란, 입술 또는 입안의 부종 등 심한 알레르기 반응 등 평소와 다른 증상이
-		 있는 경우에는 즉시 접종기관이나 가까운 외료기관을 방문하여 진료를 받아야 합니다.</font></li>
-	</ul>
+	<!-- 아코디언 메뉴 -->
+<dl class="faq">
+  <dt>
+    <button aria-expanded="false" aria-controls="faq1_desc">
+      예방접종 받기 위해 주의할 사항은 무엇인가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq1_desc" class="desc">
+    	◎ 건강 상태가 좋을 때 코로나19 백신을 접종받아야 하며, 접종 시 희사 예진을 통해 금기/제외 사항등을 확인하여 예방접종
+    	가능여부를 판단해야 합니다. <br>
+    	<br>
+    	◎ 다음과 같은 경우는 코로나19 예방접종을 받아서는 안됩니다.<br>
+    	&nbsp; - 코로나 19 백신 구성 성분에 대한 아나필락시스 같은 심각한 알레르기 반응이 나타난 경우<br> 
+    	&nbsp; - 1차 코로나19 예방접종 후 아나필락시스와 같은 심각한 알레르기 반응이 나타난 경우, 첫번째 백신과 동일 백신으로 
+    	접종 금지<br>
+    	&nbsp; - 1차 바이러스 벡터 코로나19 백신(아스트라제네카, 얀센) 접종 후 혈소판감소성, 혈전증이 발생한 경우, 바이러스 벡터
+    	코로나 19 백신 접종 금지<br>
+    	&nbsp; - 모세혈관 누출 증후군의 병력이 있는 경우, 아스트라제네카 코로나19 백신 접종 금지<br><br>
+    	◎ 다음과 같은 경우는 코로나19 예방접종을 연기합니다.<br>
+    	&nbsp; - 코로나19 감염이 의심되는 경우 선별진료소 등을 통해 신속히 진단검사를 받아야 하며, 결과가 나올때까지
+    	예방접종을 연기합니다.<br> 
+    	&nbsp; - 격리중인 코로나19 환자 및 접촉자는 격리해제 될 때까지 예방접종을 연기합니다.<br> 
+    	&nbsp; - 발열(37.5℃ 이상) 등 급성병증이 있는 경우 증상이 없어질때까지 예방접종을 연기합니다. 
+    </p>
+  </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq2_desc">
+      코로나19 접종 후 주의 사항은 무엇인가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq2_desc" class="desc">
+    	◎ 접종 후 15~30분 동안 접종기관에 머무르며 이상반응이 나타나는지 관찰합니다.<br>
+    	&nbsp; - 특별한 알레르기가 없었던 경우는 접종 후 15분간 관찰합니다.<br>
+    	&nbsp; - 과거에 음식, 약물 등의 알레르기 경험이 있었던 경우에는 30분간 관찰합니다.<br>
+    	<br>
+    	◎ 귀가 후 최소 3시간 이상 안정을 취하며 이상반응이 나타나는지 주의 깊게 관찰하며, 접종 후 최소 4주간은 특별한 관심을 
+    	가지고 관찰하며, 평소와 다른 신체 증상이 나타나면 바로 의사의 진료를 받도록 합니다. <br>
+    	<br>
+    	◎ 접종당일과 다음날은 과격한 운동 및 음주를 삼가고, 접종당일은 간단한 샤워는 가능하지만 반식욕, 사우나, 찜질방, 수영 등은 피하고, 접종부위는 청결히 유지합니다. <br>
+    	<br>
+    	◎ 만약 예방접종 후 고열, 두드러기, 호흡곤란, 입술 또는 입안의 부종 등 심한 알레르기 반응 등 평소와 다른 증상이
+		 있는 경우에는 즉시 접종기관이나 가까운 외료기관을 방문하여 진료를 받아야 합니다.
+    </p>
+  </dd>
+  
+</dl>
+
 </div>
 <br>
 <p><a href="#top">맨 위로 이동</a></p>
 
 <hr width="40% "align="left">
 <div>
-	<h4>2. 예방접종 이후 이상반응</h4><br>
+	<h4>* 예방접종 이후 이상반응</h4><br>
 	<img src="../../resources/images/vaccination02.png" ><br>
 	<br>
-<table border="1" width="1100" height="600">
+<table border="1" width="1300" height="600">
 	<tr>
-		<td>발열증상</td>
+		<td align="center">발열증상</td>
 		<td><ul>
-			<li>접종 후 39℃미만의 발열증상은 정상적인 면역반응일 가능성이 높습니다.</li>
-			<li>단, 접종 후 39℃ 이상의 고열이 나거나, 2일 이상 증상이 지속될 경우에는 의사의 진료가 필요합니다.</li>
-			<li>1단계 : 38.4℃ 이하 / 2단계 : 38.5℃~38.9℃ / 3단계 : 38.9℃~40℃ / 4단계 : 40.1 이상</li>
+			<li>⊙ 접종 후 39℃미만의 발열증상은 정상적인 면역반응일 가능성이 높습니다.</li>
+			<li>⊙ 단, 접종 후 39℃ 이상의 고열이 나거나, 2일 이상 증상이 지속될 경우에는 의사의 진료가 필요합니다.</li>
+			<li>⊙ 1단계 : 38.4℃ 이하 / 2단계 : 38.5℃~38.9℃ / 3단계 : 38.9℃~40℃ / 4단계 : 40.1 이상</li>
 			</ul></td>
 	</tr>
 	<tr>
-		<td>접종부위 통증</td>
+		<td align="center">접종부위 통증</td>
 		<td><ul>
-			<li>접종 당일에서 다음날까지는 접종부위가 불편하고 뻐근한 느낌이 들며, 예방접종 이후 나타날 수 있는 염증반응 입니다.</li>
-			<li>1단계 : 통증이 나타나지만 약을 복용할 정도는 아님</li>
-			<li>2단계 : 1~2일 약물을 먹어야 팔을 움직이는데 지장이 없음</li>
-			<li>3단계 : 3일 이상 통증이 지속되거나 약을 먹어도 통증 조절이 안도어 팔을 움직이기 어려운 경우</li>
-			<li>(3단계는 의사의 진료가 필요합니다.)</li>
+			<li>⊙ 접종 당일에서 다음날까지는 접종부위가 불편하고 뻐근한 느낌이 들며, 예방접종 이후 나타날 수 있는 염증반응 입니다.</li>
+			<li>⊙ 1단계 : 통증이 나타나지만 약을 복용할 정도는 아님</li>
+			<li>⊙ 2단계 : 1~2일 약물을 먹어야 팔을 움직이는데 지장이 없음</li>
+			<li>⊙ 3단계 : 3일 이상 통증이 지속되거나 약을 먹어도 통증 조절이 안도어 팔을 움직이기 어려운 경우</li>
+			<li>&nbsp; &nbsp;(3단계는 의사의 진료가 필요합니다.)</li>
 		</ul></td>
 	</tr>
 	<tr>
-		<td>접종 부위 붓기 또는 발적 증상</td>
+		<td align="center">접종 부위 붓기 또는 발적 증상</td>
 		<td><ul>
-			<li>접종 부위에 피부색으 변화 없이 부은 느낌이 들거나 실제 부었더라도 활동에 지장이 없는 경우 수일 내 자연적으로
+			<li>⊙ 접종 부위에 피부색으 변화 없이 부은 느낌이 들거나 실제 부었더라도 활동에 지장이 없는 경우 수일 내 자연적으로
 			호전되는 접종 반응 중 하나입니다.</li>
-			<li>1단계 : 직경 5cm 이하</li>
-			<li>2단계 : 직경 5.1cm~10cm, 움직이기 불편한 경우</li>
-			<li>3단계 : 직경 10cm 이상으로 부었거나 활동이 어려운 경우</li>
-			<li>4단계 : 접종 부위 피부색이 검게 또는 보라색 등 어둡게 변한 경우</li>
-			<li>(4단계는 의사의 진료가 필요합니다.)</li>
-			<li>단계와 상관없이 이러한 증상이 3일 이상 지속되거나 접종부위의 피부색이 검게 또는 보라색으로 어둡게 변한다면
+			<li>⊙ 1단계 : 직경 5cm 이하</li>
+			<li>⊙ 2단계 : 직경 5.1cm~10cm, 움직이기 불편한 경우</li>
+			<li>⊙ 3단계 : 직경 10cm 이상으로 부었거나 활동이 어려운 경우</li>
+			<li>⊙ 4단계 : 접종 부위 피부색이 검게 또는 보라색 등 어둡게 변한 경우</li>
+			<li>&nbsp; &nbsp;(4단계는 의사의 진료가 필요합니다.)</li>
+			<li>⊙ 단계와 상관없이 이러한 증상이 3일 이상 지속되거나 접종부위의 피부색이 검게 또는 보라색으로 어둡게 변한다면
 			의사의 진료가 필요합니다.</li>
 		</ul></td>
 	</tr>
+	<tr><td align="center" colspan="2">
+	⊙ 접종 후 예상 가능한 국소반응으로 접종부위 통증/붓기/발적 등이 있으며, 전신반응으로 발열/피로감/두통/근육통/메스꺼움/
+	구토 등이 나타날 수 있습니다.<br>
+	&nbsp; &nbsp; (접종 후 흔히 나타나는 반응으로 대부분 2~3일 이내 증상이 사라집니다.)<br>
+	⊙ 드물게 호흡곤란, 얼굴의 붓기, 눈/입술/입안의 부종, 몸 전체의 발진, 빠른 심장박동, 현기증, 쇼크 등의 증상을 동반한
+	아나필락시스와 같은 심각한 알레르기 반응이 나타날 수 있습니다. <br>
+	</td></tr>
 </table>
 </div>
 <br>
@@ -216,7 +322,7 @@
 
 <div>
 	<h4>** 백신별 예방접종 후 이상반응 **</h4>
-		<table border="1" width="1100" height="700">
+		<table border="1" width="1300" height="700">
 			<tr>
 				<td rowspan="3">구분</td>
 				<td colspan="2">전달체 백신(바이러스 벡터)</td>
@@ -329,7 +435,7 @@
 
 <div>
 <hr width="40%" align="left">
-	<h4>3. 이상반응 나타날 시 대처법</h4><br>
+	<h4>* 이상반응 나타날 시 대처법</h4><br>
 	<img src="../../resources/images/vaccination06.png">
 	<br>
 	<br>
@@ -343,24 +449,30 @@
 			&nbsp; - 접종 후 발열이 있는 경우에는 수분을 충분히 섭취하고 쉬어 주시기 바라며, 발열로 인한 불편함이 있는 경우에는
 			해열/진통제가 도움이 될 수 있습니다.<br>
 			<br>
-			 ● 다음과 같은 경우에는 접종기관 또는 가까운 의료기관을 방문하여 진료 받으셔야 합니다.<br>
-			 &nbsp; - 바이러스 벡터 백신(아스트라제네카, 얀센) 접종 후 아래의 증상이 있는 경우 <br>
-			 &nbsp;&nbsp; ⊙ 심하거나 2일 이상 지속적인 두통이 발생하며, 진통제에 반응하지 않거나 조절되지 않는 경우 또는
+			● 다음과 같은 증상 발생시 의사의 진료를 받아야 합니다.
+			<table border="1" width="1000" height="400">
+			 <tr><td>⊙ 다음과 같은 경우에는 접종기관 또는 가까운 의료기관을 방문하여 진료 받으셔야 합니다.<br></td></tr>
+			 <tr><td>&nbsp; - 바이러스 벡터 백신(아스트라제네카, 얀센) 접종 후 아래의 증상이 있는 경우 <br>
+			 &nbsp;&nbsp; -  심하거나 2일 이상 지속적인 두통이 발생하며, 진통제에 반응하지 않거나 조절되지 않는 경우 또는
 			 구토를 동반하거나 시야가 흐려지는 경우<br>
-			 &nbsp;&nbsp; ⊙ 호흡곤란, 흉통, 지속적인 복부 통증, 팔/다리 붓기와 같은 증상이 나타난 경우<br>
-			 &nbsp;&nbsp; ⊙ 접종부위가 아닌 곳에서 멍이나 출형이 생긴 경우<br>
-			 &nbsp;&nbsp; ⊙ 급격한 팔/다리의 부종, 갑작스러운 체중증가<br>
+			 &nbsp;&nbsp; - 호흡곤란, 흉통, 지속적인 복부 통증, 팔/다리 붓기와 같은 증상이 나타난 경우<br>
+			 &nbsp;&nbsp; - 접종부위가 아닌 곳에서 멍이나 출형이 생긴 경우<br>
+			 &nbsp;&nbsp; - 급격한 팔/다리의 부종, 갑작스러운 체중증가<br>
 			 &nbsp; - mRAN 백신(화이자, 모더나) 접종 후 아래의 증상이 새롭게 발생하거나 악화되어 지속되는 경우 <br>
-			 &nbsp;&nbsp; ⊙ 가슴통증, 압박감, 불편감, 호흡곤란이나 숨가쁨, 호흡시 통증, 심장이 빠르게 뛰거나 두근거림, 실신<br>
+			 &nbsp;&nbsp; - 가슴통증, 압박감, 불편감, 호흡곤란이나 숨가쁨, 호흡시 통증, 심장이 빠르게 뛰거나 두근거림, 실신<br>
 			 &nbsp; - 기타 의사의 진료가 필요한 경우 <br>
-			 &nbsp;&nbsp; ⊙ 코로나 19 예방접종 후 갑자기 기운이 떨어지거나 평소와 다른 이상증상이 나타난 경우<br>
-			 &nbsp;&nbsp; ⊙ 접종 부위의 통증/붓기/발적이 48시간 이후에도 악화되는 경우<br>
-			 <br>
-			 ● 다음과 같은 경우에는 119로 연락하거나 가까운 응급실로 내원하시기 바랍니다.<br>
-			 &nbsp; - 예방접종 후 숨쉬기 곤란하거나 심하게 어지러운 경우<br>
+			 &nbsp;&nbsp; - 코로나 19 예방접종 후 갑자기 기운이 떨어지거나 평소와 다른 이상증상이 나타난 경우<br>
+			 &nbsp;&nbsp; - 접종 부위의 통증/붓기/발적이 48시간 이후에도 악화되는 경우<br>
+			 </td></tr>
+			<tr><td>⊙ 다음과 같은 경우에는 119로 연락하거나 가까운 응급실로 내원하시기 바랍니다.<br></td></tr>
+			 <tr><td>&nbsp; - 예방접종 후 숨쉬기 곤란하거나 심하게 어지러운 경우<br>
 			 &nbsp; - 입술/얼굴이 붓거나 온몸에 심한 두드러기 증상이 나타나는 경우<br>
-			 &nbsp; - 갑자기 의식이 없거나 쓰러지는 경우<br>
+			 &nbsp; - 갑자기 의식이 없거나 쓰러지는 경우
+			 </td></tr><br>
+			 <br>
+			 
 			</p></font>
+			</table>
 		</li>
 	</ul>
 </div>
@@ -421,6 +533,128 @@
     <script src="/semi/resources/js/lib/bootstrap.min.js"></script><script src="assets/js/scripts.js"></script>
     <!-- scripit init-->
 
+<!-- 아코디언메뉴 부분 -->
+<script>
+/*
+*   This content is licensed according to the W3C Software License at
+*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+*
+*   File:   ButtonExpand.js
+*
+*   Desc:   Checkbox widget that implements ARIA Authoring Practices
+*           for a menu of links
+*/
+
+/*
+*   @constructor ButtonExpand
+*
+*
+*/
+var ButtonExpand = function (domNode) {
+
+  this.domNode = domNode;
+
+  this.keyCode = Object.freeze({
+    'RETURN': 13
+  });
+};
+
+ButtonExpand.prototype.init = function () {
+
+  this.controlledNode = false;
+
+  var id = this.domNode.getAttribute('aria-controls');
+
+  if (id) {
+    this.controlledNode = document.getElementById(id);
+  }
+
+  this.domNode.setAttribute('aria-expanded', 'false');
+  this.hideContent();
+
+  this.domNode.addEventListener('keydown',    this.handleKeydown.bind(this));
+  this.domNode.addEventListener('click',      this.handleClick.bind(this));
+  this.domNode.addEventListener('focus',      this.handleFocus.bind(this));
+  this.domNode.addEventListener('blur',       this.handleBlur.bind(this));
+
+};
+
+ButtonExpand.prototype.showContent = function () {
+
+  if (this.controlledNode) {
+    this.controlledNode.style.display = 'block';
+  }
+
+};
+
+ButtonExpand.prototype.hideContent = function () {
+
+  if (this.controlledNode) {
+    this.controlledNode.style.display = 'none';
+  }
+
+};
+
+ButtonExpand.prototype.toggleExpand = function () {
+
+  if (this.domNode.getAttribute('aria-expanded') === 'true') {
+    this.domNode.setAttribute('aria-expanded', 'false');
+    this.hideContent();
+  }
+  else {
+    this.domNode.setAttribute('aria-expanded', 'true');
+    this.showContent();
+  }
+
+};
+
+/* EVENT HANDLERS */
+
+ButtonExpand.prototype.handleKeydown = function (event) {
+
+  console.log('[keydown]');
+
+  switch (event.keyCode) {
+
+    case this.keyCode.RETURN:
+
+      this.toggleExpand();
+
+      event.stopPropagation();
+      event.preventDefault();
+      break;
+
+    default:
+      break;
+  }
+
+};
+
+ButtonExpand.prototype.handleClick = function (event) {
+  this.toggleExpand();
+};
+
+ButtonExpand.prototype.handleFocus = function (event) {
+  this.domNode.classList.add('focus');
+};
+
+ButtonExpand.prototype.handleBlur = function (event) {
+  this.domNode.classList.remove('focus');
+};
+
+/* Initialize Hide/Show Buttons */
+
+window.addEventListener('load', function (event) {
+
+  var buttons =  document.querySelectorAll('button[aria-expanded][aria-controls]');
+
+  for (var i = 0; i < buttons.length; i++) {
+    var be = new ButtonExpand(buttons[i]);
+    be.init();
+  }
+
+}, false);
+</script>
 
 
 </body>
