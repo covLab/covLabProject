@@ -45,11 +45,36 @@
   display:inline-block;
   border-radius: 10px;
   transition:all 0.2s;
-  text-shadow:0px -2px black;
  }
  .btn:active {
   transform:translateY(5px);
  }
+ 
+ .btn:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+ 
+ table th {
+	background-color:navy;
+	color: #fff;
+	text-align:center;
+	font-size:15pt;
+}
+
+table td {
+	text-align:left;
+	padding:5px;
+	border: 1px solid lightgray;
+}
+
+.a {
+	color:white;
+}
+ 
+ 
+ 
 </style>
 
 </head>
@@ -109,14 +134,14 @@
 						      <col style="width:60%" />
 					        </colgroup>
 						    <tr>
-						      <th scope="row" ><center>병원체</center></th>
+						      <th class="a" scope="row" ><center>병원체</center></th>
 						      <td class="ta_l"><ul class="s_listin_mdot mgt0" >
 						        <li align="left" >1. Severe Acute Respiratory Syndrome-Coronavirus-2(SARS-CoV-2)</li>
 						        <li align="left">2. Coronaviridae family, Betacoronavirus genus Sarbecovirus subgenus에 속함</li>
 						        </ul></td>
 					        </tr>
 						    <tr>
-						      <th scope="row"><center>전파 경로</center></th>
+						      <th class="a" scope="row"><center>전파 경로</center></th>
 						      <td class="ta_l"><ul class="s_listin_mdot mgt0">
 						        <li align="left">1. 주된 전파경로는 감염자의 호흡기 침방울(비말)에 의한 전파</li>
 						        <li align="left">2. 사람 간에 전파되며, 대부분의 감염은 감염자가 기침, 재채기, 말하기, 노래 등을할 때 발생한 호흡기 침방울(비말)을다른사람이 밀접접촉(주로 2m 이내)하여 발생</li>
@@ -128,13 +153,13 @@
 						        </ul></td>
 					        </tr>
 						    <tr>
-						      <th scope="row"><center>잠복기</center></th>
+						      <th class="a" scope="row"><center>잠복기</center></th>
 						      <td class="ta_l"><ul class="s_listin_mdot mgt0">
 						        <li align="left">1~14일(평균 5~7일)</li>
 						        </ul></td>
 					        </tr>
 						    <tr>
-						      <th scope="row"><center>진단 기준</center></th>
+						      <th class="a" scope="row"><center>진단 기준</center></th>
 						      <td class="ta_l"><ul class="s_listin_mdot mgt0">
 						        <li align="left">환자 : 임상양상에 관계없이 진단을 위한 검사기준에 따라 코로나19 감염이 확인된 자</li>
 						        <li align="left">진단을 위한 검사 기준
@@ -146,7 +171,7 @@
 						        </ul></td>
 					        </tr>
 						    <tr>
-						      <th scope="row"><center>증상</center></th>
+						      <th class="a" scope="row"><center>증상</center></th>
 						      <td class="ta_l"><ul class="s_listin_mdot mgt0">
 						        <li align="left">주요증상 및 징후
 						          <ul>
@@ -159,7 +184,7 @@
 						        </ul></td>
 					        </tr>
 						    <tr>
-						      <th scope="row"><center>치료</center></th>
+						      <th class="a" scope="row"><center>치료</center></th>
 						      <td class="ta_l"><ul class="s_listin_mdot mgt0">
 						        <li align="left">- 특이치료제는 없으며 증상에 따른 해열제, 수액공급, 진해제 등 대증치료</li>
 						        <li align="left">- 호흡 곤란 시 산소를 공급하고 필요한 경우에는 기계호흡이나 체외막 산소공급 등의 처치를 시행</li>
@@ -167,7 +192,7 @@
 						        </ul></td>
 					        </tr>
 						    <tr>
-						      <th scope="row"><center>치명률</center></th>
+						      <th class="a" scope="row"><center>치명률</center></th>
 						      <td class="ta_l"><ul class="s_listin_mdot mgt0">
 						        <li align="left">전세계 치명률은 지역, 인구집단연령 구조, 감염 상태 및 기타 요인에 의해 0.1~25%로 다양함</li>
 						        <li align="left">전세계 치명률은 0.00%~1.63% (중위값 0.27%)로 보정 후 0.00~1.54%(중위값 0.23%)(Bulletin of the World Health Organization. 2021)(https://www.who.int/bulletin/volumes/99/1/20-265892/en/)</li>
@@ -189,12 +214,12 @@
 			</p></font>
 			<table border="1" width="600" height="200"> [참고. 우리나라 코로나19 확진자 병원입원시 주요증상]
 				<tr>
-					<td>주요증상</td>
-					<td>비율(%)</td>
-					<td>주요증상</td>
-					<td>비율(%)</td>
-					<td>주요증상</td>
-					<td>비율(%)</td>
+					<th class="a" >주요증상</th>
+					<th class="a" >비율(%)</th>
+					<th class="a" >주요증상</th>
+					<th class="a" >비율(%)</th>
+					<th class="a" >주요증상</th>
+					<th class="a" >비율(%)</th>
 				</tr>
 				<tr>
 					<td>기침</td>

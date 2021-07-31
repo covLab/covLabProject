@@ -46,10 +46,108 @@
   display:inline-block;
   border-radius: 10px;
   transition:all 0.2s;
-  text-shadow:0px -2px black;
  }
  .btn:active {
   transform:translateY(5px);
+ }
+ 
+ .btn:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+ 
+ .t{
+ 	width: 1000px;
+ 	height: 250px;
+ 	background:navy;
+ 	text-align:center;
+ 	transition:all 0.2s;
+ 	
+ }
+ 
+ .c1 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c2 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c3 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c4 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c5 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c6 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c7 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c8 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c9 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+ 
+ 
+.c1:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c2:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c3:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c4:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c5:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+   .c6:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c7:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c8:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c9:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
  }
  
  dl.faq button {
@@ -141,21 +239,21 @@ dl.faq button[aria-expanded="true"]::before {
                                     <h4>QnA</h4>
 <hr>
 
-<table border="1" >
+<table border="1"  class="t">
 	<tr>
-		<td><a class="btn" href="#qna01">코로나란?</a></td>
-		<td><a class="btn" href="#qna02">코로나의 증상/검사</a></td>
-		<td><a class="btn" href="#qna03">치료 및 예방</a></td>
+		<td class="c1" ><a href="#qna01">코로나란?</a></td>
+		<td class="c2" ><a href="#qna02">코로나의 증상/검사</a></td>
+		<td class="c3" ><a href="#qna03">치료 및 예방</a></td>
 	</tr>
 	<tr>
-		<td><a class="btn" href="#qna04">접촉자 및 확진환자</a></td>
-		<td><a class="btn" href="#qna05">격리 및 격리해제</a></td>
-		<td><a class="btn" href="#qna06">백신 관련</a></td>
+		<td class="c4" ><a href="#qna04">접촉자 및 확진환자</a></td>
+		<td class="c5" ><a href="#qna05">격리 및 격리해제</a></td>
+		<td class="c6" ><a href="#qna06">백신 관련</a></td>
 	</tr>
 	<tr>
-		<td><a class="btn" href="#qna07">예방접종 이상반응</a></td>
-		<td><a class="btn" href="#qna08">코로나19 예방접종 관련 피해보상</a></td>
-		<td><a class="btn" href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a></td>
+		<td class="c7" ><a href="#qna07">예방접종 이상반응</a></td>
+		<td class="c8" ><a href="#qna08">코로나19 예방접종 관련 피해보상</a></td>
+		<td class="c9" ><a href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a></td>
 	</tr>
 </table>
 

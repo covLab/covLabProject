@@ -72,10 +72,15 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
   display:inline-block;
   border-radius: 10px;
   transition:all 0.2s;
-  text-shadow:0px -2px black;
  }
  .btn:active {
   transform:translateY(5px);
+ }
+ 
+ .btn:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
  }
  
  

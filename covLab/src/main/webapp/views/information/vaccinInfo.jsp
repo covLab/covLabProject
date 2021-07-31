@@ -46,10 +46,15 @@
   display:inline-block;
   border-radius: 10px;
   transition:all 0.2s;
-  text-shadow:0px -2px black;
  }
  .btn:active {
   transform:translateY(5px);
+ }
+ 
+ .btn:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
  }
  
  
@@ -105,6 +110,24 @@ dl.faq button[aria-expanded="true"]::before {
   content: url('../images/down-arrow-brown.png');
   padding-right: 0.35em;
 }
+
+table th {
+	background-color:navy;
+	color: #fff;
+	text-align:center;
+	font-size:15pt;
+}
+
+table td {
+	text-align:left;
+	padding:5px;
+	border: 1px solid lightgray;
+	font-color:black;
+}
+
+.a {
+	color:white;
+}
  
 </style>
 
@@ -157,11 +180,11 @@ dl.faq button[aria-expanded="true"]::before {
 <h5 id="vaccineinfo02">2. 우리나라에 들어오는 백신</h5>
 <table border="1" height="600" width="1200">
 	<tr align="center">
-		<td>백신이름</td>
-		<td>아스트라제네카</td>
-		<td>화이자</td>
-		<td>모더나</td>
-		<td>얀센</td>
+		<th class="a">백신이름</th>
+		<th class="a">아스트라제네카</th>
+		<th class="a">화이자</th>
+		<th class="a">모더나</th>
+		<th class="a">얀센</th>
 	</tr>
 	<tr>
 		<td align="center">개발국</td>
@@ -277,7 +300,7 @@ dl.faq button[aria-expanded="true"]::before {
 	<br>
 <table border="1" width="1300" height="600">
 	<tr>
-		<td align="center">발열증상</td>
+		<th class="a" align="center">발열증상</th>
 		<td><ul>
 			<li>⊙ 접종 후 39℃미만의 발열증상은 정상적인 면역반응일 가능성이 높습니다.</li>
 			<li>⊙ 단, 접종 후 39℃ 이상의 고열이 나거나, 2일 이상 증상이 지속될 경우에는 의사의 진료가 필요합니다.</li>
@@ -285,7 +308,7 @@ dl.faq button[aria-expanded="true"]::before {
 			</ul></td>
 	</tr>
 	<tr>
-		<td align="center">접종부위 통증</td>
+		<th class="a" align="center">접종부위 통증</th>
 		<td><ul>
 			<li>⊙ 접종 당일에서 다음날까지는 접종부위가 불편하고 뻐근한 느낌이 들며, 예방접종 이후 나타날 수 있는 염증반응 입니다.</li>
 			<li>⊙ 1단계 : 통증이 나타나지만 약을 복용할 정도는 아님</li>
@@ -295,7 +318,7 @@ dl.faq button[aria-expanded="true"]::before {
 		</ul></td>
 	</tr>
 	<tr>
-		<td align="center">접종 부위 붓기 또는 발적 증상</td>
+		<th class="a" align="center">접종 부위 붓기/발적증상</th>
 		<td><ul>
 			<li>⊙ 접종 부위에 피부색으 변화 없이 부은 느낌이 들거나 실제 부었더라도 활동에 지장이 없는 경우 수일 내 자연적으로
 			호전되는 접종 반응 중 하나입니다.</li>
@@ -324,9 +347,9 @@ dl.faq button[aria-expanded="true"]::before {
 	<h4>** 백신별 예방접종 후 이상반응 **</h4>
 		<table border="1" width="1300" height="700">
 			<tr>
-				<td rowspan="3">구분</td>
-				<td colspan="2">전달체 백신(바이러스 벡터)</td>
-				<td colspan="2">핵산 백신(mRNA)</td>
+				<th class="a" rowspan="3">구분</th>
+				<th class="a" colspan="2">전달체 백신(바이러스 벡터)</th>
+				<th class="a" colspan="2">핵산 백신(mRNA)</th>
 			</tr>
 			<tr>
 				<td>아스트라제네카</td>
@@ -447,11 +470,10 @@ dl.faq button[aria-expanded="true"]::before {
 			● 코로나 19 백신 접종 후 이상반응 발생시 증상완화를 위한 조치 <br>
 			&nbsp; - 예방접종 후 접종부위 통증이 있는 경우 통증 부위에 깨끗한 수건 등으로 냉찜질을 해주시기 바랍니다.<br>
 			&nbsp; - 접종 후 발열이 있는 경우에는 수분을 충분히 섭취하고 쉬어 주시기 바라며, 발열로 인한 불편함이 있는 경우에는
-			해열/진통제가 도움이 될 수 있습니다.<br>
-			<br>
+			해열/진통제가 도움이 될 수 있습니다.<br><br>
 			● 다음과 같은 증상 발생시 의사의 진료를 받아야 합니다.
 			<table border="1" width="1000" height="400">
-			 <tr><td>⊙ 다음과 같은 경우에는 접종기관 또는 가까운 의료기관을 방문하여 진료 받으셔야 합니다.<br></td></tr>
+			 <tr><th class="a">⊙ 다음과 같은 경우에는 접종기관 또는 가까운 의료기관을 방문하여 진료 받으셔야 합니다.<br></th></tr>
 			 <tr><td>&nbsp; - 바이러스 벡터 백신(아스트라제네카, 얀센) 접종 후 아래의 증상이 있는 경우 <br>
 			 &nbsp;&nbsp; -  심하거나 2일 이상 지속적인 두통이 발생하며, 진통제에 반응하지 않거나 조절되지 않는 경우 또는
 			 구토를 동반하거나 시야가 흐려지는 경우<br>
@@ -464,7 +486,7 @@ dl.faq button[aria-expanded="true"]::before {
 			 &nbsp;&nbsp; - 코로나 19 예방접종 후 갑자기 기운이 떨어지거나 평소와 다른 이상증상이 나타난 경우<br>
 			 &nbsp;&nbsp; - 접종 부위의 통증/붓기/발적이 48시간 이후에도 악화되는 경우<br>
 			 </td></tr>
-			<tr><td>⊙ 다음과 같은 경우에는 119로 연락하거나 가까운 응급실로 내원하시기 바랍니다.<br></td></tr>
+			<tr><th class="a">⊙ 다음과 같은 경우에는 119로 연락하거나 가까운 응급실로 내원하시기 바랍니다.<br></th></tr>
 			 <tr><td>&nbsp; - 예방접종 후 숨쉬기 곤란하거나 심하게 어지러운 경우<br>
 			 &nbsp; - 입술/얼굴이 붓거나 온몸에 심한 두드러기 증상이 나타나는 경우<br>
 			 &nbsp; - 갑자기 의식이 없거나 쓰러지는 경우

@@ -7,13 +7,13 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.slider {
-  width: 700px;
-  height: 750px;
+  width: 1000px;
+  height: 650px;
   position: relative;
 }
 .slide {
-  width: 600px;
-  height: 650px;
+  width: 1000px;
+  height: 550px;
   background-size: cover;
   border-radius: 10px;
   animation: fade 1.5s;
@@ -54,7 +54,7 @@
   <div class="slider">
       <div class="slide" style="background-image: url(../../resources/images/info_coronic2.png);"></div>
       <div class="slide" style="background-image: url(../../resources/images/info_vaccine.PNG);"></div>
-      <div class="slide" style="background-image: url(../../resources/images/info_qna.PNG);"></div>
+      <div class="slide" style="background-image: url(../../resources/images/maxresdefault.jpg);"></div>
       <a class="prev" onclick="button_click(-1)">&#10094</a>
       <a class="next" onclick="button_click(1)">&#10095</a>
     </div>
