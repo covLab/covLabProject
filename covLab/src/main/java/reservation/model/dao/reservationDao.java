@@ -86,7 +86,7 @@ public class reservationDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 	
-		String query = "SELECT * FROM VACCINE_DATA";
+		String query = "SELECT  REG_BUS_NO,SUM(REMAIN) REMAIN FROM VACCINE_DATA where reg_bus_no is not null GROUP BY reg_bus_no";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -95,11 +95,8 @@ public class reservationDao {
 			while(rset.next()) {		
 				VaccineData vd = new VaccineData();
 
-				vd.setSerial_num(rset.getString("serial_num"));
 				vd.setReg_bus_no(rset.getString("reg_bus_no"));
-				vd.setRel_date(rset.getTimestamp("rel_date"));
 				vd.setRemain(rset.getInt("remain"));
-				vd.setSell_by_date(rset.getDate("sell_by_date"));
 
 				list.add(vd);
 			}

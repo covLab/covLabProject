@@ -5,7 +5,6 @@ import static common.JDBCTemp.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.List;
 
 import reservation.model.dao.reservationDao;
 import reservation.model.vo.Hospital;

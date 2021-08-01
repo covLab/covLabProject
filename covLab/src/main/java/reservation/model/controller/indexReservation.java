@@ -2,7 +2,6 @@ package reservation.model.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +28,7 @@ public class indexReservation extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -45,8 +44,9 @@ public class indexReservation extends HttpServlet {
 		
 		ArrayList<Hospital> hps = rservice.selectAllHps();
 		ArrayList <VaccineData> vds=rservice.selectAllVds();
-		System.out.println(hps);
-		System.out.println(vds);
+//		System.out.println(hps.get(0).getHp_name());
+//		System.out.println(vds);
+		
 		
 		RequestDispatcher view = null;
 		if (hps.size() > 0 && vds.size()>0) {

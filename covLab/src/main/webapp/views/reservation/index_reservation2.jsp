@@ -1,15 +1,17 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!-- import="java.util.ArrayList, reservation.model.vo.Hospital" -->
+	pageEncoding="UTF-8"
+	import="java.util.ArrayList, reservation.model.vo.Hospital, reservation.model.vo.VaccineData"%>
 <%
-	//ArrayList <Hospital> hps =(ArrayList<Hospital>)request.getAttribute("hps");
-	//String hp_name=request.getAttribute("hp_name");
+	ArrayList<Hospital> hps = (ArrayList<Hospital>)request.getAttribute("hps");
+	ArrayList<VaccineData> vds = (ArrayList<VaccineData>) request.getAttribute("vds");
 
-	/* hp.setHp_name(rset.getString("hp_name"));
-	hp.setHp_address(rset.getString("hp_address"));
-	hp.setHp_phone(rset.getString("hp_phone")); */
-%>
+/*  String hp_name=((String)request.getAttribute("hp_name"));
+	String hp_address=((String)request.getAttribute("hp_address"));
+	String hp_phone=((String)request.getAttribute("hp_phone"));
+	float hp_latitude=((float)request.getAttribute("hp_latitude"));
+	float hp_longitude=((float)request.getAttribute("hp_longitude"));
+	int remain=((int)request.getAttribute("remain"));  */
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +54,7 @@
 	function locationTest() {
 		navigator.geolocation.getCurrentPosition(handleLocation, handleError);
 	}
-	
+
 	var locations=[
 		{hp_name: "강남구보건소", hp_address: "서울 강남구 선릉로 668", hp_phone: "02-3423-5555" ,hp_latitude: 37.5162581, hp_longitude: 127.042214},
 		{hp_name: "삼성서울병원", hp_address: "서울 강남구 일원로 81", hp_phone: "02-3410-2114" ,hp_latitude: 37.4881568, hp_longitude: 127.0855952},
@@ -75,7 +77,15 @@
 		{hp_name: "보라매병원", hp_address: "서울 동작구 보라매로5길 20", hp_phone: "02-870-2114" ,hp_latitude: 37.4933373, hp_longitude: 126.9246093},
 		{hp_name: "마포구보건소", hp_address: "서울 마포구 월드컵로 212", hp_phone: "02-3153-9037" ,hp_latitude: 37.5663123, hp_longitude: 126.9020798},
 	];
-	var sortedLocations = [];
+	
+	var arrsize = <%=hps.size()%>;
+	var sortedLocations = new Array(<%=hps.size() %>);
+	
+	for(var i=0;i<)
+	
+	for (var i=0;i++;i<hps.length){
+		console.log(hps[i]);
+	}
 	// 위치콜백 
 	function handleLocation(position) {
 		var outDiv = document.getElementById("result");
@@ -106,27 +116,6 @@
 			map : map,
 			title : "현위치"
 		});
-		//지도에 표시될 병원 리스트
-/* 		var locations = [ [ '강남구보건소	02-3423-5555', 37.5162581, 127.042214 ],
-				[ '삼성서울병원	02-3410-2114', 37.4881568, 127.0855952 ],
-				[ '연세대학교의과대학강남세브란스병원	02-2019-3114', 37.4927454, 127.0463152 ],
-				[ '강동경희대학교의대병원	02-440-7000', 37.5534841, 127.1576468 ],
-				[ '강동구보건소	02-3425-8565', 37.5292365, 127.1255395 ],
-				[ '성심의료재단강동성심병원	02-2224-2358', 37.5361787, 127.135423 ],
-				[ '한국보훈복지의료공단중앙보훈병원	02-2225-1100', 37.5305849, 127.1480435 ],
-				[ '강북구보건소	02-901-7706, 02-901-7704', 37.6320834, 127.0387673 ],
-				[ '강서구보건소	02-2600-5868', 37.5496053, 126.868277 ],
-				[ '이화여자대학교의과대학부속서울병원	1522-7000', 37.5371113, 126.8855845 ],
-				[ '관악구보건소	02-879-7131', 37.478434, 126.9511135 ],
-				[ '에이치플러스양지병원	02-1877-8875', 37.4842166, 126.9325109 ],
-				[ '광진구보건소	02-450-1937', 37.5383735, 127.0824046 ],
-				[ '건국대학교병원	02-1588-1533', 36.9789327, 127.9285366 ],
-				[ '구로구보건소	02-860-2003', 37.500076, 126.8893241 ],
-				[ '고려대학교의과대학부속구로병원	02-2626-1114', 37.4922173, 126.8849478 ],
-				[ '금천구보건소	02-2627-2717', 37.4570498, 126.8959514 ],
-				[ '한일병원	02-901-3114', 36.9638808, 127.9429038 ],
-				[ '보라매병원	02-870-2114', 37.4933373, 126.9246093 ],
-				[ '마포구보건소	02-3153-9037', 37.5663123, 126.9020798 ] ]; */
 
 		var infowindow = new google.maps.InfoWindow();
 
@@ -263,7 +252,7 @@
 						<input type='radio' name='list_order' value='dist'
 							onclick='hpOrder(event)' />거리순 <input type='radio'
 							name='list_order' value='amnt' onclick='hpOrder(event)' />수량순
-						<div id='result'>
+						<div id='result'></div>
 
 
 							<select name="list_option_key" onchange="handleOnList(this)">
@@ -276,19 +265,25 @@
 					<div class="row">
 
 						<div class="col-lg-3 p-0">
+							<!--반복문  -->
+							<script>
+						
+						</script>
+						<div id="map" style="width: 95%; height: 600px;">
 							<div class="card">
 								<div class="card-body">
 									<div class="row">
 										<div class="col">
-											<span>병원명         </span>
-											<script>  
+											<span>병원명 </span>
+											<script>
 											document.write(sortedLocations[0].hp_name);
 											</script>
+										
 										</div>
 									</div>
 									<div class="row">
 										<div class="col">
-											<span>주소        </span>
+											<span>주소</span>
 											<script>
 												document.write(sortedLocations[0].hp_address);
 												</script>
@@ -296,7 +291,7 @@
 									</div>
 									<div class="row">
 										<div class="col">
-											<span>전화번호  </span>
+											<span>전화번호</span>
 											<script>
 											document.write(sortedLocations[0].hp_phone);
 											</script>
@@ -307,12 +302,14 @@
 											class="btn btn-primary pl-5 pr-5">예약</a>
 									</div>
 								</div>
-								<br>
-								<br>
+							</div>
+
+
+							<div class="card">
 								<div class="card-body">
 									<div class="row">
 										<div class="col">
-											<span>병원명   </span>
+											<span>병원명 </span>
 											<script>
 											document.write(sortedLocations[1].hp_name);
 											</script>
@@ -320,7 +317,7 @@
 									</div>
 									<div class="row">
 										<div class="col">
-											<span>주소  </span>
+											<span>주소</span>
 											<script>
 											document.write(sortedLocations[1].hp_address);
 											</script>
@@ -328,7 +325,7 @@
 									</div>
 									<div class="row">
 										<div class="col">
-											<span>전화번호  </span>
+											<span>전화번호</span>
 											<script>
 											document.write(sortedLocations[1].hp_phone);
 											</script>
@@ -340,14 +337,15 @@
 									</div>
 								</div>
 
+
+
+
 							</div>
-
-
 						</div>
 
 
 						<div class="col-lg-9 p-0">
-							<div id="map" style="width: 95%; height: 590px;"></div>
+							
 						</div>
 					</div>
 			</div>
@@ -356,7 +354,7 @@
 			</section>
 		</div>
 	</div>
-	</div>
+	
 
 	<%@ include file="../common/script.jsp"%>
 </body>
