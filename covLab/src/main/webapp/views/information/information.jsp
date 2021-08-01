@@ -31,7 +31,7 @@
 
 <%@ include file="../common/sidebar.jsp"%>
 <%@ include file="../common/topbar.jsp"%>
-<style>
+<style type="text/css">
 /* 자동배너 부분 */
 html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
     *, *:before, *:after { box-sizing: inherit; }
@@ -59,7 +59,8 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
     .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
     .slide_pagination .dot.dot_active { background: #333; }
     .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
- 
+    
+
  /* 두번째 버튼 부분 */ 
  .btn {
   text-decoration: none;
@@ -71,11 +72,18 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
   display:inline-block;
   border-radius: 10px;
   transition:all 0.2s;
-  text-shadow:0px -2px black;
  }
  .btn:active {
   transform:translateY(5px);
  }
+ 
+ .btn:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+ 
+ 
 </style>
 
 
@@ -150,12 +158,14 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
   <!-- // .container -->
   <hr>
   
+ 
   <!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
 <h4>버튼을 클릭하면 해당 페이지로 이동함</h4>
 <br>
 <a class="btn" href="coronaInfo.jsp">코로나 정보</a>
 <a class="btn" href="vaccinInfo.jsp">백신/예방접종 정보</a>
 <a class="btn" href="qna.jsp">QnA</a>
+<a class="btn" href="test.jsp">test</a>
 <hr>
 
 <!-- 3. 실시간 뉴스 -->
