@@ -363,7 +363,7 @@ for(var i=0;i<sortedLocations.length;i++){
 		</section>
 	</div>
 	</div>
-	</div>
+
 
 	<%@ include file="../common/script.jsp"%>
 </body>

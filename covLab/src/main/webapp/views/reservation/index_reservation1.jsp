@@ -46,8 +46,10 @@
 -->
 </style>
 
-
 <script language="javascript">
+	
+
+	
 	// 위치확인 
 	var latitude=0;
 	var longitude=0;
@@ -59,7 +61,8 @@
 	var hospitals = new Array();
 	var vaccinedata = new Array();
 	var reg_bus_no=null;
-	
+	/* 선택한 병원의 사업자 등록번호 */
+	var chosen_hp=null;
 
 	<%
 	for (Hospital hp: hps) {
@@ -93,22 +96,28 @@
 	}
 	%>
 	/* 병원 정보 + 백신 정보 + 거리 정보 담긴 배열 */
-	var sortedLocations = new Array();
-
-	
+	var sortedLocations = [];
+	/* 라디오 버튼 값에 따라 정렬하는 함수*/
+	function hpOrder(list) {
+		/* var order_opt = document.getElementByName('list_order');
+		document.getElementByName('list_order').innerText = event.target.value; */
+		var order_opt = $(":radio[name='list_order']:checked").val();
+		if (order_opt == 'amnt') {
+			sortedLocations=sortByAmnt(list);
+		}
+		if (order_opt == 'dist') {
+			sortedLocations=sortByDist(list);
+		}
+	}
 	// 위치콜백 
 	function handleLocation(position) {
 		var outDiv = document.getElementById("result");
-		// 좌표보기 
-		/*                 var posStr = "latitude : " + position.coords.latitude + "<br/>";
-		 posStr += "longitude : " + position.coords.longitude; 
-		 outDiv.innerHTML = posStr; 
-		 */
+
 		// 위치정보 만들고 
 		var latitude = position.coords.latitude;
-		var longitude = position.coords.longitude; 
-		var latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-		 
+		var longitude = position.coords.longitude;
+		var latlng = new google.maps.LatLng(latitude, longitude);
+
 		// 지도 옵션 
 		var mapOption = {
 			zoom : 11.5,
@@ -126,19 +135,26 @@
 			map : map,
 			title : "현위치"
 		});
-
 		var infowindow = new google.maps.InfoWindow();
-
 		var marker, i;
-
-		for (i = 0; i < sortedLocations.length; i++) {
+		for (i = 0; i < hospitals.length; i++) {
 			marker = new google.maps.Marker({
-				position : new google.maps.LatLng(sortedLocations[i].hp_latitude,
-						sortedLocations[i].hp_longitude),
+				position : new google.maps.LatLng(hospitals[i].hp_latitude,
+						hospitals[i].hp_longitude),
 				map : map,
-				icon : "../../resources/images/red_dot_small.png"
-			});		
+				title : hospitals[i].hp_name,
+				label : hospitals[i].remain
+			/* icon : "../../resources/images/red_dot_small.png" */
+			});
+			if (marker) {
+				marker.addListener("click", function() {
+					map.setZoom(15);
+					map.setCenter(this.getPosition());
+					chosen_hp = hospital[i].reg_bus_no;
+				});
+			}
 		}
+		const infoWindow = new google.maps.InfoWindow();
 
 		/* sortedLocations=locations.sort(function(a,b){
 			if (a.distance>b.distance){
@@ -150,37 +166,50 @@
 			return 0;
 		});
 		return sortedLocations; */
-	}	
-	for (i = 0; i < hospitals.length; i++) {
-		let distance=getDistance(latitude, longitude, hospitals[i].hp_latitude, hospitals[i].hp_longitude)
-		hospitals[i].distance= distance;
 	}
-	
-	function sortByDist(arr){
-		sortedArr=[];
-		sortedArr=arr.sort(function(a,b){
-			if (a.distance>b.distance){
+	for (i = 0; i < hospitals.length; i++) {
+		let distance = getDistance(latitude, longitude,
+				hospitals[i].hp_latitude, hospitals[i].hp_longitude);
+		hospitals[i].distance = distance;
+	}
+
+	function sortByDist(arr) {
+		sortedArr = [];
+		sortedArr = arr.sort(function(a, b) {
+			if (a.distance > b.distance) {
 				return 1;
 			}
-			if (a.distance<b.distance){
+			if (a.distance < b.distance) {
 				return -1;
 			}
 			return 0;
 		});
 		return sortedArr;
 	}
-		
-	sortedLocations=sortByDist(hospitals);
-	console.log(sortedLocations);
 
-/* 			google.maps.event.addListener(marker, 'click',
-					(function(marker, i) {
-						return function() {
-							infowindow.setContent(hospitals[i][0]);
-							infowindow.open(map, marker);
-						}
-					})(marker, i)); 
-		}*/
+	function sortByAmnt(arr) {
+		sortedArr = [];
+		sortedArr = arr.sort(function(a, b) {
+			if (a.remain < b.remain) {
+				return 1;
+			}
+			if (a.remain > b.remain) {
+				return -1;
+			}
+			return 0;
+		});
+		return sortedArr;
+	}
+
+
+	/* 			google.maps.event.addListener(marker, 'click',
+	 (function(marker, i) {
+	 return function() {
+	 infowindow.setContent(hospitals[i][0]);
+	 infowindow.open(map, marker);
+	 }
+	 })(marker, i)); 
+	 }*/
 	// 에러콜백 
 	function handleError(err) {
 		var outDiv = document.getElementById("result");
@@ -190,36 +219,22 @@
 			outDiv.innerHTML = "에러발생 : " + err.code;
 		}
 	}
-	
-	//체크박스 값 하나만 선택되게 하는 함수
-	function checkOnlyOne(element) {
-		  const checkboxes = document.getElementsByName("list_order");
-		  checkboxes.forEach((cb) => { cb.checked = false })
-		  element.checked = true;
-		}
-	
-	function getDistance(lat1, lon1, lat2, lon2, unit) {
-        var radlat1 = Math.PI * lat1/180
-        var radlat2 = Math.PI * lat2/180
-        var radlon1 = Math.PI * lon1/180
-        var radlon2 = Math.PI * lon2/180
-        var theta = lon1-lon2
-        var radtheta = Math.PI * theta/180
-        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-        dist = Math.acos(dist)
-        dist = dist * 180/Math.PI
-        dist = dist * 60 * 1.1515
-        if (unit=="K") { dist = dist * 1.609344 }
-        if (unit=="N") { dist = dist * 0.8684 }
-        return dist;
+
+	function getDistance(lat1, lon1, lat2, lon2) {
+		var radlat1 = Math.PI * lat1 / 180
+		var radlat2 = Math.PI * lat2 / 180
+		var radlon1 = Math.PI * lon1 / 180
+		var radlon2 = Math.PI * lon2 / 180
+		var theta = lon1 - lon2
+		var radtheta = Math.PI * theta / 180
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1)
+				* Math.cos(radlat2) * Math.cos(radtheta);
+		dist = Math.acos(dist)
+		dist = dist * 180 / Math.PI
+		dist = dist * 60 * 1.1515
+		dist = dist * 1.609344
+		return dist;
 	}
-	
-	function hpOrder(event) {
-		  document.getElementByName('list_order').innerText = 
-		    event.target.value;
-		}
-	
-	
 </script>
 </head>
 
@@ -258,33 +273,30 @@
 					<form action="list_option.jsp">
 
 						<input type='radio' name='list_order' value='dist'
-							onclick='hpOrder(event)' />거리순 <input type='radio'
-							name='list_order' value='amnt' onclick='hpOrder(event)' />수량순
-						<div id='result'></div>
+							onclick='hpOrder(hospitals);console.log(sortedLocations);' />거리순 <input type='radio' name='list_order'
+							value='amnt' onclick='hpOrder(hospitals);console.log(sortedLocations);' />수량순
+
+						<div id='result'>
 
 
-						<select name="list_option_key" onchange="handleOnList(this)">
-							<option value="none">=== 선택 ===</option>
-							<option value="pfizer">화이자</option>
-							<option value="janssen">얀센</option>
-							<option value="AZ">아스트라제네카</option>
-						</select>
+							<select name="list_option_key" onchange="handleOnList(this)">
+								<option value="none">=== 전체 ===</option>
+								<option value="pfizer">화이자</option>
+								<option value="janssen">얀센</option>
+								<option value="AZ">아스트라제네카</option>
+							</select>
 					</form>
 					<div class="row">
 
 						<div class="col-lg-3 p-0">
-							<!--반복문  -->
-							<script>
-						
-						</script>
-
 							<div class="card">
 								<div class="card-body">
 									<div class="row">
 										<div class="col">
 											<span>병원명 </span>
 											<script>
-											document.write(sortedLocations[0].hp_name);
+												document
+														.write(sortedLocations[0].hp_name);
 											</script>
 
 										</div>
@@ -293,15 +305,17 @@
 										<div class="col">
 											<span>주소</span>
 											<script>
-												document.write(sortedLocations[0].hp_address);
-												</script>
+												document
+														.write(sortedLocations[0].hp_address);
+											</script>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col">
 											<span>전화번호</span>
 											<script>
-											document.write(sortedLocations[0].hp_phone);
+												document
+														.write(sortedLocations[0].hp_phone);
 											</script>
 										</div>
 									</div>
@@ -309,7 +323,8 @@
 										<div class="col">
 											<span>수량 : </span>
 											<script>
-											document.write(sortedLocations[0].remain);
+												document
+														.write(sortedLocations[0].remain);
 											</script>
 										</div>
 									</div>
@@ -319,7 +334,11 @@
 									</div>
 								</div>
 							</div>
+<table>
+<tr>
+<td>병원명</td><td align="center">
 
+</table>
 
 							<div class="card">
 								<div class="card-body">
@@ -327,7 +346,8 @@
 										<div class="col">
 											<span>병원명 </span>
 											<script>
-											document.write(sortedLocations[1].hp_name);
+												document
+														.write(sortedLocations[1].hp_name);
 											</script>
 										</div>
 									</div>
@@ -335,7 +355,8 @@
 										<div class="col">
 											<span>주소</span>
 											<script>
-											document.write(sortedLocations[1].hp_address);
+												document
+														.write(sortedLocations[1].hp_address);
 											</script>
 										</div>
 									</div>
@@ -343,7 +364,8 @@
 										<div class="col">
 											<span>전화번호</span>
 											<script>
-											document.write(sortedLocations[1].hp_phone);
+												document
+														.write(sortedLocations[1].hp_phone);
 											</script>
 										</div>
 									</div>
@@ -351,7 +373,8 @@
 										<div class="col">
 											<span>수량 : </span>
 											<script>
-											document.write(sortedLocations[1].remain);
+												document
+														.write(sortedLocations[1].remain);
 											</script>
 										</div>
 									</div>
@@ -365,7 +388,6 @@
 
 
 						<div class="col-lg-9 p-0">
-
 							<div id="map" style="width: 95%; height: 600px;"></div>
 						</div>
 					</div>
@@ -375,7 +397,7 @@
 			</section>
 		</div>
 	</div>
-
+	</div>
 
 	<%@ include file="../common/script.jsp"%>
 </body>
