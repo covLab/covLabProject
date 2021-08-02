@@ -39,7 +39,7 @@ Member loginMember = (Member) session.getAttribute("loginMember");
 								<ul>
 									<li><a href="/semi/blistadmin?page=1">접종 후기 관리</a></li>
 									<li><a href="/semi/mlist">회원 관리</a></li>
-									<li><a href="/semi/bcmanage">백신 관리</a></li>
+									<li><a href="/semi/vcmanage">백신 관리</a></li>
 								</ul></li>
 						
 						<% } else {//로그인 %>

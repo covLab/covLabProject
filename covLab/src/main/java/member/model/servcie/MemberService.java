@@ -6,8 +6,10 @@ import static common.JDBCTemp.getConnection;
 import static common.JDBCTemp.rollback;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
 
+import board.model.vo.Board;
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
 
@@ -122,12 +124,80 @@ public class MemberService {
 		return result;
 	}
 
-	public ArrayList<Member> selectList() {
+	public ArrayList<Member> selectList(int startRow, int endRow) {
 		Connection conn = getConnection();
-		ArrayList<Member> list = mdao.selectList(conn);
+		ArrayList<Member> list = mdao.selectList(conn, startRow, endRow);
 		close(conn);
 		return list;
 	}
+
+	public int getListCount() {
+		Connection conn = getConnection();
+		int listCount = mdao.getListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Member> selectSearchUserNo(int startRow, int endRow, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchUserNo(conn, startRow, endRow, keyword);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Member> selectSearchUserName(int startRow, int endRow, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchUserName(conn, startRow, endRow, keyword);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Member> selectSearchGender(int startRow, int endRow, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchGender(conn, startRow, endRow, keyword);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Member> selectSearchAge(int startRow, int endRow, int keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchAge(conn, startRow, endRow, keyword);
+		close(conn);
+		return list;
+	}
+
+	/*
+	 * public ArrayList<Member> selectSearchRegDate(int startRow, int endRow, Date
+	 * begin, Date end) { Connection conn = getConnection(); ArrayList<Member> list
+	 * = mdao.selectSearchRegDate(conn, startRow, endRow, begin, end); close(conn);
+	 * return list; }
+	 */
+
+	public ArrayList<Member> selectSearchLoginType(int startRow, int endRow, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchLoginType(conn, startRow, endRow, keyword);
+		close(conn);
+		return list;
+	}
+
+	// 검색한 결과 카운트
+	public int getSearchListCount(String action, String keyword) {
+		Connection conn = getConnection();
+		int listCount = mdao.getSearchListCount(conn, action, keyword);
+		close(conn);
+		return listCount;
+	}
+
+	/*
+	 * public int getSearchListCount(String action, String keyword, String
+	 * beginDate, String endDate) { Connection conn = getConnection(); int listCount
+	 * = mdao.getSearchListCount(conn, action, keyword, beginDate, endDate);
+	 * close(conn); return listCount; }
+	 */
+
+
+
+
 }
 	
 

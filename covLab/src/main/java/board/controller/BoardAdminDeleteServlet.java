@@ -1,6 +1,7 @@
 package board.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,12 +33,16 @@ public class BoardAdminDeleteServlet extends HttpServlet {
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
-      // 관리자용 공지글 삭제 처리용 컨트롤러
+      // 관리자용 게시글 삭제 처리용 컨트롤러
+	  request.setCharacterEncoding("utf-8");
 
-      String checkedList = request.getParameter("checkedArray");
-      System.out.println("checkedList : "+checkedList);
+      String[] checkedList = request.getParameterValues("chk");
+      for(int i = 0 ; i<checkedList.length; i++) {
+      System.out.println("checkedList at servlet : "+checkedList[i]);  
+      }
+//      System.out.println(Arrays.toString(checkedList));
+//      System.out.println("checkedList.length : "+ checkedList.length);
 
-      JSONArray array = JSONArray.fromObject(jsonData);
   
       // 출력할 페이지 작성
       int currentPage = 1;
@@ -46,22 +51,14 @@ public class BoardAdminDeleteServlet extends HttpServlet {
          currentPage = Integer.parseInt(request.getParameter("page"));
       }
       
-//      int result = 0;
-//      for(int i=0; i<checkedList.length; i++) {
-//         
-//         
-//      }
-      //int boardno = Integer.parseInt(request.getParameter("bno"));
-      int boardno = Integer.parseInt(checkedList);
-      int result = new BoardService().deleteBoard(boardno);
 
-      String returnValue = null;
+      int result = new BoardService().deleteBoard(checkedList);
+
       if (result > 0) {
-         returnValue = "ok";
-         response.sendRedirect("/semi/blsitadmin?page="+currentPage);
+         response.sendRedirect("/semi/blistadmin?page="+currentPage);
       } else {
          RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-         request.setAttribute("message", boardno + "번 공지글 삭제 실패");
+         request.setAttribute("message", Arrays.toString(checkedList)+"번 공지글 삭제 실패");
          view.forward(request, response);
       }
       

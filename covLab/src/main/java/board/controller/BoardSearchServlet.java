@@ -68,7 +68,6 @@ public class BoardSearchServlet extends HttpServlet {
 
 		// 서비스로 해당 페이지에 출력할 게시글만 조회해 옴
 		ArrayList<Board> list = bservice.selectSearchList(startRow, endRow, sCondition, sKeyword);
-		System.out.println(list);
 		
 		// 뷰 페이지로 같이 내보낼 페이지 관련 숫자 계산 처리
 		// 총 페이지 수 : 총 목록이 22개인 경우

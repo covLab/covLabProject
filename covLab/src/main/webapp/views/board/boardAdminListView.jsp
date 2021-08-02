@@ -38,8 +38,8 @@ function showWriteForm(){
    }
 } --%>
 
-$(document).ready(function(){
-   $("#save").click(function(){
+/* $(document).ready(function(){
+   $("#delete").click(function(){
       
       var checkedArray = [];
 
@@ -48,20 +48,16 @@ $(document).ready(function(){
       });
       
       console.log("checkedArray : "+checkedArray);
-      
-  	  var objParams = {
-         "checkedList" : checkedArray
-      } 
-    
-      console.log("objParams : "+objParams);
-      
+      console.log("checkedArray[0] : "+checkedArray[0]);
       
       
       //ajax 호출
       $.ajax({
          url: "/semi/bdeleteadmin",
          type: "post",
-         data: {checkedArray : checkedArray},
+         data: {
+            "checkedArray=" + checkedArray
+        },
          dataType: "json",
          contentType: "charset=utf-8",
          
@@ -82,7 +78,7 @@ $(document).ready(function(){
       });
    
    });
-});
+}); */
 </script>
 
 
@@ -110,6 +106,7 @@ $(document).ready(function(){
                                     <h4>Bootstrap Data Table </h4>
                                 </div> -->
                   <!-- <div class="bootstrap-data-table-panel">-->
+                  
                   <div class="table-responsive">
                      <div>
                         <select id="searchForm" name="searchCondition">
@@ -123,7 +120,9 @@ $(document).ready(function(){
                         <input type="submit" value="검색 " class="btn btn-primary">
                      </div>
                      
-                     <table class="display table table-borderd table-hover">
+                <form action="/semi/bdeleteadmin" method="post" id="multidelete">
+                <input type="hidden" name="page" value="<%= currentPage %>">
+                    <table class="display table table-borderd table-hover">
 
                         <thead>
                            <tr>
@@ -133,7 +132,7 @@ $(document).ready(function(){
                               <th>작성일</th>
                               <th>조회수</th>
                               <th>추천수</th>
-                              <th> &nbsp; </th>
+                              <th> &nbsp; <!-- <input type="checkbox" name="all" onclick="allChk(this.checked);"> --></th>
                            </tr>
                         </thead>
 
@@ -150,7 +149,7 @@ $(document).ready(function(){
                               <td><%=b.getBoardDate()%></td>
                               <td><%=b.getViewCnt()%></td>
                               <td><%=b.getRecommendCnt()%></td>
-                              <td><input type="checkbox" name="selectCheckbox" value="<%= b.getBoardNo() %>"></td>
+                              <td><input type="checkbox" name="chk" value="<%= b.getBoardNo() %>"></td>
                            </tr>   
                            <%
                            } //list:for each
@@ -160,6 +159,13 @@ $(document).ready(function(){
                         </tbody>
 
                      </table>
+                     <div align="right">
+                     <input type="button" onclick="showWriteForm();" class="btn btn-primary wrtie" value="글쓰기"> &nbsp;<!-- 
+                     <button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button>  &nbsp;
+                     <button id="delete" class="btn btn-danger">글 삭제</button>   -->
+                     <input type="submit" class="btn btn-danger" value="삭제">
+                     </div>
+                     </form>
                   </div>
                   <!-- </div> -->
 
@@ -199,16 +205,11 @@ $(document).ready(function(){
                      <% } %>
                      
                      
-                     <div align="right">
                      
-                     <button onclick="showWriteForm();" class="btn btn-primary wrtie">글쓰기</button> &nbsp;<!-- 
-                     <button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> --> &nbsp;
-                     <button id="save" class="btn btn-danger">글 삭제</button>   
-                     
-                     </div>
-                     
+                    
                   </div>
                </div>
+
                <!-- /# card -->
                <!-- </div> -->
                <!-- /# column 

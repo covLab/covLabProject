@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -16,16 +17,16 @@ import reservation.model.service.reservationService;
 import reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class MemberListServlet
+ * Servlet implementation class MemberSearchServlet
  */
-@WebServlet("/mlist")
-public class MemberListServlet extends HttpServlet {
+@WebServlet("/msearch")
+public class MemberSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public MemberListServlet() {
+	public MemberSearchServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,52 +37,73 @@ public class MemberListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 관리자용 회원 전체 조회 처리용 컨트롤러
+		request.setCharacterEncoding("utf-8");
 
-		// 출력할 페이지 작성
+		String action = request.getParameter("action");
+		String keyword = request.getParameter("keyword");
+		String beginDate = null, endDate = null;
+		int listCount =0;
+
+		System.out.println("action : " + action);
+		System.out.println("keyword : " + keyword);
+		
+		MemberService mservice = new MemberService();
+		
+		// 페이징처리
 		int currentPage = 1;
-		// 전송온 페이지 값이 있다면 추출
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
 
-		// 한 페이지당 출력할 목록 갯수 지정
 		int limit = 10;
-
-		// 조회용 서비스 객체 생성
-		MemberService mservice = new MemberService();
-
-		// 총 페이지 수 계산을 위한 목록 개수 조회
-		int listCount = mservice.getListCount();
-		// System.out.println("총 목록개수 : "+listCount);
-
-		// 요청한 페이지의 출력될 목록의 행번호를 계산
-		// 한 페이지에 출력할 목록 개수가 10개인 경우
-		// 3page 가 요청되었다면 행번호는 21~30행.
+		if(action.equals("reg_date")) {
+			beginDate = request.getParameter("begin");
+			endDate = request.getParameter("end");
+//			listCount = mservice.getSearchListCount(action, keyword, beginDate, endDate);
+		}else {
+		listCount = mservice.getSearchListCount(action, keyword);
+		}
+		System.out.println("listCount : "+listCount);
+		
 		int startRow = (currentPage - 1) * limit + 1;
 		int endRow = startRow + limit - 1;
+		
+		ArrayList<Member> list = null;
 
-		// 서비스로 해당 페이지에 출력할 게시글만 조회해 옴
-		ArrayList<Member> list = mservice.selectList(startRow, endRow);
-
-		// 뷰 페이지로 같이 내보낼 페이지 관련 숫자 계산 처리
-		// 총 페이지 수 : 총 목록이 22개인 경우
-		// 한 페이지에 출력할 목록이 10개이면, 페이지는 3임
+		
 		int maxPage = (int) ((double) listCount / limit + 0.9);
-
-		// 뷰에 출력할 페이지그룹의 시작 페이지 지정
-		// 뷰 목록 아래쪽에 페이지 숫자를 10개를 출력한다면..
-		// 현재 페이지가 3페이지이면, 페이지 그룹은 1~10 이 됨
-		// 현재 페이지가 15페이지이면, 페이지 그룹은 11~20이 됨
 		int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
 		int endPage = startPage + limit - 1;
 
-		// 총 페이지 수와 페이지 그룹의 마지막 숫자 조정
 		if (maxPage < endPage) {
 			endPage = maxPage;
 		}
+		System.out.println(startRow + ", " + endRow + ", " + maxPage + ", " + startPage + ", " + endPage);
+		System.out.println(action+", "+keyword);
+
+		switch (action) {
+		case "no":
+			list = mservice.selectSearchUserNo(startRow, endRow, keyword);
+			break;
+		case "name":
+			list = mservice.selectSearchUserName(startRow, endRow, keyword);
+			break;
+		case "gender":
+			list = mservice.selectSearchGender(startRow, endRow, keyword);
+			break;
+		case "age":
+			list = mservice.selectSearchAge(startRow, endRow, Integer.parseInt(keyword));
+			break;
+		case "reg_date":
+//			list = mservice.selectSearchRegDate(startRow, endRow, Date.valueOf(beginDate), Date.valueOf(endDate));
+			break;
+		case "logintype":
+			list = mservice.selectSearchLoginType(startRow, endRow, keyword);
+			break;
+		}
+
 		
-		// 예약 내역 확인용
+		
 		ArrayList<Reservation> rlist = new reservationService().selectList();
 
 		RequestDispatcher view = null;
@@ -97,9 +119,10 @@ public class MemberListServlet extends HttpServlet {
 			view.forward(request, response);
 		} else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "회원 목록 조회 실패");
+			request.setAttribute("message", action + " 검색에 대한 " + keyword + " 결과가 존재하지 않습니다...");
 			view.forward(request, response);
 		}
+
 	}
 
 	/**

@@ -30,13 +30,13 @@ public class reservationService {
 		close(conn);
 		return hps;
 	}
-	
+/*	
 	public List<VaccineData> selectAllVds() {
 		Connection conn = getConnection();
 		List<VaccineData> vds = rdao.selectAllVds(conn);
 		close(conn);
 		return vds;
-	}
+	}*/
 
 	public Members selectOneMember(String user_id) {
 		Connection conn = getConnection();
@@ -65,13 +65,10 @@ public class reservationService {
 		close(conn);
 		return check;
 	}
-<<<<<<< Updated upstream
-	
+/*	에러나서 주석처리 해놨어요ㅜ
 	public int deleteReservation(String user_rn) {
-=======
-
+	}
 	public int deleteReservation(Reservation res) {
->>>>>>> Stashed changes
 		Connection conn = getConnection();
 		int result = rdao.deleteReservation(conn, user_rn);
 		close(conn);
@@ -84,18 +81,15 @@ public class reservationService {
 		close(conn);
 		return result;
 	}
-<<<<<<< Updated upstream
 	
 	public Members selectOneSubMember(String user_rn) {
-=======
-
+	}
 	public Members selectOneSubMember(int sub_user_no) {
->>>>>>> Stashed changes
 		Connection conn = getConnection();
 		Members mb = rdao.selectOneSubMember(conn, user_rn);
 		close(conn);
 		return mb;
-	}
+	}*/
 
 	public int checkSubReservation(String user_rn) {
 		Connection conn = getConnection();
@@ -109,5 +103,12 @@ public class reservationService {
 		ArrayList<Members> sub_list = rdao.selectOneSubUserRn(conn, user_no);
 		close(conn);
 		return sub_list;
+	}
+
+	public ArrayList<Reservation> selectList() {
+		Connection conn = getConnection();
+		ArrayList <Reservation> list = rdao.selectList(conn);
+		close(conn);
+		return list;
 	}
 }

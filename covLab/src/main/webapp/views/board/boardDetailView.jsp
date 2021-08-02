@@ -129,6 +129,7 @@ $(document).ready(function(){
 	}); 
 }); */
 
+
 //답글 작성
 <%-- function requestReply(){
 	location.href = "/semi/views/board/commentsWriteForm.jsp?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>"
