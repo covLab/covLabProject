@@ -43,50 +43,45 @@ public class cancelPopup extends HttpServlet {
 		//서비스 생성
 		reservationService rservice = new reservationService();
 		System.out.println("------------예약 취소 서블릿-------------");
-		System.out.println("유저번호 :"+request.getParameter("user_no"));
+		
 		//테스트용 세션 받아오기
 		HttpSession session = request.getSession(true);
 		String user_id = (String) session.getAttribute("user_id");
 		
-		// 테스트용 시리얼 넘버 받아오기
-		String serial_num = request.getParameter("serial_num");
-		System.out.println("serial_num : "+serial_num);
-		
-		//테스트용 reg_bus_no 받아오기
+		//기관 번호 받아오기
 		String reg_bus_no = request.getParameter("reg_bus_no");
 		System.out.println("reg_bus_no : "+reg_bus_no);
 		
-		//테스트용 날짜 데이터 받아오기
-		String ioc_date = request.getParameter("ioc_date");
+		//버튼 타입(대리인지 아닌지)
+		String resType = request.getParameter("resType");
 		
-
 //		String date = request.getParameter("rev_date"); 
 //		Timestamp rev_date =Timestamp.valueOf(date);
 		
 		
-		Members mb = new Members();
-		Vaccine vac = rservice.selectOneVac(serial_num);
-		Hospital hp = rservice.selectOneHp(reg_bus_no);
+		Members mb = rservice.selectOneMember(user_id);
 		
 		RequestDispatcher view = null;
 		
-		String resType =request.getParameter("resType");
-		System.out.println("cPop resType : "+resType);
-		if(resType.equals("self")) {
+		String sub_ok = "N";
+		if(resType.equals("sub")) {
 			
-			mb = rservice.selectOneMember(user_id);
-		}else {
-			int user_no = Integer.parseInt(request.getParameter("user_no").toString());
+			sub_ok = "Y";
+			// 서브 유저 추출을 위한 부모 유저의 user_no 추출
+			int user_no = mb.getUserNo();
+			
+			//해당 아이디의 대리 유저들 List 생성
 			ArrayList<Members> mb_list = rservice.selectOneSubUserRn(user_no);
 			
 			for(Members sub_mb : mb_list) {
 				
-				System.out.println("sub_mb.getUserRn() : "+sub_mb.getUserRn());
-				
+				//대리 유저의 예약 여부 확인
 				int subResCheck = rservice.checkSubReservation(sub_mb.getUserRn());
-				System.out.println("subResCheck :"+subResCheck);
 				
+				//대리 예약 내역이 있다면
 				if(subResCheck > 0) {
+					
+					//첫번째 정보만 담아서 mb에 담는다
 					mb = rservice.selectOneSubMember(sub_mb.getUserRn());
 					break;
 					
@@ -98,13 +93,20 @@ public class cancelPopup extends HttpServlet {
 			}
 		}
 
-		view = request.getRequestDispatcher(
-				"views/reservation/cancelPopupPage.jsp");
+		
+		Reservation res = rservice.selectOneResByUserRn(mb.getUserRn(), sub_ok);
+		
+		Vaccine vac = rservice.selectOneVac(res.getSerial_num());
+		Hospital hp = rservice.selectOneHp(reg_bus_no);
 		
 		request.setAttribute("mb", mb);
 		request.setAttribute("vac", vac);
 		request.setAttribute("hp", hp);
-		request.setAttribute("ioc_date", ioc_date);
+		request.setAttribute("res", res);
+		
+		
+		view = request.getRequestDispatcher(
+				"views/reservation/cancelPopupPage.jsp");
 		
 		view.forward(request, response);
 		

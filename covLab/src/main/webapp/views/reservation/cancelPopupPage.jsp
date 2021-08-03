@@ -1,3 +1,4 @@
+<%@page import="reservation.model.vo.Reservation"%>
 <%@page import="reservation.model.vo.Vaccine"%>
 <%@page import="reservation.model.vo.Members"%>
 <%@page import="reservation.model.vo.Hospital"%>
@@ -7,6 +8,7 @@
 Hospital hp = (Hospital) request.getAttribute("hp");
 Members mb = (Members) request.getAttribute("mb");
 Vaccine vac = (Vaccine) request.getAttribute("vac");
+Reservation res = (Reservation) request.getAttribute("res");
 
 %><!DOCTYPE html>
 <html>
@@ -71,7 +73,7 @@ function cancel(){
 						</div>
 						<div class="form-group">
 							<label>예약 날짜 : </label> <input type="text" name="rev_date"
-								value="<%= request.getAttribute("ioc_date") %>" readonly class="inputBox" id="ioc">
+								value="<%= res.getIoc_date() %>" readonly class="inputBox" id="ioc">
 						</div>
 						<input type="hidden" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" id="serial">
 						<input type="hidden" name="reg_bus_no" value=<%= hp.getReg_bus_no() %> class="inputBox" id="reg">

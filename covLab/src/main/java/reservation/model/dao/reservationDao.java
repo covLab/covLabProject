@@ -6,11 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import reservation.model.vo.Hospital;
 import reservation.model.vo.Members;
 import reservation.model.vo.Reservation;
 import reservation.model.vo.Vaccine;
+import reservation.model.vo.Vaccine_Data;
 
 public class reservationDao {
 
@@ -150,7 +152,6 @@ public class reservationDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int check = 0;
-		
 		String query = "select count(*) from reservation where user_rn = ? and state = 'W' and sub_ok = 'N' ";
 		
 		try {
@@ -161,7 +162,7 @@ public class reservationDao {
 			
 			if(rset.next()) {
 				check = rset.getInt(1);
-				System.out.println("check : " + check);
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -366,4 +367,207 @@ public class reservationDao {
 		}
 		return hps;
 	}
+	
+	
+	
+	public ArrayList<Reservation> selectTimeRes(Connection conn, String reg_bus_no) {
+		ArrayList<Reservation> list_resTime = new ArrayList<Reservation>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select ioc_date from reservation where reg_bus_no =? AND STATE ='W'";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, reg_bus_no);			
+			
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Reservation res = new Reservation();
+
+				res.setIoc_date(rset.getTimestamp("ioc_date"));
+
+				list_resTime.add(res);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list_resTime;
+	}
+	
+	
+	public HashMap<String,Integer> countVaccineData(Connection conn) {
+		 HashMap<String,Integer> cntVac = new  HashMap<String,Integer>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select reg_bus_no,count(vaccine_data.serial_num) from vaccine_data , vaccine where vaccine_data.serial_num = vaccine.serial_num(+) group by reg_bus_no";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				cntVac.put(rset.getString("reg_bus_no"), rset.getInt(2));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cntVac;
+	}
+	
+	
+	public String selectSericalNumVaccineData(Connection conn, String reg_bus_no) {
+		Hospital hp = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from hospital where reg_bus_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, reg_bus_no);			
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				hp = new Hospital();
+				
+				hp.setReg_bus_no(reg_bus_no);
+				hp.setHp_name(rset.getString("hp_name"));
+				hp.setHp_address(rset.getString("hp_address"));
+				hp.setHp_phone(rset.getString("hp_phone"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return hp;
+	}
+	
+	
+	public ArrayList<Object> joinvacVacData(Connection conn, String reg_bus_no) {
+		ArrayList<Object> join_list = new ArrayList<Object>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select count(vaccine_data.serial_num), reg_bus_no, vaccine.vac_name "+
+						"from vaccine_data, vaccine where vaccine_data.serial_num = vaccine.serial_num(+) "+
+						"and reg_bus_no = ?"+
+						"group by (reg_bus_no,vaccine.vac_name)";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, reg_bus_no);			
+			
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				ArrayList<String> list = new ArrayList<String>();
+				
+				list.add(rset.getString(1));
+				list.add(rset.getString(2));
+				list.add(rset.getString(3));
+				
+				join_list.add(list);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return join_list;
+	}
+	
+	
+	public String selectSerialNum(Connection conn, String vac_name, String reg_bus_no) {
+		String serial_num = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select vaccine.serial_num "
+				+ "from vaccine_data, vaccine "
+				+ "where vaccine_data.serial_num = vaccine.serial_num(+) "
+				+ "and vac_name = ? "
+				+ "and reg_bus_no= ? "
+				+ "and rownum=1";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, vac_name);
+			pstmt.setString(2, reg_bus_no);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				serial_num = rset.getString(1);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return serial_num;
+	}
+	
+	
+	public Reservation selectOneResByUserRn(Connection conn, String user_rn, String sub_ok) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Reservation res = null;
+		
+		String query = "select * from reservation where user_rn = ? and sub_ok =? ";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user_rn);			
+			pstmt.setString(2, sub_ok);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next() ) {
+				res = new Reservation();
+
+				res.setSerial_num(rset.getString("serial_num"));
+				res.setSub_ok(rset.getString("sub_ok"));
+				res.setUser_rn(rset.getString("user_rn"));
+				res.setReg_bus_no(rset.getString("reg_bus_no"));
+				res.setRev_date(rset.getTimestamp("rev_date"));
+				res.setIoc_date(rset.getTimestamp("ioc_date"));
+				res.setCan_date(rset.getTimestamp("can_date"));
+				res.setState(rset.getString("state"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return res;
+	}
+	
+	
 }

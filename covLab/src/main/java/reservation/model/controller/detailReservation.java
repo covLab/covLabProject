@@ -2,6 +2,7 @@ package reservation.model.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import reservation.model.service.reservationService;
 import reservation.model.vo.Hospital;
 import reservation.model.vo.Members;
+import reservation.model.vo.Reservation;
+import reservation.model.vo.Vaccine_Data;
 
 
 /**
@@ -41,8 +44,11 @@ public class detailReservation extends HttpServlet {
 		
 		reservationService rservice = new reservationService();
 		
+		
+		System.out.println("-----------------------디테일 서블릿----------------------------");
 //		String reg_bus_no = request.getParameter("reg_bus_no");
 		String reg_bus_no = "252-12-62156";
+		
 		HttpSession session = request.getSession(true);
 		
 		/*테스트용 세션 생성*/
@@ -50,18 +56,21 @@ public class detailReservation extends HttpServlet {
 		
 		//세션 아이디 설정
 		String user_id = (String) session.getAttribute("user_id");
+		
 		Members mb = rservice.selectOneMember(user_id);
 		String user_rn = mb.getUserRn();
+		
 		System.out.println("user_rn : "+user_rn);
 		
 		
 		//병원 정보 가져오기
 		Hospital hp = rservice.selectOneHp(reg_bus_no);
 		
+		
 		// 대리예약 정보 가져오기 위한 대리유저 정보
 		ArrayList<Members> sub_list = rservice.selectOneSubUserRn(mb.getUserNo());
-		int checkRes = rservice.checkReservation(user_rn);
 		
+		int checkRes = rservice.checkReservation(user_rn);
 		int checkSubRes = 0;
 		
 		System.out.println("sub_list.size() : " + sub_list.size());
@@ -79,7 +88,38 @@ public class detailReservation extends HttpServlet {
 				}
 			}
 		}
-
+		
+		ArrayList<Reservation> list_resTime = rservice.selectTimeRes(reg_bus_no);
+		
+		System.out.println("list_resTime :" + list_resTime.size());
+		
+		for(Reservation rdate : list_resTime) {
+			System.out.println("rdate : "+rdate.getIoc_date());
+		}
+		
+//		String serialNumVac = rservice.selectSericalNumVaccineData(reg_bus_no);
+		ArrayList<Object> joinvacVacData = rservice.joinvacVacName(reg_bus_no);
+		
+		/*
+		 * for(int i =0 ; i< joinvacVacData.size() ; i++) { ArrayList<String> list = new
+		 * ArrayList<String>(); for(int j =0 ; j < ((ArrayList<String>)
+		 * joinvacVacData.get(i)).size() ; j++) {
+		 * 
+		 * System.out.println("join_list : "+ ((ArrayList<String>)
+		 * joinvacVacData.get(i)).get(j)); list.add(((ArrayList<String>)
+		 * joinvacVacData.get(i)).get(j));
+		 * 
+		 * } }
+		 */
+		
+		for(Object obj : joinvacVacData) {
+			System.out.println( "! : "+((ArrayList<String>) obj).get(1));
+			
+			for(String st :(ArrayList<String>) obj) {
+				System.out.println(st);
+			}
+		}
+		
 		System.out.println("checkRes : "+checkRes);
 		System.out.println("checkSubRes : "+checkSubRes);
 		
@@ -92,6 +132,8 @@ public class detailReservation extends HttpServlet {
 			request.setAttribute("checkRes", checkRes);
 			request.setAttribute("mb", mb);
 			request.setAttribute("checkSubRes", checkSubRes);
+			request.setAttribute("list_resTime", list_resTime);
+			request.setAttribute("joinvacVacData", joinvacVacData);
 			
 			view.forward(request, response);
 		}else {
@@ -102,7 +144,7 @@ public class detailReservation extends HttpServlet {
 			view.forward(request, response);
 		}
 		
-	
+		
 		
 	}
 
