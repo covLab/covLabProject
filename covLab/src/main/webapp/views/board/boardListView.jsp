@@ -17,6 +17,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>백신 후기</title>
+<style type="text/css">
+thead tr th {
+	text-align: center;
+}
+</style>
 
 <link href="/semi/resources/css/lib/font-awesome.min.css" rel="stylesheet">
 <link href="/semi/resources/css/lib/themify-icons.css" rel="stylesheet">
@@ -31,6 +36,14 @@
 <script type="text/javascript">
 function showWriteForm(){
 	location.href="/semi/views/board/boardWriteForm.jsp";
+}
+function moveLogin(){
+	console.log("moveLogin");
+	if(confirm("로그인후 이용 가능합니다. \n확인을 누르면 로그인 페이지로 이동합니다.") == true){
+		location.href="/semi/views/member/login.jsp";
+	}else{
+		return;
+	}
 }
 
 </script>
@@ -95,12 +108,12 @@ function showWriteForm(){
 									for (Board b : list) {
 									%>
 									<tr>
-										<td><%=b.getBoardNo()%></td>
+										<td align="center"><%=b.getBoardNo()%></td>
 										<td><a href="/semi/bdetail?bno=<%= b.getBoardNo() %>&page=<%= currentPage %>"><%=b.getBoardTitle()%></a></td>
-										<td><%=b.getBoardWriter()%></td>
-										<td><%=b.getBoardDate()%></td>
-										<td><%=b.getViewCnt()%></td>
-										<td><%=b.getRecommendCnt()%></td>
+										<td align="center"><%=b.getBoardWriter()%></td>
+										<td align="center"><%=b.getBoardDate()%></td>
+										<td align="center"><%=b.getViewCnt()%></td>
+										<td align="center"><%=b.getRecommendCnt()%></td>
 									</tr>
 									<%
 									} //list:for each
@@ -148,9 +161,9 @@ function showWriteForm(){
 							<% } %>
 							
 							<div align="right">
-							<% if(false){ //로그인 안했을 때 %>
-							<button 로그인 창으로 넘어가기>글쓰기</button>
-							<% }else{  %>
+							<% if(loginMember == null){//로그인 안했을 때 %>
+							<button onclick="moveLogin();" class="btn btn-primary wrtie">글쓰기</button>
+							<% }else{ %>
 							<button onclick="showWriteForm();" class="btn btn-primary wrtie">글쓰기</button>
 							<% } %>
 							</div>

@@ -49,8 +49,12 @@ public class CommentWriteServlet extends HttpServlet {
 		//comments.setComLevel()
 		
 		int result = cservice.insertComments(comments);
+<<<<<<< HEAD
 		
 		
+=======
+		System.out.println("comments : "+comments);
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 		if(result > 0 ) {
 			response.sendRedirect("/semi/bdetail?bno="+boardNo+"&page="+currentPage);
 		}else {

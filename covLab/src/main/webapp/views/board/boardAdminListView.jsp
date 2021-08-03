@@ -29,13 +29,14 @@
 function showWriteForm(){
    location.href="/semi/views/board/boardWriteForm.jsp";
 }
-function requestDelete(){
+
+<%-- function requestDelete(){
    if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-      <%-- location.href = "/semi/bdeleteadmin?bno=<%= board.getBoardNo() %>"; --%>
+      location.href = "/semi/bdeleteadmin?bno=<%= board.getBoardNo() %>";
    }else{   //취소
        return;
    }
-}
+} --%>
 
 $(document).ready(function(){
    $("#save").click(function(){
@@ -48,12 +49,12 @@ $(document).ready(function(){
       
       console.log("checkedArray : "+checkedArray);
       
-   /* /*    var objParams = {
+  	  var objParams = {
          "checkedList" : checkedArray
       } 
     
       console.log("objParams : "+objParams);
-      */
+      
       
       
       //ajax 호출
