@@ -32,33 +32,53 @@
 <%@ include file="../common/sidebar.jsp"%>
 <%@ include file="../common/topbar.jsp"%>
 <style type="text/css">
-/* 자동배너 부분 */
-html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
-    *, *:before, *:after { box-sizing: inherit; }
-    .clearfix:after { content: ''; display: block; clear: both; float: none; }
-    .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
-    .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
-    .link:hover, .link:focus { color: #9fd6c2; }
-    /* container - body */
-    #container { width: 1000px; margin: auto; }
-    .slide_wrap { position: relative; width: 400px; margin: auto; padding-bottom: 30px; }
-    .slide_box { width: 100%; margin: auto; overflow-x: hidden; }
-    /*밑에가 슬라이드 이미지 칸에 대한 부분*/
-    .slide_content { display: table; float: left; width: 400px; height: 400px; }
-    /*밑에가 슬라이드 내의 글자*/
-    .slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
-    .slide_content.slide01 { background: #ddbdff; }
-    .slide_content.slide02 { background: #9fd6c2; }
-    .slide_content.slide03 { background: #abe2f7; }
-    .slide_content.slide04 { background: #f08c78; }
-    /* .slide_content.slide05 { background: #fbdb65; } */
-    .slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: white; background: navy; border: 1px solid #ddd; cursor: pointer; }
-    .slide_btn_box > .slide_btn_prev { left: -100px; }
-    .slide_btn_box > .slide_btn_next { right: -100px; }
-    .slide_pagination { position: absolute; left: 50%; bottom: 0; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
-    .slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
-    .slide_pagination .dot.dot_active { background: #333; }
-    .slide_pagination .dot a { display: block; width: 100%; height: 100%; }
+	.slider {
+  width: 1000px;
+  height: 650px;
+  position: relative;
+}
+.slide {
+  width: 1000px;
+  height: 550px;
+  background-size: cover;
+  border-radius: 10px;
+  animation: fade 1.5s;
+  display: none;
+}
+.imga {
+  width: 1000px;
+  height: 550px;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 16px;
+  color: black;
+  font-size: 4rem;
+  transition: 0.6s ease;
+  border-radius: 5px;
+}
+.next {
+  right: 0;
+}
+.prev:hover,
+.next:hover {
+  background-color: white;
+  /*rgba(190, 190, 190, 0.5)*/
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
     
 
  /* 두번째 버튼 부분 */ 
@@ -122,54 +142,40 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
                             <div class="card">
                                 <div class="card-title">
                                 <!-- 1. 코로나/백신 정보 (자동 슬라이드) -->
-                                    <h4>자동 배너, 코로나 확진자 수/백신접종현황/예방접종 사전예약 날짜/QnA</h4>
+                                    <!-- <h4>1. 코로나/백신/QnA</h4> -->
 
 <!-- 자동배너 (이미지 넣고, 수정해야함) -->
-  <div id="container">
-    <div class="slide_wrap">
-      <div class="slide_box">
-        <div class="slide_list clearfix">
-          <div class="slide_content slide01">
-            <p>1</p>
-          </div>
-          <div class="slide_content slide02">
-            <p>2</p>
-          </div>
-          <div class="slide_content slide03">
-            <p>3</p>
-          </div>
-          <div class="slide_content slide04">
-            <p>4</p>
-          </div>
-        </div>
-        <!-- // .slide_list -->
+  <div class="slider" >
+      <!-- <div class="slide" style="background-image: url(../../resources/images/info_num.jpg);"></div>   -->
+      <div class="slide" style="background-image: url(../../resources/images/info_num2.jpeg);">
+      	<a href="coronaInfo.jsp"><img src="../../resources/images/info_num2.jpeg" class="imga"></a>
       </div>
-      <!-- // .slide_box -->
-      <div class="slide_btn_box">
-        <button type="button" class="slide_btn_prev">이전</button>
-        <button type="button" class="slide_btn_next">다음</button>
+      <div class="slide" style="background-image: url(../../resources/images/info_vac.gif);">
+      	<a href="vaccinInfo.jsp"><img src="../../resources/images/info_vac.gif" class="imga"></a>
       </div>
-      <!-- // .slide_btn_box -->
-      <ul class="slide_pagination"></ul>
-      <!-- // .slide_pagination -->
+      <div class="slide" style="background-image: url(../../resources/images/info_qna2.jpg);">
+      	<a href="qna.jsp"><img src="../../resources/images/info_qna2.jpg" class="imga"></a>
+      </div>
+      <a class="prev" onclick="button_click(-1)">&#10094</a>
+      <a class="next" onclick="button_click(1)">&#10095</a>
     </div>
-    <!-- // .slide_wrap -->
-  </div>
-  <!-- // .container -->
   <hr>
   
  
-  <!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
-<h4>버튼을 클릭하면 해당 페이지로 이동함</h4>
+<!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
+ <h4>**메뉴 이동**</h4> 
 <br>
 <a class="btn" href="coronaInfo.jsp">코로나 정보</a>
 <a class="btn" href="vaccinInfo.jsp">백신/예방접종 정보</a>
 <a class="btn" href="qna.jsp">QnA</a>
-<a class="btn" href="test.jsp">test</a>
+<!-- <a class="btn" href="test2.jsp">test2</a> -->
 <hr>
 
 <!-- 3. 실시간 뉴스 -->
 <h4>크롤링으로 실시간 뉴스 가져오기</h4>
+
+
+
   
                                 </div>
                                     </div>
@@ -192,107 +198,25 @@ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; 
     <!-- scripit init-->
 
 <!-- 자동배너 부분의 스크립트 -->
-<script>
-    (function () {
-      const slideList = document.querySelector('.slide_list');  // Slide parent dom
-      const slideContents = document.querySelectorAll('.slide_content');  // each slide dom
-      const slideBtnNext = document.querySelector('.slide_btn_next'); // next button
-      const slideBtnPrev = document.querySelector('.slide_btn_prev'); // prev button
-      const pagination = document.querySelector('.slide_pagination');
-      const slideLen = slideContents.length;  // slide length
-      const slideWidth = 400; // slide width
-      const slideSpeed = 300; // slide speed
-      const startNum = 0; // initial slide index (0 ~ 4)
-      
-      slideList.style.width = slideWidth * (slideLen + 2) + "px";
-      
-      // Copy first and last slide
-      let firstChild = slideList.firstElementChild;
-      let lastChild = slideList.lastElementChild;
-      let clonedFirst = firstChild.cloneNode(true);
-      let clonedLast = lastChild.cloneNode(true);
+ <script>
+let currSlide = 1;
+showSlide(currSlide);
 
-      // Add copied Slides
-      slideList.appendChild(clonedFirst);
-      slideList.insertBefore(clonedLast, slideList.firstElementChild);
-
-      // Add pagination dynamically
-      let pageChild = '';
-      for (var i = 0; i < slideLen; i++) {
-        pageChild += '<li class="dot';
-        pageChild += (i === startNum) ? ' dot_active' : '';
-        pageChild += '" data-index="' + i + '"><a href="#"></a></li>';
-      }
-      pagination.innerHTML = pageChild;
-      const pageDots = document.querySelectorAll('.dot'); // each dot from pagination
-
-      slideList.style.transform = "translate3d(-" + (slideWidth * (startNum + 1)) + "px, 0px, 0px)";
-
-      let curIndex = startNum; // current slide index (except copied slide)
-      let curSlide = slideContents[curIndex]; // current slide dom
-      curSlide.classList.add('slide_active');
-
-      /** Next Button Event */
-      slideBtnNext.addEventListener('click', function() {
-        if (curIndex <= slideLen - 1) {
-          slideList.style.transition = slideSpeed + "ms";
-          slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 2)) + "px, 0px, 0px)";
-        }
-        if (curIndex === slideLen - 1) {
-          setTimeout(function() {
-            slideList.style.transition = "0ms";
-            slideList.style.transform = "translate3d(-" + slideWidth + "px, 0px, 0px)";
-          }, slideSpeed);
-          curIndex = -1;
-        }
-        curSlide.classList.remove('slide_active');
-        pageDots[(curIndex === -1) ? slideLen - 1 : curIndex].classList.remove('dot_active');
-        curSlide = slideContents[++curIndex];
-        curSlide.classList.add('slide_active');
-        pageDots[curIndex].classList.add('dot_active');
-      });
-
-      /** Prev Button Event */
-      slideBtnPrev.addEventListener('click', function() {
-        if (curIndex >= 0) {
-          slideList.style.transition = slideSpeed + "ms";
-          slideList.style.transform = "translate3d(-" + (slideWidth * curIndex) + "px, 0px, 0px)";
-        }
-        if (curIndex === 0) {
-          setTimeout(function() {
-            slideList.style.transition = "0ms";
-            slideList.style.transform = "translate3d(-" + (slideWidth * slideLen) + "px, 0px, 0px)";
-          }, slideSpeed);
-          curIndex = slideLen;
-        }
-        curSlide.classList.remove('slide_active');
-        pageDots[(curIndex === slideLen) ? 0 : curIndex].classList.remove('dot_active');
-        curSlide = slideContents[--curIndex];
-        curSlide.classList.add('slide_active');
-        pageDots[curIndex].classList.add('dot_active');
-      });
-
-      /** Pagination Button Event */
-      let curDot;
-      Array.prototype.forEach.call(pageDots, function (dot, i) {
-        dot.addEventListener('click', function (e) {
-          e.preventDefault();
-          curDot = document.querySelector('.dot_active');
-          curDot.classList.remove('dot_active');
-          
-          curDot = this;
-          this.classList.add('dot_active');
-
-          curSlide.classList.remove('slide_active');
-          curIndex = Number(this.getAttribute('data-index'));
-          curSlide = slideContents[curIndex];
-          curSlide.classList.add('slide_active');
-          slideList.style.transition = slideSpeed + "ms";
-          slideList.style.transform = "translate3d(-" + (slideWidth * (curIndex + 1)) + "px, 0px, 0px)";
-        });
-      });
-    })();
-  </script>
+function button_click(num){
+  showSlide((currSlide += num));
+}
+function showSlide(num){
+  const slides = document.querySelectorAll(".slide");
+  if(num>slides.length){
+    currSlide =1;
+  }if(num<1){
+    currSlide = slides.length;
+  }
+  for(let i=0; i<slides.length; i++){
+    slides[i].style.display="none";
+  }slides[currSlide -1].style.display="block";
+}
+</script>
 
 
 </body>

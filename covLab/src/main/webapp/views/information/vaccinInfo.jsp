@@ -132,52 +132,23 @@ table td {
 </style>
 
 <body>
-
-    <div class="content-wrap">
-        <div class="main">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-8 p-r-0 title-margin-right">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <h1>뉴스 /  백신 정보 <span>게시판</span></h1>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Row-Select</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                </div>
-                <!-- /# row -->
-                <section id="main-content">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-title">
-                                    <h4>백신/예방접종 정보</h4>
+<h4>백신/예방접종 정보</h4>
 <hr>
 
 <a class="btn" href="#vaccineinfo02">우리나라에 들어오는 백신</a>
 <a class="btn" href="#vaccineinfo03">예방접종 주의사항</a>
+<a class="btn" href="#vaccineinfo04">예방접종 이후 이상반응</a>
+<a class="btn" href="#vaccineinfo05">이상반응 발생시 대처법</a>
 
 <hr>
 <!-- 윗부분은 목록을 만들고 a 태그로 각 번호의 목록으로 이동하게 만듬 -->
 
 <!-- 각 목록의 내용을 번호를 붙여서 작성 -->
-<h5 id="#vaccineinfo01">1. 백신 접종 현황 (1차 접종 / 백신 접종 완료)</h5>
+<!-- <h5 id="#vaccineinfo01">1. 백신 접종 현황 (1차 접종 / 백신 접종 완료)</h5>
 <p><a href="#top">맨 위로 이동</a></p>
-<hr>
+<hr> -->
 
-<h5 id="vaccineinfo02">2. 우리나라에 들어오는 백신</h5>
+<h3 id="vaccineinfo02">1. 우리나라에 들어오는 백신</h3>
 <table border="1" height="600" width="1200">
 	<tr align="center">
 		<th class="a">백신이름</th>
@@ -233,10 +204,52 @@ table td {
 </table>
  <p><a href="#top">맨 위로 이동</a></p>
 <hr>
-<h5 id="vaccineinfo03">3 예방접종 주의사항</h5>
+<h3 id="vaccineinfo03">2.  예방접종 주의사항</h3>
 <br>
 <div>
+<<<<<<< HEAD
+	<h4>* 예방접종할 때 주의 사항(사진을 누르면 영상이 재생됩니다.)</h4><br>
+=======
+<<<<<<< HEAD
+	<h4>1. 예방접종 이후 주의 사항</h4>
+	<img src="../../resources/images/vaccination01.jpg">
+	<ul>
+		<li><font size="4">접종받은 기관에서 15~30분 가량 머무르며 즉각적으로 나타날 수 있는 이상반응의 발생여부를 관찰합니다.</font></li>
+		<li><font size="4">예방접종 이후 최소 3일동안은 몸 상태를 주의 깊게 살펴야 합니다.</font></li>
+		<li><font size="4">예방접종을 한 당일에는 간단한 샤워는 가능하지만 반식욕, 사우나, 찜질방, 수영 등은 피하고 충분한 휴식을 취합니다.</font></li>
+		<li><font size="4">접종 1~2일 후에는 금주하고, 접종 부위는 청결하게 유지하며 긁지 않도록 합니다.</font></li>
+		<li><font size="4">만약 예방접종 후 고열, 두드러기, 호흡곤란, 입술 또는 입안의 부종 등 심한 알레르기 반응 등 평소와 다른 증상이
+		 있는 경우에는 즉시 접종기관이나 가까운 외료기관을 방문하여 진료를 받아야 합니다.</font></li>
+	</ul>
+</div>
+<hr width="40%" align="left">
+<div>
+	<h4>2. 예방접종 이후 이상반응</h4>
+	<img src="../../resources/images/vaccination02.png">
+	<ul>	
+		<li><font size="4">발열증상		
+			<p>접종 후 39℃미만의 발열증상은 정상적인 면역반응일 가능성이 높습니다.<br>
+			단, 접종 후 39℃ 이상의 고열이 나거나, 2일 이상 증상이 지속될 경우에는 의사의 진료가 필요합니다.<br>
+			1단계 : 38.4℃ 이하 / 2단계 : 38.5℃~38.9℃ / 3단계 : 38.9℃~40℃ / 4단계 : 40.1 이상</p></font></li>
+		<li><font size="4">접종부위 통증
+			<p>접종 당일에서 다음날까지는 접종부위가 불편하고 뻐근한 느낌이 들며, 예방접종 이후 나타날 수 있는 염증반응 입니다.<br>
+			1단계 : 통증이 나타나지만 약을 복용할 정도는 아님 <br>
+			2단계 : 1~2일 약물을 먹어야 팔을 움직이는데 지장이 없음<br>
+			3단계 : 3일 이상 통증이 지속되거나 약을 먹어도 통증 조절이 안도어 팔을 움직이기 어려운 경우<br>
+			(3단계는 의사의 진료가 필요합니다.)</p></font></li>
+		<li><font size="4">접종 부위 붓기 또는 발적 증상
+			<p>접종 부위에 피부색으 변화 없이 부은 느낌이 들거나 실제 부었더라도 활동에 지장이 없는 경우 수일 내 자연적으로
+			호전되는 접종 반응 중 하나입니다. <br>
+			1단계 : 직경 5cm 이하 <br>
+			2단계 : 직경 5.1cm~10cm, 움직이기 불편한 경우<br>
+			3단계 : 직경 10cm 이상으로 부었거나 활동이 어려운 경우<br>
+			4단계 : 접종 부위 피부색이 검게 또는 보라색 등 어둡게 변한 경우<br>
+			(4단계는 의사의 진료가 필요합니다.<br>
+			단계와 상관없이 이러한 증상이 3일 이상 지속되거나 접종부위의 피부색이 검게 또는 보라색으로 어둡게 변한다면
+			의사의 진료가 필요합니다.</p></font></li>
+=======
 	<h4>* 예방접종할 때 주의 사항</h4><br>
+>>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
 	<a href="https://www.youtube.com/watch?v=APOt56usrt4"><img src="../../resources/images/info_video.jpg"></a>
 	<br>
 	<!-- 아코디언 메뉴 -->
@@ -295,7 +308,7 @@ table td {
 
 <hr width="40% "align="left">
 <div>
-	<h4>* 예방접종 이후 이상반응</h4><br>
+	<h3 id="vaccineinfo04">3. 예방접종 이후 이상반응</h3><br>
 	<img src="../../resources/images/vaccination02.png" ><br>
 	<br>
 <table border="1" width="1300" height="600">
@@ -450,19 +463,25 @@ table td {
 				<td></td>
 			</tr>	
 		</table>
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 </div>
-<br>
-<br>
-<p><a href="#top">맨 위로 이동</a></p>
-
-
 <div>
 <hr width="40%" align="left">
+<<<<<<< HEAD
+	<h3 id="vaccineinfo05">4. 이상반응 나타날 시 대처법</h3><br>
+=======
+<<<<<<< HEAD
+	<h4>3. 이상반응 나타날 시 대처법</h4>
+=======
 	<h4>* 이상반응 나타날 시 대처법</h4><br>
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
+>>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
 	<img src="../../resources/images/vaccination06.png">
-	<br>
-	<br>
 	<ul>
+<<<<<<< HEAD
+		<li><font size="4"><p>이상반응이 일상생활을 방해하지 않는 정도일 경우에는 의료기관을 방문하여 진료를 받을 수 있습니다.<br>
+		하지만 아나필락시스 등의 심한 알레르기 반응이 나타날 경우에는 즉시 119로 연락하여 가까운 응급실로 내원해야 합니다.</p></font></li>
+=======
 		<li><font size="4">
 			<p> ● 이상반응이 의심되는 경우 예방접종 도우미 누리집(https://nip.kdca.go.kr)을 통해 접종 받은 자 또는 보호자가 이상반응을
 			체크하고 대응방법을 안내 받을 수 있습니다. <br>
@@ -496,33 +515,11 @@ table td {
 			</p></font>
 			</table>
 		</li>
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 	</ul>
 </div>
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
-  
-                                </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /# card -->
-                        </div>
-                        <!-- /# column -->
-                    </div>
-                    <!-- /# row -->
-                </section>
-            </div>
-            
-<!-- -------------------------------------------------------------------------------- -->
-
-
-
-
-
-
-
-
-
                 <!-- /# row -->
                 <section id="main-content">
                     <div class="row">

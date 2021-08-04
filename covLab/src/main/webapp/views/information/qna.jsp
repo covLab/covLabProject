@@ -50,6 +50,8 @@
  .btn:active {
   transform:translateY(5px);
  }
+<<<<<<< HEAD
+=======
  
  .btn:hover {
  	background:lightgray;
@@ -202,6 +204,7 @@ dl.faq button[aria-expanded="true"]::before {
   padding-right: 0.35em;
 }
  
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 </style>
 
 <body>
@@ -239,6 +242,16 @@ dl.faq button[aria-expanded="true"]::before {
                                     <h4>QnA</h4>
 <hr>
 
+<<<<<<< HEAD
+<a class="btn" href="#qna01">코로나19 백신 개요</a>
+<a class="btn" href="#qna02">코로나19 예방접종 사업</a>
+<a class="btn" href="#qna03">백신 관련</a>
+<a class="btn" href="#qna04">백신의 안전성과 이상반응</a>
+<a class="btn" href="#qna05">코로나19 예방접종 관련 피해보상</a>
+<a class="btn" href="#qna06">인과성 불충분한 중증 환자 의료비 지원사업</a>
+<a class="btn" href="#qna07">75세 이상 어르신 및 노인시설 예방접종</a>
+<a class="btn" href="#qna08">시스템및 예방접종 기록</a>
+=======
 <table border="1"  class="t">
 	<tr>
 		<td class="c1" ><a href="#qna01">코로나란?</a></td>
@@ -259,22 +272,23 @@ dl.faq button[aria-expanded="true"]::before {
 
 <a class="btn" href="#qna01">코로나란?</a>
 <a class="btn" href="#qna02">코로나의 증상/검사</a>
-
 <a class="btn" href="#qna03">치료 및 예방</a>
+<br>
 <a class="btn" href="#qna04">접촉자 및 확진환자</a>
 <a class="btn" href="#qna05">격리 및 격리해제</a>
-
 <a class="btn" href="#qna06">백신 관련</a>
+<br>
 <a class="btn" href="#qna07">예방접종 이상반응</a>
-
 <a class="btn" href="#qna08">코로나19 예방접종 관련 피해보상</a>
 <a class="btn" href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a>
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 <hr>
 <!-- 윗부분은 목록을 만들고 a 태그로 각 번호의 목록으로 이동하게 만듬 -->
 
 <!-- 각 목록의 내용을 번호를 붙여서 작성 -->
+<<<<<<< HEAD
 <!-- qna01 버튼 내용 ---------------------------------------------------------- -->
-<h5 id="qna01">1. 코로나란?</h5>
+<h3 id="qna01">1. 코로나란?</h3>
 <dl class="faq">
    <dt>
     <button aria-expanded="false" aria-controls="faq2_desc">
@@ -365,11 +379,21 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd> 
  </dl>
+=======
+<h5 id="qna01">1. 코로나19 백신 개요</h5>
+<p>목록 버튼 누르면 작은 목록 나오게 하고 싶은데 어떻게 해야할까?</p>
+<p>목록 버튼 누르면 작은 목록 나오게 하고 싶은데 어떻게 해야할까?</p>
+>>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+<<<<<<< HEAD
+<h5 id="qna02">2. 코로나19 예방접종 사업</h5>
+<p>예방접종 하면 좋겠죠.. 건강할거에요.. 그럴거에요...</p>
+<p>예방접종 하면 좋겠죠.. 건강할거에요.. 그럴거에요...</p>
+=======
 
 <!-- qna02 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna02">2.코로나의 증상/검사</h5>
+<h3 id="qna02">2.코로나의 증상/검사</h3>
  <dl class="faq">
    <dt>
     <button aria-expanded="false" aria-controls="faq9_desc">
@@ -528,7 +552,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna03 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna03">3. 치료 및 예방</h5>
+<h3 id="qna03">3. 치료 및 예방</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq25_desc">
@@ -573,7 +597,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna04 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna04">4. 접촉자 및 확진환자</h5>
+<h3 id="qna04">4. 접촉자 및 확진환자</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq28_desc">
@@ -671,11 +695,13 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd>
 </dl> 
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+<<<<<<< HEAD
 
 <!-- qna05 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna05">5. 격리 및 격리해제</h5>
+<h3 id="qna05">5. 격리 및 격리해제</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq35_desc">
@@ -774,7 +800,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna06 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna06">6. 백신 관련</h5>
+<h3 id="qna06">6. 백신 관련</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq41_desc">
@@ -864,11 +890,43 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd>  
 </dl> 
+=======
+<h5 id="qna03">3. 백신 관련</h5>
+<p>백신이 점점 업그레이드 좀 됐으면 좋겠어요.</p>
+<p>백신이 점점 업그레이드 좀 됐으면 좋겠어요.</p>
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+<h5 id="qna04">4. 백신의 안전성과 이상반응</h5>
+<p>백신은 안전하지 않은것 같지만.. 괜찮아지길 바래요.. 이상있음 병원가야 합니다...</p>
+<p>백신은 안전하지 않은것 같지만.. 괜찮아지길 바래요.. 이상있음 병원가야 합니다...</p>
+<p>백신은 안전하지 않은것 같지만.. 괜찮아지길 바래요.. 이상있음 병원가야 합니다...</p>
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+<<<<<<< HEAD
+<h5 id="qna05">5. 코로나19 예방접종 관련 피해보상</h5>
+<p>코로나로 피해를 받으셨으면 보상을 받으세요. 보상해줍니다.</p>
+<p>코로나로 피해를 받으셨으면 보상을 받으세요. 보상해줍니다.</p>
+<p>코로나로 피해를 받으셨으면 보상을 받으세요. 보상해줍니다.</p>
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+<h5 id="qna06">6. 인과성 불충분한 중증 환자 의료비 지원사업</h5>
+<p>인과성 자료가 부족해도 보상 받을 수 있습니다.</p>
+<p>인과성 자료가 부족해도 보상 받을 수 있습니다.</p>
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+<h5 id="qna07">7. 75세 이상 어르신 및 노인시설 예방접종</h5>
+<p>어르신들께서 건강하시길 바랍니다.</p>
+<p>어르신들께서 건강하시길 바랍니다.</p>
+>>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+<h5 id="qna08">8. 시스템및 예방접종 기록</h5>
+<p>예방접종 하면 기록이 생깁니다.</p>
+<p>예방접종 하면 기록이 생깁니다.</p>
+=======
 
 <!-- qna07 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna07">7. 예방접종 이상반응</h5>
+<h3 id="qna07">7. 예방접종 이상반응</h3>
 <dl class="faq">
   
   <dt>
@@ -919,7 +977,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna08 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna08">8. 코로나 19 예방접종 관련 피해보상</h5>
+<h3 id="qna08">8. 코로나 19 예방접종 관련 피해보상</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq53_desc">
@@ -974,7 +1032,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna09 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna09">9. 의료비 지원사업</h5>
+<h3 id="qna09">9. 의료비 지원사업</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq57_desc">
@@ -1027,6 +1085,7 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd>  
 </dl> 
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 
@@ -1082,127 +1141,6 @@ dl.faq button[aria-expanded="true"]::before {
     <script src="/semi/resources/js/lib/bootstrap.min.js"></script><script src="assets/js/scripts.js"></script>
     <!-- scripit init-->
 
-<script>
-/*
-*   This content is licensed according to the W3C Software License at
-*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
-*
-*   File:   ButtonExpand.js
-*
-*   Desc:   Checkbox widget that implements ARIA Authoring Practices
-*           for a menu of links
-*/
-
-/*
-*   @constructor ButtonExpand
-*
-*
-*/
-var ButtonExpand = function (domNode) {
-
-  this.domNode = domNode;
-
-  this.keyCode = Object.freeze({
-    'RETURN': 13
-  });
-};
-
-ButtonExpand.prototype.init = function () {
-
-  this.controlledNode = false;
-
-  var id = this.domNode.getAttribute('aria-controls');
-
-  if (id) {
-    this.controlledNode = document.getElementById(id);
-  }
-
-  this.domNode.setAttribute('aria-expanded', 'false');
-  this.hideContent();
-
-  this.domNode.addEventListener('keydown',    this.handleKeydown.bind(this));
-  this.domNode.addEventListener('click',      this.handleClick.bind(this));
-  this.domNode.addEventListener('focus',      this.handleFocus.bind(this));
-  this.domNode.addEventListener('blur',       this.handleBlur.bind(this));
-
-};
-
-ButtonExpand.prototype.showContent = function () {
-
-  if (this.controlledNode) {
-    this.controlledNode.style.display = 'block';
-  }
-
-};
-
-ButtonExpand.prototype.hideContent = function () {
-
-  if (this.controlledNode) {
-    this.controlledNode.style.display = 'none';
-  }
-
-};
-
-ButtonExpand.prototype.toggleExpand = function () {
-
-  if (this.domNode.getAttribute('aria-expanded') === 'true') {
-    this.domNode.setAttribute('aria-expanded', 'false');
-    this.hideContent();
-  }
-  else {
-    this.domNode.setAttribute('aria-expanded', 'true');
-    this.showContent();
-  }
-
-};
-
-/* EVENT HANDLERS */
-
-ButtonExpand.prototype.handleKeydown = function (event) {
-
-  console.log('[keydown]');
-
-  switch (event.keyCode) {
-
-    case this.keyCode.RETURN:
-
-      this.toggleExpand();
-
-      event.stopPropagation();
-      event.preventDefault();
-      break;
-
-    default:
-      break;
-  }
-
-};
-
-ButtonExpand.prototype.handleClick = function (event) {
-  this.toggleExpand();
-};
-
-ButtonExpand.prototype.handleFocus = function (event) {
-  this.domNode.classList.add('focus');
-};
-
-ButtonExpand.prototype.handleBlur = function (event) {
-  this.domNode.classList.remove('focus');
-};
-
-/* Initialize Hide/Show Buttons */
-
-window.addEventListener('load', function (event) {
-
-  var buttons =  document.querySelectorAll('button[aria-expanded][aria-controls]');
-
-  for (var i = 0; i < buttons.length; i++) {
-    var be = new ButtonExpand(buttons[i]);
-    be.init();
-  }
-
-}, false);
-</script>
 
 
 </body>
