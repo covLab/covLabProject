@@ -1,7 +1,6 @@
-package member.controller;
+package reservation.model.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,19 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.servcie.MemberService;
-
 /**
- * Servlet implementation class FindIdEmailServlet
+ * Servlet implementation class errorServlet
  */
-@WebServlet("/memailcheck")
-public class EmailCheck extends HttpServlet {
+@WebServlet("/error")
+public class errorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EmailCheck() {
+    public errorServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +28,12 @@ public class EmailCheck extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("utf-8");
+		RequestDispatcher view = null;
 		
-		String useremail = request.getParameter("useremail");
-		
-		
-		int idCount = new MemberService().searchEmail(useremail);
-		System.out.println(useremail);
-		String returnValue = null;  
-		if(idCount != 0) {
-			returnValue = "ok";
-		}else {
-			returnValue = "no";
-		}
-		
-		
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.append(returnValue);
-		out.flush();
-		out.close();
+			view = request.getRequestDispatcher(
+					"views/reservation/error.jsp");
+			request.setAttribute("message",  "시간을 선택해주세요.");
+			view.forward(request, response);
 	}
 
 	/**

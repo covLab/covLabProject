@@ -31,8 +31,8 @@
     <link href="/semi/resources/css/lib/helper.css" rel="stylesheet">
     <link href="/semi/resources/css/style.css" rel="stylesheet">
 
-	<!-- boardAdmin -->
-	<link href="/semi/resources/css/lib/font-awesome.min.css" rel="stylesheet">
+   <!-- boardAdmin -->
+   <link href="/semi/resources/css/lib/font-awesome.min.css" rel="stylesheet">
     <link href="/semi/resources/css/lib/themify-icons.css" rel="stylesheet">
     <link href="/semi/resources/css/lib/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
     <link href="/semi/resources/css/lib/jsgrid/jsgrid.min.css" type="text/css" rel="stylesheet" />
@@ -41,13 +41,17 @@
     <link href="/semi/resources/css/lib/helper.css" rel="stylesheet">
     <link href="/semi/resources/css/style.css" rel="stylesheet">
 
-	<!-- boardMain
+   <!-- boardMain
     <link href="/semi/resources/css/lib/font-awesome.min.css" rel="stylesheet">
     <link href="/semi/resources/css/lib/themify-icons.css" rel="stylesheet">
     <link href="/semi/resources/css/lib/menubar/sidebar.css" rel="stylesheet">
     <link href="/semi/resources/css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="/semi/resources/css/lib/helper.css" rel="stylesheet">
     <link href="/semi/resources/css/style.css" rel="stylesheet"> -->
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/semi/resources/css/bootstrap-datepicker3.standalone.css">
+<link rel="stylesheet" href="/semi/resources/css/jquery.timepicker.css">
 
 </head>
 <body>

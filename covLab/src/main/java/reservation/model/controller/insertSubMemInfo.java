@@ -43,8 +43,8 @@ public class insertSubMemInfo extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		String user_id = (String) session.getAttribute("user_id");
 		
-		String serial_num = request.getParameter("serial_num");
-		System.out.println("serial_num : "+serial_num);
+		String vac_name = request.getParameter("vac_name");
+		System.out.println("vac_name : "+vac_name);
 		
 		//테스트용 reg_bus_no 받아오기
 		String reg_bus_no = request.getParameter("reg_bus_no");
@@ -60,9 +60,9 @@ public class insertSubMemInfo extends HttpServlet {
 //		String date = request.getParameter("rev_date"); 
 //		Timestamp rev_date =Timestamp.valueOf(date);
 		
+		String serial_num = rservice.selectSerialNum(vac_name, reg_bus_no);
 		
 		//mb 객체에 유저 정보 담기
-		System.out.println("user_id2 : "+user_id);
 		Members mb = rservice.selectOneMember(user_id);
 		
 		//vac 객체에 백신 정보 담기

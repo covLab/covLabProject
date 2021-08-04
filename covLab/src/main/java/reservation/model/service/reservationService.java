@@ -5,6 +5,7 @@ import static common.JDBCTemp.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import reservation.model.dao.reservationDao;
 import reservation.model.vo.Hospital;
@@ -102,4 +103,51 @@ public class reservationService {
 		close(conn);
 		return sub_list;
 	}
+	
+	public ArrayList<Reservation> selectTimeRes(String reg_bus_no) {
+		Connection conn = getConnection();
+		ArrayList<Reservation> list_resTime = rdao.selectTimeRes(conn, reg_bus_no);
+		close(conn);
+		return list_resTime;
+	}
+	
+	
+	public HashMap<String,Integer> countVaccineData() {
+		Connection conn = getConnection();
+		HashMap<String,Integer> cntVac = rdao.countVaccineData(conn);
+		close(conn);
+		return cntVac;
+	}
+	
+	public String selectSericalNumVaccineData(String reg_bus_no) {
+		Connection conn = getConnection();
+		String serialNumVac = rdao.selectSericalNumVaccineData(conn, reg_bus_no);
+		close(conn);
+		return serialNumVac;
+	}
+	
+	
+	public ArrayList<Object> joinvacVacName(String reg_bus_no) {
+		Connection conn = getConnection();
+		ArrayList<Object> join_list = rdao.joinvacVacData(conn, reg_bus_no);
+		close(conn);
+		return join_list;
+	}
+	
+	
+	public String selectSerialNum(String vac_name, String reg_bus_no) {
+		Connection conn = getConnection();
+		String serial_num = rdao.selectSerialNum(conn, vac_name, reg_bus_no);
+		close(conn);
+		return serial_num;
+	}
+	
+	public Reservation selectOneResByUserRn(String user_rn, String sub_ok) {
+		Connection conn = getConnection();
+		Reservation resByUserRn= rdao.selectOneResByUserRn(conn, user_rn, sub_ok);
+		close(conn);
+		return resByUserRn;
+	}
+	
+	
 }

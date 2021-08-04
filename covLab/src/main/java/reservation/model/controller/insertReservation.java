@@ -2,6 +2,7 @@ package reservation.model.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,7 +35,7 @@ public class insertReservation extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		System.out.println("인서트");
+		System.out.println("----------------------------------인서트-------------------------------");
 
 		request.setCharacterEncoding("utf-8");
 		
@@ -44,11 +45,12 @@ public class insertReservation extends HttpServlet {
 //		HttpSession session = request.getSession(true);
 //		String user_id = (String) session.getAttribute("user_id");
 		
-		//테스트용 날짜 받아오기
-		String date = request.getParameter("ioc_date");
+		//날짜 받아오고 timestamp로 담기 위한 변환을 위해 가공
+		System.out.println("ioc_date :"+request.getParameter("ioc_date"));
+		String date = request.getParameter("ioc_date")+":00";
+		System.out.println("date : "+ date);
 		Timestamp ioc_date = Timestamp.valueOf(date);
-		System.out.println("ioc_date:"+ioc_date);
-		
+		System.out.println("timestamp : " + ioc_date);
 //		
 //		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 //		String d2 = sdf.format(date);
@@ -60,6 +62,7 @@ public class insertReservation extends HttpServlet {
 			// TODO Auto-generated catch block
 //		System.out.println("user_id"+user_id);
 //		Members mb = rservice.selectOneMember(user_id);
+		
 		
 		res.setSerial_num(request.getParameter("serial_num"));
 		res.setReg_bus_no(request.getParameter("reg_bus_no"));

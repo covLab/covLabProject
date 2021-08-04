@@ -49,10 +49,6 @@ public class termsPopup extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		String user_id = (String) session.getAttribute("user_id");
 		
-		// 테스트용 시리얼 넘버 받아오기
-		String serial_num = request.getParameter("serial_num");
-		System.out.println("serial_num : "+serial_num);
-		
 		//테스트용 reg_bus_no 받아오기
 		String reg_bus_no = request.getParameter("reg_bus_no");
 		System.out.println("reg_bus_no : "+reg_bus_no);
@@ -61,9 +57,17 @@ public class termsPopup extends HttpServlet {
 		//테스트용 날짜 데이터 받아오기
 		String ioc_date = request.getParameter("ioc_date");
 		
+		//선택한 백신 종류 가져오기
+		String vac_name = request.getParameter("vac_name");
+		System.out.println("vac_name : " + vac_name);
+		
 //		mb = rservice.selectOneMember(user_id);
 //		Members sub_mb = rservice.selectOneSubMember(sub_user_no);
 			
+		//백신 종류에 따른 serialnum 가져오기
+		String serial_num  = rservice.selectSerialNum(vac_name, reg_bus_no);
+		
+		System.out.println("serial_num: " +serial_num);
 		
 		//vac 객체에 백신 정보 담기
 		Vaccine vac = rservice.selectOneVac(serial_num);
@@ -72,24 +76,20 @@ public class termsPopup extends HttpServlet {
 		Hospital hp = rservice.selectOneHp(reg_bus_no);
 		
 		//mb 정보 객체 생성
-		Members mb = new Members();
+		Members mb = rservice.selectOneMember(user_id);
 		
 		//버튼 타입
 		String resType = request.getParameter("resType");
 		System.out.println("resType : "+resType);
-		//user_no 받아오기
-		int user_no = Integer.parseInt(request.getParameter("user_no").toString());
 		
-		RequestDispatcher view = null;
 		
-		if(resType.equals("self")) {
-			mb = rservice.selectOneMember(user_id);
-					
-		}else {
+		if (resType.equals("sub")){
+				
 				String user_name = request.getParameter("sub_user_name");
 				String user_rn = request.getParameter("sub_user_rn");	
 				String user_address = request.getParameter("sub_user_address");
 				String user_phone = request.getParameter("sub_user_phone");
+				
 				
 				mb.setUserName(user_name);
 				mb.setUserRn(user_rn);
@@ -103,17 +103,18 @@ public class termsPopup extends HttpServlet {
 				System.out.println("user_phone : "+mb.getUserPhone());
 				
 				//sub 유저 데이터 삽입
-				int result = rservice.insertSubMember(user_no, mb);
+				int result = rservice.insertSubMember(mb.getUserNo(), mb);
 				System.out.println("result : "+result);
 				
 				if(result > 0) {
-					request.setAttribute("user_no", user_no);
+					request.setAttribute("user_no", mb.getUserNo());
 					
 					
 				}
 			
 		}
 		
+		RequestDispatcher view = null;
 		
 		request.setAttribute("hp", hp);
 		request.setAttribute("vac", vac);

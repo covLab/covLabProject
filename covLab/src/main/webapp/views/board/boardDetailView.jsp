@@ -14,85 +14,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>백신 후기</title>
-
 <script type="text/javascript">
-//httpRequest 객체 생성
-function getXMLHttpRequest(){
-	var httpRequest = null;
-
-	if(window.ActiveXObject){
-		try{
-			httpRequest = new ActiveXObject("Msxml2.XMLHTTP");	
-		} catch(e) {
-			try{
-				httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-			} catch (e2) { httpRequest = null; }
-		}
-	}
-	else if(window.XMLHttpRequest){
-		httpRequest = new window.XMLHttpRequest();
-	}
-	return httpRequest;	
-}
-function checkFunc(){
-	if(httpRequest.readyState == 4){
-		// 결과값을 가져온다.
-		var resultText = httpRequest.responseText;
-		if(resultText == 1){ 
-			document.location.reload(); // 상세보기 창 새로고침
-		}
-	}
-}
-
-//게시글 수정
 function moveUpdateView() {
 	location.href = "/semi/bupview?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>";
 }
-
-// 게시글 삭제
-function requestBoardDelete(){
-   if (confirm("게시글을 정말 삭제하시겠습니까??") == true){    //확인
-      location.href = "/semi/bdelete?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>";
-   }else{   //취소
-       return;
-   }
-}
-
-//댓글---------------------
-<%-- //댓글 수정
-function moveCommentsUpdateView(){
-	location.href = "/semi/cupview?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>&cno=<%= c.getComNo()%>&clevel=<%=c.getComLevel()%>";
-} --%>
-//댓글 수정
-function moveCommentsUpdate(comNo, boardRef, page){
-	var param = "comNo="+comNo+"&boardRef="+boardRef+"&page="+page;
-	console.log("cNo:"+comNo);
-	console.log("boardref:"+boardRef);
-	console.log("page:"+page);
-	
-	location.href = "/semi/cupview?"+param;
-
-	
-	/* httpRequest = getXMLHttpRequest();
-	httpRequest.onreadystatechange = checkFunc;
-	httpRequest.open("POST", "cupview", true);
-	httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-	httpRequest.send(param);
- */
-}
-
-//댓글 삭제
-function requestCommentsDelete(comNo, boardRef, page){
-	if (confirm("댓글을 정말 삭제하시겠습니까??") == true){
-		console.log("cNo : "+comNo);
-		console.log("boardRef : "+boardRef);
-		console.log("page: "+page);
-		
-		deleteComments(comNo, boardRef, page);
-	}else{
-		return;
+function requestDelete(){
+	   if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+	      location.href = "/semi/bdelete?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>";
+	   }else{   //취소
+	       return;
+	   }
 	}
+function requestReply(){
+	location.href = "/semi/views/board/commentsWriteForm.jsp?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>"
 }
+<<<<<<< HEAD
+=======
 function deleteComments(comNo, boardRef, page){
 	var param = "comNo="+comNo+"&boardRef="+boardRef+"&page="+page;
 	console.log("cNo:"+comNo);
@@ -128,11 +65,8 @@ $(document).ready(function(){
 		$(this).hide();
 	}); 
 }); */
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 
-//답글 작성
-<%-- function requestReply(){
-	location.href = "/semi/views/board/commentsWriteForm.jsp?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>"
-} --%>
 </script>
 
 <%@ include file="../common/stylesheet.jsp"%>
@@ -158,7 +92,7 @@ $(document).ready(function(){
 
 						<table align="center">
 							<tr>
-								<th width="100">제 목</th>
+								<th>제 목</th>
 								<td><%= board.getBoardTitle() %></td>
 							</tr>
 							<tr>
@@ -183,6 +117,21 @@ $(document).ready(function(){
 									<% if(loginMember != null){ 
 											if(loginMember.getUserName().equals(board.getBoardWriter())) { //본인글일때%>
 											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
+<<<<<<< HEAD
+											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
+									<% }else if(loginMember.getUserGrade().equals("U")){ %>
+											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;	
+											<button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp;
+									<% } else { //로그인했는데 본인글이 아닐때 %>
+										
+											<button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp; 
+									<% } %> --%>
+									
+									<%-- 테스트용 버튼 --%>
+											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
+											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
+									
+=======
 											<button onclick="requestBoardDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
 										<% } else if(loginMember.getUserGrade().equals("A")){ //관리자%>
 												<button onclick="requestBoardDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;	
@@ -195,6 +144,7 @@ $(document).ready(function(){
 											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
 											<button onclick="requestBoardDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
 									 --%>
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 								</th>
 							</tr>
 						</table>
@@ -204,13 +154,20 @@ $(document).ready(function(){
 						<%-- 댓글이 있을 때 --%>
 						<% if (clist != null){ %>
 						<% for(Comments c : clist){ %>
+<<<<<<< HEAD
+						<hr>
+=======
 						
 						<% if(c.getComLevel() == c.getComNo()){ %>
 							<hr>		
 						<% } else { %><% } %>
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 						<table align="center">
-
 							<tr>
+<<<<<<< HEAD
+								<th>아이디</th>
+								<td><%= c.getComWriter() %></td>
+=======
 								<td width="50px" rowspan="3" valign="top">
 								<% if(c.getComLevel() != c.getComNo()){ //댓글의 답글 %>
 									&nbsp; &nbsp; └ &nbsp; &nbsp;
@@ -239,6 +196,7 @@ $(document).ready(function(){
 									<br>
 									
 								</td>
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 							</tr>
 							<tr>
 								<th>작성일시</th>
@@ -246,6 +204,14 @@ $(document).ready(function(){
 							</tr>
 							<tr>
 								<th>댓글 내용</th>
+<<<<<<< HEAD
+								<td><%= c.getComContent() %></td>
+							</tr>	
+						</table>
+						
+						<% } %>
+						<hr>
+=======
 								<td align="center"><pre><%= c.getComContent() %></pre></td>
 							</tr>	
 						</table>
@@ -315,9 +281,8 @@ $(document).ready(function(){
 									onclick="javascript:location.href='/semi/blist?page=<%= currentPage %>'; return false;"></div>
 						<% }else{ %>
 						<!-- 댓글달기 폼 -->
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 						<form action="/semi/cwrite" method="post">
-						<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
-						<input type="hidden" name="page" value="<%= currentPage %>">
 						<table align="center">
 	
 								<tr>
@@ -325,12 +290,20 @@ $(document).ready(function(){
 								</tr>
 								<tr>
 									<td>작성자 :</td>
+<<<<<<< HEAD
+									<td><input type="text" id="writer" size="50"></td>
+								</tr>
+								<tr>
+									<td>내 용 : </td>
+									<td><textarea rows="5" cols="50" id="content"></textarea></td>
+=======
 									<td align="left"><input type="text" name="writer" readonly value="<%= loginMember.getUserId() %>"></td>
 									<td></td>
 								</tr>
 								<tr>
 									<td>내 용 : </td>
 									<td><textarea rows="5" cols="50" name="content" placeholder="내용을 입력하세요" wrap="hard"></textarea></td>
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 								</tr>
 								
 								<tr align="center">

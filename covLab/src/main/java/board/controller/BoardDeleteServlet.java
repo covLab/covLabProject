@@ -34,6 +34,8 @@ public class BoardDeleteServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		int currentPage = Integer.parseInt(request.getParameter("page"));
+		//int boardLevel = Integer.parseInt(request.getParameter("level"));
+
 		
 		if (new BoardService().deleteBoard(boardNo) > 0) {
 
