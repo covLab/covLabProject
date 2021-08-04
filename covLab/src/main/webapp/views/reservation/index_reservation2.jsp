@@ -47,9 +47,7 @@
 </style>
 
 <script language="javascript">
-	
-
-	
+		
 	// 위치확인 
 	var latitude=0;
 	var longitude=0;
@@ -97,17 +95,48 @@
 	%>
 	/* 병원 정보 + 백신 정보 + 거리 정보 담긴 배열 */
 	var sortedLocations = [];
+
+	/*거리순 정렬 함수*/
+	function sortByDist(arr) {
+		sortedArr = [];
+		sortedArr = arr.sort(function(a, b) {
+			if (a.distance > b.distance) {
+				return 1;
+			}
+			if (a.distance < b.distance) {
+				return -1;
+			}
+			return 0;
+		});
+		return sortedArr;
+	}
+	/*수량순 정렬 함수*/
+	function sortByAmnt(arr) {
+		sortedArr = [];
+		sortedArr = arr.sort(function(a, b) {
+			if (a.remain < b.remain) {
+				return 1;
+			}
+			if (a.remain > b.remain) {
+				return -1;
+			}
+			return 0;
+		});
+		return sortedArr;
+	}
 	/* 라디오 버튼 값에 따라 정렬하는 함수*/
 	function hpOrder(list) {
 		/* var order_opt = document.getElementByName('list_order');
 		document.getElementByName('list_order').innerText = event.target.value; */
-		var order_opt = $(":radio[name='list_order']:checked").val();
+		var order_opt = 'dist';
+		order_opt = $(":radio[name='list_order']:checked").val();
 		if (order_opt == 'amnt') {
-			sortedLocations=sortByAmnt(list);
+			sortedLocations = sortByAmnt(list);
 		}
 		if (order_opt == 'dist') {
-			sortedLocations=sortByDist(list);
+			sortedLocations = sortByDist(list);
 		}
+		console.log(sortedLocations);
 	}
 	// 위치콜백 
 	function handleLocation(position) {
@@ -137,6 +166,7 @@
 		});
 		var infowindow = new google.maps.InfoWindow();
 		var marker, i;
+
 		for (i = 0; i < hospitals.length; i++) {
 			marker = new google.maps.Marker({
 				position : new google.maps.LatLng(hospitals[i].hp_latitude,
@@ -173,36 +203,6 @@
 		hospitals[i].distance = distance;
 	}
 
-	function sortByDist(arr) {
-		sortedArr = [];
-		sortedArr = arr.sort(function(a, b) {
-			if (a.distance > b.distance) {
-				return 1;
-			}
-			if (a.distance < b.distance) {
-				return -1;
-			}
-			return 0;
-		});
-		return sortedArr;
-	}
-
-	function sortByAmnt(arr) {
-		sortedArr = [];
-		sortedArr = arr.sort(function(a, b) {
-			if (a.remain < b.remain) {
-				return 1;
-			}
-			if (a.remain > b.remain) {
-				return -1;
-			}
-			return 0;
-		});
-		return sortedArr;
-	}
-
-	
-	console.log(chosen_hp);
 	/* 			google.maps.event.addListener(marker, 'click',
 	 (function(marker, i) {
 	 return function() {
@@ -244,7 +244,8 @@
 	<div class="content-wrap">
 		<div class="main">
 			<div class="container-fluid">
-				<div class="row">
+
+				<!-- <div class="row">
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
 							<div class="page-title">
@@ -255,7 +256,7 @@
 						</div>
 					</div>
 
-					<!-- /# column -->
+					/# column
 					<div class="col-lg-4 p-l-0 title-margin-left">
 						<div class="page-header">
 							<div class="page-title">
@@ -266,137 +267,174 @@
 							</div>
 						</div>
 					</div>
-					<!-- /# column -->
-
-				</div>
+					/# column
+				</div> -->
 				<!-- /# row -->
 				<section id="main-content">
-					<form action="list_option.jsp">
+					<div>
+						</br> <input type='radio' name='list_order' value='dist'
+							onclick='hpOrder(hospitals);console.log(sortedLocations);'
+							checked='checked' /> 거리순 <input type='radio' name='list_order'
+							value='amnt'
+							onclick='hpOrder(hospitals);console.log(sortedLocations);' />
+						수량순 <select name="list_option_key" onchange="handleOnList(this)">
+							<option value="none">===백신종류===</option>
+							<option value="pfizer">화이자</option>
+							<option value="janssen">얀센</option>
+							<option value="AZ">아스트라제네카</option>
+						</select>
+						<div class="row">
+							<div class="col-lg-3 p-0">
+								
+									<script>
+									document.write('<table style="width: 100%" bgcolor="white"><tr><td align="center">&nbsp</td></tr>');
+									for(i=0;i<sortedLocations.length;i++){
+										document.write('<tr><td align="center" style="width: 40%">병원명</td><td align="center" style="width: 60%">'+sortedLocations[i].hp_name+'</td></tr>');
+										document.write('<tr><td align="center" style="width: 40%">주소</td><td align="center" style="width: 60%">'+sortedLocations[i].hp_address+'</td></tr>');
+										document.write('<tr><td align="center" style="width: 40%">전화번호</td><td align="center" style="width: 60%">'+sortedLocations[i].hp_phone+'</td></tr>');
+										document.write('<tr><td align="center" style="width: 40%">잔여수량</td><td align="center" style="width: 60%">'+sortedLocations[i].hp_remain+'</td></tr>');
+										document.write('<tr><td colspan="2" align="center"><input type="button" value="예약" onClick="location.href='+"detail_reservation.jsp"+'"></td></tr>');
+									}
+									
+									</script>
 
-						<input type='radio' name='list_order' value='dist'
-							onclick='hpOrder(hospitals);console.log(sortedLocations);' />거리순 <input type='radio' name='list_order'
-							value='amnt' onclick='hpOrder(hospitals);console.log(sortedLocations);' />수량순
+									<tr>
+										<td align="center">&nbsp</td>
+									</tr>
+									<tr>
+										<td align="center" style="width: 40%">병원명</td>
+										<td align="center" style="width: 60%">무야호</td>
+									</tr>
+									<tr>
+										<td align="center" style="width: 40%">주소</td>
+										<td align="center" style="width: 60%">무야호</td>
+									</tr>
+									<tr>
+										<td align="center" style="width: 40%">전화번호</td>
+										<td align="center" style="width: 60%">무야호</td>
+									</tr>
+									<tr>
+										<td align="center" style="width: 40%">수량</td>
+										<td align="center" style="width: 60%">무야호</td>
+									</tr>
+									<tr>
+										<td colspan="2" align="center"><input type="button"
+											value="예약" onClick="location.href='detail_reservation.jsp'"></td>
+									</tr>
+								</table>
+								<script>
+								
+								</script>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col">
+												<span>병원명 </span>
+												<script>
+													document
+															.write(sortedLocations[0].hp_name);
+												</script>
 
-						<div id='result'>
-
-
-							<select name="list_option_key" onchange="handleOnList(this)">
-								<option value="none">=== 전체 ===</option>
-								<option value="pfizer">화이자</option>
-								<option value="janssen">얀센</option>
-								<option value="AZ">아스트라제네카</option>
-							</select>
-					</form>
-					<div class="row">
-
-						<div class="col-lg-3 p-0">
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
-										<div class="col">
-											<span>병원명 </span>
-											<script>
-												document
-														.write(sortedLocations[0].hp_name);
-											</script>
-
+											</div>
+										</div>
+										<div class="row">
+											<div class="col">
+												<span>주소</span>
+												<script>
+													document
+															.write(sortedLocations[0].hp_address);
+												</script>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col">
+												<span>전화번호</span>
+												<script>
+													document
+															.write(sortedLocations[0].hp_phone);
+												</script>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col">
+												<span>수량 : </span>
+												<script>
+													document
+															.write(sortedLocations[0].remain);
+												</script>
+											</div>
+										</div>
+										<div class="col text-center">
+											<a href="detail_reservation.jsp"
+												class="btn btn-primary pl-5 pr-5">예약</a>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col">
-											<span>주소</span>
-											<script>
-												document
-														.write(sortedLocations[0].hp_address);
-											</script>
+								</div>
+
+
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col">
+												<span>병원명 </span>
+												<script>
+													document
+															.write(sortedLocations[1].hp_name);
+												</script>
+											</div>
 										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<span>전화번호</span>
-											<script>
-												document
-														.write(sortedLocations[0].hp_phone);
-											</script>
+										<div class="row">
+											<div class="col">
+												<span>주소</span>
+												<script>
+													document
+															.write(sortedLocations[1].hp_address);
+												</script>
+											</div>
 										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<span>수량 : </span>
-											<script>
-												document
-														.write(sortedLocations[0].remain);
-											</script>
+										<div class="row">
+											<div class="col">
+												<span>전화번호</span>
+												<script>
+													document
+															.write(sortedLocations[1].hp_phone);
+												</script>
+											</div>
 										</div>
-									</div>
-									<div class="col text-center">
-										<a href="detail_reservation.jsp"
-											class="btn btn-primary pl-5 pr-5">예약</a>
+										<div class="row">
+											<div class="col">
+												<span>수량 : </span>
+												<script>
+													document
+															.write(sortedLocations[1].remain);
+												</script>
+											</div>
+										</div>
+										<div class="col text-center">
+											<a href="detail_reservation.jsp"
+												class="btn btn-primary pl-5 pr-5">예약</a>
+										</div>
 									</div>
 								</div>
 							</div>
 
 
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
-										<div class="col">
-											<span>병원명 </span>
-											<script>
-												document
-														.write(sortedLocations[1].hp_name);
-											</script>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<span>주소</span>
-											<script>
-												document
-														.write(sortedLocations[1].hp_address);
-											</script>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<span>전화번호</span>
-											<script>
-												document
-														.write(sortedLocations[1].hp_phone);
-											</script>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<span>수량 : </span>
-											<script>
-												document
-														.write(sortedLocations[1].remain);
-											</script>
-										</div>
-									</div>
-									<div class="col text-center">
-										<a href="detail_reservation.jsp"
-											class="btn btn-primary pl-5 pr-5">예약</a>
-									</div>
-								</div>
+							<div class="col-lg-9 p-0">
+								<div id="map" style="width: 95%; height: 600px;"></div>
 							</div>
-						</div>
-
-
-						<div class="col-lg-9 p-0">
-							<div id="map" style="width: 95%; height: 600px;"></div>
 						</div>
 					</div>
-			</div>
+					<!-- </div> -->
 
-			<%@ include file="../common/footer.jsp"%>
-			</section>
+
+					<%@ include file="../common/footer.jsp"%>
+				</section>
+			</div>
 		</div>
-	</div>
 	</div>
 
 	<%@ include file="../common/script.jsp"%>
 </body>
 
 
+</html>
