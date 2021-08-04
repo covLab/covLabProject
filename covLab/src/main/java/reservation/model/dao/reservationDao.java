@@ -12,7 +12,6 @@ import reservation.model.vo.Hospital;
 import reservation.model.vo.Members;
 import reservation.model.vo.Reservation;
 import reservation.model.vo.Vaccine;
-import reservation.model.vo.Vaccine_Data;
 import reservation.model.vo.VaccineData;
 
 public class reservationDao {
@@ -88,7 +87,7 @@ public class reservationDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 	
-		String query = "SELECT  REG_BUS_NO,SUM(REMAIN) REMAIN FROM VACCINE_DATA where reg_bus_no is not null GROUP BY reg_bus_no";
+		String query = "SELECT REG_BUS_NO,SUM(REMAIN) REMAIN FROM VACCINE_DATA where reg_bus_no is not null GROUP BY reg_bus_no";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
