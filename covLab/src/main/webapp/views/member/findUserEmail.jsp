@@ -45,6 +45,7 @@ function movephone(){
 							<form action="/semi/findidemail" method="post">
 								<div class="form-group">
 									<h4>아이디 찾기</h4>
+							
 								<div class="form-group">
                                     <label>구 분</label>
                                     <Br>
@@ -63,8 +64,17 @@ function movephone(){
 								<hr>
 								<button  type="submit" value="확인"class="btn btn-primary btn-flat m-b-15">확인</button>
 									</div>
-							
-				
+							<table border="1" width="700" height="100" align="center">
+	<tr>
+	<th class="a" align="left"></th>
+		<td><ul>
+			<li align="left">- 아이디/비밀번호 관리의 책임은 본인에게 있습니다.</li>
+			<li align="left">- 타인에게 알려줄 경우 불이익을 당할 수 있으므로 관리에 주의하여주십시오.</li>
+			<li align="left">- 아이디/비밀번호 관리소홀로 인한 피해는 본 사이트에서 책임지지 않습니다.</li>
+			</ul></td>
+	</tr>
+			</table>	
+			<br>
 								<div class="register-link text-center">
 									<p>
 										Back to <a href="/semi/"> Home</a>
