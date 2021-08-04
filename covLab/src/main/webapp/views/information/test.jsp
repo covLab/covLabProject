@@ -52,9 +52,10 @@
 </head>
 <body>
   <div class="slider">
-      <div class="slide" style="background-image: url(../../resources/images/info_coronic2.png);"></div>
-      <div class="slide" style="background-image: url(../../resources/images/info_vaccine.PNG);"></div>
-      <div class="slide" style="background-image: url(../../resources/images/maxresdefault.jpg);"></div>
+      <div class="slide" style="background-image: url(../../resources/images/info_num.jpg);"></div>
+      <div class="slide" style="background-image: url(../../resources/images/info_num2.jpeg);"></div>
+      <div class="slide" style="background-image: url(../../resources/images/info_vac.gif);"></div>
+      <div class="slide" style="background-image: url(../../resources/images/info_qna2.jpg);"></div>
       <a class="prev" onclick="button_click(-1)">&#10094</a>
       <a class="next" onclick="button_click(1)">&#10095</a>
     </div>
