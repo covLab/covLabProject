@@ -5,7 +5,6 @@
 	//로그인 확인을 위해서 내장된 session 객체를 이용
 	//Member loginMember = (Member)session.getAttribute("loginMember");
 %> 
-	pageEncoding="UTF-8" import="member.model.vo.Member"%>
 <%
 Member loginMember = (Member) session.getAttribute("loginMember");
 %>

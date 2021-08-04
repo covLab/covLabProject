@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- page-register -->
@@ -98,7 +99,7 @@ if(!re3.test(email)){
  var phone = document.getElementById("phone").value;
  var re4= /^01[01679]-[0-9]{3,4}-[0-9]{4}$/; 
 if(!re4.test(phone)){
-	alert("전화번호 형식이 틀렸습니다.")
+	alert("전화번호 형식이 틀렸습니다 (' - ')을 포함해서 입력해주세요.")
 	document.getElementById("phone").value="";
 	 document.getElementById("phone").focus();
 	 return false;
@@ -151,16 +152,22 @@ if(!re4.test(phone)){
                                 </div>
                                  <div class="form-group">
                                     <label>전화번호</label>
-                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="전화번호">
+                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="전화번호" onclick="popupcode();">
+                                     <script>
+                                    function popupcode(){
+                                    	window.open("phoneCode.jsp", "본인인증" , "width = 500, height = 500, top = 100, left = 200, location = no" )
+                                    }
+                                    </script>
+                               
+                                
                                 </div>
                                  <div class="form-group">
                                     <label>주소</label>
-                                    
-                                    <input type="text" id="sample6_postcode" class="form-control" placeholder="우편번호">
-                                    <input type="button"  class="form-control"onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                                    <input type="text" id="sample6_address"  class="form-control" placeholder="주소"><br>
-                                    <input type="text" id="sample6_detailAddress" class="form-control" placeholder="상세주소">
-                                    <input type="text" id="sample6_extraAddress" class="form-control" placeholder="참고항목">
+                                     <input type="text" name="address1"id="sample6_postcode" class="form-control" placeholder="우편번호">
+                                    <input type="button"name="address2"  class="form-control"onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                                    <input type="text" name="address"id="sample6_address"  class="form-control" placeholder="주소"><br>
+                                    <input type="text" name="address3"id="sample6_detailAddress" class="form-control" placeholder="상세주소">
+                                    <input type="text" name="address4"id="sample6_extraAddress" class="form-control" placeholder="참고항목">
                                 </div>
                                  <div class="form-group">
                                     <label>수신동의</label>

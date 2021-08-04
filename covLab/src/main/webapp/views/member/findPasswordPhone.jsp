@@ -20,15 +20,15 @@
     <script type="text/javascript" src="/semi/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 
-function EmailCheck(){ 
-	 $.ajax({
-			url: "/semi/emailcheck",
+function phoneCheck(){ 
+	  $.ajax({
+			url: "/semi/phonecheck",
 			type: "post",
-			data: {userid: $("#userid").val(), useremail: $("#useremail").val()},
+			data: {userid: $("#userid").val(), userphone: $("#userphone").val()},
 			success: function(data){
 				console.log("success : " + data);
 				if(data == "ok"){
-					alert("임시비밀번호가 이메일로 보내어 졌습니다.");
+					alert("임시비밀번호가 핸드폰번호로 보내어 졌습니다.");
 					
 				}else{
 					alert("조회된 정보가 없습니다.");
@@ -50,7 +50,16 @@ function moveemail(){
 function movephone(){
 	location.href="/semi/views/member/findPasswordPhone.jsp";
 }
-
+function validate(){
+	 var phone = document.getElementById("userphone").value;
+	 var re4= /^01[01679]-[0-9]{3,4}-[0-9]{4}$/; 
+	if(!re4.test(phone)){
+		alert("전화번호 형식이 틀렸습니다 (' - ')을 포함해서 입력해주세요.")
+		document.getElementById("userphone").value="";
+		 document.getElementById("userphone").focus();
+		 return false;
+	} 
+}
  </script>   
     
 </head>
@@ -67,26 +76,26 @@ function movephone(){
 						</div>
 						<div class="login-form">
 
-							<form action="/semi/findpwdemail" method="post">
+							<form action="/semi/findpwphone" method="post" onsubmit="return validate();">
 								<div class="form-group">
 									<h4>비밀번호 찾기</h4>
 								<div class="form-group">
                                     <label>구 분</label>
                                     <Br>
-                                    <label> <input type="radio" value="findemail" name="findemail" id="findemail"  checked onclick="moveemail();">이메일</label> 
+                                    <label> <input type="radio" value="findemail" name="findemail" id="findemail"   onclick="moveemail();">이메일</label> 
                                     &nbsp;
-                                   <label> <input type="radio" value="findphone" name="findphone" id="findphone" onclick="movephone();" >핸드폰</label>
+                                   <label> <input type="radio" value="findphone" name="findphone" id="findphone" checked onclick="movephone();" >핸드폰</label>
                                 </div>
 								<!-- <form action="/semi/findidemail" method="post" > -->
 								<hr>
 								
 								    <label>아이디</label> <input type="text"  name="userid" id="userid"class="form-control" required
 										placeholder="아이디을 입력해주세요.">
-										<Br>
-									<label>이메일</label> <input type="email"  name="useremail" id="useremail"class="form-control" required
-										placeholder="이메일 입력하세요">
+										<br>
+									<label>핸드폰</label> <input type="text"  name="userphone" id="userphone"class="form-control" required
+										placeholder="핸드폰을 입력하세요">
 								<hr>
-								<button  onclick ="EmailCheck();" type="submit" value="확인"class="btn btn-primary btn-flat m-b-15">확인</button>
+								<button   onclick ="phoneCheck();"type="submit" class="btn btn-primary btn-flat m-b-15">확인</button>
 									</div>
 							<table border="1" width="700" height="100" align="center">
 	<tr>

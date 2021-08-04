@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8" import="member.model.vo.Profile, java.util.ArrayList" %>
+<%
+	ArrayList<Profile> list = (ArrayList<Profile>)request.getAttribute("list");
+      Profile p = (Profile)request.getAttribute("p");
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <!-- app-profile => myInfo_mem -->
@@ -35,9 +40,9 @@
   
 <!-- 위에메뉴 -->
                                           <% String Gender = ""; %>
-                                          <% char ch = loginMember.getUserRn().charAt(7); %>
-                                           <% if( ch == '1' || ch == '3'){ Gender = "남자"; %>
-                                           <% }else{  Gender = "여자";} %>
+                                          <% char ch = p.getUserRn().charAt(7); %>
+                                           <% if( ch == '1' || ch == '3'){ Gender = "남성"; %>
+                                           <% }else{  Gender = "여성";} %>
   <div class="content-wrap">
     <div class="main">
       <div class="container-fluid">
@@ -45,7 +50,7 @@
           <div class="col-lg-8 p-r-0 title-margin-right">
             <div class="page-header">
               <div class="page-title">
-                <h1><%= loginMember1.getUserName() %>님
+                <h1><%= p.getUserName() %>님
                   <span>반갑습니다</span>
                 </h1>
               </div>
@@ -60,7 +65,7 @@
                     <a href="/semi/views/member/userUpdate.jsp">정보변경 /</a>
                   </li>
                    <br>    &nbsp; 
-                  <li class="breadcrumb-item active"><a href ="#">회원탈퇴</a></li>
+                  <li class="breadcrumb-item active"><a href ="/semi/views/member/userDelete.jsp">회원탈퇴</a></li>
                 </ol>
               </div>
             </div>
@@ -83,31 +88,51 @@
                           <img class="img-fluid" src="/semi/resources/images/bookingSystem/5.png" style="width: 300px; height: 250px;"/>
                           <% } %>
                         </div>
+                        <% if(p.getVac_name() != null) {%>
                         <div class="user-work">
                           <h4>백신 예약 정보</h4>
                           <div class="work-content">
                             <h3>백신 종류</h3>
-                            <!-- <p>123, South Mugda</p>
-                            <p>New York, 1214</p> -->
+                  
+                            <p><%= p.getVac_name() %></p>
                           </div>
                           <div class="work-content">
                             <h3>예약 병원</h3>
-                          <!--   <p>123, South Mugda</p>
-                            <p>New York, 1214</p> -->
+                            <p><%= p.getHp_name() %></p>
+                            
                           </div>
                           <div class="work-content">
                             <h3>예약 시간</h3>
-                            <!-- <p>123, South Mugda</p>
-                            <p>New York, 1214</p> -->
+                             <p><%= p.getRev_date() %></p>
+                            
                           </div>
                         </div>
-                       
+                       <%} else { %>
+                       <div class="user-work">
+                          <h4>백신 예약 정보</h4>
+                          <div class="work-content">
+                            <h3>백신 종류</h3>
+                  
+                            <p></p>
+                          </div>
+                          <div class="work-content">
+                            <h3>예약 병원</h3>
+                            <p></p>
+                            
+                          </div>
+                          <div class="work-content">
+                            <h3>예약 시간</h3>
+                             <p></p>
+                            
+                          </div>
+                        </div>
+                       <%} %>
                       </div>
                       <div class="col-lg-8">
-                        <div class="user-profile-name">이 름   <%= loginMember.getUserName() %></div>
+                        <div class="user-profile-name">이 름   <%= p.getUserName() %></div>
                         
                         <div class="user-send-message">
-                          <button class="btn btn-primary " type="button">
+                          <button class="btn btn-primary " type="button" onclick="javascript:location.href='/semi/views/reservation/detail_reservation.jsp'">
                             예약 상세 확인</button>
                         </div>
                         <div class="custom-tab user-profile-tab">
@@ -122,30 +147,34 @@
                                 <h4>연락처 및 알림</h4>
                                 <div class="phone-content">
                                   <span class="contact-title">전화번호:</span>
-                                  <span class="phone-number"><%= loginMember.getUserPhone() %></span>
+                                  <span class="phone-number"><%= p.getUserPhone() %></span>
                                 </div>
                                 <div class="address-content">
                                   <span class="contact-title">주소:</span>
-                                  <span class="mail-address"><%= loginMember.getUserAddress() %></span>
+                                  <span class="mail-address"><%= p.getUserAddress() %></span>
                                 </div>
                                 <div class="email-content">
                                   <span class="contact-title">이메일:</span>
-                                  <span class="contact-email"><%= loginMember.getUserEmail() %></span>
+                                  <span class="contact-email"><%= p.getUserEmail() %></span>
                                 </div>
                                 <div class="website-content">
-                                  <span class="contact-title">웹사이트:</span>
-                                  <span class="contact-website">www.Admin Board.com</span>
-                                </div>
-                                <div class="skype-content">
-                                  <span class="contact-title">Skype:</span>
-                                  <span class="contact-skype">Admin Board</span>
-                                </div>
-                              </div>
+                                  <span class="contact-title">대리예약자:</span>
+                               
+                                    <span class="contact-title"><%= request.getAttribute("num") %>명</span>
+                                    
+                                    <button class="btn btn-primary "  onclick= "movepage();">
+                            대리자 상세 확인</button>
+                            <script type="text/javascript">
+                        	function movepage(){
+								location.href = "/semi/subusers?user_no=<%= p.getUserNo() %>";
+							}
+                            </script>
+                                
                               <div class="basic-information">
                                 <h4>기본 정보</h4>
                                 <div class="birthday-content">
                                   <span class="contact-title">주민번호</span>
-                                   <% String userrn = loginMember.getUserRn(); %>
+                                   <% String userrn = p.getUserRn(); %>
                                   <% char[] rn= new char[userrn.length()]; %>
                                   <%  for(int i = 0 ; i < userrn.length(); i++) {%>
                                   <%  rn[i] = userrn.charAt(i) ;} %>
