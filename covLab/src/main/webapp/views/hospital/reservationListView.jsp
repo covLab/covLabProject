@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="hospital.model.vo.VaccineInfo, java.util.ArrayList, java.util.Calendar"%>
+	import="hospital.model.vo.ReservationInfo, java.util.ArrayList, java.util.Calendar"%>
 <%
-ArrayList<VaccineInfo> list = (ArrayList<VaccineInfo>) request.getAttribute("list");
-//sint listCount = ((Integer) request.getAttribute("listCount")).intValue();
+ArrayList<ReservationInfo> list = (ArrayList<ReservationInfo>) request.getAttribute("list");
+int listCount = ((Integer) request.getAttribute("listCount")).intValue();
+int startPage = ((Integer) request.getAttribute("startPage")).intValue();
+int endPage = ((Integer) request.getAttribute("endPage")).intValue();
+int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
+int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +16,7 @@ ArrayList<VaccineInfo> list = (ArrayList<VaccineInfo>) request.getAttribute("lis
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>백신 관리</title>
+<title>회원 관리</title>
 <style type="text/css">
 form.sform{
 
@@ -51,65 +55,6 @@ form.sform{
 <%@ include file="../common/sidebar.jsp"%>
 <%@ include file="../common/topbar.jsp"%>
 
-<script type="text/javascript" src="/semi/resources/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-//httpRequest 객체 생성
-function getXMLHttpRequest(){
-	var httpRequest = null;
-
-	if(window.ActiveXObject){
-		try{
-			httpRequest = new ActiveXObject("Msxml2.XMLHTTP");	
-		} catch(e) {
-			try{
-				httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-			} catch (e2) { httpRequest = null; }
-		}
-	}
-	else if(window.XMLHttpRequest){
-		httpRequest = new window.XMLHttpRequest();
-	}
-	return httpRequest;	
-}
-function checkFunc(){
-	if(httpRequest.readyState == 4){
-		// 결과값을 가져온다.
-		var resultText = httpRequest.responseText;
-		if(resultText == 1){ 
-			document.location.reload(); // 상세보기 창 새로고침
-		}
-	}
-}
-
-// delete
-function requestVInfoDelete(vname){
-	if (confirm("백신정보를 정말 삭제하시겠습니까??") == true){
-		console.log("vname : "+vname);
-		
-		deleteVInfo(vname);
-	}else{
-		return;
-	}
-}
-function deleteVInfo(vname){
-	var param = "vname="+vname;
-	
-	httpRequest = getXMLHttpRequest();
-	httpRequest.onreadystatechange = checkFunc;
-	httpRequest.open("POST", "deletevcinfo", true);
-	httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-	httpRequest.send(param);
-	//console.log("end");
-	location.reload();
-}
-/*  // update
-function requestVInfoDelete(vname){
-	console.log("vname : "+vname);
-	window.name = "parentForm";
-	window.open("updatevcinfo?vname="+vname, "updateForm", "width=600, height=400");
-}  */
-
-</script>
 
 </head>
 
@@ -145,32 +90,41 @@ function requestVInfoDelete(vname){
 						<div class="col-lg-12">
 							<div class="card">
 								<div align="center" class="card-title">
-									백신 목록 조회
+									백신 예약 내역 조회 : <%= listCount %> 개 내역
 								</div>
 								
 								<div>
 								<table class="display table table-borderd table-hover">
 									<thead>
 										<tr align="center">
-											<th>백신이름</th>
-											<th>제조사</th>
-											<th>제조국</th>
-											<th>최대접종횟수</th>
-											<th>유통기간</th>
+											<th>병원이름</th>
+											<th>환자이름</th>
+											<th>주민등록번호</th>
+											<th>백신종류</th>
+											<th>예약일시</th>
+											<th>접종상태</th>
 											<th> &nbsp; </th>
 										</tr>
 									</thead>
 									<tbody>
-										<% for (VaccineInfo vi : list){ %>
+										<% for (ReservationInfo ri : list){ %>
 										<tr align="center">
-											<th><%= vi.getVacName() %></th>
-											<th><%= vi.getMadeByCompany() %></th>
-											<th><%= vi.getMadeInCountry() %></th>
-											<th><%= vi.getMaxIocCount() %></th>
-											<th><%= vi.getExpDur() %></th>
+											<th><%= ri.getHpName() %></th>
+											<th><%= ri.getUserName() %></th>
+											<th><%= ri.getUserRn() %></th>
+											<th><%= ri.getVacName() %></th>
+											<th><%= ri.getIocDate() %></th>
+											<th><%= ri.getState() %></th>
 											<th>
-											<%-- <a href=# onclick="requestVInfoUpdate('<%= vi.getVacName()%>'); return false;">[수정]</a> &nbsp; --%>
-											<a href=# onclick="requestVInfoDelete('<%= vi.getVacName()%>'); return false;">[삭제]</a>
+												<% if(ri.getState().equals("F")){ %>
+													<input type="button" class="btn btn-default" value="완료">
+												<% } else{ //대기, 취소 
+													 if(ri.getInoCnt()==0){%>
+													 	<button class="btn">1차 접종</button>
+													 <%}else{ %>
+													 	<button class="btn">2차 접종</button>
+													 <%} %>
+												<% } %>
 											</th>
 										</tr>
 										<% } %>
@@ -179,22 +133,49 @@ function requestVInfoDelete(vname){
 								</div>
 								<br>
 								
-								<form action="/semi/insertvcinfo" method="post">
-								<table align="center">
-								<Tr>
-								<td><input type="text" placeholder="백신이름" name="vcname" size=10></td> 
-								<Td><input type="text" placeholder="제조사" name="vccomp" size=10></Td> 
-								<td><input type="text" placeholder="제조국" name="vccountry" size=10></td> 
-								<Td><input type="text" placeholder="최대접종횟수" name="vccnt" size=10></Td> 
-								<td><input type="text" placeholder="유통기간" name="vcexp" size=10></td> 
-								<td><input type="submit" value="추가" class="btn btn-default"></td>
-								<%-- <td><input type="button" value="삭제" class="btn btn-danger"
-										onclick="javascript:location.href='/semi/deletevcinfo?vname=<%= vname %>'; return false;"></td>
-								 --%>
-								 </Tr>
-								</table>
-								</form>
-																
+							<!-- 페이징 처리 -->
+						<div style="text-align:center;" class="jsgrid-pager">
+							<% if(currentPage <= 1){ %>
+									[맨처음] &nbsp;
+							<% }else{ %>
+									<a href="/semi/rinfolist?page=1">[맨처음]</a> &nbsp;
+							<% } %>
+							<!-- 이전 페이지 그룹으로 이동 -->
+							<% if((currentPage -10 ) < startPage && (currentPage - 10) > 1){ %>
+									<a href="/semi/rinfolist?page=<%= startPage - 10 %>">[이전그룹] </a> &nbsp;
+							<% }else{ %>
+									[이전그룹] &nbsp;
+							<% } %>
+							
+							<!-- 현재 페이지 그룹의 페이지 숫자 출력 -->
+							<% for(int p = startPage; p<= endPage; p++){ 
+									if (p == currentPage){%>
+										<font color="blue" size="4">[<%= p %>]</font>
+									<% }else{ %>
+										<a href="/semi/rinfolist?page=<%= p %>"><%= p %></a>
+							<% }} %>
+							&nbsp;
+							<!-- 다음 페이지 그룹으로 이동 -->
+							<% if((currentPage +10 ) > endPage && (currentPage + 10) < maxPage){ %>
+									<a href="/semi/rinfolist?page=<%= endPage + 10 %>">[다음그룹] </a> &nbsp;
+							<% }else{ %>
+									[다음그룹] &nbsp;
+							<% } %>
+							
+							<% if(currentPage >= maxPage){ %>
+									[맨끝] &nbsp;
+							<% }else{ %>
+									<a href="/semi/rinfolist?page=<%= maxPage %>">[맨끝]</a> &nbsp;
+							<% } %>
+							
+							<div align="right">
+							<% if(loginMember == null){//로그인 안했을 때 %>
+							<button onclick="moveLogin();" class="btn btn-primary wrtie">글쓰기</button>
+							<% }else{ %>
+							<button onclick="showWriteForm();" class="btn btn-primary wrtie">글쓰기</button>
+							<% } %>
+							</div>
+						</div>																
 								
 							</div>
 						</div>

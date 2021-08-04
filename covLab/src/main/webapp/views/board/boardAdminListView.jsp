@@ -132,7 +132,7 @@ function showWriteForm(){
                               <th>작성일</th>
                               <th>조회수</th>
                               <th>추천수</th>
-                              <th> &nbsp; <!-- <input type="checkbox" name="all" onclick="allChk(this.checked);"> --></th>
+                              <th> &nbsp; </th>
                            </tr>
                         </thead>
 

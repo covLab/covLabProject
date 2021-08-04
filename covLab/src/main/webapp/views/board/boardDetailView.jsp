@@ -14,7 +14,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>백신 후기</title>
+<style type="text/css">
+/* form.rform{
+	display: none;
+}  */
+</style>
 
+<script type="text/javascript" src="/semi/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 //httpRequest 객체 생성
 function getXMLHttpRequest(){
@@ -104,7 +110,6 @@ function deleteComments(comNo, boardRef, page){
 	httpRequest.open("POST", "cdelete", true);
 	httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
 	httpRequest.send(param);
-	console.log("end");
 	location.reload();
 }
 //로그인 안했을 시 로그인으로 이동
@@ -117,17 +122,14 @@ function moveLogin(){
 	}
 }
 
-/* //답글 폼 보이기
-$(document).ready(function(){
-	//기본값 설정
-	$("#reply").hide();
-	
-/* 	//버튼 클릭시 보이기 및 숨기기
+//답글 폼 보이기
+/* $(document).ready(function(){
+
+ 	//버튼 클릭시 보이기 및 숨기기
 	$("a.showReplyForm").click(function(){
-		$("#reply").show();
-		$(this).hide();
+		$("form.rform").css("display", "none");
 	}); 
-}); */
+});  */
 
 
 //답글 작성
@@ -271,11 +273,11 @@ $(document).ready(function(){
 						<!-- 답글달기 폼 -->
 						
 						<% if (loginMember != null){ %>
-						<form action="/semi/creplywrite" method="post">
+						<form action="/semi/creplywrite" method="post" class="rform" id="reply">
 						<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
 						<input type="hidden" name="page" value="<%= currentPage %>">
 						<input type="hidden" name="cno" value="<%= c.getComNo() %>">
-						<table align="center" id="reply">
+						<table align="center">
 	
 								<tr>
 									<th colspan="2">답글달기</th>
