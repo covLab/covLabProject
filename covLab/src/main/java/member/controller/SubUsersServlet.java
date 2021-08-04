@@ -1,25 +1,30 @@
-	package member.controller;
+package member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import member.model.servcie.MemberService;
+import member.model.vo.Member;
+import member.model.vo.Profile;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class SubUsersServlet
  */
-@WebServlet("/logout")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/subusers")
+public class SubUsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public SubUsersServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,17 +33,20 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 로그아웃 처리용 컨트롤러
+        String user_no = request.getParameter("user_no");
+		ArrayList<Profile> list= new MemberService().subSelectList(Integer.parseInt(user_no));
 		
-		//request 에 등록되어 있는 세션객체의 ID 를 이용해서
-		//세션객체를 조회함
-		HttpSession session = request.getSession(false);
-		
-		//해당 세션객체가 존재하면, 세션객체를 없앰
-		if(session != null) {
-			session.invalidate();
-			//index.jsp 페이지로 이동함
-			response.sendRedirect("index.jsp");
+		RequestDispatcher view = null;
+		if(list.size() >= 0) {
+			view = request.getRequestDispatcher(
+					"views/member/subUsers.jsp");
+			request.setAttribute("list", list);
+			view.forward(request, response);
+		}else {
+			view = request.getRequestDispatcher(
+					"views/common/error.jsp");
+			request.setAttribute("message", "회원 전체 조회 실패");
+			view.forward(request, response);
 		}
 	}
 

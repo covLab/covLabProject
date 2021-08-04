@@ -38,7 +38,7 @@ public class FindIdEmail extends HttpServlet {
 		System.out.print(useremail + username);
 		
 		if(userid != null ) {
-			RequestDispatcher view =request.getRequestDispatcher("views/member/findid.jsp");
+			RequestDispatcher view =request.getRequestDispatcher("views/member/findId.jsp");
 			request.setAttribute("userid", userid);
 			  view.forward(request, response);
 			 System.out.println(userid);

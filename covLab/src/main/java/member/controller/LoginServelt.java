@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import member.model.servcie.MemberService;
 import member.model.vo.Member;
+import member.model.vo.Profile;
+
 
 /**
  * Servlet implementation class LoginServelt
@@ -60,8 +62,8 @@ public class LoginServelt extends HttpServlet {
 				}
 		
 		
-		Member member = new MemberService().selectLogin(userid, cryptoUserpw);
-		
+				Member member = new MemberService().selectLogin(userid, cryptoUserpw);
+	           System.out.println();
 		
 		if(member != null ) { //로그인 성공
 			
@@ -73,7 +75,8 @@ public class LoginServelt extends HttpServlet {
 			session.setAttribute("loginMember", member);
 			
 			//로그인 성공시 내보낼 페이지 지정
-			response.sendRedirect("/semi/index.jsp");
+			response.sendRedirect("index.jsp");
+			
 			
 		}else { //로그인 실패
 			
