@@ -30,8 +30,9 @@ public class reservationService {
 		close(conn);
 		return hps;
 	}
-	
+
 	public ArrayList<VaccineData> selectAllVds() {
+
 		Connection conn = getConnection();
 		ArrayList<VaccineData> vds = rdao.selectAllVds(conn);
 		close(conn);
@@ -103,6 +104,15 @@ public class reservationService {
 		close(conn);
 		return sub_list;
 	}
+
+
+	public ArrayList<Reservation> selectList() {
+		Connection conn = getConnection();
+		ArrayList <Reservation> list = rdao.selectList(conn);
+		close(conn);
+		return list;
+	}
+
 	
 	public ArrayList<Reservation> selectTimeRes(String reg_bus_no) {
 		Connection conn = getConnection();
@@ -148,6 +158,5 @@ public class reservationService {
 		close(conn);
 		return resByUserRn;
 	}
-	
 	
 }

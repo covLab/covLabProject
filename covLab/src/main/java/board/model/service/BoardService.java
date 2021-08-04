@@ -94,6 +94,18 @@ public class BoardService {
 		return list;
 	}
 
+	public int deleteBoard(String[] checkedList) {
+		Connection conn = getConnection();
+		int result = bdao.deleteBoard(conn, checkedList);
+		if(result==checkedList.length) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 	
 
 

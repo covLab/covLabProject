@@ -1,4 +1,4 @@
-package board.controller;
+package member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
-import board.model.vo.Board;
+import member.model.servcie.MemberService;
+import member.model.vo.Member;
+import reservation.model.service.reservationService;
+import reservation.model.vo.Reservation;
 
 /**
- * Servlet implementation class BoardSearchServlet
+ * Servlet implementation class MemberListServlet
  */
-@WebServlet("/bsearch")
-public class BoardSearchServlet extends HttpServlet {
+@WebServlet("/mlist")
+public class MemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public BoardSearchServlet() {
+	public MemberListServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,15 +36,8 @@ public class BoardSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 페이지별로 출력되는 게시글 목록 조회 처리용 컨트롤러
-		
-		request.setCharacterEncoding("utf-8");
-		
-		String sCondition = request.getParameter("searchCondition");
-		String sKeyword = request.getParameter("searchKeyword");
-		System.out.println("searchCondition : "+sCondition);
-		System.out.println("searchKeyword : "+sKeyword);
-		
+		// 관리자용 회원 전체 조회 처리용 컨트롤러
+
 		// 출력할 페이지 작성
 		int currentPage = 1;
 		// 전송온 페이지 값이 있다면 추출
@@ -54,12 +49,12 @@ public class BoardSearchServlet extends HttpServlet {
 		int limit = 10;
 
 		// 조회용 서비스 객체 생성
-		BoardService bservice = new BoardService();
+		MemberService mservice = new MemberService();
 
 		// 총 페이지 수 계산을 위한 목록 개수 조회
-		int listCount = bservice.getSearchListCount(sCondition, sKeyword);
-		System.out.println("총 목록개수 : "+listCount);
-		
+		int listCount = mservice.getListCount();
+		// System.out.println("총 목록개수 : "+listCount);
+
 		// 요청한 페이지의 출력될 목록의 행번호를 계산
 		// 한 페이지에 출력할 목록 개수가 10개인 경우
 		// 3page 가 요청되었다면 행번호는 21~30행.
@@ -67,8 +62,8 @@ public class BoardSearchServlet extends HttpServlet {
 		int endRow = startRow + limit - 1;
 
 		// 서비스로 해당 페이지에 출력할 게시글만 조회해 옴
-		ArrayList<Board> list = bservice.selectSearchList(startRow, endRow, sCondition, sKeyword);
-		
+		ArrayList<Member> list = mservice.selectList(startRow, endRow);
+
 		// 뷰 페이지로 같이 내보낼 페이지 관련 숫자 계산 처리
 		// 총 페이지 수 : 총 목록이 22개인 경우
 		// 한 페이지에 출력할 목록이 10개이면, 페이지는 3임
@@ -85,23 +80,24 @@ public class BoardSearchServlet extends HttpServlet {
 		if (maxPage < endPage) {
 			endPage = maxPage;
 		}
+		
+		// 예약 내역 확인용
+		ArrayList<Reservation> rlist = new reservationService().selectList();
 
-		// 뷰 지정해서 내보내기
 		RequestDispatcher view = null;
 		if (list.size() > 0) {
-			view = request.getRequestDispatcher("views/board/boardListView.jsp");
-
+			view = request.getRequestDispatcher("views/member/memberListView.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
-
+			request.setAttribute("rlist", rlist);
 			view.forward(request, response);
 		} else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", currentPage + " 페이지에 대한 검색 목록 조회 실패..");
+			request.setAttribute("message", "회원 목록 조회 실패");
 			view.forward(request, response);
 		}
 	}

@@ -326,5 +326,30 @@ public class BoardDao {
 
 		return list;
 	}
+
+	// 관리자용 게시글 삭제
+	public int deleteBoard(Connection conn, String[] checkedList) {
+		int[] result = null;
+		PreparedStatement pstmt = null;
+		
+		String query = "delete from board where board_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			for(int i =0; i<checkedList.length; i++) {
+				pstmt.setString(1, checkedList[i]);
+				//쿼리문 pstmt 에 모두 쌓아 한번에 처리
+				pstmt.addBatch();
+			}
+			
+			result = pstmt.executeBatch();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result.length;
+	}
 	
 }

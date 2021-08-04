@@ -6,8 +6,12 @@ import static common.JDBCTemp.getConnection;
 import static common.JDBCTemp.rollback;
 
 import java.sql.Connection;
+
+import java.sql.Date;
+
 import java.util.ArrayList;
 
+import board.model.vo.Board;
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
 import member.model.vo.Profile;
@@ -124,12 +128,6 @@ public class MemberService {
 		return result;
 	}
 
-	public int searchUseri(String userid, String userpwd) {
-		Connection conn =getConnection();
-		int idCount =mdao.searchUseri(conn, userid, userpwd);
-		close(conn);
-		return idCount;
-	}
 
 	public int deleteMember(String userid, String cryptoUserpwd) {
 		Connection conn = getConnection();
@@ -144,7 +142,83 @@ public class MemberService {
 		return result;
 	}
 
-	public Member searchUserPwPhone(String userid, String phone) {
+
+	public ArrayList<Member> selectList(int startRow, int endRow) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectList(conn, startRow, endRow);
+		close(conn);
+		return list;
+	}
+
+	public int getListCount() {
+		Connection conn = getConnection();
+		int listCount = mdao.getListCount(conn);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<Member> selectSearchUserNo(int startRow, int endRow, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchUserNo(conn, startRow, endRow, keyword);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Member> selectSearchUserName(int startRow, int endRow, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchUserName(conn, startRow, endRow, keyword);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Member> selectSearchGender(int startRow, int endRow, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchGender(conn, startRow, endRow, keyword);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Member> selectSearchAge(int startRow, int endRow, int keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchAge(conn, startRow, endRow, keyword);
+
+		close(conn);
+		return list;
+	}
+
+
+	/*
+	 * public ArrayList<Member> selectSearchRegDate(int startRow, int endRow, Date
+	 * begin, Date end) { Connection conn = getConnection(); ArrayList<Member> list
+	 * = mdao.selectSearchRegDate(conn, startRow, endRow, begin, end); close(conn);
+	 * return list; }
+	 */
+
+	public ArrayList<Member> selectSearchLoginType(int startRow, int endRow, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchLoginType(conn, startRow, endRow, keyword);
+		close(conn);
+		return list;
+	}
+
+	// 검색한 결과 카운트
+	public int getSearchListCount(String action, String keyword) {
+		Connection conn = getConnection();
+		int listCount = mdao.getSearchListCount(conn, action, keyword);
+		close(conn);
+		return listCount;
+	}
+
+	/*
+	 * public int getSearchListCount(String action, String keyword, String
+	 * beginDate, String endDate) { Connection conn = getConnection(); int listCount
+	 * = mdao.getSearchListCount(conn, action, keyword, beginDate, endDate);
+	 * close(conn); return listCount; }
+	 */
+
+
+
+  	public Member searchUserPwPhone(String userid, String phone) {
 		Connection conn =getConnection();
 		Member member =mdao.searchUserPwPhone(conn, userid, phone);
 		close(conn);
@@ -172,13 +246,13 @@ public class MemberService {
 		return member;
 	}
 
-	public ArrayList<Profile> subSelectList(int user_no) {
-		Connection conn = getConnection();
-		ArrayList<Profile> list= mdao.subSelectList(conn, user_no);
-		close(conn);
-		return list;
-	}
-
+  public ArrayList<Profile> subSelectList(int user_no) {
+      Connection conn = getConnection();
+      ArrayList<Profile> list= mdao.subSelectList(conn, user_no);
+      close(conn);
+      return list;
+   }  
+    
 	public Profile profile(String userid ) {
 		Connection conn = getConnection();
 		Profile profile = mdao.profile(conn, userid);
@@ -192,6 +266,7 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+
 
 
 }
