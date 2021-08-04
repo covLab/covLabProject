@@ -12,11 +12,8 @@ import reservation.model.vo.Hospital;
 import reservation.model.vo.Members;
 import reservation.model.vo.Reservation;
 import reservation.model.vo.Vaccine;
-<<<<<<< HEAD
 import reservation.model.vo.Vaccine_Data;
-=======
 import reservation.model.vo.VaccineData;
->>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 
 public class reservationDao {
 
@@ -403,38 +400,26 @@ public class reservationDao {
 	}
 	
 	
-<<<<<<< HEAD
-
-	public ArrayList<Hospital> selectAllHps(Connection conn) {
-		ArrayList<Hospital> hps = new ArrayList<Hospital>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String query = "select * from hospital;";
-
-		try {
-			pstmt = conn.prepareStatement(query);
-
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Hospital hp = new Hospital();
-
-				hp.setHp_name(rset.getString("hp_name"));
-				hp.setHp_address(rset.getString("hp_address"));
-				hp.setHp_phone(rset.getString("hp_phone"));
-
-				hps.add(hp);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return hps;
-	}
+	/*
+	 * public ArrayList<Hospital> selectAllHps(Connection conn) {
+	 * ArrayList<Hospital> hps = new ArrayList<Hospital>(); PreparedStatement pstmt
+	 * = null; ResultSet rset = null;
+	 * 
+	 * String query = "select * from hospital;";
+	 * 
+	 * try { pstmt = conn.prepareStatement(query);
+	 * 
+	 * rset = pstmt.executeQuery();
+	 * 
+	 * while (rset.next()) { Hospital hp = new Hospital();
+	 * 
+	 * hp.setHp_name(rset.getString("hp_name"));
+	 * hp.setHp_address(rset.getString("hp_address"));
+	 * hp.setHp_phone(rset.getString("hp_phone"));
+	 * 
+	 * hps.add(hp); } } catch (SQLException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); } finally { close(rset); close(pstmt); } return hps; }
+	 */
 	
 	
 	
@@ -493,39 +478,39 @@ public class reservationDao {
 		return cntVac;
 	}
 	
-	
-	public String selectSericalNumVaccineData(Connection conn, String reg_bus_no) {
-		Hospital hp = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String query = "select * from hospital where reg_bus_no = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, reg_bus_no);			
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				hp = new Hospital();
-				
-				hp.setReg_bus_no(reg_bus_no);
-				hp.setHp_name(rset.getString("hp_name"));
-				hp.setHp_address(rset.getString("hp_address"));
-				hp.setHp_phone(rset.getString("hp_phone"));
-				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return hp;
-	}
+//	
+//	public String selectSericalNumVaccineData(Connection conn, String reg_bus_no) {
+//		Hospital hp = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		
+//		String query = "select * from hospital where reg_bus_no = ?";
+//		
+//		try {
+//			pstmt = conn.prepareStatement(query);
+//			pstmt.setString(1, reg_bus_no);			
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			if(rset.next()) {
+//				hp = new Hospital();
+//				
+//				hp.setReg_bus_no(reg_bus_no);
+//				hp.setHp_name(rset.getString("hp_name"));
+//				hp.setHp_address(rset.getString("hp_address"));
+//				hp.setHp_phone(rset.getString("hp_phone"));
+//				
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		
+//		return hp;
+//	}
 	
 	
 	public ArrayList<Object> joinvacVacData(Connection conn, String reg_bus_no) {
@@ -637,7 +622,5 @@ public class reservationDao {
 		return res;
 	}
 	
-=======
->>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 	
 }

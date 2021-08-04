@@ -102,6 +102,8 @@ public class insertReservation extends HttpServlet {
 //					"views/reservation/index_reservation.jsp");
 //			view.forward(request, response);
 					"views/reservation/complete.jsp");
+			String pageType = "insertSuccess";
+			request.setAttribute("pageType", pageType);
 			view.forward(request, response);
 		}else {
 			System.out.println("실패");

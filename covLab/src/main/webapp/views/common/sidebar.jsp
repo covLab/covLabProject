@@ -1,16 +1,14 @@
+<%@page import="member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-<<<<<<< HEAD
 	pageEncoding="UTF-8" %>
 <%
 	//로그인 확인을 위해서 내장된 session 객체를 이용
 	//Member loginMember = (Member)session.getAttribute("loginMember");
 %> 
-=======
 	pageEncoding="UTF-8" import="member.model.vo.Member"%>
 <%
 Member loginMember = (Member) session.getAttribute("loginMember");
 %>
->>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +28,6 @@ Member loginMember = (Member) session.getAttribute("loginMember");
 					</div>
 					<li class="label">Menu</li>
 					<ul>
-<<<<<<< HEAD
 						<li><a href="/semi/index.jsp">백신 예약</a></li>
 						<li><a href="/semi/views/information/information.jsp">뉴스/백신 정보</a></li>
 
@@ -65,7 +62,6 @@ Member loginMember = (Member) session.getAttribute("loginMember");
 					<li><a href="../documentation/index.html"><i
 							class="ti-file"></i> Documentation</a></li>
 					<li><a><i class="ti-close"></i> Logout</a></li>
-=======
 						<li><a href="/semi/index.jsp">홈페이지</a></li>
 						<li><a href="/semi/views/information/information.jsp">뉴스/백신
 								정보</a></li>
@@ -107,7 +103,6 @@ Member loginMember = (Member) session.getAttribute("loginMember");
 						<li><a><i class="ti-close"
 								onclick="javascript:location.href='logout';"></i> Logout</a></li>
 					</ul>
->>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 				</ul>
 			</div>
 		</div>
