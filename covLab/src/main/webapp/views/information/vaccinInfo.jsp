@@ -137,16 +137,18 @@ table td {
 
 <a class="btn" href="#vaccineinfo02">우리나라에 들어오는 백신</a>
 <a class="btn" href="#vaccineinfo03">예방접종 주의사항</a>
+<a class="btn" href="#vaccineinfo04">예방접종 이후 이상반응</a>
+<a class="btn" href="#vaccineinfo05">이상반응 발생시 대처법</a>
 
 <hr>
 <!-- 윗부분은 목록을 만들고 a 태그로 각 번호의 목록으로 이동하게 만듬 -->
 
 <!-- 각 목록의 내용을 번호를 붙여서 작성 -->
-<h5 id="#vaccineinfo01">1. 백신 접종 현황 (1차 접종 / 백신 접종 완료)</h5>
+<!-- <h5 id="#vaccineinfo01">1. 백신 접종 현황 (1차 접종 / 백신 접종 완료)</h5>
 <p><a href="#top">맨 위로 이동</a></p>
-<hr>
+<hr> -->
 
-<h5 id="vaccineinfo02">2. 우리나라에 들어오는 백신</h5>
+<h3 id="vaccineinfo02">1. 우리나라에 들어오는 백신</h3>
 <table border="1" height="600" width="1200">
 	<tr align="center">
 		<th class="a">백신이름</th>
@@ -202,9 +204,12 @@ table td {
 </table>
  <p><a href="#top">맨 위로 이동</a></p>
 <hr>
-<h5 id="vaccineinfo03">3 예방접종 주의사항</h5>
+<h3 id="vaccineinfo03">2.  예방접종 주의사항</h3>
 <br>
 <div>
+<<<<<<< HEAD
+	<h4>* 예방접종할 때 주의 사항(사진을 누르면 영상이 재생됩니다.)</h4><br>
+=======
 <<<<<<< HEAD
 	<h4>1. 예방접종 이후 주의 사항</h4>
 	<img src="../../resources/images/vaccination01.jpg">
@@ -244,6 +249,7 @@ table td {
 			의사의 진료가 필요합니다.</p></font></li>
 =======
 	<h4>* 예방접종할 때 주의 사항</h4><br>
+>>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
 	<a href="https://www.youtube.com/watch?v=APOt56usrt4"><img src="../../resources/images/info_video.jpg"></a>
 	<br>
 	<!-- 아코디언 메뉴 -->
@@ -302,7 +308,7 @@ table td {
 
 <hr width="40% "align="left">
 <div>
-	<h4>* 예방접종 이후 이상반응</h4><br>
+	<h3 id="vaccineinfo04">3. 예방접종 이후 이상반응</h3><br>
 	<img src="../../resources/images/vaccination02.png" ><br>
 	<br>
 <table border="1" width="1300" height="600">
@@ -462,10 +468,14 @@ table td {
 <div>
 <hr width="40%" align="left">
 <<<<<<< HEAD
+	<h3 id="vaccineinfo05">4. 이상반응 나타날 시 대처법</h3><br>
+=======
+<<<<<<< HEAD
 	<h4>3. 이상반응 나타날 시 대처법</h4>
 =======
 	<h4>* 이상반응 나타날 시 대처법</h4><br>
 >>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
+>>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
 	<img src="../../resources/images/vaccination06.png">
 	<ul>
 <<<<<<< HEAD

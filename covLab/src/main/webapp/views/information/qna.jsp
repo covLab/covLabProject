@@ -272,14 +272,13 @@ dl.faq button[aria-expanded="true"]::before {
 
 <a class="btn" href="#qna01">코로나란?</a>
 <a class="btn" href="#qna02">코로나의 증상/검사</a>
-
 <a class="btn" href="#qna03">치료 및 예방</a>
+<br>
 <a class="btn" href="#qna04">접촉자 및 확진환자</a>
 <a class="btn" href="#qna05">격리 및 격리해제</a>
-
 <a class="btn" href="#qna06">백신 관련</a>
+<br>
 <a class="btn" href="#qna07">예방접종 이상반응</a>
-
 <a class="btn" href="#qna08">코로나19 예방접종 관련 피해보상</a>
 <a class="btn" href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a>
 >>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
@@ -287,9 +286,104 @@ dl.faq button[aria-expanded="true"]::before {
 <!-- 윗부분은 목록을 만들고 a 태그로 각 번호의 목록으로 이동하게 만듬 -->
 
 <!-- 각 목록의 내용을 번호를 붙여서 작성 -->
+<<<<<<< HEAD
+<!-- qna01 버튼 내용 ---------------------------------------------------------- -->
+<h3 id="qna01">1. 코로나란?</h3>
+<dl class="faq">
+   <dt>
+    <button aria-expanded="false" aria-controls="faq2_desc">
+      코로나 바이러스는 어떤 바이러스인가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq2_desc" class="desc">
+    	◎ 코로나 바이러스는 동물 및 사람에게 전파될 수 있는 바이러스로 그 중 사람에게 전파가능 함 사람 코로나 바이러스는 기존에
+    	6종이 알려져 있습니다.<br>
+    	<br>
+    	◎ 이 중 4종은 감기와 같은 질병을 일으키는 바이러스이며, 나머지 2종은 각각 MERS-CoV와 SARS-CoV로 알려져있습니다.<br>
+    	<br>
+    	◎ 이번 유행의 원인 바이러스는 코로나바이러스(SARS-CoV-2)로 공개된 염기서열 분석을 통해 코로나 19 바이러스가 박쥐유래
+    	사스 유사 바이러스와 89.1% 일치하는 것을 확인하였습니다.
+    </p>
+  </dd>
+     <dt>
+    <button aria-expanded="false" aria-controls="faq3_desc">
+      코로나 19는 어떻게 전염되나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq3_desc" class="desc">
+    	◎ 코로나 19를 일으키는 바이러스는 사람에서 사람으로 전파되며 주로 환자와 직접 접촉 또는 호흡기를 통해 배출되는 비말에
+    	의해 전염됩니다. 즉, 코로나 19에 감염된 사람이 말을 하거나 기침/재채기/노래 등을 할 떄 생성된 비말이 근처에 있는 사람들의
+    	호흡기에 직접 닿거나, 비말이 묻은 손 또는 물건 등을 만진 뒤 눈/코/입을 만질 때 전염될 수 있습니다. <br>
+		<br>
+    	◎ 또한 공기 감염은 흔하지 않으나 의료기관의 에어로졸 생성 시술이나 밀폐된 공간에서 장시간 호흡기 비말을 만드는 환경 등
+    	특수 상황에서 보통 비말이 도달하는 거리(2미터) 이상까지 바이러스 전파가 가능할 수 있습니다. 
+    </p>
+  </dd>
+  <dt>
+    <button aria-expanded="false" aria-controls="faq4_desc">
+      코로나 19 환자의 대변이나 체액으로도 전염이 가능한가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq4_desc" class="desc">
+    	◎ 환자의 대변에서 코로나19 바이러스가 검출되었다는 보고가 있었지만, 현재까지 환자의 대변으로 인해 코로나 19가 전염된
+    	사레는 보고되지 않았습니다. 추가로 물이나 하수오물 같은 환경에서 바이러스가 생존할 수 있다는 증거도 발견되지 않았습니다.<br>
+    	<br>
+    	◎ 혈액, 뇌척수액, 소변, 타액, 눈물 및 결막 분비물 등의 체액에서도 바이러스가 검출되었다는 보고가 있었지만, 그로 인해 
+    	전염된 사례는 보고되지 않았습니다.
+    </p>
+  </dd>
+   <dt>
+    <button aria-expanded="false" aria-controls="faq5_desc">
+      음식을 통해 코로나 19가 전염될 수 있나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq5_desc" class="desc">
+    	◎ 현재까지 코로나 19가 음식을 통해 전파된다는 증거는 없습니다. <br>
+    	<br>
+    	◎ 바이러스가 있는 음식의 포장 용기 표면이나 물체를 만진 후 자신의 입/코/눈을 만지면 코로나 19에 걸릴 수 있지만, 
+    	물체의 표면에서 이러한 코로나 바이러스의 생존력이 높지 않기 때문에 식품인 포장 용기를 통해 확산될 위험은 매우 낮습니다.<br>
+    	<br>
+    	◎ 안전을 위해서는 항상 음식을 준비하거나 먹기 전에 비누와 물로 30초 동안 손을 씻는 것이 도움이 될 수 있습니다.
+    </p>
+  </dd> 
+     <dt>
+    <button aria-expanded="false" aria-controls="faq6_desc">
+      날씨가 따뜻해지면 코로나 19 전파를 막을 수 있나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq6_desc" class="desc">
+    	◎ 일반적으로 코로나 바이러스는 저온의 건조한 환경보다 고온 다습한 환경에서 생존 기간이 더 짧습니다. 하지만 코로나 19 바이러스에
+    	대한 직접적인 온도와 관련된 자료와 바이러스 비활성화에 관련된 온도 정보는 아직까지 부족합니다. <br>
+    	<br>
+    	◎ 제한적이지만, 위도/온도/습도에 따른 코로나 19의 분포 양상이 계절성 호흡기 바이러스의 양상과 비슷하다는 연구 보고가 있었습니다.
+    </p>
+  </dd> 
+       <dt>
+    <button aria-expanded="false" aria-controls="faq7_desc">
+      카페 등의 다중이용 시설 및 가정에서 냉난방기 가동시, 환기는 얼마나 자주 해야 하나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq7_desc" class="desc">
+    	◎ 코로나19는 비말, 접촉, 공기 전파를 통해 감염 가능하며, 주된 감염경로는 2미터 이내의 비말감염입니다. 공기감염은 흔하지 않지만, 
+    	밀폐된 공간에서 장시간 호흡기 비말을 배출하거나 환기가 부적절한 경우 발생 가능하여 집단감염을 일으킬 수 있으므로 실내 오염도를 
+    	낮추기 위하여 충분한 환기를 실시하여야 합니다.<br>
+    	<br>
+    	◎ 환기 시에는 가급적 자연환기 하며, 창문을 개방하여 맞통풍하고, 공조장비 설치 시설은 외부공기 도입량을 가능한 높게 설정하여
+    	최대한 외부 공기로 환기하며 가능하면 자연환기와 병행합니다.
+    </p>
+  </dd> 
+ </dl>
+=======
 <h5 id="qna01">1. 코로나19 백신 개요</h5>
 <p>목록 버튼 누르면 작은 목록 나오게 하고 싶은데 어떻게 해야할까?</p>
 <p>목록 버튼 누르면 작은 목록 나오게 하고 싶은데 어떻게 해야할까?</p>
+>>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 <<<<<<< HEAD
@@ -299,7 +393,7 @@ dl.faq button[aria-expanded="true"]::before {
 =======
 
 <!-- qna02 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna02">2.코로나의 증상/검사</h5>
+<h3 id="qna02">2.코로나의 증상/검사</h3>
  <dl class="faq">
    <dt>
     <button aria-expanded="false" aria-controls="faq9_desc">
@@ -458,7 +552,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna03 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna03">3. 치료 및 예방</h5>
+<h3 id="qna03">3. 치료 및 예방</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq25_desc">
@@ -503,7 +597,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna04 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna04">4. 접촉자 및 확진환자</h5>
+<h3 id="qna04">4. 접촉자 및 확진환자</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq28_desc">
@@ -604,6 +698,199 @@ dl.faq button[aria-expanded="true"]::before {
 >>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+<<<<<<< HEAD
+
+<!-- qna05 버튼 내용-------------------------------------------------------- -->
+<h3 id="qna05">5. 격리 및 격리해제</h3>
+<dl class="faq">
+  <dt>
+    <button aria-expanded="false" aria-controls="faq35_desc">
+      무증상 확진환자의 격리해제기준은 어떤가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq35_desc" class="desc">
+    	◎ 임상경과 기준 또는 검사기준 중 어느 하나를 충족한 경우 격리해제 가능합니다.<br>
+    	<table border="1">
+    		<tr>
+    			<td>▶ 임상경과 기반<br>
+    			- (기간) 확진일로부터 10일 경과<br>
+    			- (증상) 이 기간 동안 임상증상 미 발생</td>
+    			<td>▶ 검사 기반<br>
+    			- (검사) PCR 검사 결과 24시간 이상의 간격으로 연속 2회 음성<br>
+    			- (증상) 확진 후 임상증상 미발생</td>
+    		</tr>
+    	</table>
+    </p>
+  </dd>
+  
+   <dt>
+    <button aria-expanded="false" aria-controls="faq36_desc">
+      유증상 확진환자의 격리해제 기준은 어떤가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq36_desc" class="desc">
+    	◎ 임상경과 기준 또는 검사 기준 중 어느 하나를 충족한 경우 격리해제 가능합니다.<br>
+    	<br>
+    	&nbsp; ▶ 임상경과 기반 <br>
+    	&nbsp; &nbsp; - (기간) 증상 발생 후 최소 10일 경과 <br>
+    	&nbsp; &nbsp; - (증상) 최소 24시간 동안 해열 치료 없이 발열이 없고 임상증상이 호전되는 추세 <br>
+    	&nbsp; ▶ 임상경과 기반 : 위중증* 단계에 해당하거나 해당한 적이 있는 경우 <br>
+    	&nbsp; &nbsp; - (기간) 증상 발생 후 최소 10일 경과 <br>
+    	&nbsp; &nbsp; - (증상) 최소 48시간 동안 해열 치료 없이 발열이 없고 임상증상이 호전되는 추세 <br>
+    	&nbsp; &nbsp; * 위중증 : 고유량 산소요법, 인공호흡기 ECMO. CRRT 치료 적용
+    	&nbsp; ▶ 검사 기반 <br>
+    	&nbsp; &nbsp; - (검사) PCR 검사 결과 24시간 이상의 간격으로 연속 2회 음성 <br>
+    	&nbsp; &nbsp; - (증상) 해열 치료 없이 발열이 없고 임상증상이 호전되는 추세 <br>
+    </p>
+  </dd>
+  
+   <dt>
+    <button aria-expanded="false" aria-controls="faq37_desc">
+      격리해제 기준에 따라 격리해제 후 PCR 재검출된 경우 어떻게 관리 되나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq37_desc" class="desc">
+    	◎ PCR 검사는 전파가 불가능한 사멸된 바이러스나 바이러스 잔여물도 검출됩니다. WHO는 경증 또는 무증상자 환자에서 검출 된
+    	바이러스 배양 검사 결과 발병 8일 후 검출 된 바이러스가 배양이 안 된 연구결과를 바탕으로 격리 해제 후 PCR 검사에서 양성으로
+    	검출되더라도 전파력은 극히 낮거나 없는 것으로 판단하고 있습니다. <br>
+    	<br>
+    	◎ 따라서 코로나 19 확진환자가 확진자의 격리해제 기준에 부합하여 격리해제 된 경우에는 격리해제 후 PCR 재검출 되더라도
+    	요양병원 입원, 종사자 업무 목귀 등이 가능하며 일상생활을 변함없이 지속할 수 있습니다.
+    </p>
+  </dd>
+  
+   <dt>
+    <button aria-expanded="false" aria-controls="faq38_desc">
+      확진자가 격리해지 된 이후 바로 등교/출근 할 수 있나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq38_desc" class="desc">
+    	◎ 확진자의 격리해제 기준에 부합하여 격리 해제된 경우에는 바로 일상생활로 복귀할 수 있습니다.<br>
+    </p>
+  </dd>
+  
+   <dt>
+    <button aria-expanded="false" aria-controls="faq39_desc">
+      공익적 또는 인도적 목적으로 격리면제대상자인 경우 중도 출국이 가능한가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq39_desc" class="desc">
+    	◎ 입국 목적을 달성하였거나, 특별한 사정이 있는 경우 격리면제 기간 중이라도 출국은 가능합니다.
+    </p>
+  </dd>
+  
+   <dt>
+    <button aria-expanded="false" aria-controls="faq40_desc">
+      가족이 상을 당한 경우 급히 입국하느라 대사관에서 격리면제를 발급받지 못한 경우, 입국 후 격리면제가 가능한가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq40_desc" class="desc">
+    	◎ 격리면제서는 입국 심사 시 제출하여야 하며, 입국 후 발급 불가합니다.
+    </p>
+  </dd>
+ 
+</dl> 
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+
+<!-- qna06 버튼 내용-------------------------------------------------------- -->
+<h3 id="qna06">6. 백신 관련</h3>
+<dl class="faq">
+  <dt>
+    <button aria-expanded="false" aria-controls="faq41_desc">
+      우리나라에 도입되는 백신의 종류는 무엇인가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq41_desc" class="desc">
+    	◎ 우리나라에 아스트라제네카, 얀센社의 바이러스 백터 백신 2종, 화이자, 모더나社의 mRNA 백신 2종, 노바백스 
+    	합성항원 백신 1종이 도입될 예정입니다. 
+    </p>
+  </dd>
+
+  <dt>
+    <button aria-expanded="false" aria-controls="faq42_desc">
+      코로나19 백신은 모두 1회 사용 형태로 공급되나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq42_desc" class="desc">
+    	◎ 현재까지 국내에서 허가된 코로나19 백신은 모두 다회 투여 용량 바이알(multi-dose vial)로 제공됩니다.
+    </p>
+  </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq43_desc">
+      우리나라에 여러 종류의 백신이 들어오는데, 백신에 대한 선택권이 있나요? 선택권이 없다면 이유가 뭔가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq43_desc" class="desc">
+    	◎ 여러 종류의 코로나19 백신이 순차적으로 공급되는 상황에서, 빠른 시일 내 최대한 많은 국민에게 코로나19 예방접종을
+    	하기 위해서는 백신 종류가 아닌 예방접종 순서에 따라 코로나19 예방접종을 시행하여 접종 현장의 혼란을 최소화 해야 합니다.<br>
+    	<br>
+    	◎ 코로나 19 백신 공급량 및 특성, 안정성과 유효성, 부작용 발생 사례 등을 고려하여 전문가 검토 등을 통해 공급된 백신
+    	접종 대상자를 선정할 예정입니다.<br>
+    	<br>
+    	◎ 현재 미국, 유럽 등 코로나 19 백신 접종을 시작한 다른 나라에서도 개인의 코로나19 백신 선택권은 인정하지 않고 있습니다.
+    </p>
+  </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq44_desc">
+      이미 도입이 결정된 코로나 19 백신 종류 중 어떤 백신이 특정연령대나 특정 대상에 더 적합하다는 것을 어떤 방식으로 결정하나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq44_desc" class="desc">
+    	◎ 코로나 19 백신별 공급시키, 효능 및 안전성, 보관 및 유통조건 등을 고려하여 예방접종 전문위원회의 심의를 통해 결정합니다.
+    </p>
+  </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq45_desc">
+      최소 잔여형(LSD) 주사기는 무엇인가요? 일반 주사기와 무엇이 다른가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq45_desc" class="desc">
+    	◎ 주사기와 바늘의 잔여량이 0.032mL 이하(EMA, 유럽의약품청 기준)인 주사기를 최소 잔여형(LSD) 주사기라고 합니다. 
+    	일반 주사기는 주사기 잔여량이 0.07mL 이하(식약처 의료기기 기준규격)인 주사기입니다.
+    </p>
+  </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq46_desc">
+      희석액은 모든 코로나 19 백신에 사용하나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq46_desc" class="desc">
+    	◎ 희석액은 화이자 코로나19 백신에만 사용합니다.
+    </p>
+  </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq47_desc">
+      희석액의 성분은 몸에 해롭지 않나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq47_desc" class="desc">
+    	◎ 희석액은 0.9% 생리 식염주사액을 사용하며, 인체의 체액과 유사한 농도로 구성되어 있고 주사액 희석액 등으로
+    	널리 안전하게 쓰이고 있습니다.<br>
+    	<br>
+    	◎ 백신의 의석액으로 주입하는 소량의 0.9% 생리식염주사액은 인체에 해롭지 않습니다.
+    </p>
+  </dd>  
+</dl> 
+=======
 <h5 id="qna03">3. 백신 관련</h5>
 <p>백신이 점점 업그레이드 좀 됐으면 좋겠어요.</p>
 <p>백신이 점점 업그레이드 좀 됐으면 좋겠어요.</p>
@@ -630,6 +917,7 @@ dl.faq button[aria-expanded="true"]::before {
 <h5 id="qna07">7. 75세 이상 어르신 및 노인시설 예방접종</h5>
 <p>어르신들께서 건강하시길 바랍니다.</p>
 <p>어르신들께서 건강하시길 바랍니다.</p>
+>>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 <h5 id="qna08">8. 시스템및 예방접종 기록</h5>
@@ -638,7 +926,7 @@ dl.faq button[aria-expanded="true"]::before {
 =======
 
 <!-- qna07 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna07">7. 예방접종 이상반응</h5>
+<h3 id="qna07">7. 예방접종 이상반응</h3>
 <dl class="faq">
   
   <dt>
@@ -689,7 +977,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna08 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna08">8. 코로나 19 예방접종 관련 피해보상</h5>
+<h3 id="qna08">8. 코로나 19 예방접종 관련 피해보상</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq53_desc">
@@ -744,7 +1032,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna09 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna09">9. 의료비 지원사업</h5>
+<h3 id="qna09">9. 의료비 지원사업</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq57_desc">

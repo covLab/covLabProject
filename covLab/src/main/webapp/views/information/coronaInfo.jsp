@@ -119,9 +119,12 @@ table td {
 									  	<a class="btn" href="#coronainfo04">코로나의 예방법</a>
 									  	<hr>
 									  	<br>
-	<h5 id="coronainfo01">1. 확진자 수/격리해제 수/검사중 수/사망자 수 (실시간, 누적 모두)</h5>
+	<h3 id="coronainfo01">1. 확진자 수/격리해제 수/검사중 수/사망자 수 (실시간, 누적 모두)</h3>
+		
+	
+	
 		<hr>
-<h5 id="coronainfo02">2. 코로나19란?</h5>
+<h3 id="coronainfo02">2. 코로나19란?</h3>
 <p class="ta_r mgt36">* 현재까지 알려진 정보(2021년 3월 2일 기준) </p>
                         <h4 class="s_title_1">코로나바이러스감염증-19(COVID-19) 정보</h4>
 						<div class="data_table">
@@ -203,7 +206,7 @@ table td {
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 <!-- ---------------------------------------------------------------------------------- -->
-<h5 id="coronainfo03">3. 코로나19의 증상</h5>
+<h3 id="coronainfo03">3. 코로나19의 증상</h3>
 	<ul>
 		<li><font size="4">
 			<p> <li>◎ 코로나19의 주요 증상으로는 발열 (37.5℃ 이상), 기침, 호흡곤란, 오한, 근육통, 두통, 인후통, 후각/미각 손실</li></p>
@@ -260,10 +263,10 @@ table td {
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 
-<h5 id="coronainfo04">4. 코로나19 예방법</h5>
+<h3 id="coronainfo04">4. 코로나19 예방법</h3>
 	<ul>
 		<li><font size="4">
-			<p> <li>식약처에서 승인된 코로나 19 <a href="vaccinInfo.jsp#vaccineinfo01"><u>백신</u></a></li></p>
+			<p> <li>식약처에서 승인된 코로나 19 <a href="vaccinInfo.jsp#vaccineinfo02"><u>백신</u></a></li></p>
 			<p> <li>올바른 손씻기</li></p>
 			<p> <li>기침 예절 준수</li></p>
 			<p> <li>씻지 않은 손으로 눈, 코, 입 만지지 않기</li></p>
