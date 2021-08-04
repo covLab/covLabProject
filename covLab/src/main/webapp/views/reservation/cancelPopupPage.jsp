@@ -48,9 +48,9 @@ function cancel(){
 		<div class="col-lg-3 p-0 ">
 			<div class="card h-100 m-0">
 				<div class="card_header"></div>
-				<div class="card-body container-fluid">
 					<h5 class="card-title text-center">접종 정보</h5>
 
+				<div class="card-body container-fluid text-center">
 					<form action="/semi/cancelres" method="post" name="info">
 						<div class="form-group">
 							<label class= "col-sm-2 col-form-label" for="user_name">이름 : </label> <input class="form-control inputBox" type="text"
