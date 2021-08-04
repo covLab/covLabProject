@@ -6,12 +6,16 @@ import static common.JDBCTemp.getConnection;
 import static common.JDBCTemp.rollback;
 
 import java.sql.Connection;
+
 import java.sql.Date;
+
 import java.util.ArrayList;
 
 import board.model.vo.Board;
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
+import member.model.vo.Profile;
+
 
 public class MemberService {
            MemberDao mdao = new MemberDao(); 
@@ -27,7 +31,7 @@ public class MemberService {
 		Connection conn =getConnection();
 		Member member=mdao.selectLogin(conn, userid, userpw);
 		close(conn);
-		return member;
+		return member; 
 	}
 
 	public int insertMember(Member member) {
@@ -105,12 +109,12 @@ public class MemberService {
 		return result;
 	}
 
-	public int selectCheckpd(String curpd) {
-		Connection conn =getConnection();
-		int reuslt =mdao.selectCheckpd(conn, curpd);
-		close(conn);
-		return reuslt;
-	}
+//	public int selectCheckpd(String curpd) {
+//		Connection conn =getConnection();
+//		int reuslt =mdao.selectCheckpd(conn, curpd);
+//		close(conn);
+//		return reuslt;
+//	}
 
 	public int updateMember(Member member) {
 		Connection conn = getConnection();
@@ -123,6 +127,21 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+
+
+	public int deleteMember(String userid, String cryptoUserpwd) {
+		Connection conn = getConnection();
+		int result = mdao.deleteMember(conn, userid, cryptoUserpwd);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		System.out.println("result : " + result);
+		close(conn);
+		return result;
+	}
+
 
 	public ArrayList<Member> selectList(int startRow, int endRow) {
 		Connection conn = getConnection();
@@ -162,9 +181,11 @@ public class MemberService {
 	public ArrayList<Member> selectSearchAge(int startRow, int endRow, int keyword) {
 		Connection conn = getConnection();
 		ArrayList<Member> list = mdao.selectSearchAge(conn, startRow, endRow, keyword);
+
 		close(conn);
 		return list;
 	}
+
 
 	/*
 	 * public ArrayList<Member> selectSearchRegDate(int startRow, int endRow, Date
@@ -195,6 +216,56 @@ public class MemberService {
 	 * close(conn); return listCount; }
 	 */
 
+
+
+  	public Member searchUserPwPhone(String userid, String phone) {
+		Connection conn =getConnection();
+		Member member =mdao.searchUserPwPhone(conn, userid, phone);
+		close(conn);
+		return member;
+	}
+
+	public int updateTempPwp(String cryptoUserpw, String userid, String phone) {
+		Connection conn = getConnection();
+		int result = mdao.updateTempPwp(conn, cryptoUserpw, userid, phone);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		 
+		return result;
+	}
+
+	public Member searchpwdp(String userid, String userphone) {
+		Connection conn =getConnection();
+		Member member =mdao.searchpwdp(conn, userphone, userid);
+		close(conn);
+		return member;
+	}
+
+  public ArrayList<Profile> subSelectList(int user_no) {
+      Connection conn = getConnection();
+      ArrayList<Profile> list= mdao.subSelectList(conn, user_no);
+      close(conn);
+      return list;
+   }  
+    
+	public Profile profile(String userid ) {
+		Connection conn = getConnection();
+		Profile profile = mdao.profile(conn, userid);
+		close(conn);
+		return profile;
+	}
+
+	public int snum(int user_no) {
+		Connection conn = getConnection();
+		int result = mdao.snum(conn, user_no);
+		close(conn);
+		return result;
+	}
 
 
 

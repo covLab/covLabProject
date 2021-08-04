@@ -1,5 +1,10 @@
+<%@page import="member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="member.model.vo.Member"%>
+	pageEncoding="UTF-8" %>
+<%
+	//로그인 확인을 위해서 내장된 session 객체를 이용
+	//Member loginMember = (Member)session.getAttribute("loginMember");
+%> 
 <%
 Member loginMember = (Member) session.getAttribute("loginMember");
 %>
@@ -22,6 +27,40 @@ Member loginMember = (Member) session.getAttribute("loginMember");
 					</div>
 					<li class="label">Menu</li>
 					<ul>
+						<li><a href="/semi/index.jsp">백신 예약</a></li>
+						<li><a href="/semi/views/information/information.jsp">뉴스/백신 정보</a></li>
+
+						<li>
+						<% if(true){ //로그인%> <!--회원가입 창 만들었는데 아니다 싶으면 지워주세여  -->
+						<a href="/semi/views/member/idcheck.jsp">회원가입</a>
+							
+						<% }else{  //로그인 아닐시 %>
+							<a href="/semi/index.jsp">MY PAGE</a>
+						<% } %>
+						</li>
+
+						<% if(true){ //관리자 %>
+							<li><a href="/semi/blistadmin?page=1">접종 후기 관리</a></li>
+						<% } else { %>
+							<li><a href="/semi/blist?page=1">접종 후기</a></li>
+						<% } %>
+						<li><a href="/semi/index.jsp">MY PAGE</a></li>
+
+					</ul>
+
+
+
+
+					<li><a class="sidebar-sub-toggle"><i class="ti-target"></i>
+							Pages <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+						<ul>
+							<li><a href="page-login.html">Login</a></li>
+							<li><a href="page-register.html">Register</a></li>
+							<li><a href="page-reset-password.html">Forgot password</a></li>
+						</ul></li>
+					<li><a href="../documentation/index.html"><i
+							class="ti-file"></i> Documentation</a></li>
+					<li><a><i class="ti-close"></i> Logout</a></li>
 						<li><a href="/semi/index.jsp">홈페이지</a></li>
 						<li><a href="/semi/views/information/information.jsp">뉴스/백신
 								정보</a></li>

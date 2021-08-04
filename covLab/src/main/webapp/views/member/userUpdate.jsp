@@ -76,7 +76,7 @@ function validate(){
           <div class="col-lg-8 p-r-0 title-margin-right">
             <div class="page-header">
               <div class="page-title">
-                <h1><%= loginMember1.getUserName() %>님
+                <h1><%= loginMember.getUserName() %>님
                   
                 </h1>
               </div>

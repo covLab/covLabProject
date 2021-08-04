@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Vaccine implements Serializable {
-	private static final long serialVersionUID = 102L;
+	private static final long serialVersionUID = 153L;
 	
 	private String serial_num;
 	private String vac_name;

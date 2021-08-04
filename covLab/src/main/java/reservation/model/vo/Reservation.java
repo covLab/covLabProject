@@ -3,7 +3,7 @@ package reservation.model.vo;
 import java.sql.Timestamp;
 
 public class Reservation implements java.io.Serializable{
-	private static final long serialVersionUID = 101L;
+	private static final long serialVersionUID = 151L;
 	
 	private String serial_num;
 	private String sub_ok;

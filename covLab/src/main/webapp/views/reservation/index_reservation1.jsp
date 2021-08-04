@@ -4,14 +4,15 @@
 <%
 	ArrayList<Hospital> hps = (ArrayList<Hospital>)request.getAttribute("hps");
 	ArrayList<VaccineData> vds = (ArrayList<VaccineData>) request.getAttribute("vds");
+	int listCount = ((Integer) request.getAttribute("listCount")).intValue();
+	int startPage = ((Integer) request.getAttribute("startPage")).intValue();
+	int endPage = ((Integer) request.getAttribute("endPage")).intValue();
+	int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
+	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
+	int startRow = ((Integer) request.getAttribute("startRow")).intValue();
+	int endRow = ((Integer) request.getAttribute("endRow")).intValue();
 
- 	String hp_name=((String)request.getAttribute("hp_name"));
-	String hp_address=((String)request.getAttribute("hp_address"));
-	String hp_phone=((String)request.getAttribute("hp_phone"));
-	float hp_latitude=((float)request.getAttribute("hp_latitude"));
-	float hp_longitude=((float)request.getAttribute("hp_longitude"));
-	int remain=((int)request.getAttribute("remain")); 
-%> 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,53 +47,113 @@
 -->
 </style>
 
-
 <script language="javascript">
+	
 	// 위치확인 
 	var latitude=0;
 	var longitude=0;
-	function locationTest() {
-		navigator.geolocation.getCurrentPosition(handleLocation, handleError);
-	}
-	for (var i=0;i++;i<hps.length){
-		console.log(hps[i]);
-	}
-	var locations=[
-		{hp_name: "강남구보건소", hp_address: "서울 강남구 선릉로 668", hp_phone: "02-3423-5555" ,hp_latitude: 37.5162581, hp_longitude: 127.042214},
-		{hp_name: "삼성서울병원", hp_address: "서울 강남구 일원로 81", hp_phone: "02-3410-2114" ,hp_latitude: 37.4881568, hp_longitude: 127.0855952},
-		{hp_name: "연세대학교의과대학강남세브란스병원", hp_address: "서울 강남구 언주로 211", hp_phone: "02-2019-3114" ,hp_latitude: 37.4927454, hp_longitude:127.0463152 },
-		{hp_name: "강동경희대학교의대병원", hp_address: "서울 강동구 동남로 892", hp_phone: "02-440-7000" ,hp_latitude: 37.5534841, hp_longitude:127.1576468 },
-		{hp_name: "강동구보건소", hp_address: "서울 강동구 성내동 541-2", hp_phone: "02-440-7000" ,hp_latitude: 37.5292365, hp_longitude: 127.1255395},
-		{hp_name: "성심의료재단강동성심병원", hp_address: "서울 강동구 성안로 150", hp_phone: "02-3425-8565" ,hp_latitude: 37.5361787, hp_longitude: 127.135423},
-		{hp_name: "한국보훈복지의료공단중앙보훈병원", hp_address: "서울 강동구 진황도로61길 53", hp_phone: "02-2225-1100" ,hp_latitude: 37.5305849, hp_longitude: 127.1480435},
-		{hp_name: "강북구보건소", hp_address: "서울 강북구 한천로 897", hp_phone: "02-901-7706" ,hp_latitude: 37.6320834, hp_longitude: 127.0387673},
-		{hp_name: "강서구보건소", hp_address: "서울 강서구 공항대로 561", hp_phone: "02-2600-5868" ,hp_latitude: 37.5496053, hp_longitude: 126.868277},
-		{hp_name: "이화여자대학교의과대학부속서울병원", hp_address: "서울특별시 강서구 공항대로 260", hp_phone: "1522-7000" ,hp_latitude: 37.5371113, hp_longitude: 126.8855845 },
-		{hp_name: "관악구보건소", hp_address: "서울 관악구 관악로 145", hp_phone: "02-879-7131" ,hp_latitude: 37.478434, hp_longitude: 126.9511135 },
-		{hp_name: "에이치플러스양지병원", hp_address: "서울 관악구 남부순환로 1636", hp_phone: "02-1877-8875" ,hp_latitude: 37.4842166, hp_longitude: 126.9325109},
-		{hp_name: "광진구보건소	", hp_address: "서울 광진구 자양로 117", hp_phone: "02-450-1937" ,hp_latitude: 37.5383735, hp_longitude: 127.0824046},
-		{hp_name: "건국대학교병원", hp_address: "서울 광진구 능동로 120-1", hp_phone: "02-1588-1533" ,hp_latitude: 36.9789327, hp_longitude: 126.8893241},
-		{hp_name: "구로구보건소", hp_address: "서울 구로구 구로중앙로28길 66", hp_phone: "02-860-2003" ,hp_latitude:37.500076 , hp_longitude: 126.8893241},
-		{hp_name: "고려대학교의과대학부속구로병원", hp_address: "서울 구로구 구로동로 148", hp_phone: "02-2626-1114" ,hp_latitude: 37.4922173, hp_longitude:126.8849478 },
-		{hp_name: "금천구보건소", hp_address: "서울 금천구 시흥대로73길 70", hp_phone: "02-2627-2717" ,hp_latitude: 37.4570498, hp_longitude: 126.8959514},
-		{hp_name: "한일병원", hp_address: "서울 도봉구 우이천로 308", hp_phone: "02-901-3114" ,hp_latitude: 36.9638808, hp_longitude: 127.9429038},
-		{hp_name: "보라매병원", hp_address: "서울 동작구 보라매로5길 20", hp_phone: "02-870-2114" ,hp_latitude: 37.4933373, hp_longitude: 126.9246093},
-		{hp_name: "마포구보건소", hp_address: "서울 마포구 월드컵로 212", hp_phone: "02-3153-9037" ,hp_latitude: 37.5663123, hp_longitude: 126.9020798},
-	];
 	var sortedLocations = [];
+
+	/* 병원 정보 + 백신 정보 담긴 배열 */
+	var hospitals = new Array();
+	var vaccinedata = new Array();
+	var reg_bus_no=null;
+	/* 선택한 병원의 사업자 등록번호 */
+	var chosen_hp=null;
+	var order_opt = 'dist';
+	<%
+	for (Hospital hp: hps) {
+	%>
+		var obj={};
+		obj.reg_bus_no="<%=hp.getReg_bus_no()%>";
+		obj.hp_name="<%=hp.getHp_name()%>";
+		obj.hp_address="<%=hp.getHp_address()%>";
+		obj.hp_phone="<%=hp.getHp_phone()%>";
+		obj.hp_latitude=<%=hp.getHp_latitude()%>;
+		obj.hp_longitude=<%=hp.getHp_longitude()%>;
+		obj.remain=0;
+		hospitals.push(obj);
+	<%
+	}
+	%>
+	/* 병원 정보 + 백신 정보 */
+	<%
+	for (VaccineData vd: vds) {
+	%>
+		reg_bus_no="<%=vd.getReg_bus_no()%>";
+		var i=0;
+		while (i<hospitals.length){
+			if (reg_bus_no == hospitals[i].reg_bus_no){
+				hospitals[i].remain="<%=vd.getRemain()%>";
+				break;
+			}
+			else i+=1;
+		}
+	<%
+	}
+	%>
+	for (i = 0; i < hospitals.length; i++) {
+		let distance = getDistance(latitude, longitude,
+				hospitals[i].hp_latitude, hospitals[i].hp_longitude);
+		hospitals[i].distance = distance;
+	}
+	sortedLocations = sortByDist(hospitals);
+	/* 병원 정보 + 백신 정보 + 거리 정보 담긴 배열 */
+	
+
+	/*거리순 정렬 함수*/
+	function sortByDist(arr) {
+		sortedArr = [];
+		sortedArr = arr.sort(function(a, b) {
+			if (a.distance > b.distance) {
+				return 1;
+			}
+			if (a.distance < b.distance) {
+				return -1;
+			}
+			return 0;
+		});
+		return sortedArr;
+	}
+	/*수량순 정렬 함수*/
+	function sortByAmnt(arr) {
+		sortedArr = [];
+		sortedArr = arr.sort(function(a, b) {
+			if (a.remain < b.remain) {
+				return 1;
+			}
+			if (a.remain > b.remain) {
+				return -1;
+			}
+			return 0;
+		});
+		return sortedArr;
+	}
+	/* 라디오 버튼 값에 따라 정렬하는 함수*/
+	function hpOrder(list) {
+		/* var order_opt = document.getElementByName('list_order');
+		document.getElementByName('list_order').innerText = event.target.value; */
+		const xhttp = new XMLHttpRequest();
+		order_opt = $(":radio[name='list_order']:checked").val();
+		if (order_opt == 'amnt') {
+			sortedLocations = sortByAmnt(list);
+		}
+		if (order_opt == 'dist') {
+			sortedLocations = sortByDist(list);
+		}
+		console.log(sortedLocations);
+	}
+	
 	// 위치콜백 
 	function handleLocation(position) {
 		var outDiv = document.getElementById("result");
-		// 좌표보기 
-		/*                 var posStr = "latitude : " + position.coords.latitude + "<br/>";
-		 posStr += "longitude : " + position.coords.longitude; 
-		 outDiv.innerHTML = posStr; 
-		 */
+
 		// 위치정보 만들고 
 		var latitude = position.coords.latitude;
-		var longitude = position.coords.longitude; 
-		var latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-		 
+		var longitude = position.coords.longitude;
+		
+		var latlng = new google.maps.LatLng(latitude, longitude);
+
 		// 지도 옵션 
 		var mapOption = {
 			zoom : 11.5,
@@ -110,41 +171,27 @@
 			map : map,
 			title : "현위치"
 		});
-		//지도에 표시될 병원 리스트
-/* 		var locations = [ [ '강남구보건소	02-3423-5555', 37.5162581, 127.042214 ],
-				[ '삼성서울병원	02-3410-2114', 37.4881568, 127.0855952 ],
-				[ '연세대학교의과대학강남세브란스병원	02-2019-3114', 37.4927454, 127.0463152 ],
-				[ '강동경희대학교의대병원	02-440-7000', 37.5534841, 127.1576468 ],
-				[ '강동구보건소	02-3425-8565', 37.5292365, 127.1255395 ],
-				[ '성심의료재단강동성심병원	02-2224-2358', 37.5361787, 127.135423 ],
-				[ '한국보훈복지의료공단중앙보훈병원	02-2225-1100', 37.5305849, 127.1480435 ],
-				[ '강북구보건소	02-901-7706, 02-901-7704', 37.6320834, 127.0387673 ],
-				[ '강서구보건소	02-2600-5868', 37.5496053, 126.868277 ],
-				[ '이화여자대학교의과대학부속서울병원	1522-7000', 37.5371113, 126.8855845 ],
-				[ '관악구보건소	02-879-7131', 37.478434, 126.9511135 ],
-				[ '에이치플러스양지병원	02-1877-8875', 37.4842166, 126.9325109 ],
-				[ '광진구보건소	02-450-1937', 37.5383735, 127.0824046 ],
-				[ '건국대학교병원	02-1588-1533', 36.9789327, 127.9285366 ],
-				[ '구로구보건소	02-860-2003', 37.500076, 126.8893241 ],
-				[ '고려대학교의과대학부속구로병원	02-2626-1114', 37.4922173, 126.8849478 ],
-				[ '금천구보건소	02-2627-2717', 37.4570498, 126.8959514 ],
-				[ '한일병원	02-901-3114', 36.9638808, 127.9429038 ],
-				[ '보라매병원	02-870-2114', 37.4933373, 126.9246093 ],
-				[ '마포구보건소	02-3153-9037', 37.5663123, 126.9020798 ] ]; */
-
 		var infowindow = new google.maps.InfoWindow();
-
 		var marker, i;
 
-		for (i = 0; i < locations.length; i++) {
+		for (i = 0; i < hospitals.length; i++) {
 			marker = new google.maps.Marker({
-				position : new google.maps.LatLng(locations[i].hp_latitude,
-						locations[i].hp_longitude),
+				position : new google.maps.LatLng(hospitals[i].hp_latitude,
+						hospitals[i].hp_longitude),
 				map : map,
-				icon : "../../resources/images/red_dot_small.png"
+				title : hospitals[i].hp_name,
+				label : hospitals[i].remain
+			/* icon : "../../resources/images/red_dot_small.png" */
 			});
-			
+			if (marker) {
+				marker.addListener("click", function() {
+					map.setZoom(15);
+					map.setCenter(this.getPosition());
+					chosen_hp = hospital[i].reg_bus_no;
+				});
+			}
 		}
+		const infoWindow = new google.maps.InfoWindow();
 
 		/* sortedLocations=locations.sort(function(a,b){
 			if (a.distance>b.distance){
@@ -155,39 +202,10 @@
 			}
 			return 0;
 		});
-		console.log(sortedLocations);
 		return sortedLocations; */
-	}	
-	for (i = 0; i < locations.length; i++) {
-		let distance=getDistance(latitude, longitude, locations[i].hp_latitude, locations[i].hp_longitude)
-		locations[i].distance= distance;
 	}
-	
-	function sortByDist(arr){
-		sortedArr=[];
-		sortedArr=arr.sort(function(a,b){
-			if (a.distance>b.distance){
-				return 1;
-			}
-			if (a.distance<b.distance){
-				return -1;
-			}
-			return 0;
-		});
-		return sortedArr;
-	}
-		
-	sortedLocations=sortByDist(locations);
-	console.log(sortedLocations);
 
-/* 			google.maps.event.addListener(marker, 'click',
-					(function(marker, i) {
-						return function() {
-							infowindow.setContent(locations[i][0]);
-							infowindow.open(map, marker);
-						}
-					})(marker, i)); 
-		}*/
+
 	// 에러콜백 
 	function handleError(err) {
 		var outDiv = document.getElementById("result");
@@ -197,36 +215,30 @@
 			outDiv.innerHTML = "에러발생 : " + err.code;
 		}
 	}
-	
-	//체크박스 값 하나만 선택되게 하는 함수
-	function checkOnlyOne(element) {
-		  const checkboxes = document.getElementsByName("list_order");
-		  checkboxes.forEach((cb) => { cb.checked = false })
-		  element.checked = true;
-		}
-	
-	function getDistance(lat1, lon1, lat2, lon2, unit) {
-        var radlat1 = Math.PI * lat1/180
-        var radlat2 = Math.PI * lat2/180
-        var radlon1 = Math.PI * lon1/180
-        var radlon2 = Math.PI * lon2/180
-        var theta = lon1-lon2
-        var radtheta = Math.PI * theta/180
-        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-        dist = Math.acos(dist)
-        dist = dist * 180/Math.PI
-        dist = dist * 60 * 1.1515
-        if (unit=="K") { dist = dist * 1.609344 }
-        if (unit=="N") { dist = dist * 0.8684 }
-        return dist;
+
+	function getDistance(lat1, lon1, lat2, lon2) {
+		var radlat1 = Math.PI * lat1 / 180
+		var radlat2 = Math.PI * lat2 / 180
+		var radlon1 = Math.PI * lon1 / 180
+		var radlon2 = Math.PI * lon2 / 180
+		var theta = lon1 - lon2
+		var radtheta = Math.PI * theta / 180
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1)
+				* Math.cos(radlat2) * Math.cos(radtheta);
+		dist = Math.acos(dist)
+		dist = dist * 180 / Math.PI
+		dist = dist * 60 * 1.1515
+		dist = dist * 1.609344
+		return dist;
 	}
 	
-	function hpOrder(event) {
-		  document.getElementByName('list_order').innerText = 
-		    event.target.value;
-		}
-	
-	
+	function locationTest() {
+		navigator.geolocation.getCurrentPosition(handleLocation, handleError);
+		hpOrder(sortedLocations);
+		console.log(sortedLocations);
+		<%-- hospTable(<%=startRow%>,<%=endRow%>); --%> 
+	}
+
 </script>
 </head>
 
@@ -235,140 +247,83 @@
 	<div class="content-wrap">
 		<div class="main">
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-8 p-r-0 title-margin-right">
-						<div class="page-header">
-							<div class="page-title">
-								<h1>
-									안녕하세요. <span>코로나 백신 예약 사이트 Covlab입니다.</span>
-								</h1>
-							</div>
-						</div>
-					</div>
-
-					<!-- /# column -->
-					<div class="col-lg-4 p-l-0 title-margin-left">
-						<div class="page-header">
-							<div class="page-title">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-									<li class="breadcrumb-item active">Home</li>
-								</ol>
-							</div>
-						</div>
-					</div>
-					<!-- /# column -->
-
-				</div>
-				<!-- /# row -->
 				<section id="main-content">
-					<form action="list_option.jsp">
-
-						<input type='radio' name='list_order' value='dist'
-							onclick='hpOrder(event)' />거리순 <input type='radio'
-							name='list_order' value='amnt' onclick='hpOrder(event)' />수량순
-						<div id='result'>
-
-
-							<select name="list_option_key" onchange="handleOnList(this)">
-								<option value="none">=== 선택 ===</option>
-								<option value="pfizer">화이자</option>
-								<option value="janssen">얀센</option>
-								<option value="AZ">아스트라제네카</option>
-							</select>
-					</form>
-					<div class="row">
-
-						<div class="col-lg-3 p-0">
-							<!--반복문  -->
-							<script>
-						for (var i=0;i<sortedLocations.length;i++){
-							 
-						}
-						</script>
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
-										<div class="col">
-											<span>병원명 </span>
-											<script>
-											document.write(sortedLocations[0].hp_name);
-											</script>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<span>주소</span>
-											<script>
-												document.write(sortedLocations[0].hp_address);
-												</script>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<span>전화번호</span>
-											<script>
-											document.write(sortedLocations[0].hp_phone);
-											</script>
-										</div>
-									</div>
-									<div class="col text-center">
-										<a href="detail_reservation.jsp"
-											class="btn btn-primary pl-5 pr-5">예약</a>
-									</div>
-								</div>
-							</div>
-
-
-							<div class="card">
-								<div class="card-body">
-									<div class="row">
-										<div class="col">
-											<span>병원명 </span>
-											<script>
-											document.write(sortedLocations[1].hp_name);
-											</script>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<span>주소</span>
-											<script>
-											document.write(sortedLocations[1].hp_address);
-											</script>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<span>전화번호</span>
-											<script>
-											document.write(sortedLocations[1].hp_phone);
-											</script>
-										</div>
-									</div>
-									<div class="col text-center">
-										<a href="detail_reservation.jsp"
-											class="btn btn-primary pl-5 pr-5">예약</a>
-									</div>
-								</div>
-
-
-
-
-							</div>
+					<div>
+						</br> <input type='radio' id='orderOpt' name='list_order' value='dist' onclick='hpOrder(sortedLocations);' checked='checked' /> 거리순 
+						       <input type='radio'  id='orderOpt' name='list_order' value='amnt' onclick='hpOrder(sortedLocations);' />수량순 
+						<select name="list_option_key" onchange="handleOnList(this)">
+							<option value="none">===백신종류===</option>
+							<option value="pfizer">화이자</option>
+							<option value="janssen">얀센</option>
+							<option value="AZ">아스트라제네카</option>
+						</select>
+						<div class="row">
+							<div class="col-lg-3 p-0">
+									<script>
+									document.write('<table style="width: 100%" bgcolor="white">');
+									for(i=<%=startRow%>;i<=<%=endRow%>;i++){
+										document.write('<tr><td align="center">&nbsp</td></tr><tr>'+"<td align=\"center\" style=\"width: 40%\">"+"병원명"+"</td>"+"<td align=\"center\" style=\"width: 60%\">"+sortedLocations[i].hp_name+"</td>"+"</tr>");
+										document.write('<tr><td align="center" style="width: 40%">주소</td><td align="center" style="width: 60%">'+sortedLocations[i].hp_address+'</td></tr>');
+										document.write('<tr><td align="center" style="width: 40%">전화번호</td><td align="center" style="width: 60%">'+sortedLocations[i].hp_phone+'</td></tr>');
+										document.write('<tr><td align="center" style="width: 40%">잔여수량</td><td align="center" style="width: 60%">'+sortedLocations[i].remain+'</td></tr>');
+										document.write('<tr><td colspan="2" align="center"><input type="button" value="예약" onClick="location.href='+"detail_reservation.jsp"+'"></td></tr>');
+									}
+									document.write('<tr><td align="center">&nbsp</td></tr>');
+									hospTable(<%=startRow%>,<%=endRow%>);
+									</script>	
+								</table>
+								
+								<div style="text-align:center;" class="jsgrid-pager">
+							<% if(currentPage <= 1){ %>
+									[맨처음] &nbsp;
+							<% }else{ %>
+									<a href="/semi/indexres?page=1">[맨처음]</a> &nbsp;
+							<% } %>
+							<!-- 이전 페이지 그룹으로 이동 -->
+							<% if((currentPage -10 ) < startPage && (currentPage - 10) > 1){ %>
+									<a href="/semi/indexres?page=<%= startPage - 10 %>">[이전그룹] </a> &nbsp;
+							<% }else{ %>
+									[이전그룹] &nbsp;
+							<% } %>
+							
+							<!-- 현재 페이지 그룹의 페이지 숫자 출력 -->
+							<% for(int p = startPage; p<= endPage; p++){ 
+									if (p == currentPage){%>
+										<font color="blue" size="4">[<%= p %>]</font>
+									<% }else{ %>
+										<a href="/semi/indexres?page=<%= p %>"><%= p %></a>
+							<% }} %>
+							&nbsp;
+							<!-- 다음 페이지 그룹으로 이동 -->
+							<% if((currentPage +10 ) > endPage && (currentPage + 10) < maxPage){ %>
+									<a href="/semi/indexres?page=<%= endPage + 10 %>">[다음그룹] </a> &nbsp;
+							<% }else{ %>
+									[다음그룹] &nbsp;
+							<% } %>
+							
+							<% if(currentPage >= maxPage){ %>
+									[맨끝] &nbsp;
+							<% }else{ %>
+									<a href="/semi/indexres?page=<%= maxPage %>">[맨끝]</a> &nbsp;
+							<% } %>
+							
+							
 						</div>
+							</div>
 
 
-						<div class="col-lg-9 p-0">
-							<div id="map" style="width: 95%; height: 600px;"></div>
+							<div class="col-lg-9 p-0">
+								<div id="map" style="width: 95%; height: 600px;"></div>
+							</div>
 						</div>
 					</div>
-			</div>
+					<!-- </div> -->
 
-			<%@ include file="../common/footer.jsp"%>
-			</section>
+
+					<%@ include file="../common/footer.jsp"%>
+				</section>
+			</div>
 		</div>
-	</div>
 	</div>
 
 	<%@ include file="../common/script.jsp"%>

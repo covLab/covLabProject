@@ -1,7 +1,7 @@
 package reservation.model.vo;
 
 public class Members implements java.io.Serializable{
-    private static final long serialVersionUID = 112L;
+    private static final long serialVersionUID = 152L;
      
     private String userRn;
     private String userPw;

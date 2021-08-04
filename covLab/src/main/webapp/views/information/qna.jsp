@@ -46,10 +46,110 @@
   display:inline-block;
   border-radius: 10px;
   transition:all 0.2s;
-  text-shadow:0px -2px black;
  }
  .btn:active {
   transform:translateY(5px);
+ }
+<<<<<<< HEAD
+=======
+ 
+ .btn:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+ 
+ .t{
+ 	width: 1000px;
+ 	height: 250px;
+ 	background:navy;
+ 	text-align:center;
+ 	transition:all 0.2s;
+ 	
+ }
+ 
+ .c1 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c2 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c3 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c4 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c5 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c6 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c7 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c8 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+  .c9 {
+ 	font-size:15pt;
+ 	font-color:white;
+ }
+ 
+ 
+.c1:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c2:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c3:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c4:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c5:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+   .c6:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c7:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c8:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
+ }
+.c9:hover {
+ 	background:lightgray;
+ 	color:black;
+ 	transition:all 0.2s;
  }
  
  dl.faq button {
@@ -104,6 +204,7 @@ dl.faq button[aria-expanded="true"]::before {
   padding-right: 0.35em;
 }
  
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 </style>
 
 <body>
@@ -141,25 +242,53 @@ dl.faq button[aria-expanded="true"]::before {
                                     <h4>QnA</h4>
 <hr>
 
+<<<<<<< HEAD
+<a class="btn" href="#qna01">코로나19 백신 개요</a>
+<a class="btn" href="#qna02">코로나19 예방접종 사업</a>
+<a class="btn" href="#qna03">백신 관련</a>
+<a class="btn" href="#qna04">백신의 안전성과 이상반응</a>
+<a class="btn" href="#qna05">코로나19 예방접종 관련 피해보상</a>
+<a class="btn" href="#qna06">인과성 불충분한 중증 환자 의료비 지원사업</a>
+<a class="btn" href="#qna07">75세 이상 어르신 및 노인시설 예방접종</a>
+<a class="btn" href="#qna08">시스템및 예방접종 기록</a>
+=======
+<table border="1"  class="t">
+	<tr>
+		<td class="c1" ><a href="#qna01">코로나란?</a></td>
+		<td class="c2" ><a href="#qna02">코로나의 증상/검사</a></td>
+		<td class="c3" ><a href="#qna03">치료 및 예방</a></td>
+	</tr>
+	<tr>
+		<td class="c4" ><a href="#qna04">접촉자 및 확진환자</a></td>
+		<td class="c5" ><a href="#qna05">격리 및 격리해제</a></td>
+		<td class="c6" ><a href="#qna06">백신 관련</a></td>
+	</tr>
+	<tr>
+		<td class="c7" ><a href="#qna07">예방접종 이상반응</a></td>
+		<td class="c8" ><a href="#qna08">코로나19 예방접종 관련 피해보상</a></td>
+		<td class="c9" ><a href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a></td>
+	</tr>
+</table>
+
 <a class="btn" href="#qna01">코로나란?</a>
 <a class="btn" href="#qna02">코로나의 증상/검사</a>
-
 <a class="btn" href="#qna03">치료 및 예방</a>
+<br>
 <a class="btn" href="#qna04">접촉자 및 확진환자</a>
 <a class="btn" href="#qna05">격리 및 격리해제</a>
-
 <a class="btn" href="#qna06">백신 관련</a>
-<a class="btn" href="#qna07">예방접종 주의사항과 이상반응</a>
-
+<br>
+<a class="btn" href="#qna07">예방접종 이상반응</a>
 <a class="btn" href="#qna08">코로나19 예방접종 관련 피해보상</a>
 <a class="btn" href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a>
-<a class="btn" href="#qna10">기타</a>
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 <hr>
 <!-- 윗부분은 목록을 만들고 a 태그로 각 번호의 목록으로 이동하게 만듬 -->
 
 <!-- 각 목록의 내용을 번호를 붙여서 작성 -->
+<<<<<<< HEAD
 <!-- qna01 버튼 내용 ---------------------------------------------------------- -->
-<h5 id="qna01">1. 코로나란?</h5>
+<h3 id="qna01">1. 코로나란?</h3>
 <dl class="faq">
    <dt>
     <button aria-expanded="false" aria-controls="faq2_desc">
@@ -250,28 +379,22 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd> 
  </dl>
+=======
+<h5 id="qna01">1. 코로나19 백신 개요</h5>
+<p>목록 버튼 누르면 작은 목록 나오게 하고 싶은데 어떻게 해야할까?</p>
+<p>목록 버튼 누르면 작은 목록 나오게 하고 싶은데 어떻게 해야할까?</p>
+>>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+<<<<<<< HEAD
+<h5 id="qna02">2. 코로나19 예방접종 사업</h5>
+<p>예방접종 하면 좋겠죠.. 건강할거에요.. 그럴거에요...</p>
+<p>예방접종 하면 좋겠죠.. 건강할거에요.. 그럴거에요...</p>
+=======
 
 <!-- qna02 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna02">2.코로나의 증상/검사</h5>
+<h3 id="qna02">2.코로나의 증상/검사</h3>
  <dl class="faq">
-  <dt>
-    <button aria-expanded="false" aria-controls="faq8_desc">
-      코로나 19의 증상은 어떤것이 있나요?
-    </button>
-  </dt>
-  <dd>
-    <p id="faq8_desc" class="desc">
-    	◎ 코로나 19의 가장 흔한 증상은 발열, 마른 기침, 피로이며 그 외에 후각 및 미각 소실, 근육통, 인후통, 콧물, 코막힘, 두통, 결막염,
-    	설사, 피부 증상 등 다영한 증상이 나타날 수 있습니다.<br>
-    	<br>
-    	◎ 이러한 증상은 보통 경미하고 점진적으로 나타납니다. 사람에 따라 감염되어도 매우 약한 증상만 나타날 수 있습니다.<br>
-    	<br>
-    	◎ 대부분의 환자들(약 80%)은 특별한 치료없이 회복되나, 5명 중 1명 정도는 중증으로 진행 할 수 있습니다. 고령자나 고혈압, 
-    	심폐질환, 당뇨병이나 암과 같은 기저질환이 있는 사람들은 중증으로 진행 될 가능성이 높습니다.
-    </p>
-  </dd>
    <dt>
     <button aria-expanded="false" aria-controls="faq9_desc">
       무증상 환자도 다른 사람을 전염시킬 수 있나요?
@@ -429,7 +552,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna03 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna03">3. 치료 및 예방</h5>
+<h3 id="qna03">3. 치료 및 예방</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq25_desc">
@@ -474,7 +597,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna04 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna04">4. 접촉자 및 확진환자</h5>
+<h3 id="qna04">4. 접촉자 및 확진환자</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq28_desc">
@@ -572,11 +695,13 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd>
 </dl> 
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+<<<<<<< HEAD
 
 <!-- qna05 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna05">5. 격리 및 격리해제</h5>
+<h3 id="qna05">5. 격리 및 격리해제</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq35_desc">
@@ -675,7 +800,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna06 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna06">6. 백신 관련</h5>
+<h3 id="qna06">6. 백신 관련</h3>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq41_desc">
@@ -765,145 +890,205 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd>  
 </dl> 
+=======
+<h5 id="qna03">3. 백신 관련</h5>
+<p>백신이 점점 업그레이드 좀 됐으면 좋겠어요.</p>
+<p>백신이 점점 업그레이드 좀 됐으면 좋겠어요.</p>
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+<h5 id="qna04">4. 백신의 안전성과 이상반응</h5>
+<p>백신은 안전하지 않은것 같지만.. 괜찮아지길 바래요.. 이상있음 병원가야 합니다...</p>
+<p>백신은 안전하지 않은것 같지만.. 괜찮아지길 바래요.. 이상있음 병원가야 합니다...</p>
+<p>백신은 안전하지 않은것 같지만.. 괜찮아지길 바래요.. 이상있음 병원가야 합니다...</p>
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+<<<<<<< HEAD
+<h5 id="qna05">5. 코로나19 예방접종 관련 피해보상</h5>
+<p>코로나로 피해를 받으셨으면 보상을 받으세요. 보상해줍니다.</p>
+<p>코로나로 피해를 받으셨으면 보상을 받으세요. 보상해줍니다.</p>
+<p>코로나로 피해를 받으셨으면 보상을 받으세요. 보상해줍니다.</p>
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+<h5 id="qna06">6. 인과성 불충분한 중증 환자 의료비 지원사업</h5>
+<p>인과성 자료가 부족해도 보상 받을 수 있습니다.</p>
+<p>인과성 자료가 부족해도 보상 받을 수 있습니다.</p>
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+<h5 id="qna07">7. 75세 이상 어르신 및 노인시설 예방접종</h5>
+<p>어르신들께서 건강하시길 바랍니다.</p>
+<p>어르신들께서 건강하시길 바랍니다.</p>
+>>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+<h5 id="qna08">8. 시스템및 예방접종 기록</h5>
+<p>예방접종 하면 기록이 생깁니다.</p>
+<p>예방접종 하면 기록이 생깁니다.</p>
+=======
 
 <!-- qna07 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna07">7. 예방접종 주의사항과 이상반응</h5>
+<h3 id="qna07">7. 예방접종 이상반응</h3>
 <dl class="faq">
-  <dt>
-    <button aria-expanded="false" aria-controls="faq48_desc">
-      예방접종 받기 위해 주의할 사항은 무엇인가요?
-    </button>
-  </dt>
-  <dd>
-    <p id="faq48_desc" class="desc">
-    	◎ 건강 상태가 좋을 때 코로나19 백신을 접종받아야 하며, 접종 시 희사 예진을 통해 금기/제외 사항등을 확인하여 예방접종
-    	가능여부를 판단해야 합니다. <br>
-    	<br>
-    	◎ 다음과 같은 경우는 코로나19 예방접종을 받아서는 안됩니다.<br>
-    	&nbsp; - 코로나 19 백신 구성 성분에 대한 아나필락시스 같은 심각한 알레르기 반응이 나타난 경우<br> 
-    	&nbsp; - 1차 코로나19 예방접종 후 아나필락시스와 같은 심각한 알레르기 반응이 나타난 경우, 첫번째 백신과 동일 백신으로 
-    	접종 금지<br>
-    	&nbsp; - 1차 바이러스 벡터 코로나19 백신(아스트라제네카, 얀센) 접종 후 혈소판감소성, 혈전증이 발생한 경우, 바이러스 벡터
-    	코로나 19 백신 접종 금지<br>
-    	&nbsp; - 모세혈관 누출 증후군의 병력이 있는 경우, 아스트라제네카 코로나19 백신 접종 금지<br>
-    </p>
-  </dd>
-
-  <dt>
-    <button aria-expanded="false" aria-controls="faq49_desc">
-      코로나19 예방접종 후 주의 사항은 무엇인가요?
-    </button>
-  </dt>
-  <dd>
-    <p id="faq49_desc" class="desc">
-    	◎ 접종 후 15~30분 동안 접종기관에 머무르며 이상반응이 나타나는지 관찰합니다.<br>
-    	&nbsp; - 특별한 알레르기가 없었던 경우는 접종 후 15분간 관찰합니다.<br>
-    	&nbsp; - 과거에 음식, 약물 등의 알레르기 경험이 있었던 경우에는 30분간 관찰합니다.<br>
-    	<br>
-    	◎ 귀가 후 최소 3시간 이상 안정을 취하며 이상반응이 나타나는지 주의 깊게 관찰하며, 접종 후 최소 4주간은 특별한 관심을 
-    	가지고 관찰하며, 평소와 다른 신체 증상이 나타나면 바로 의사의 진료를 받도록 합니다. <br>
-    	<br>
-    	◎ 접종당일과 다음날은 과격한 운동 및 음주를 삼가고, 접종당일은 목욕을 하지 않는 것이 좋으며, 접종부위는 청결히 유지합니다.
-    </p>
-  </dd> 
   
   <dt>
     <button aria-expanded="false" aria-controls="faq50_desc">
-      코로나19 예방접종 후 나타날 수 있는 이상반응은 뭔가요?
+      코로나 19 예방접종 후 열이 나고 피로감이 생겼는데 어떻게 해야 하나요?
     </button>
   </dt>
   <dd>
     <p id="faq50_desc" class="desc">
-    	◎ 예방접종 후 예상 가능한 국소반응으로 접종부위 통증이나 붓기, 발적 등이 있으며, 전신잔응으로 발열, 피로감, 두통, 근육통,
-    	메스꺼움/구토 등이 나타날 수 있습니다. <br>
-    	(접종 후 흔히 나타나는 반응으로 대부분 2~3일 이내 증상이 사라집니다.)<br>
+    	◎ 예방접종 후 발열, 피로감, 접종부위 통증, 발적 등 이상반응이 나타날 수 있고, 2~3일 내에 증상이 사라집니다.<br>
     	<br>
-    	◎ 드물게 호흡곤란, 얼굴의 붓기, 눈/입술/입 안의 부종, 몸 전체의 발진, 빠른 심장 박동, 현기증, 쇼크 등의 증상을 동반한
-    	아나필락시스와 같은 심각한 알레르기 반응이 나타날수 있습니다.<br>
-    	<br>
-    	◎ 아스트라제네카, 얀센 접종 후 매우 드물게 혈소판감소성 혈전증이나 모세혈관 누출 증후군이 발생할 수 있고, <br>
-    	화이자, 모더나 접종 후 매우 드물게 심근염/심낭염이 발생할 수 있습니다.
+    	◎ 다만 이러한 상태가 48시간 이상 지속되는 경우 의료기관을 방문하시기 바랍니다.
     </p>
   </dd> 
   
   <dt>
     <button aria-expanded="false" aria-controls="faq51_desc">
-      코로나19 백신 접종 후 이상반응 발생시, 증상완화를 위하여 어떻게 조치하면 될까요?
+      예방접종 후 해열/진통제는 무엇을 복용해야 하나요?
     </button>
   </dt>
   <dd>
     <p id="faq51_desc" class="desc">
-    	◎ 예방접종 후 접종부위 통증이 있는 경우 통증 부위에 깨끗한 수건 등으로 냉찜질을 해주시기 바랍니다.
-    	◎ 드물게 호흡곤란, 얼굴의 붓기, 눈/입술/입 안의 부종, 몸 전체의 발진, 빠른 심장 박동, 현기증, 쇼크 등의 증상을 동반한
-    	아나필락시스와 같은 심각한 알레르기 반응이 나타날수 있습니다.<br>
+    	◎ 해열/진통제를 복용하는 경우 가급적 염증을 제거하는 효과가 없는 아세트아미노펜 성분의 의약품을 복용하시기 바랍니다.<br>
     	<br>
-    	◎ 아스트라제네카, 얀센 접종 후 매우 드물게 혈소판감소성 혈전증이나 모세혈관 누출 증후군이 발생할 수 있고, <br>
-    	화이자, 모더나 접종 후 매우 드물게 심근염/심낭염이 발생할 수 있습니다.
+    	◎ 아세트아미노펜 성분에 대한 알레르기 반응 이력이 있는 경우 다른 성분의 해열진통제 복용에 대해 의사와 상담하시기 바랍니다.
     </p>
   </dd>
   
-  
-  
-  
-  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq52_desc">
+      아나필락시스 증상은 어떠하고, 처치는 어떻게 하야 하나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq52_desc" class="desc">
+    	◎ 아나필락시스느 매우 드물지만, 갑자기 발생하는 심각한 알레르기 반응으로 피부, 호흡기, 순환기, 신경계 및 위장관계 증상이 
+    	나타납니다.<br>
+    	&nbsp; - 피부가 전신적으로 붉어지거나 두드러기가 생김, 얼굴 부종<br>
+    	&nbsp; - 목이 붓고 조이는 것 같음, 말하기 힘들고 목소리가 잠김, 숨이 차고 쌕쌕거림<br>
+    	&nbsp; - 어지럽거나 의식이 없음, 창백하거나 늘어짐<br>
+    	<br>
+    	◎ 아나필락시스는 생명을 위협할 수도 있으므로 빠른 응급처치가 필요하며, 위 증상이 나타나면 즉시 119로 연락하거나 
+    	가까운 응급실로 내원하시기 바랍니다.
+    </p>
+  </dd>  
 </dl> 
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 
 <!-- qna08 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna08">8. 코로나 19 예방접종 관련 피해보상</h5>
+<h3 id="qna08">8. 코로나 19 예방접종 관련 피해보상</h3>
 <dl class="faq">
   <dt>
-    <button aria-expanded="false" aria-controls="faq41_desc">
-      
+    <button aria-expanded="false" aria-controls="faq53_desc">
+      코로나19 예방접종 후 발생한 피해에 대한 보상은 어떤 종류가 있나요?
     </button>
   </dt>
   <dd>
-    <p id="faq41_desc" class="desc">
-    	◎ 
+    <p id="faq53_desc" class="desc">
+    	◎ 진료비 및 정액간병비, 장애일시 보상금, 사망일시 보상금 및 장제비가 포함됩니다.
     </p>
   </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq54_desc">
+      국가예방접종 피해보상은 언제까지 신청해야 하나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq54_desc" class="desc">
+    	◎ 국가예방접종 피해보상은 [감염병 예방 및 관리에 관한 법률] 시행령 제 29조에 따라 이상반응 발생일로부터 5년 이내에
+    	신청해야 합니다. 사망의 경우 사망일로부터 장애진단을 받은 경우는 진단일로부터 5년 이내에 신청해야 합니다.
+    </p>
+  </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq55_desc">
+      코로나19 1차 예방접종 후 이상반응으로 피해보상을 받은 사람이, 2차 예방접종 후 동일한 이상반응으로 피해보상을 신청할
+      경우 재보상이 가능한가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq55_desc" class="desc">
+    	◎ 네, 보상이 가능합니다.<br>
+    	&nbsp; ※ 다만, 1/2차 에방접종 피해보상 신처금액 합산 총액이 30만원 이상인 경우에는, 2차 예방접종 피해보상 신청금액이
+    	30만원 미만이라도 2차 예방접종 피해보상 신청시 기존 본인부담금 30만원 이상 피해보상 절차를 적용받게 됩니다.
+    </p>
+  </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq56_desc">
+      예방접종 후 이상반응으로 인한 피해보상 신청을 본인이 아닌 타인이 대신 해주어도 되나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq56_desc" class="desc">
+    	◎ 안됩니다. 보상신청의 경우 보상대상자 본인이 신청하거나, 보상대상자가 미성년자일 경우 친권자 또는 후견인이 보상신청을
+    	대행할 수 있습니다.
+    </p>
+  </dd>  
 </dl> 
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 
 <!-- qna09 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna09">9. 의료비 지원사업</h5>
+<h3 id="qna09">9. 의료비 지원사업</h3>
 <dl class="faq">
   <dt>
-    <button aria-expanded="false" aria-controls="faq41_desc">
-      
+    <button aria-expanded="false" aria-controls="faq57_desc">
+      코로나19 예방접종 후 인과성 불충분한 중증 환자 의료비 지원사업이란 무엇인가요?
     </button>
   </dt>
   <dd>
-    <p id="faq41_desc" class="desc">
-    	◎ 
+    <p id="faq57_desc" class="desc">
+    	◎ 코로나19 예방접종 후 중환자실 입원치료 도는 이에 준하는 질병이 발생하였으나, 백신과 이상반응에 대한 인과성 근거자료가
+    	부족하여 피해보상이 어려운 중증화자의 치료비를 지원하여 경제적 부담을 경감하기 위한 한시적 사업입니다. <br>
+    	<br>
     </p>
   </dd>
-</dl> 
-<p><a href="#top">맨 위로 이동</a></p>
-<hr>
-
-<!-- qna10 버튼 내용-------------------------------------------------------- -->
-<h5 id="qna10">10. 기타</h5>
-<dl class="faq">
-  <dt>
-    <button aria-expanded="false" aria-controls="faq41_desc">
-      
-    </button>
-  </dt>
-  <dd>
-    <p id="faq41_desc" class="desc">
-    	◎ 
-    </p>
-  </dd>
-</dl> 
-<p><a href="#top">맨 위로 이동</a></p>
-<hr>
-
   
+  <dt>
+    <button aria-expanded="false" aria-controls="faq58_desc">
+      코로나19 예방접종 후 인과성 불충분한 중증 환자 의료비 지원사업의 대상은 누구인가요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq58_desc" class="desc">
+    	◎ 코로나 19 예방접종 후 중환자실 입원치료 또는 이에 준하는 질병이 초래되었으나, 예방접종 피해조사반 도는 피해보상전문위원회
+    	검토결과 인과성 인정을 위한 근거자료 불충분으로 피해보상에서 제외된 환자를 대상으로 하며, 이대 소득/재산여건은 고려되지 않습니다.
+    	<br><br>
+    	◎ 다만, 백신보다는 다른 이유에 의한 경우, 명백히 인과성이 없는 경우는 지원 대상이 아닙니다.
+    </p>
+  </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq59_desc">
+      코로나19 예방접종 후 인과성 불충분한 중증 환자 의료비 지원을 받았더라도 추가로 피해보상 신청을 할 수 있나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq59_desc" class="desc">
+    	◎ 신청 가능합니다. 근거자료 축적 등 인과성 근거가 확인되어 인과성이 추가적으로 인정되면 선 지원된 진료비는 제외 후 
+    	보상됩니다.<br><br>
+    	◎ 다만, 동일한 진료 내역에 대해 긴급복지 등 타 사업과 중복 수혜를 받은 경우 환수됩니다.
+    </p>
+  </dd>
+  
+  <dt>
+    <button aria-expanded="false" aria-controls="faq60_desc">
+      1차로 지원받았으니, 치료가 끝나지 않아 계속 진료비가 발생하는 경우 추가로 지급이 되나요?
+    </button>
+  </dt>
+  <dd>
+    <p id="faq60_desc" class="desc">
+    	◎ 추가적으로 신청 가능하나, 1인당 1,000만원 한도에서 지원됩니다.
+    </p>
+  </dd>  
+</dl> 
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+
                                 </div>
                                     </div>
                                 </div>
@@ -956,127 +1141,6 @@ dl.faq button[aria-expanded="true"]::before {
     <script src="/semi/resources/js/lib/bootstrap.min.js"></script><script src="assets/js/scripts.js"></script>
     <!-- scripit init-->
 
-<script>
-/*
-*   This content is licensed according to the W3C Software License at
-*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
-*
-*   File:   ButtonExpand.js
-*
-*   Desc:   Checkbox widget that implements ARIA Authoring Practices
-*           for a menu of links
-*/
-
-/*
-*   @constructor ButtonExpand
-*
-*
-*/
-var ButtonExpand = function (domNode) {
-
-  this.domNode = domNode;
-
-  this.keyCode = Object.freeze({
-    'RETURN': 13
-  });
-};
-
-ButtonExpand.prototype.init = function () {
-
-  this.controlledNode = false;
-
-  var id = this.domNode.getAttribute('aria-controls');
-
-  if (id) {
-    this.controlledNode = document.getElementById(id);
-  }
-
-  this.domNode.setAttribute('aria-expanded', 'false');
-  this.hideContent();
-
-  this.domNode.addEventListener('keydown',    this.handleKeydown.bind(this));
-  this.domNode.addEventListener('click',      this.handleClick.bind(this));
-  this.domNode.addEventListener('focus',      this.handleFocus.bind(this));
-  this.domNode.addEventListener('blur',       this.handleBlur.bind(this));
-
-};
-
-ButtonExpand.prototype.showContent = function () {
-
-  if (this.controlledNode) {
-    this.controlledNode.style.display = 'block';
-  }
-
-};
-
-ButtonExpand.prototype.hideContent = function () {
-
-  if (this.controlledNode) {
-    this.controlledNode.style.display = 'none';
-  }
-
-};
-
-ButtonExpand.prototype.toggleExpand = function () {
-
-  if (this.domNode.getAttribute('aria-expanded') === 'true') {
-    this.domNode.setAttribute('aria-expanded', 'false');
-    this.hideContent();
-  }
-  else {
-    this.domNode.setAttribute('aria-expanded', 'true');
-    this.showContent();
-  }
-
-};
-
-/* EVENT HANDLERS */
-
-ButtonExpand.prototype.handleKeydown = function (event) {
-
-  console.log('[keydown]');
-
-  switch (event.keyCode) {
-
-    case this.keyCode.RETURN:
-
-      this.toggleExpand();
-
-      event.stopPropagation();
-      event.preventDefault();
-      break;
-
-    default:
-      break;
-  }
-
-};
-
-ButtonExpand.prototype.handleClick = function (event) {
-  this.toggleExpand();
-};
-
-ButtonExpand.prototype.handleFocus = function (event) {
-  this.domNode.classList.add('focus');
-};
-
-ButtonExpand.prototype.handleBlur = function (event) {
-  this.domNode.classList.remove('focus');
-};
-
-/* Initialize Hide/Show Buttons */
-
-window.addEventListener('load', function (event) {
-
-  var buttons =  document.querySelectorAll('button[aria-expanded][aria-controls]');
-
-  for (var i = 0; i < buttons.length; i++) {
-    var be = new ButtonExpand(buttons[i]);
-    be.init();
-  }
-
-}, false);
-</script>
 
 
 </body>

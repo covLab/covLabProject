@@ -1,7 +1,7 @@
 package reservation.model.vo;
 
 public class Hospital implements java.io.Serializable{
-	private static final long serialVersionUID = 100L;
+	private static final long serialVersionUID = 150L;
 	
 	private String reg_bus_no;
 	private String hp_name;
@@ -9,7 +9,14 @@ public class Hospital implements java.io.Serializable{
 	private String hp_phone;
 	private float hp_latitude;
 	private float hp_longitude;
+	private int remain;
 	
+	public int getRemain() {
+		return remain;
+	}
+	public void setRemain(int remain) {
+		this.remain = remain;
+	}
 	public String getReg_bus_no() {
 		return reg_bus_no;
 	}

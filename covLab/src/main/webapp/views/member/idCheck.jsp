@@ -26,10 +26,12 @@
 				console.log("success : " + data);
 				if(data == "ok"){
 					alert("이미 등록된 회원 입니다.");
-					
+					alert("로그인 페이지로 넘어 갑니다.")
+					location.href="/semi/views/member/login.jsp";
 				}else{
 					alert("조회된 정보가 없습니다.");
-					
+					alert("가입하기 페이지로 넘어 갑니다.")
+					location.href="/semi/views/member/enroll.html";
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown){
@@ -59,7 +61,7 @@
                         </div>
                         <div class="login-form">
                             <h4>회원 확인</h4>
-                            <form action="/semi/mcheck" method="post" >
+                            
                                 <div class="form-group">
                                     <label>이름</label>
                                     <input type="text" class="form-control" name="username" id="username" placeholder="이름">
@@ -75,7 +77,7 @@
                                 <div class="register-link text-center">
                                     <p>돌아가기 <a href="/semi/"> 홈페이지</a></p>
                                 </div>
-                              </form>
+                            <!--   </form> -->
                         </div>
                     </div>
                 </div>

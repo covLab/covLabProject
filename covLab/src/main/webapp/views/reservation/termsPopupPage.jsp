@@ -14,14 +14,26 @@ Vaccine vac = (Vaccine) request.getAttribute("vac");
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+#areaBox {
+	overflow: hidden;
+	resize: none;
+	border: none;
+	outline: none;
+}
 .inputBox {
 	border: none;
+	outline: none;
+	resize: none;
 }
 
 input:focus {
 	outline: none;
 }
 </style>
+
+<%@ include file="../common/script.jsp"%>
+<%@ include file="../common/stylesheet.jsp"%>
+
 <script type="text/javascript">
 	function agree(){
 		
@@ -44,53 +56,52 @@ input:focus {
 	 	
 	}
 </script>
+
+
 </head>
 <body>
 	<div class="row">
 
 		<div class="col-lg-3 p-0 ">
 			<div class="card h-100 m-0">
-				<div class="card_header"></div>
-				<div class="card-body">
+				<div class="card-header">
 					<h5 class="card-title text-center">접종 정보</h5>
+				</div>
+				<div class="card-body container-fluid">
 
 					<form action="/semi/insertres" method="post" name="info">
 					
 						<div class="form-group">
-							<label for="user_name">이름 : </label> <input type="text"
+							<label class="col-sm-2 col-form-label" for="user_name">이름 : </label> <input type="text"
 								name="user_name" value="<%=mb.getUserName()%>" readonly
-								class="inputBox">
+								class="form-control inputBox">
 						</div>
 						<div class="form-group">
-							<label for="hp_phone">주민번호 : </label><input type="text"
+							<label class="col-sm-2 col-form-label" for="hp_phone">주민번호 : </label><input type="text"
 								name="user_rn" value="<%=mb.getUserRn()%>" readonly
-								class="inputBox" id="rn">
+								class="form-control inputBox" id="rn">
 						</div>
 						<div class="form-group">
-							<label for="user_address">주소 : </label><input type="text"
-								name="user_address" value="<%=mb.getUserAddress()%>" readonly
-								class="inputBox">
+							<label class="col-sm-2 col-form-label" for="user_address">주소 : </label><textarea 
+								name="user_address" readonly
+								class="form-control inputBox"><%=mb.getUserAddress()%></textarea>
 						</div>
 						<div class="form-group">
-							<label for="user_phone">전화번호 : </label><input type="text"
+							<label class="col-sm-2 col-form-label" for="user_phone">전화번호 : </label><input type="text"
 								name="user_phone" value="<%=mb.getUserPhone()%>" readonly
-								class="inputBox">
+								class="form-control inputBox">
 						</div>
 						<div class="form-group">
-							<label for="">기관명 : </label> <input type="text" name="hp_name"
-								value="<%=hp.getHp_name()%>" readonly class="inputBox">
+							<label class="col-sm-2 col-form-label" for="">기관명 : </label> <input type="text" name="hp_name"
+								value="<%=hp.getHp_name()%>" readonly class="form-control inputBox">
 						</div>
 						<div class="form-group">
-							<label>백신 : </label> <input type="text" name="vac_name"
-								value="<%=vac.getVac_name()%>" readonly class="inputBox">
+							<label  class="col-sm-2 col-form-label">백신 : </label> <input type="text" name="vac_name"
+								value="<%=vac.getVac_name()%>" readonly class="form-control inputBox">
 						</div>
 						<div class="form-group">
-							<label>예약 날짜 : </label> <input type="text" name="ioc_date"
-								value="<%= request.getAttribute("ioc_date") %>" readonly class="inputBox">
-						</div>
-						<div class="form-group">
-							<label>서브 유저 넘버 : </label> <input type="text" name="sub_user_no"
-								value="<%= request.getAttribute("sub_user_no") %>" readonly class="inputBox">
+							<label  class="col-sm-2 col-form-label">예약 날짜 : </label> <input type="text" name="ioc_date"
+								value="<%= request.getAttribute("ioc_date") %>" readonly class="form-control inputBox">
 						</div>
 						<input type="hidden" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" >
 						<input type="hidden" name="reg_bus_no" value=<%= hp.getReg_bus_no() %> class="inputBox" >
@@ -102,7 +113,7 @@ input:focus {
 								onclick="reservationDatePopup()">날짜 선택</a>
 						</div> -->
 
-						<textarea class="form-control h-25" rows="10">
+						<textarea class="form-control h-25 text-center" rows="10">
 						제1조(목적) 이 법은 사업자가 그 거래상의 지위를 남용하여 불공정한 내용의 약관(約款)을 작성하여 거래에 사용하는 것을 방지하고 불공정한 내용의 약관을 규제함으로써 건전한 거래질서를 확립하고, 이를 통하여 소비자를 보호하고 국민생활을 균형 있게 향상시키는 것을 목적으로 한다.
 						제2조(정의) 이 법에서 사용하는 용어의 정의는 다음과 같다.
 
@@ -115,7 +126,9 @@ input:focus {
 						<div class="text-center">
 							<input type="checkbox" id="agreeCheck" ><span>약관에 동의합니다.</span>
 						</div>
-						<input type="button" onclick="agree()" value="예약확인">
+						<div class="text-center">
+						<input class="btn btn-rounded btn-primary" type="button" onclick="agree()" value="예약확인">
+						</div>
 
 					</form>
 

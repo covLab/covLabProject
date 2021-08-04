@@ -54,7 +54,7 @@
 									<br>
 									</div>
                                 <div class="register-link m-t-20 text-center">
-                                    <p>회원이 아니신가요? <Br><a href="/semi/views/member/enroll.html"> 가입하기</a></p>
+                                    <p>회원이 아니신가요? <Br><a href="/semi/views/member/idCheck.jsp"> 가입하기</a></p>
                                 </div>
                             
                         </div>

@@ -14,11 +14,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>백신 후기</title>
-<style type="text/css">
-/* form.rform{
+<!-- <style type="text/css">
+form.rform{
 	display: none;
-}  */
-</style>
+}  
+</style> -->
 
 <script type="text/javascript" src="/semi/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -130,7 +130,15 @@ function moveLogin(){
 		$("form.rform").css("display", "none");
 	}); 
 });  */
-
+function showReplyForm(comlevel){
+	console.log("comlevel : "+comlevel);
+	var con = document.getElementById("reply");
+	if(con.style.display=='none'){
+		con.style.display = 'block';
+	}else{
+		con.style.display = 'none';
+	}
+}
 
 //답글 작성
 <%-- function requestReply(){
@@ -229,7 +237,7 @@ function moveLogin(){
 										 <% if(loginMember == null){ %>
 										 	<a href="#" onclick="moveLogin()">[답변]</a>
 										 <% }else{ %>
-										 		<a href="#" onclick="showReplyForm()">[답변]</a><br>
+										 		<a href="#" onclick="showReplyForm(<%= c.getComLevel() %>)">[답변]</a><br>
 										 	<% if(loginMember.getUserId().equals(c.getComWriter())){ //본인글일때 %>
 												<a href="#" onclick="moveCommentsUpdate(<%= c.getComNo() %>, <%= c.getBoardRef() %>, <%= currentPage %>); return false;">[수정하기]</a><br>
 												<a href="#" onclick="requestCommentsDelete(<%= c.getComNo() %>, <%= c.getBoardRef() %>, <%= currentPage %>);return false;">[댓글삭제]</a>

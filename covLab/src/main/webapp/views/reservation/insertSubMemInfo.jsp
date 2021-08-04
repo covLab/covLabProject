@@ -6,7 +6,6 @@
 <%
 Hospital hp = (Hospital) request.getAttribute("hp");
 Members mb = (Members) request.getAttribute("mb");
-Vaccine vac = (Vaccine) request.getAttribute("vac");
 
 %><!DOCTYPE html>
 <html>
@@ -62,8 +61,8 @@ input:focus {
 							<label for="sub_user_phone">전화번호 : </label><input type="text"
 								name="sub_user_phone">
 						</div>
-						<input type="text" name="ioc_date" value="<%= request.getAttribute("ioc_date") %> " class="inputBox" id="ioc" readonly><br>
-						<input type="text" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" id="serial"><br>
+						<input type="text" name="ioc_date" value="<%= request.getAttribute("ioc_date")%>" class="inputBox" id="ioc" readonly><br>
+						<input type="text" name="vac_name" value=<%= request.getAttribute("vac_name") %> class="inputBox" id="vac_name"><br>
 						<input type="text" name="reg_bus_no" value=<%=hp.getReg_bus_no()%> class="inputBox" id="reg"><br>
 						<input type="text" name="user_no" value=<%=mb.getUserNo()%> class="inputBox" id="no"> <br>
 						<input type="text" name="resType" value=<%=request.getAttribute("resType")%> class="inputBox" id="resType"> <br>

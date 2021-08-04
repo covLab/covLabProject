@@ -20,56 +20,46 @@
     <script type="text/javascript" src="/semi/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 
-function EmailCheck(){ 
-	  $('#userphone').click(function(){
-          String phoneNumber = $('#inputPhoneNumber').val();
-          alert('인증번호 발송 완료!');
-
-
-          $.ajax({
-              type: "GET",
-              url: "/check/sendSMS",
-              data: {
-                  "phoneNumber" : phoneNumber
-              },
-              success: function(res){
-                  $('#checkBtn').click(function(){
-                      if($.trim(res) ==$('#inputCertifiedNumber').val()){
-                          Swal.fire(
-                              '인증성공!',
-                              '휴대폰 인증이 정상적으로 완료되었습니다.',
-                              'success'
-                          )
-
-                          $.ajax({
-                              type: "GET",
-                              url: "/update/phone",
-                              data: {
-                                  "phoneNumber" : $('#inputPhoneNumber').val()
-                              }
-                          })
-                          document.location.href="/home";
-                      }else{
-                          Swal.fire({
-                              icon: 'error',
-                              title: '인증오류',
-                              text: '인증번호가 올바르지 않습니다!',
-                              footer: '<a href="/home">다음에 인증하기</a>'
-                          })
-                      }
-                  })
-
-
-              }
-          })
-      });
+function phoneCheck(){ 
+	  $.ajax({
+			url: "/semi/phonecheck",
+			type: "post",
+			data: {userid: $("#userid").val(), userphone: $("#userphone").val()},
+			success: function(data){
+				console.log("success : " + data);
+				if(data == "ok"){
+					alert("임시비밀번호가 핸드폰번호로 보내어 졌습니다.");
+					
+				}else{
+					alert("조회된 정보가 없습니다.");
+					
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log("error : " + jqXHR + ", " 
+						+ textStatus + ", " + errorThrown);
+			}
+		});
+		
+		//버튼 클릭이벤트 취소 (submit 으로 클릭 전달 막기 위함)
+	
+	}
 function moveemail(){
 	location.href="/semi/views/member/findPasswordEmail.jsp";
 }
 function movephone(){
 	location.href="/semi/views/member/findPasswordPhone.jsp";
 }
-
+function validate(){
+	 var phone = document.getElementById("userphone").value;
+	 var re4= /^01[01679]-[0-9]{3,4}-[0-9]{4}$/; 
+	if(!re4.test(phone)){
+		alert("전화번호 형식이 틀렸습니다 (' - ')을 포함해서 입력해주세요.")
+		document.getElementById("userphone").value="";
+		 document.getElementById("userphone").focus();
+		 return false;
+	} 
+}
  </script>   
     
 </head>
@@ -86,7 +76,7 @@ function movephone(){
 						</div>
 						<div class="login-form">
 
-							<form action="/semi/findpwdemail" method="post">
+							<form action="/semi/findpwphone" method="post" onsubmit="return validate();">
 								<div class="form-group">
 									<h4>비밀번호 찾기</h4>
 								<div class="form-group">
@@ -105,9 +95,19 @@ function movephone(){
 									<label>핸드폰</label> <input type="text"  name="userphone" id="userphone"class="form-control" required
 										placeholder="핸드폰을 입력하세요">
 								<hr>
-								<button  onclick ="EmailCheck();" type="submit" value="확인"class="btn btn-primary btn-flat m-b-15">확인</button>
+								<button   onclick ="phoneCheck();"type="submit" class="btn btn-primary btn-flat m-b-15">확인</button>
 									</div>
-							
+							<table border="1" width="700" height="100" align="center">
+	<tr>
+	<th class="a" align="left"></th>
+		<td><ul>
+			<li align="left">- 아이디/비밀번호 관리의 책임은 본인에게 있습니다.</li>
+			<li align="left">- 타인에게 알려줄 경우 불이익을 당할 수 있으므로 관리에 주의하여주십시오.</li>
+			<li align="left">- 아이디/비밀번호 관리소홀로 인한 피해는 본 사이트에서 책임지지 않습니다.</li>
+			</ul></td>
+	</tr>
+			</table>	
+			<br>
 				
 								<div class="register-link text-center">
 									<p>

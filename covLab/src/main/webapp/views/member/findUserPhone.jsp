@@ -26,6 +26,16 @@ function moveemail(){
 function movephone(){
 	location.href="/semi/views/member/findUserPhone.jsp";
 }
+function validate(){
+	var phone = document.getElementById("userphone").value;
+	 var re4= /^01[01679]-[0-9]{3,4}-[0-9]{4}$/; 
+	if(!re4.test(phone)){
+		alert("전화번호 형식이 틀렸습니다 (' - ')을 포함해서 입력해주세요.")
+		document.getElementById("userphone").value="";
+		 document.getElementById("userphone").focus();
+		 return false;
+	} 
+}
  </script>   
     
 </head>
@@ -42,7 +52,7 @@ function movephone(){
 						</div>
 						<div class="login-form">
 
-							<form action="/semi/findidphone" method="post">
+							<form action="/semi/findidphone" method="post" onsubmit= "return validate();">
 								<div class="form-group">
 									<h4>아이디 찾기</h4>
 								<div class="form-group">
@@ -66,7 +76,17 @@ function movephone(){
 											<hr>
 										<button type="submit" class="btn btn-primary btn-flat m-b-15">확인</button>
 								</div>
-								
+								<table border="1" width="700" height="100" align="center">
+	<tr>
+	<th class="a" align="left"></th>
+		<td><ul>
+			<li align="left">- 아이디/비밀번호 관리의 책임은 본인에게 있습니다.</li>
+			<li align="left">- 타인에게 알려줄 경우 불이익을 당할 수 있으므로 관리에 주의하여주십시오.</li>
+			<li align="left">- 아이디/비밀번호 관리소홀로 인한 피해는 본 사이트에서 책임지지 않습니다.</li>
+			</ul></td>
+	</tr>
+			</table>	
+			<br>
 								<div class="register-link text-center">
 									<p>
 										Back to <a href="/semi/"> Home</a>

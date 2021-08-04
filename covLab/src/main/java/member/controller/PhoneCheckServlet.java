@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.servcie.MemberService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class TempCheckServlet
+ * Servlet implementation class PhoneCheckServlet
  */
-@WebServlet("/ctemp")
-public class TempCheckServlet extends HttpServlet {
+@WebServlet("/phonecheck")
+public class PhoneCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TempCheckServlet() {
+    public PhoneCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +31,21 @@ public class TempCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//임시비밀번호 체크
-		 String curpd = request.getParameter("curpd");
-		 
-		//Member member = new MemberService().selectCheckId2(username, userrn);
+request.setCharacterEncoding("utf-8");
 		
-       int reuslt = new MemberService().selectCheckpd(curpd);
-      
+		String userphone = request.getParameter("userphone");
+		String userid = request.getParameter("userid");
+		
+		Member member = new MemberService().searchpwdp(userid ,userphone);
+		System.out.println(userphone);
+		System.out.println(userid);
 		String returnValue = null;  
-		
-		if(reuslt != 0 ) {
+		if(member != null) {
 			returnValue = "ok";
 		}else {
 			returnValue = "no";
 		}
+		
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -51,6 +53,7 @@ public class TempCheckServlet extends HttpServlet {
 		out.flush();
 		out.close();
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import member.model.servcie.MemberService;
 import member.model.vo.Member;
 
@@ -57,7 +58,7 @@ public class FindPasswordEmailServlet extends HttpServlet {
 		// mail server 설정
 		String host = "smtp.gmail.com";
 		String user = "djop1212@gmail.com"; // 자신의 네이버 계정
-		String password = "ehtlfkr1@3";// 자신의 네이버 패스워드
+		String password = "ehtlfkr!2";// 자신의 네이버 패스워드
 
 		// 메일 받을 주소
 		String to_email = useremail;
