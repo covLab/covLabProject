@@ -10,7 +10,7 @@
 <body>
 
 
-	<!-- index -->
+   <!-- index -->
 
     <!-- jquery vendor -->
     <script src="/semi/resources/js/lib/jquery.min.js"></script>
@@ -38,21 +38,18 @@
     <script src="/semi/resources/js/lib/sparklinechart/sparkline.init.js"></script>
     <script src="/semi/resources/js/lib/owl-carousel/owl.carousel.min.js"></script>
     <script src="/semi/resources/js/lib/owl-carousel/owl.carousel-init.js"></script>
+    
+    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/semi/resources/js/bootstrap-datepicker.js"></script>
+    <!-- <script src="/semi/resources/js/jquery.timepicker.min.js"></script> -->
+    <script src="/semi/resources/js/jquery.timepicker.min.js"></script>
+    <script src="/semi/resources/js/bootstrap-datepicker.ko.min.js"></script>
+    
+    
     <!-- scripit init-->
     <script src="/semi/resources/js/dashboard2.js"></script>
-
-
-
-	<!-- boardAdmin -->
-	<!-- jquery vendor -->
-    <script src="/semi/resources/js/lib/jquery.min.js"></script>
-    <script src="/semi/resources/js/lib/jquery.nanoscroller.min.js"></script>
-    <!-- nano scroller -->
-    <script src="/semi/resources/js/lib/menubar/sidebar.js"></script>
-    <script src="/semi/resources/js/lib/preloader/pace.min.js"></script>
-    <!-- sidebar -->
     
-    <!-- bootstrap -->
 
     <!-- JS Grid Scripts Start-->
     <script src="/semi/resources/js/lib/jsgrid/db.js"></script>
@@ -68,12 +65,6 @@
     <script src="/semi/resources/js/lib/jsgrid/fields/jsgrid.field.control.js"></script>
     <script src="/semi/resources/js/lib/jsgrid/jsgrid-init.js"></script>
     <!-- JS Grid Scripts End-->
-
-    <script src="/semi/resources/js/lib/bootstrap.min.js"></script>
-    <script src="/semi/resources/js/scripts.js"></script>
-    <!-- scripit init-->
-
-
 
 
 

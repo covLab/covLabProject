@@ -1,7 +1,7 @@
 package reservation.model.vo;
 
 public class Hospital implements java.io.Serializable{
-	private static final long serialVersionUID = 100L;
+	private static final long serialVersionUID = 150L;
 	
 	private String reg_bus_no;
 	private String hp_name;

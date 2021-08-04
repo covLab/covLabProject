@@ -45,8 +45,7 @@ public class moveSubInfo extends HttpServlet {
 		String user_id = (String) session.getAttribute("user_id");
 		
 		// 테스트용 시리얼 넘버 받아오기
-		String serial_num = request.getParameter("serial_num");
-		System.out.println("serial_num : "+serial_num);
+		String vac_name = request.getParameter("vac_name");
 		
 		//테스트용 reg_bus_no 받아오기
 		String reg_bus_no = request.getParameter("reg_bus_no");
@@ -65,9 +64,6 @@ public class moveSubInfo extends HttpServlet {
 		System.out.println("user_id2 : "+user_id);
 		Members mb = rservice.selectOneMember(user_id);
 		
-		//vac 객체에 백신 정보 담기
-		System.out.println("serial_num2 : "+serial_num);
-		Vaccine vac = rservice.selectOneVac(serial_num);
 		
 		//hp 객체에 기관 정보 담기
 		System.out.println("reg2 : "+reg_bus_no);
@@ -82,7 +78,7 @@ public class moveSubInfo extends HttpServlet {
 		
 		request.setAttribute("hp", hp);
 		request.setAttribute("mb", mb);
-		request.setAttribute("vac", vac);
+		request.setAttribute("vac_name", vac_name);
 		request.setAttribute("ioc_date", ioc_date);
 		request.setAttribute("resType", resType);
 		view.forward(request, response);

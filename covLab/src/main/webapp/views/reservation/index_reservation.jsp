@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+=======
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 	pageEncoding="UTF-8"%>
 <!-- import="java.util.ArrayList, reservation.model.vo.Hospital" -->
 <%
@@ -88,6 +92,7 @@
 		var longitude = position.coords.longitude; 
 		var latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 		 
+
 		// 지도 옵션 
 		var mapOption = {
 			zoom : 11.5,
@@ -138,6 +143,24 @@
 				map : map,
 				icon : "../../resources/images/red_dot_small.png"
 			});
+<<<<<<< HEAD
+			let distance=getDistance(latitude, longitude, locations[i].hp_latitude, locations[i].hp_longitude)
+			locations[i].distance= distance;
+		}
+			let newLocList = locations.sort(function(a,b){
+				if (a.distance>b.distance){
+					return 1;
+				}
+				if (a.distance<b.distance){
+					return -1;
+				}
+				return 0;
+			});
+			
+			console.log(newLocList);
+	}
+	
+=======
 			
 		}
 
@@ -174,6 +197,7 @@
 		
 	sortedLocations=sortByDist(locations);
 	console.log(sortedLocations);
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 
 /* 			google.maps.event.addListener(marker, 'click',
 					(function(marker, i) {
@@ -192,11 +216,21 @@
 			outDiv.innerHTML = "에러발생 : " + err.code;
 		}
 	}
-	
 	//체크박스 값 하나만 선택되게 하는 함수
 	function checkOnlyOne(element) {
+<<<<<<< HEAD
+		  
+		  const checkboxes 
+		      = document.getElementsByName("list_order");
+		  
+		  checkboxes.forEach((cb) => {
+		    cb.checked = false;
+		  })
+		  
+=======
 		  const checkboxes = document.getElementsByName("list_order");
 		  checkboxes.forEach((cb) => { cb.checked = false })
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 		  element.checked = true;
 		}
 	
@@ -213,7 +247,7 @@
         dist = dist * 60 * 1.1515
         if (unit=="K") { dist = dist * 1.609344 }
         if (unit=="N") { dist = dist * 0.8684 }
-        return dist;
+        return dist
 	}
 	
 	function hpOrder(event) {
@@ -226,7 +260,14 @@
 </head>
 
 <body onload="javascript:locationTest();">
+<<<<<<< HEAD
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+		rel='stylesheet' type='text/css' />
+</head>
+<body>
+=======
 
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 	<div class="content-wrap">
 		<div class="main">
 			<div class="container-fluid">
@@ -258,6 +299,21 @@
 				<!-- /# row -->
 				<section id="main-content">
 					<form action="list_option.jsp">
+<<<<<<< HEAD
+						<input type='checkbox' name='list_order' value='dist'
+							onclick='checkOnlyOne(this)' />거리순 <input type='checkbox'
+							name='list_order' value='amnt' onclick='checkOnlyOne(this)' />수량순
+						<select name="list_option_key" onchange="handleOnList(this)">
+							<option value="none">=== 선택 ===</option>
+							<option value="dist">화이자</option>
+							<option value="dist">얀센</option>
+							<option value="dist">AZ</option>
+						</select>
+					</form>
+					<div class="row">
+
+
+=======
 
 						<input type='radio' name='list_order' value='dist'
 							onclick='hpOrder(event)' />거리순 <input type='radio'
@@ -274,6 +330,7 @@
 					</form>
 					<div class="row">
 
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 						<div class="col-lg-3 p-0">
 							<div class="card">
 								<div class="card-body">
@@ -345,11 +402,19 @@ for(var i=0;i<sortedLocations.length;i++){
 										class="btn btn-primary pl-5 pr-5">예약</a>
 								</div>
 							</div>
+<<<<<<< HEAD
+						</div>
+						<div class="col-lg-9 p-0">
+							<div id="map" style="width: 95%; height: 600px;"></div>
+
+=======
 							
+>>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 
 
 
 						</div>
+
 					</div>
 
 
@@ -363,7 +428,7 @@ for(var i=0;i<sortedLocations.length;i++){
 		</section>
 	</div>
 	</div>
-	</div>
+
 
 	<%@ include file="../common/script.jsp"%>
 </body>
