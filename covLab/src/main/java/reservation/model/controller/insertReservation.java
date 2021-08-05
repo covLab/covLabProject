@@ -105,6 +105,7 @@ public class insertReservation extends HttpServlet {
 			String pageType = "insertSuccess";
 			request.setAttribute("pageType", pageType);
 			view.forward(request, response);
+			
 		}else {
 			System.out.println("실패");
 			view = request.getRequestDispatcher(
