@@ -53,13 +53,11 @@ public class cancelReservation extends HttpServlet {
 		System.out.println("삭제 결과 : "+result);
 		RequestDispatcher view = null;
 		
-		if(result >= 1) {
+		if(result == 1) {
 			view = request.getRequestDispatcher(
 					"views/reservation/complete.jsp");
-			
 			String pageType = "cancelSuccess";
 			request.setAttribute("pageType", pageType);
-			
 			view.forward(request, response);
 		}else {
 			view = request.getRequestDispatcher(

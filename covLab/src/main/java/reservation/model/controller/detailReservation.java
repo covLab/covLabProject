@@ -138,9 +138,9 @@ public class detailReservation extends HttpServlet {
 			view.forward(request, response);
 		}else {
 			view = request.getRequestDispatcher(
-					"views/reservation/error.jsp");
-			String pageType = "hpInquireError";
-			request.setAttribute("pageType", pageType);
+					"views/common/error.jsp");
+			request.setAttribute("message", 
+					reg_bus_no + "번 병원 조회 실패!");
 			view.forward(request, response);
 		}
 		

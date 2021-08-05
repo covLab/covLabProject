@@ -53,30 +53,30 @@ function cancel(){
 
 					<form action="/semi/cancelres" method="post" name="info">
 						<div class="form-group">
-							<label class= "col-sm-2 col-form-label" for="user_name">이름 </label> <input class="form-control inputBox" type="text"
+							<label class= "col-sm-2 col-form-label" for="user_name">이름 : </label> <input class="form-control inputBox" type="text"
 								name="user_name" value="<%=mb.getUserName()%>" readonly
 								class="inputBox">
 						</div>
 						<div class="form-group">
-							<label class= "col-sm-2 col-form-label"  for="hp_phone">주민번호</label><input class="form-control inputBox" type="text"
+							<label class= "col-sm-2 col-form-label"  for="hp_phone">주민번호 : </label><input class="form-control inputBox" type="text"
 								name="user_rn" value="<%=mb.getUserRn()%>" readonly
 								class="inputBox" id="rn">
 						</div>
 						<div class="form-group">
-							<label class= "col-sm-2 col-form-label"  for="user_address">주소</label><input class="form-control inputBox" type="text"
+							<label class= "col-sm-2 col-form-label"  for="user_address">주소 : </label><input class="form-control inputBox" type="text"
 								name="user_address" value="<%=mb.getUserAddress()%>" readonly
 								class="inputBox">
 						</div>
 						<div class="form-group">
-							<label class= "col-sm-2 col-form-label"  for="">기관명</label> <input class="form-control inputBox" type="text" name="hp_name"
+							<label class= "col-sm-2 col-form-label"  for="">기관명 : </label> <input class="form-control inputBox" type="text" name="hp_name"
 								value="<%=hp.getHp_name()%>" readonly class="inputBox">
 						</div>
 						<div class="form-group">
-							<label class= "col-sm-2 col-form-label" >백신</label> <input class="form-control inputBox" type="text" name="vac_name"
+							<label class= "col-sm-2 col-form-label" >백신 : </label> <input class="form-control inputBox" type="text" name="vac_name"
 								value="<%=vac.getVac_name()%>" readonly class="inputBox">
 						</div>
 						<div class="form-group">
-							<label class= "col-sm-2 col-form-label" >예약 날짜</label> <input class="form-control inputBox" type="text" name="rev_date"
+							<label class= "col-sm-2 col-form-label" >예약 날짜 : </label> <input class="form-control inputBox" type="text" name="rev_date"
 								value="<%= res.getIoc_date() %>" readonly class="inputBox" id="ioc">
 						</div>
 						<input type="hidden" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" id="serial">
@@ -87,9 +87,8 @@ function cancel(){
 							<a href="javascript:void(0)" target="_blank"
 								onclick="reservationDatePopup()">날짜 선택</a>
 						</div> -->
-						<div class="text-center">
+
 						<input class = "btn btn-rounded btn-primary"type="button" onclick ="cancel()" value="예약취소">
-						</div>
 
 					</form>
 

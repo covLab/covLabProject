@@ -65,6 +65,27 @@ $(function() {
     
     //초기값을 오늘 날짜로 설정해줘야 합니다.
    $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
+    
+/*    function ct(){
+	   var currTime = new Date();
+	   alert(currTime);
+	   if(carrTime.getHours <= 0)
+	   	return 0;
+   }
+   $("#time1").timepicker({
+   
+      step: 30,            //시간간격 : 5분
+      minTime : ct(),
+      maxTime : "18:00",
+      timeFormat: "H:i"    //시간:분 으로표시
+   
+   
+   });
+   $(document).ready(function(){
+   
+      $("#time1").timepicker('setTime', new Date());
+   
+   }); */
 });
 
 function getTimeStamp(date) {
@@ -100,6 +121,28 @@ $(function(){
 		$('#timeBox').click();
 		
 		
+		<%-- var today = $('#datepicker').datepicker("getDate");
+		
+		
+		 
+		alert(getTimeStamp(today));
+		
+		var list_date = [];
+		<% for (Reservation date : list_resTime) {%>
+			
+			var sdate = '<%= date.getIoc_date()%>';
+			var toDate = new Date(sdate);
+			
+			alert(getTimeStamp(toDate));
+			
+			list_date.push(toDate);
+		<% } %>
+		
+		for(int i=0 ; i < list_date.length ; i++ ){
+			alert("같음");
+		} --%>
+		
+		
 		
 	});
 });
@@ -119,6 +162,7 @@ function termsPopup(){
 	var sDate = getTimeStamp(date);
 
   	var time = $('#timeBox').text();
+  	alert(time);
 	var ioc_date = sDate+' '+time;
   
 	fnm.ioc_date.value = ioc_date;
@@ -213,7 +257,7 @@ input:focus {
 						<div class="page-header">
 							<div class="page-title">
 								<h1>
-									안녕하세요. <span>코로나 백신 예약 사ddsd이트 Covlab입니다.</span>
+									안녕하세요. <span>코로나 백신 예약 사이트 Covlab입니다.</span>
 								</h1>
 							</div>
 						</div>
