@@ -11,7 +11,6 @@
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 	int startRow = ((Integer) request.getAttribute("startRow")).intValue();
 	int endRow = ((Integer) request.getAttribute("endRow")).intValue();
-
 %>
 <!DOCTYPE html>
 <html>
@@ -33,6 +32,7 @@
 <script
 	src="http://maps.google.com/maps/api/js?q=seoul&key=AIzaSyCZ8XJruaL1nd6GJOryueJE_Av5O6mU5H0"
 	type="text/javascript"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 
 <style>
 <!--
@@ -60,7 +60,8 @@
 	var reg_bus_no=null;
 	/* 선택한 병원의 사업자 등록번호 */
 	var chosen_hp=null;
-	var order_opt = 'dist';
+
+	const request = new XMLHttpRequest();
 	<%
 	for (Hospital hp: hps) {
 	%>
@@ -128,20 +129,6 @@
 			return 0;
 		});
 		return sortedArr;
-	}
-	/* 라디오 버튼 값에 따라 정렬하는 함수*/
-	function hpOrder(list) {
-		/* var order_opt = document.getElementByName('list_order');
-		document.getElementByName('list_order').innerText = event.target.value; */
-		const xhttp = new XMLHttpRequest();
-		order_opt = $(":radio[name='list_order']:checked").val();
-		if (order_opt == 'amnt') {
-			sortedLocations = sortByAmnt(list);
-		}
-		if (order_opt == 'dist') {
-			sortedLocations = sortByDist(list);
-		}
-		console.log(sortedLocations);
 	}
 	
 	// 위치콜백 
@@ -234,23 +221,73 @@
 	
 	function locationTest() {
 		navigator.geolocation.getCurrentPosition(handleLocation, handleError);
-		hpOrder(sortedLocations);
 		console.log(sortedLocations);
-		<%-- hospTable(<%=startRow%>,<%=endRow%>); --%> 
+		
+	}
+	
+	function getOrderOpt(){
+		var orderopt = null;
+		request.open("Post","/semi/hosporder?orderopt="+encodeURIComponent(document.getElementById('orderOpt').value),true);
+		request.onreadystatechange=orderProcess;
+	}
+
+	function orderProcess(){
+		console.log({orderOpt: $("#orderOpt").val()});
+		$.ajax({
+			url: "/semi/hosporder",
+			type: "post",
+			data: {orderOpt:$('input[name=list_order]:checked').val()},
+			success : function(data){
+				console.log(data);
+				var table =document.getElementById("ajaxTable");
+				table.innerHTML="";
+				if (data=='dist'){
+					sortByDist(hospitals);
+				}
+				if (data=='amnt'){
+					sortByAmnt(hospitals);
+				}
+				for(i=<%=startRow%>-1;i<<%=endRow%>;i++){
+					table.insertRow();
+					
+					const hospname=table.insertRow();
+					hospname.insertCell(0).innerText="병원명";
+					hospname.insertCell(1).innerText=sortedLocations[i].hp_name;
+					
+					const hospaddress=table.insertRow();			
+					hospaddress.insertCell(0).innerText="주소";
+					hospaddress.insertCell(1).innerText=sortedLocations[i].hp_address;
+					
+					const hospphone=table.insertRow();
+					hospphone.insertCell(0).innerText="전화번호";
+					hospphone.insertCell(1).innerText=sortedLocations[i].hp_phone;
+					
+					const hospremain=table.insertRow();
+					hospremain.insertCell(0).innerText="잔여수량";
+					hospremain.insertCell(1).innerText=sortedLocations[i].remain;
+					
+					const btn=table.insertRow();
+					btn.innerHTML="<input type=\"button\" value=\"예약\" onClick=\"location.href=\'+\"detail_reservation.jsp\"+\'\">";
+				}
+			}
+		})
+		
 	}
 
 </script>
 </head>
 
-<body onload="javascript:locationTest();">
+<body onload="javascript:orderProcess();locationTest();">
 
 	<div class="content-wrap">
 		<div class="main">
 			<div class="container-fluid">
 				<section id="main-content">
 					<div>
-						</br> <input type='radio' id='orderOpt' name='list_order' value='dist' onclick='hpOrder(sortedLocations);' checked='checked' /> 거리순 
-						       <input type='radio'  id='orderOpt' name='list_order' value='amnt' onclick='hpOrder(sortedLocations);' />수량순 
+						<div></div>
+						<input type='radio' name='list_order' value='dist' checked='checked' onclick='orderProcess();' /> 거리순 
+						<input type='radio' name='list_order' value='amnt' onclick='orderProcess();' />수량순 
+						       
 						<select name="list_option_key" onchange="handleOnList(this)">
 							<option value="none">===백신종류===</option>
 							<option value="pfizer">화이자</option>
@@ -259,19 +296,7 @@
 						</select>
 						<div class="row">
 							<div class="col-lg-3 p-0">
-									<script>
-									document.write('<table style="width: 100%" bgcolor="white">');
-									for(i=<%=startRow%>;i<=<%=endRow%>;i++){
-										document.write('<tr><td align="center">&nbsp</td></tr><tr>'+"<td align=\"center\" style=\"width: 40%\">"+"병원명"+"</td>"+"<td align=\"center\" style=\"width: 60%\">"+sortedLocations[i].hp_name+"</td>"+"</tr>");
-										document.write('<tr><td align="center" style="width: 40%">주소</td><td align="center" style="width: 60%">'+sortedLocations[i].hp_address+'</td></tr>');
-										document.write('<tr><td align="center" style="width: 40%">전화번호</td><td align="center" style="width: 60%">'+sortedLocations[i].hp_phone+'</td></tr>');
-										document.write('<tr><td align="center" style="width: 40%">잔여수량</td><td align="center" style="width: 60%">'+sortedLocations[i].remain+'</td></tr>');
-										document.write('<tr><td colspan="2" align="center"><input type="button" value="예약" onClick="location.href='+"detail_reservation.jsp"+'"></td></tr>');
-									}
-									document.write('<tr><td align="center">&nbsp</td></tr>');
-									hospTable(<%=startRow%>,<%=endRow%>);
-									</script>	
-								</table>
+							<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
 								
 								<div style="text-align:center;" class="jsgrid-pager">
 							<% if(currentPage <= 1){ %>
