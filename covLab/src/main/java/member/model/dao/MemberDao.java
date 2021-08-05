@@ -3,10 +3,15 @@ package member.model.dao;
 import static common.JDBCTemp.close;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import java.sql.Statement;
+
 import java.util.ArrayList;
 
+import board.model.vo.Board;
 import member.model.vo.Member;
 import member.model.vo.Profile;
 import reservation.model.vo.Hospital;
@@ -412,7 +417,422 @@ public class MemberDao {
 		return result;
 	}
 
-	public Member searchUserPwPhone(Connection conn, String userid, String phone) {
+
+	// 회원 전체 목록 조회
+	public ArrayList<Member> selectList(Connection conn, int startRow, int endRow) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from  "
+				+ "(select rownum rnum, user_no, sub_user_no, user_id, user_pw, user_name, user_rn, user_email, user_phone, user_address, user_grade, sms_agr, ino_cnt "
+				+ "from "
+				+ "(select * from members "
+				+ "start with sub_user_no is null "
+				+ "connect by sub_user_no = prior user_no)) "
+				+ "where rnum between ? and ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setUserNo(rset.getInt("user_no"));
+				member.setSubUserNo(rset.getInt("sub_user_no"));
+				member.setUserId(rset.getString("user_id"));
+				member.setUserPw(rset.getString("user_pw"));
+				member.setUserName(rset.getString("user_name"));
+				member.setUserRn(rset.getString("user_rn"));
+				member.setUserEmail(rset.getString("user_email"));
+				member.setUserPhone(rset.getString("user_phone"));
+				member.setUserAddress(rset.getString("user_address"));
+				member.setUserGrade(rset.getString("user_grade"));
+				member.setSmsAgr(rset.getString("sms_agr"));
+				member.setInoCnt(rset.getInt("ino_cnt"));
+				
+				list.add(member);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+	// 회원 전체 카운트
+	public int getListCount(Connection conn) {
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+
+		String query = "select count(*) from members";
+
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+
+			if (rset.next()) {
+				listCount = rset.getInt(1); // select 절의 첫번째 항목
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<Member> selectSearchUserNo(Connection conn, int startRow, int endRow, String keyword) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from "
+				+ "(select rownum rnum, user_no, sub_user_no, user_id, user_pw, user_name, user_rn, user_email, user_phone, user_address, user_grade, sms_agr, ino_cnt "
+				+ "from "
+				+ "(select * from members "
+				+ "start with user_no like ?"
+				+ "connect by sub_user_no = prior user_no)) "
+				+ "where rnum between ? and ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				// 컬럼 값 꺼내서 필드에 옮겨 기록하기 : 결과 매핑
+				member.setUserNo(rset.getInt("user_no"));
+				member.setSubUserNo(rset.getInt("sub_user_no"));
+				member.setUserId(rset.getString("user_id"));
+				member.setUserPw(rset.getString("user_pw"));
+				member.setUserName(rset.getString("user_name"));
+				member.setUserRn(rset.getString("user_rn"));
+				member.setUserEmail(rset.getString("user_email"));
+				member.setUserPhone(rset.getString("user_phone"));
+				member.setUserAddress(rset.getString("user_address"));
+				member.setUserGrade(rset.getString("user_grade"));
+				member.setSmsAgr(rset.getString("sms_agr"));
+				member.setInoCnt(rset.getInt("ino_cnt"));
+								
+				list.add(member);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Member> selectSearchUserName(Connection conn, int startRow, int endRow, String keyword) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from "
+				+ "(select rownum rnum, user_no, sub_user_no, user_id, user_pw, user_name, user_rn, user_email, user_phone, user_address, user_grade, sms_agr, ino_cnt "
+				+ "from "
+				+ "(select * from members "
+				+ "start with user_name like ?"
+				+ "connect by sub_user_no = prior user_no)) "
+				+ "where rnum between ? and ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				// 컬럼 값 꺼내서 필드에 옮겨 기록하기 : 결과 매핑
+				member.setUserNo(rset.getInt("user_no"));
+				member.setSubUserNo(rset.getInt("sub_user_no"));
+				member.setUserId(rset.getString("user_id"));
+				member.setUserPw(rset.getString("user_pw"));
+				member.setUserName(rset.getString("user_name"));
+				member.setUserRn(rset.getString("user_rn"));
+				member.setUserEmail(rset.getString("user_email"));
+				member.setUserPhone(rset.getString("user_phone"));
+				member.setUserAddress(rset.getString("user_address"));
+				member.setUserGrade(rset.getString("user_grade"));
+				member.setSmsAgr(rset.getString("sms_agr"));
+				member.setInoCnt(rset.getInt("ino_cnt"));
+								
+				list.add(member);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Member> selectSearchGender(Connection conn, int startRow, int endRow, String keyword) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from  "
+				+ "(select rownum rnum, user_no, sub_user_no, user_id, user_pw, user_name, user_rn, user_email, user_phone, user_address, user_grade, sms_agr, ino_cnt "
+				+ "from "
+				+ "(select * from members "
+				+ "where mod(substr(user_rn, 8, 1), 2) = ?)) "
+				+ "where rnum between ? and ?";
+		int gender =0;
+		if(keyword.equals("M")) {
+			gender = 1;
+		}else if(keyword.equals("F")) {
+			gender = 0;
+		}
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, gender);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setUserNo(rset.getInt("user_no"));
+				member.setSubUserNo(rset.getInt("sub_user_no"));
+				member.setUserId(rset.getString("user_id"));
+				member.setUserPw(rset.getString("user_pw"));
+				member.setUserName(rset.getString("user_name"));
+				member.setUserRn(rset.getString("user_rn"));
+				member.setUserEmail(rset.getString("user_email"));
+				member.setUserPhone(rset.getString("user_phone"));
+				member.setUserAddress(rset.getString("user_address"));
+				member.setUserGrade(rset.getString("user_grade"));
+				member.setSmsAgr(rset.getString("sms_agr"));
+				member.setInoCnt(rset.getInt("ino_cnt"));
+								
+				list.add(member);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Member> selectSearchAge(Connection conn, int startRow, int endRow, int keyword) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from "
+				+ "(select  rownum rnum , 나이, user_no, sub_user_no, user_id, user_pw, user_name, user_rn, user_email, user_phone, user_address, user_grade, sms_agr, ino_cnt "
+				+ "from "
+				+ "(select extract(year from sysdate) - extract(year from to_date(substr(user_rn, 1, 2), 'RR')) 나이, "
+				+ "user_no, sub_user_no, user_id, user_pw, user_name, user_rn, user_email, user_phone, user_address, user_grade, sms_agr, ino_cnt "
+				+ "from members "
+				+ "order by 1 desc) ";
+		System.out.println("keyword in dao : "+keyword);
+		if(keyword == 60) {
+			query +="where 나이 >= ? ) "
+					+ "where rnum between ? and ?";
+		}else {
+			query +="where 나이 between ? and ?) "
+					+ "where rnum between ? and ?";
+		}
+		try {
+			pstmt = conn.prepareStatement(query);
+			if(keyword == 60) {
+				pstmt.setInt(1, keyword);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+			}else {
+				pstmt.setInt(1, keyword);
+				pstmt.setInt(2, keyword+9);
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+			}
+
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setUserNo(rset.getInt("user_no"));
+				member.setSubUserNo(rset.getInt("sub_user_no"));
+				member.setUserId(rset.getString("user_id"));
+				member.setUserPw(rset.getString("user_pw"));
+				member.setUserName(rset.getString("user_name"));
+				member.setUserRn(rset.getString("user_rn"));
+				member.setUserEmail(rset.getString("user_email"));
+				member.setUserPhone(rset.getString("user_phone"));
+				member.setUserAddress(rset.getString("user_address"));
+				member.setUserGrade(rset.getString("user_grade"));
+				member.setSmsAgr(rset.getString("sms_agr"));
+				member.setInoCnt(rset.getInt("ino_cnt"));
+								
+				list.add(member);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public ArrayList<Member> selectSearchLoginType(Connection conn, int startRow, int endRow, String keyword) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from "
+				+ "(select rownum rnum, user_no, sub_user_no, user_id, user_pw, user_name, user_rn, user_email, user_phone, user_address, user_grade, sms_agr, ino_cnt "
+				+ "from "
+				+ "(select * from members "
+				+ "start with sub_user_no is null "
+				+ "connect by sub_user_no = prior user_no) "
+				+ "where user_grade= ?) "
+				+ "where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setUserNo(rset.getInt("user_no"));
+				member.setSubUserNo(rset.getInt("sub_user_no"));
+				member.setUserId(rset.getString("user_id"));
+				member.setUserPw(rset.getString("user_pw"));
+				member.setUserName(rset.getString("user_name"));
+				member.setUserRn(rset.getString("user_rn"));
+				member.setUserEmail(rset.getString("user_email"));
+				member.setUserPhone(rset.getString("user_phone"));
+				member.setUserAddress(rset.getString("user_address"));
+				member.setUserGrade(rset.getString("user_grade"));
+				member.setSmsAgr(rset.getString("sms_agr"));
+				member.setInoCnt(rset.getInt("ino_cnt"));
+								
+				list.add(member);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int getSearchListCount(Connection conn, String action, String keyword) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		int uno = 0; 
+		String query = "";
+		
+		switch (action) {
+		case "no":
+			query = "select count(*) from members "
+					+ "start with user_no like ? "
+					+ "connect by sub_user_no = prior user_no";
+			uno = Integer.parseInt(keyword);
+			break;
+		case "name":
+			query = "select count(*) from members "
+					+ "start with user_name like ? "
+					+ "connect by sub_user_no = prior user_no";
+			break;
+		case "gender":
+			query = "select count(*) from members  "
+					+ "where mod(substr(user_rn, 8, 1), 2) = ?";
+			if(keyword.equals("M")) {
+				uno = 1;
+			}else if(keyword.equals("F")){
+				uno = 0;
+			}		
+			System.out.println("uno : "+uno);
+			break;
+		case "age":
+			query = "select count(*) from  "
+					+ "(select extract(year from sysdate) - extract(year from to_date(substr(user_rn, 1, 2), 'RR')) 나이, "
+					+ "user_no, sub_user_no, user_id, user_pw, user_name, rpad(substr(user_rn, 1, 8), 14, '*') user_rn, user_email, user_phone, user_address, user_grade, sms_agr, ino_cnt "
+					+ "from members) "
+					+ "where 나이 between ? and ?";
+			break;
+
+		case "logintype":
+			query = "select count(*) from members "
+					+ "where user_grade like ?";
+			break;
+		}
+		
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			if(action.equals("age")) {
+				pstmt.setInt(1, Integer.parseInt(keyword));
+				pstmt.setInt(2, Integer.parseInt(keyword)+9);
+				System.out.println(1);
+			}else if(!(action.equals("no") || action.equals("gender"))) {
+				pstmt.setString(1, "%"+keyword+"%");
+				System.out.println(2);
+			}else {
+				pstmt.setInt(1, uno);
+				System.out.println(3);
+			}
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				listCount = rset.getInt(1); // select 절의 첫번째 항목 : count(*)
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return listCount;
+	}
+
+
+
+	
+
+		public Member searchUserPwPhone(Connection conn, String userid, String phone) {
 		Member member = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset =null;
@@ -431,15 +851,7 @@ public class MemberDao {
 				
 				member.setUserId(userid);
 				member.setUserPw(phone);
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		   
+					   
 		return member;
 	}
 
@@ -608,6 +1020,7 @@ public class MemberDao {
 		   
 		return result;
 	}
+
 	
 
 }

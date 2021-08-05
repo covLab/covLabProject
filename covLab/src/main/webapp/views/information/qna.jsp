@@ -1,4 +1,3 @@
-@@ -0,0 +1,205 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -36,6 +35,7 @@
 </head>
 
 <style>
+/*a 태그의 버튼들*/
  .btn {
   text-decoration: none;
   font-size:15pt;  
@@ -50,15 +50,13 @@
  .btn:active {
   transform:translateY(5px);
  }
-<<<<<<< HEAD
-=======
  
  .btn:hover {
  	background:lightgray;
  	color:black;
  	transition:all 0.2s;
  }
- 
+  /*테이블 모양 버튼들*/
  .t{
  	width: 1000px;
  	height: 250px;
@@ -204,7 +202,6 @@ dl.faq button[aria-expanded="true"]::before {
   padding-right: 0.35em;
 }
  
->>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 </style>
 
 <body>
@@ -242,16 +239,6 @@ dl.faq button[aria-expanded="true"]::before {
                                     <h4>QnA</h4>
 <hr>
 
-<<<<<<< HEAD
-<a class="btn" href="#qna01">코로나19 백신 개요</a>
-<a class="btn" href="#qna02">코로나19 예방접종 사업</a>
-<a class="btn" href="#qna03">백신 관련</a>
-<a class="btn" href="#qna04">백신의 안전성과 이상반응</a>
-<a class="btn" href="#qna05">코로나19 예방접종 관련 피해보상</a>
-<a class="btn" href="#qna06">인과성 불충분한 중증 환자 의료비 지원사업</a>
-<a class="btn" href="#qna07">75세 이상 어르신 및 노인시설 예방접종</a>
-<a class="btn" href="#qna08">시스템및 예방접종 기록</a>
-=======
 <table border="1"  class="t">
 	<tr>
 		<td class="c1" ><a href="#qna01">코로나란?</a></td>
@@ -269,7 +256,7 @@ dl.faq button[aria-expanded="true"]::before {
 		<td class="c9" ><a href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a></td>
 	</tr>
 </table>
-
+<!-- 
 <a class="btn" href="#qna01">코로나란?</a>
 <a class="btn" href="#qna02">코로나의 증상/검사</a>
 <a class="btn" href="#qna03">치료 및 예방</a>
@@ -281,13 +268,13 @@ dl.faq button[aria-expanded="true"]::before {
 <a class="btn" href="#qna07">예방접종 이상반응</a>
 <a class="btn" href="#qna08">코로나19 예방접종 관련 피해보상</a>
 <a class="btn" href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a>
->>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
-<hr>
-<!-- 윗부분은 목록을 만들고 a 태그로 각 번호의 목록으로 이동하게 만듬 -->
+<hr>-->
+<!-- 윗부분은 목록을 만들고 a 태그로 각 번호의 목록으로 이동하게 만듬 --> 
 
 <!-- 각 목록의 내용을 번호를 붙여서 작성 -->
-<<<<<<< HEAD
 <!-- qna01 버튼 내용 ---------------------------------------------------------- -->
+<hr>
+<br>
 <h3 id="qna01">1. 코로나란?</h3>
 <dl class="faq">
    <dt>
@@ -379,18 +366,8 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd> 
  </dl>
-=======
-<h5 id="qna01">1. 코로나19 백신 개요</h5>
-<p>목록 버튼 누르면 작은 목록 나오게 하고 싶은데 어떻게 해야할까?</p>
-<p>목록 버튼 누르면 작은 목록 나오게 하고 싶은데 어떻게 해야할까?</p>
->>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
-<<<<<<< HEAD
-<h5 id="qna02">2. 코로나19 예방접종 사업</h5>
-<p>예방접종 하면 좋겠죠.. 건강할거에요.. 그럴거에요...</p>
-<p>예방접종 하면 좋겠죠.. 건강할거에요.. 그럴거에요...</p>
-=======
 
 <!-- qna02 버튼 내용-------------------------------------------------------- -->
 <h3 id="qna02">2.코로나의 증상/검사</h3>
@@ -423,6 +400,7 @@ dl.faq button[aria-expanded="true"]::before {
     	더 위험할 수 있습니다.
     </p>
   </dd>  
+
        <dt>
     <button aria-expanded="false" aria-controls="faq11_desc">
       누가 검사 받을 수 있나요?
@@ -431,24 +409,24 @@ dl.faq button[aria-expanded="true"]::before {
   <dd>
     <p id="faq11_desc" class="desc">
     	◎ 본 지침 상의 사례 정의에 따라 의사환자 및 조사대상 유증상자로 분류되는 경우에는 확진검사를 받을 수 있습니다.<br>
+    	&nbsp; ▶ 의사환자 : 확진환자와 접촉한 후 14일 이내에 코로나 19 임상증상이 나타난 자<br>
+    	&nbsp; ▶ 조사대상 유증상자<br>
+    	&nbsp; &nbsp; 1. 의사의 소견에 따라 코로나 19 임상증상으로 코로나 19가 의심되는 자<br>
+    	&nbsp; &nbsp; 2. 해외 방문력이 있으며 귀국 후 14일 이내에 코로나 19 임상증상이 있는 자<br>
+    	&nbsp; &nbsp; 3. 코로나 19 국내 집단발생과 역학적 연관성이 있어 진단검사가 필요하다고 인정되는 자<br>
+    	&nbsp; ※ 주요 임상증상 : 발열(37.5℃ 이상), 기침, 호흡곤란, 오한, 근육통, 두통, 인후통, 후각/미각 소실 또는 폐렴 등<br>
     	<br>
     	◎ 중증응급환자(중증도 등급기준 1 및 2 등급) 또는 6시간 이상 지연할 수 없는 응급수술이 필요한 중증응급의심환자(중증도 등급기준 3등급)의
     	경우 응급 선별검사 또는 확진검사를 받을 수 있습니다. <br>
     	<br>
-    	<table border="1">
-    		<tr><td>의사환자</td><td>확진환자와 접촉한 후 14일 이내에 코로나 19 임상증상이 나타난 자</td></tr>
-    		<tr><td rowspan="3">조사대상 유증상자</td><td>1. 의사의 소견에 따라코로나 19 임상증상으로 코로나 19가 의심되는 자</td></tr>
-    		<tr> <td>2. 해외 방문력이 있으며 귀국 후 14일 이내에 코로나 19 임상증상이 있는 자</td></tr>
-    		<tr> <td>3. 코로나 19 국내 집단발생과 역학적 연관성이 있어 진단검사가 필요하다고 인정되는 자</td></tr>
-    		<tr><td colspan="2">주요 임상증상 : 발열(37.5℃ 이상), 기침, 호흡곤란, 오한, 근육통, 두통, 인후통, 후각/미각 소실 또는 폐렴 등</td></tr>
-		</table> <br> <br>
 		◎ 다음에 해당하는 경우 적극적 검사 권고 (조사대상 유증상자 1로 신고)<br>
 		1. 가족(동거인) 또는 동일시설 생활자가 코로나 19 임상증상이 있는 경우<br>
 		2. 해외에서 입국한지 14일 이내의 가족(동거인), 친구, 지인과 접촉한 경우<br>
 		3. 지역사회 유행 양상 고려하여 확진자가 발생한 기관 또는 장소 방문력이 있는 경우<br>
 		4. 응급선별검사, 신속항원검사 또는 자가검사 결과 양성인 경우
     </p>
-  </dd> 
+  </dd>
+
      <dt>
     <button aria-expanded="false" aria-controls="faq12_desc">
       검사는 어디에서 받을 수 있나요?
@@ -474,20 +452,12 @@ dl.faq button[aria-expanded="true"]::before {
     	◎ (검체 채취)검체는 의사, 간호사, 임상병리사가 지정된 장소(선별진료소 등)에서 채취합니다. 필수 검체는 상기도 검체이며,
     	하기도 검체는 가래가 있는 환자에서 채취합니다. 검체 채취시 불편감/통증이 있을 수 있습니다.<br>
     	&nbsp; ▶ 간호사와 임상별리사는 의사의 지도하에 시행
-    	<br>
-    	<table border="1">
-    		<tr>
-    			<td>상기도 검체</td>
-    			<td>비인두 또는 구인두 도말물 채취<br>
-    			- (비인두도말) 콧구멍 깊숙이 면봉을 삽입하여 분비물 채취<br>
-    			- (구인두도말) 면봉으로 목구멍 안쪽 벽의 분비물을 긁어서 채취</td>
-    		</tr>
-    		<tr>
-    			<td>하기도 검체</td>
-    			<td>타액 등이 포함되지 않도록 깊이 기침하여 가래 채취<br>
-    			- 가래가 없는 경우는 억지로 맽으면 에어로졸 발생 가능성이 있으므로 가래 유도 금지</td>
-    		</tr>
-    	</table>
+    	<br><br>
+    	&nbsp; ▶ 상기도 검체 : 비인두 또는 구인두 도말물 채취<br>
+    	&nbsp; &nbsp; - (비인두도말) 콧구멍 깊숙이 면봉을 삽입하여 분비물 채취<br>
+    	&nbsp; &nbsp; - (구인두도말) 면봉으로 목구멍 안쪽 벽의 분비물을 긁어서 채취<br>
+    	&nbsp; ▶ 하기도 검체 : 타액 등이 포함되지 않도록 깊이 기침하여 가래 채취
+    	&nbsp; &nbsp; - 가래가 없는 경우는 억지로 맽으면 에어로졸 발생 가능성이 있으므로 가래 유도 금지<br>
     	<br>
     	◎ (유전자 검사) 검사가 가능한 선별진료소는 직접 검사하고, 그렇지 않은 경우는 수탁검사기관으로 검사를 의뢰합니다.
     </p>
@@ -695,10 +665,8 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd>
 </dl> 
->>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
-<<<<<<< HEAD
 
 <!-- qna05 버튼 내용-------------------------------------------------------- -->
 <h3 id="qna05">5. 격리 및 격리해제</h3>
@@ -711,16 +679,12 @@ dl.faq button[aria-expanded="true"]::before {
   <dd>
     <p id="faq35_desc" class="desc">
     	◎ 임상경과 기준 또는 검사기준 중 어느 하나를 충족한 경우 격리해제 가능합니다.<br>
-    	<table border="1">
-    		<tr>
-    			<td>▶ 임상경과 기반<br>
-    			- (기간) 확진일로부터 10일 경과<br>
-    			- (증상) 이 기간 동안 임상증상 미 발생</td>
-    			<td>▶ 검사 기반<br>
-    			- (검사) PCR 검사 결과 24시간 이상의 간격으로 연속 2회 음성<br>
-    			- (증상) 확진 후 임상증상 미발생</td>
-    		</tr>
-    	</table>
+    	&nbsp; ▶ 임상경과 기반<br>
+    	&nbsp; &nbsp; - (기간) 확진일로부터 10일 경과<br>
+    	&nbsp; &nbsp; - (증상) 이 기간 동안 임상증상 미 발생<br>
+    	&nbsp; ▶ 검사 기반<br>
+    	&nbsp; &nbsp; - (검사) PCR 검사 결과 24시간 이상의 간격으로 연속 2회 음성<br>
+    	&nbsp; &nbsp; - (증상) 확진 후 임상증상 미발생<br>
     </p>
   </dd>
   
@@ -890,40 +854,8 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd>  
 </dl> 
-=======
-<h5 id="qna03">3. 백신 관련</h5>
-<p>백신이 점점 업그레이드 좀 됐으면 좋겠어요.</p>
-<p>백신이 점점 업그레이드 좀 됐으면 좋겠어요.</p>
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
-<h5 id="qna04">4. 백신의 안전성과 이상반응</h5>
-<p>백신은 안전하지 않은것 같지만.. 괜찮아지길 바래요.. 이상있음 병원가야 합니다...</p>
-<p>백신은 안전하지 않은것 같지만.. 괜찮아지길 바래요.. 이상있음 병원가야 합니다...</p>
-<p>백신은 안전하지 않은것 같지만.. 괜찮아지길 바래요.. 이상있음 병원가야 합니다...</p>
-<p><a href="#top">맨 위로 이동</a></p>
-<hr>
-<<<<<<< HEAD
-<h5 id="qna05">5. 코로나19 예방접종 관련 피해보상</h5>
-<p>코로나로 피해를 받으셨으면 보상을 받으세요. 보상해줍니다.</p>
-<p>코로나로 피해를 받으셨으면 보상을 받으세요. 보상해줍니다.</p>
-<p>코로나로 피해를 받으셨으면 보상을 받으세요. 보상해줍니다.</p>
-<p><a href="#top">맨 위로 이동</a></p>
-<hr>
-<h5 id="qna06">6. 인과성 불충분한 중증 환자 의료비 지원사업</h5>
-<p>인과성 자료가 부족해도 보상 받을 수 있습니다.</p>
-<p>인과성 자료가 부족해도 보상 받을 수 있습니다.</p>
-<p><a href="#top">맨 위로 이동</a></p>
-<hr>
-<h5 id="qna07">7. 75세 이상 어르신 및 노인시설 예방접종</h5>
-<p>어르신들께서 건강하시길 바랍니다.</p>
-<p>어르신들께서 건강하시길 바랍니다.</p>
->>>>>>> 825645eed6c4076b0e4c199bbd928787ddd47618
-<p><a href="#top">맨 위로 이동</a></p>
-<hr>
-<h5 id="qna08">8. 시스템및 예방접종 기록</h5>
-<p>예방접종 하면 기록이 생깁니다.</p>
-<p>예방접종 하면 기록이 생깁니다.</p>
-=======
 
 <!-- qna07 버튼 내용-------------------------------------------------------- -->
 <h3 id="qna07">7. 예방접종 이상반응</h3>
@@ -1085,7 +1017,6 @@ dl.faq button[aria-expanded="true"]::before {
     </p>
   </dd>  
 </dl> 
->>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 
@@ -1141,6 +1072,127 @@ dl.faq button[aria-expanded="true"]::before {
     <script src="/semi/resources/js/lib/bootstrap.min.js"></script><script src="assets/js/scripts.js"></script>
     <!-- scripit init-->
 
+<script>
+/*
+*   This content is licensed according to the W3C Software License at
+*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+*
+*   File:   ButtonExpand.js
+*
+*   Desc:   Checkbox widget that implements ARIA Authoring Practices
+*           for a menu of links
+*/
+
+/*
+*   @constructor ButtonExpand
+*
+*
+*/
+var ButtonExpand = function (domNode) {
+
+  this.domNode = domNode;
+
+  this.keyCode = Object.freeze({
+    'RETURN': 13
+  });
+};
+
+ButtonExpand.prototype.init = function () {
+
+  this.controlledNode = false;
+
+  var id = this.domNode.getAttribute('aria-controls');
+
+  if (id) {
+    this.controlledNode = document.getElementById(id);
+  }
+
+  this.domNode.setAttribute('aria-expanded', 'false');
+  this.hideContent();
+
+  this.domNode.addEventListener('keydown',    this.handleKeydown.bind(this));
+  this.domNode.addEventListener('click',      this.handleClick.bind(this));
+  this.domNode.addEventListener('focus',      this.handleFocus.bind(this));
+  this.domNode.addEventListener('blur',       this.handleBlur.bind(this));
+
+};
+
+ButtonExpand.prototype.showContent = function () {
+
+  if (this.controlledNode) {
+    this.controlledNode.style.display = 'block';
+  }
+
+};
+
+ButtonExpand.prototype.hideContent = function () {
+
+  if (this.controlledNode) {
+    this.controlledNode.style.display = 'none';
+  }
+
+};
+
+ButtonExpand.prototype.toggleExpand = function () {
+
+  if (this.domNode.getAttribute('aria-expanded') === 'true') {
+    this.domNode.setAttribute('aria-expanded', 'false');
+    this.hideContent();
+  }
+  else {
+    this.domNode.setAttribute('aria-expanded', 'true');
+    this.showContent();
+  }
+
+};
+
+/* EVENT HANDLERS */
+
+ButtonExpand.prototype.handleKeydown = function (event) {
+
+  console.log('[keydown]');
+
+  switch (event.keyCode) {
+
+    case this.keyCode.RETURN:
+
+      this.toggleExpand();
+
+      event.stopPropagation();
+      event.preventDefault();
+      break;
+
+    default:
+      break;
+  }
+
+};
+
+ButtonExpand.prototype.handleClick = function (event) {
+  this.toggleExpand();
+};
+
+ButtonExpand.prototype.handleFocus = function (event) {
+  this.domNode.classList.add('focus');
+};
+
+ButtonExpand.prototype.handleBlur = function (event) {
+  this.domNode.classList.remove('focus');
+};
+
+/* Initialize Hide/Show Buttons */
+
+window.addEventListener('load', function (event) {
+
+  var buttons =  document.querySelectorAll('button[aria-expanded][aria-controls]');
+
+  for (var i = 0; i < buttons.length; i++) {
+    var be = new ButtonExpand(buttons[i]);
+    be.init();
+  }
+
+}, false);
+</script>
 
 
 </body>

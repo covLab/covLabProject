@@ -77,14 +77,15 @@ public class indexReservation extends HttpServlet {
 		int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
 		int endPage = startPage + limit - 1;
 		
+		
+		
 		// 뷰 지정해서 내보내기
 		RequestDispatcher view = null;
 		if (hps.size() > 0 && vds.size()>0) {
-			view = request.getRequestDispatcher("views/reservation/index_reservation1.jsp");
+			view = request.getRequestDispatcher("views/reservation/index_reservation.jsp");
 
 			request.setAttribute("hps", hps);
 			request.setAttribute("vds", vds);
-//			request.setAttribute("hp_name", hp_name);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
 			request.setAttribute("startPage", startPage);
@@ -92,6 +93,7 @@ public class indexReservation extends HttpServlet {
 			request.setAttribute("listCount", hps.size());
 			request.setAttribute("startRow", startRow);
 			request.setAttribute("endRow", endRow);
+			
 
 			view.forward(request, response);
 		} else {
@@ -110,7 +112,8 @@ public class indexReservation extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		String orderopt = request.getParameter("orderOpt");
+		String orderopt = request.getParameter("orderopt");
+		response.getWriter().write(orderopt);
 		
 	}
 

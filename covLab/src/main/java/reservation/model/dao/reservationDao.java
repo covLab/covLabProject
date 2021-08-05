@@ -5,9 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import member.model.vo.Member;
 import reservation.model.vo.Hospital;
 import reservation.model.vo.Members;
 import reservation.model.vo.Reservation;
@@ -545,6 +547,45 @@ public class reservationDao {
 		}
 		return join_list;
 	}
+
+
+	public ArrayList<Reservation> selectList(Connection conn) {
+		ArrayList<Reservation> list = new ArrayList<Reservation>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from reservation";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				Reservation reserv = new Reservation();
+				
+				// 컬럼 값 꺼내서 필드에 옮겨 기록하기 : 결과 매핑
+				reserv.setSerial_num(rset.getString("serial_num"));
+				reserv.setSub_ok(rset.getString("sub_ok"));
+				reserv.setUser_rn(rset.getString("user_rn"));
+				reserv.setReg_bus_no(rset.getString("reg_bus_no"));
+				reserv.setRev_date(rset.getTimestamp("rev_date"));
+				reserv.setIoc_date(rset.getTimestamp("ioc_date"));
+				reserv.setCan_date(rset.getTimestamp("can_date"));
+				reserv.setState(rset.getString("state"));
+				
+				list.add(reserv);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
+	}
+
 	
 	
 	public String selectSerialNum(Connection conn, String vac_name, String reg_bus_no) {
@@ -620,6 +661,5 @@ public class reservationDao {
 		
 		return res;
 	}
-	
-	
+
 }
