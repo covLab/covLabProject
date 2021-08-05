@@ -61,7 +61,6 @@ public class termsPopup extends HttpServlet {
 		String vac_name = request.getParameter("vac_name");
 		System.out.println("vac_name : " + vac_name);
 		
-		
 //		mb = rservice.selectOneMember(user_id);
 //		Members sub_mb = rservice.selectOneSubMember(sub_user_no);
 			
@@ -82,7 +81,6 @@ public class termsPopup extends HttpServlet {
 		//버튼 타입
 		String resType = request.getParameter("resType");
 		System.out.println("resType : "+resType);
-		
 		
 		
 		if (resType.equals("sub")){
@@ -124,13 +122,6 @@ public class termsPopup extends HttpServlet {
 		request.setAttribute("mb", mb);
 		request.setAttribute("resType", resType);
 		
-		if(vac_name == null) {
-			view = request.getRequestDispatcher(
-					"views/reservation/error.jsp");
-			String pageType = "vacChoiceError";
-			request.setAttribute("pageType", pageType);
-			view.forward(request, response);
-		}else
 		if(mb!=null) {
 			
 			view = request.getRequestDispatcher(
