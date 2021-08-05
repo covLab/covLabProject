@@ -61,6 +61,27 @@ public class HospitalService {
 		return list;
 	}
 
+	public int updateReservationInfo(ReservationInfo ri) {
+		Connection conn = getConnection();
+		int result = hdao.updateRInoCntInfo(conn, ri);
+		if(result >0 ) {
+			commit(conn);
+			System.out.println("1");
+		}else {
+			rollback(conn);
+		}close(conn);
+		
+		conn = getConnection();
+		result = hdao.updateRStateInfo(conn, ri);
+		if(result >0 ) {
+			commit(conn);
+			System.out.println("2");
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
+
 
 
 

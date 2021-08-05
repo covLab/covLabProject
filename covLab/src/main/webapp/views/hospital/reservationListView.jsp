@@ -17,15 +17,20 @@ int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>회원 관리</title>
-<style type="text/css">
-form.sform{
+<script type="text/javascript" src="/semi/resources/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+function updateState(userno, page, inocnt){
+	console.log("userno : "+userno);
+	console.log("page : "+page);
+	console.log("inocnt : "+inocnt);
+	var param = "userno="+userno+"&page="+page+"&inocnt="+inocnt;
+	
+	location.href="/semi/uprinfo?"+param;
+	
 
-	display: none; 
-}
-</style>
-
-
-
+}	
+							
+</script>
 <!-- ================= Favicon ================== -->
 <!-- Standard -->
 <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
@@ -120,10 +125,11 @@ form.sform{
 													<input type="button" class="btn btn-default" value="완료">
 												<% } else{ //대기, 취소 
 													 if(ri.getInoCnt()==0){%>
-													 	<button class="btn">1차 접종</button>
+													 	<button class="btn" onclick="updateState(<%= ri.getUserNo() %>, <%= currentPage %>, <%= ri.getInoCnt() %>);">1차 접종</button>
 													 <%}else{ %>
-													 	<button class="btn">2차 접종</button>
+													 	<button class="btn" onclick="updateState(<%= ri.getUserNo() %>, <%= currentPage %>, <%= ri.getInoCnt() %>);">2차 접종</button>
 													 <%} %>
+
 												<% } %>
 											</th>
 										</tr>
@@ -168,13 +174,6 @@ form.sform{
 									<a href="/semi/rinfolist?page=<%= maxPage %>">[맨끝]</a> &nbsp;
 							<% } %>
 							
-							<div align="right">
-							<% if(loginMember == null){//로그인 안했을 때 %>
-							<button onclick="moveLogin();" class="btn btn-primary wrtie">글쓰기</button>
-							<% }else{ %>
-							<button onclick="showWriteForm();" class="btn btn-primary wrtie">글쓰기</button>
-							<% } %>
-							</div>
 						</div>																
 								
 							</div>
@@ -194,7 +193,7 @@ form.sform{
 	<script src="/semi/resources/js/lib/jquery.min.js"></script>
 	<script src="/semi/resources/js/lib/jquery.nanoscroller.min.js"></script>
 	<script src="/semi/resources/js/lib/bootstrap.min.js"></script>
-	<script src="assets/js/scripts.js"></script>
+	<script src="/semi/resources/js/scripts.js"></script>
 	<!-- scripit init-->
 	
 

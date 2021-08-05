@@ -41,7 +41,8 @@ Member loginMember = (Member) session.getAttribute("loginMember");
                            <li><a href="/semi/mlist">회원 관리</a></li>
                            <li><a href="/semi/vcmanage">백신 관리</a></li>
                         </ul></li>
-                  
+                  <%}else if(loginMember.getUserGrade().equals("H")){ %>
+                  		<li><a href="/semi/rinfolist">백신 접종 관리</a></li>
                   <% } else {//로그인 %>
                      <li><a href="/semi/blist?page=1">접종 후기</a></li>
                      <li><a href="/semi/views/member/myInfo.jsp">MY PAGE</a></li>

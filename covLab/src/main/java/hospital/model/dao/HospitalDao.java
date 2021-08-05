@@ -3,13 +3,11 @@ package hospital.model.dao;
 import static common.JDBCTemp.close;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import board.model.vo.Board;
 import hospital.model.vo.ReservationInfo;
 import hospital.model.vo.VaccineInfo;
 
@@ -169,6 +167,67 @@ public class HospitalDao {
 		}
 
 		return list;
+	}
+
+	public int updateRInoCntInfo(Connection conn, ReservationInfo ri) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "update members " 
+						+ "set ino_cnt = ? " 
+						+ "where user_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			if (ri.getInoCnt() == 0) {
+				pstmt.setInt(1, 1);
+			} else {
+				System.out.println("~~~");
+				pstmt.setInt(1, 2);
+			}
+			pstmt.setInt(2, ri.getUserNo());
+
+			result = pstmt.executeUpdate();
+
+			System.out.println("result : " + result);
+			System.out.println("ri : " + ri);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateRStateInfo(Connection conn, ReservationInfo ri) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "update reservation "
+				+ "set state = ? , ioc_date = sysdate "
+				+ "where user_rn = (select user_rn "
+				+ "                                from members "
+				+ "                                where user_no = ?)";
+				
+		System.out.println("inocnt : "+ri.getInoCnt());
+		try {
+			pstmt = conn.prepareStatement(query);
+			if(ri.getInoCnt() != 2) {
+				System.out.println("www");
+				pstmt.setString(1, "W");
+			}else {
+				System.out.println("fff");
+				pstmt.setString(1, "F");
+			}
+			pstmt.setInt(2, ri.getUserNo());
+			
+			result = pstmt.executeUpdate();
+			
+		System.out.println("result : "+result);	
+		System.out.println("ri : "+ri);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	
