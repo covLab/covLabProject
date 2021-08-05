@@ -1,4 +1,3 @@
-@@ -0,0 +1,216 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -119,10 +118,8 @@ table td {
 									  	<a class="btn" href="#coronainfo04">코로나의 예방법</a>
 									  	<hr>
 									  	<br>
-	<h3 id="coronainfo01">1. 확진자 수/격리해제 수/검사중 수/사망자 수 (실시간, 누적 모두)</h3>
-		
-	
-	
+	<h3 id="coronainfo01">1. 확진자 수 (클릭시 이동)</h3>
+	<a href="http://ncov.mohw.go.kr/"><img src="../../resources/images/캡처.PNG"></a>
 		<hr>
 <h3 id="coronainfo02">2. 코로나19란?</h3>
 <p class="ta_r mgt36">* 현재까지 알려진 정보(2021년 3월 2일 기준) </p>
