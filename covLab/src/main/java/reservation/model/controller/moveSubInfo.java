@@ -82,6 +82,8 @@ public class moveSubInfo extends HttpServlet {
 		request.setAttribute("ioc_date", ioc_date);
 		request.setAttribute("resType", resType);
 		view.forward(request, response);
+		
+		
 	}
 
 	/**
