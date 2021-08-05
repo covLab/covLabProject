@@ -160,26 +160,39 @@
 		});
 		var infowindow = new google.maps.InfoWindow();
 		var marker, i;
-
+		var chosen_hp;
+		console.log(Object.values(hospitals[1]));
 		for (i = 0; i < hospitals.length; i++) {
 			marker = new google.maps.Marker({
 				position : new google.maps.LatLng(hospitals[i].hp_latitude,
 						hospitals[i].hp_longitude),
 				map : map,
-				title : hospitals[i].hp_name,
-				label : hospitals[i].remain
+				title : Object.values(hospitals[i])[0],
+				label : Object.values(hospitals[i])[6]
 			/* icon : "../../resources/images/red_dot_small.png" */
 			});
+			
 			if (marker) {
 				marker.addListener("click", function() {
 					map.setZoom(15);
 					map.setCenter(this.getPosition());
-					chosen_hp = hospital[i].reg_bus_no;
+					console.log(this.getTitle());
+					var rbn_val=this.getTitle();
+					console.log(rbn_val);
+					var data={"reg_bus_no":rbn_val};
+					$.ajax({
+						url: "/semi/detailhp",
+						type: "post",
+						data: data,
+						dataType: "json",
+						success : function(data){
+							console.log(data);
+						}
+					});
 				});
 			}
 		}
-		const infoWindow = new google.maps.InfoWindow();
-
+		
 		/* sortedLocations=locations.sort(function(a,b){
 			if (a.distance>b.distance){
 				return 1;
@@ -248,7 +261,7 @@
 					sortByAmnt(hospitals);
 				}
 				for(i=<%=startRow%>-1;i<<%=endRow%>;i++){
-					table.insertRow();
+					table.insertRow().insertCell().innerText=" ";
 					
 					const hospname=table.insertRow();
 					hospname.insertCell(0).innerText="병원명";
@@ -267,7 +280,7 @@
 					hospremain.insertCell(1).innerText=sortedLocations[i].remain;
 					
 					const btn=table.insertRow();
-					btn.innerHTML="<input type=\"button\" value=\"예약\" onClick=\"location.href=\'+\"detail_reservation.jsp\"+\'\">";
+					btn.innerHTML="<input type=\"button\" value=\"예약\" onClick=\"location.href=\'+\"/semi/detailhp\"+\'\">";
 				}
 			}
 		})

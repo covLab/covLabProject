@@ -1,6 +1,7 @@
 package reservation.model.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -46,8 +47,15 @@ public class detailReservation extends HttpServlet {
 		
 		
 		System.out.println("-----------------------디테일 서블릿----------------------------");
-//		String reg_bus_no = request.getParameter("reg_bus_no");
-		String reg_bus_no = "252-12-62156";
+		String reg_bus_no = request.getParameter("reg_bus_no");
+		System.out.println("reg_bus_no : " + reg_bus_no);
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(reg_bus_no);
+		out.flush();
+		out.close();
+//		String reg_bus_no = "252-12-62156";
 		
 		HttpSession session = request.getSession(true);
 		
@@ -154,6 +162,7 @@ public class detailReservation extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
 	}
 
 }
