@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="java.util.ArrayList, reservation.model.vo.Hospital, reservation.model.vo.VaccineData"%>
+   pageEncoding="UTF-8"
+   import="java.util.ArrayList, reservation.model.vo.Hospital, reservation.model.vo.VaccineData"%>
 <%
 	ArrayList<Hospital> hps = (ArrayList<Hospital>)request.getAttribute("hps");
 	ArrayList<VaccineData> vds = (ArrayList<VaccineData>) request.getAttribute("vds");
@@ -28,7 +28,7 @@
 <!-- GOOGLE FONTS-->
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
-	rel='stylesheet' type='text/css' />
+   rel='stylesheet' type='text/css' />
 <script
 	src="http://maps.google.com/maps/api/js?q=seoul&key=AIzaSyCZ8XJruaL1nd6GJOryueJE_Av5O6mU5H0"
 	type="text/javascript"></script>
@@ -37,22 +37,22 @@
 <style>
 <!--
 .supported {
-	width: 300px;
-	border: 1px solid #e3e3e3;
-	padding: 5px;
-	font-family: Arial;
-	font-size: 0.9em;
-	line-height: 160%;
+   width: 300px;
+   border: 1px solid #e3e3e3;
+   padding: 5px;
+   font-family: Arial;
+   font-size: 0.9em;
+   line-height: 160%;
 }
 -->
 </style>
 
 <script language="javascript">
-	
-	// 위치확인 
-	var latitude=0;
-	var longitude=0;
-	var sortedLocations = [];
+   
+   // 위치확인 
+   var latitude=0;
+   var longitude=0;
+   var sortedLocations = [];
 
 	/* 병원 정보 + 백신 정보 담긴 배열 */
 	var hospitals = new Array();
@@ -135,73 +135,73 @@
 	function handleLocation(position) {
 		var outDiv = document.getElementById("result");
 
-		// 위치정보 만들고 
-		var latitude = position.coords.latitude;
-		var longitude = position.coords.longitude;
-		
-		var latlng = new google.maps.LatLng(latitude, longitude);
+      // 위치정보 만들고 
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      
+      var latlng = new google.maps.LatLng(latitude, longitude);
 
-		// 지도 옵션 
-		var mapOption = {
-			zoom : 11.5,
-			center : latlng,
-			mapTypeControl : false,
-			mapTypeId : google.maps.MapTypeId.ROADMAP
-		};
+      // 지도 옵션 
+      var mapOption = {
+         zoom : 11.5,
+         center : latlng,
+         mapTypeControl : false,
+         mapTypeId : google.maps.MapTypeId.ROADMAP
+      };
 
-		// 지도만들고 
-		var map = new google.maps.Map(document.getElementById("map"), mapOption);
+      // 지도만들고 
+      var map = new google.maps.Map(document.getElementById("map"), mapOption);
 
-		// 위치표시 
-		new google.maps.Marker({
-			position : latlng,
-			map : map,
-			title : "현위치"
-		});
-		var infowindow = new google.maps.InfoWindow();
-		var marker, i;
+      // 위치표시 
+      new google.maps.Marker({
+         position : latlng,
+         map : map,
+         title : "현위치"
+      });
+      var infowindow = new google.maps.InfoWindow();
+      var marker, i;
 
-		for (i = 0; i < hospitals.length; i++) {
-			marker = new google.maps.Marker({
-				position : new google.maps.LatLng(hospitals[i].hp_latitude,
-						hospitals[i].hp_longitude),
-				map : map,
-				title : hospitals[i].hp_name,
-				label : hospitals[i].remain
-			/* icon : "../../resources/images/red_dot_small.png" */
-			});
-			if (marker) {
-				marker.addListener("click", function() {
-					map.setZoom(15);
-					map.setCenter(this.getPosition());
-					chosen_hp = hospital[i].reg_bus_no;
-				});
-			}
-		}
-		const infoWindow = new google.maps.InfoWindow();
+      for (i = 0; i < hospitals.length; i++) {
+         marker = new google.maps.Marker({
+            position : new google.maps.LatLng(hospitals[i].hp_latitude,
+                  hospitals[i].hp_longitude),
+            map : map,
+            title : hospitals[i].hp_name,
+            label : hospitals[i].remain
+         /* icon : "../../resources/images/red_dot_small.png" */
+         });
+         if (marker) {
+            marker.addListener("click", function() {
+               map.setZoom(15);
+               map.setCenter(this.getPosition());
+               chosen_hp = hospital[i].reg_bus_no;
+            });
+         }
+      }
+      const infoWindow = new google.maps.InfoWindow();
 
-		/* sortedLocations=locations.sort(function(a,b){
-			if (a.distance>b.distance){
-				return 1;
-			}
-			if (a.distance<b.distance){
-				return -1;
-			}
-			return 0;
-		});
-		return sortedLocations; */
-	}
+      /* sortedLocations=locations.sort(function(a,b){
+         if (a.distance>b.distance){
+            return 1;
+         }
+         if (a.distance<b.distance){
+            return -1;
+         }
+         return 0;
+      });
+      return sortedLocations; */
+   }
 
 
-	// 에러콜백 
-	function handleError(err) {
-		var outDiv = document.getElementById("result");
-		if (err.code == 1) {
-			outDiv.innerHTML = "사용자가 위치정보 공유를 거부함";
-		} else {
-			outDiv.innerHTML = "에러발생 : " + err.code;
-		}
-	}
+   // 에러콜백 
+   function handleError(err) {
+      var outDiv = document.getElementById("result");
+      if (err.code == 1) {
+         outDiv.innerHTML = "사용자가 위치정보 공유를 거부함";
+      } else {
+         outDiv.innerHTML = "에러발생 : " + err.code;
+      }
+   }
 
 	function getDistance(lat1, lon1, lat2, lon2) {
 		var radlat1 = Math.PI * lat1 / 180
@@ -337,21 +337,21 @@
 							</div>
 
 
-							<div class="col-lg-9 p-0">
-								<div id="map" style="width: 95%; height: 600px;"></div>
-							</div>
-						</div>
-					</div>
-					<!-- </div> -->
+                     <div class="col-lg-9 p-0">
+                        <div id="map" style="width: 95%; height: 600px;"></div>
+                     </div>
+                  </div>
+               </div>
+               <!-- </div> -->
 
 
-					<%@ include file="../common/footer.jsp"%>
-				</section>
-			</div>
-		</div>
-	</div>
+               <%@ include file="../common/footer.jsp"%>
+            </section>
+         </div>
+      </div>
+   </div>
 
-	<%@ include file="../common/script.jsp"%>
+   <%@ include file="../common/script.jsp"%>
 </body>
 
 
