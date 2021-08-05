@@ -4,10 +4,12 @@
 Member loginMember = (Member) session.getAttribute("loginMember");
 %>
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
 <title></title>
+
 </head>
 <body>
 
@@ -22,7 +24,7 @@ Member loginMember = (Member) session.getAttribute("loginMember");
                </div>
                <li class="label">Menu</li>
                <ul>
-                  <li><a href="/semi/index.jsp">홈페이지</a></li>
+                  <li><a href="/semi/indexres?page=1">홈페이지</a></li>
                   <li><a href="/semi/views/information/information.jsp">뉴스/백신
                         정보</a></li>
 
@@ -41,11 +43,10 @@ Member loginMember = (Member) session.getAttribute("loginMember");
                            <li><a href="/semi/mlist">회원 관리</a></li>
                            <li><a href="/semi/vcmanage">백신 관리</a></li>
                         </ul></li>
-                  <%}else if(loginMember.getUserGrade().equals("H")){ %>
-                  		<li><a href="/semi/rinfolist">백신 접종 관리</a></li>
+                  
                   <% } else {//로그인 %>
                      <li><a href="/semi/blist?page=1">접종 후기</a></li>
-                     <li><a href="/semi/views/member/myInfo.jsp">MY PAGE</a></li>
+                     <li><a href="/semi/uprofile?userid=<%= loginMember.getUserId()%>&user_no=<%= loginMember.getUserNo() %>">MY PAGE</a></li>
 
                   <%}%>
 
@@ -56,9 +57,9 @@ Member loginMember = (Member) session.getAttribute("loginMember");
                   <li><a class="sidebar-sub-toggle"><i class="ti-target"></i>
                         Pages <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                      <ul>
-                        <li><a href="page-login.html">Login</a></li>
-                        <li><a href="page-register.html">Register</a></li>
-                        <li><a href="page-reset-password.html">Forgot password</a></li>
+                        <li><a href="/semi/views/member/login.jsp">Login</a></li>
+                        <li><a href="/semi/views/member/enroll.html">Enroll</a></li>
+                        <li><a href="/semi/views/member/findPasswordEmail.jsp">Forgot password</a></li>
                      </ul></li>
                   
                   <li><a><i class="ti-close"
@@ -70,6 +71,9 @@ Member loginMember = (Member) session.getAttribute("loginMember");
    </div>
    <!-- /# sidebar -->
 
-
+	<script src="/semi/resources/js/lib/jquery.min.js"></script>
+	<script src="/semi/resources/js/lib/jquery.nanoscroller.min.js"></script>
+	<script src="/semi/resources/js/lib/bootstrap.min.js"></script>
+		<script src="assets/js/scripts.js"></script>
 </body>
 </html>
