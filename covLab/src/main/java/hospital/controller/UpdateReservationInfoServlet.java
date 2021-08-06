@@ -50,7 +50,6 @@ public class UpdateReservationInfoServlet extends HttpServlet {
 		ReservationInfo ri = new ReservationInfo();
 		ri.setUserNo(userNo);
 		ri.setInoCnt(Integer.parseInt(request.getParameter("inocnt")));
-		System.out.println("ri at servlet : "+ri);
 		
 		int result = new HospitalService().updateReservationInfo(ri);
 		if (result > 0) {

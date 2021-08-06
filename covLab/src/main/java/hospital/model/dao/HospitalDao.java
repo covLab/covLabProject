@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import board.model.vo.Board;
 import hospital.model.vo.ReservationInfo;
 import hospital.model.vo.VaccineInfo;
 

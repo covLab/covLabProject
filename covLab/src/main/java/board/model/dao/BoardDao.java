@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import board.comments.model.vo.Comments;
 import board.model.vo.Board;
 
 

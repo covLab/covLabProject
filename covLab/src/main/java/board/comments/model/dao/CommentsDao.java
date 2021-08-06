@@ -85,11 +85,22 @@ public class CommentsDao {
 	public int insertComments(Connection conn, Comments comments) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = null;
+		String query = "INSERT INTO COMMENTS VALUES "
+				+ " ((select max(com_no) + 1 from comments), ?, ?, sysdate, ?, (select max(com_no) + 1 from comments))";
 		
-		query = "";
-		System.out.println("답글달기 수정필요. 참조컬럼 추가해야 할듯");
-		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, comments.getBoardRef());
+			pstmt.setString(2, comments.getComWriter());
+			pstmt.setString(3, comments.getComContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 

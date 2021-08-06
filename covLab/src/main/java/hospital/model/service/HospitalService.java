@@ -8,7 +8,6 @@ import static common.JDBCTemp.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import board.model.vo.Board;
 import hospital.model.dao.HospitalDao;
 import hospital.model.vo.ReservationInfo;
 import hospital.model.vo.VaccineInfo;
