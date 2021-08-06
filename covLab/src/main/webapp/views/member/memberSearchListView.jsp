@@ -9,6 +9,8 @@ int endPage = ((Integer) request.getAttribute("endPage")).intValue();
 int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 ArrayList<Reservation> rlist = (ArrayList<Reservation>) request.getAttribute("rlist");
+String action  = ((String)request.getAttribute("action"));
+String keyword = ((String)request.getAttribute("keyword"));
 %>
 <!DOCTYPE html>
 <html>
@@ -261,11 +263,11 @@ function changeLogin(element){
 							<% if(currentPage <= 1){ %>
 									[맨처음] &nbsp;
 							<% }else{ %>
-									<a href="/semi/mlist?page=1">[맨처음]</a> &nbsp;
+									<a href="/semi/msearch?page=1&action=<%=action %>&keyword=<%= keyword %>">[맨처음]</a> &nbsp;
 							<% } %>
 							<!-- 이전 페이지 그룹으로 이동 -->
 							<% if((currentPage -10 ) < startPage && (currentPage - 10) > 1){ %>
-									<a href="/semi/mlist?page=<%= startPage - 10 %>">[이전그룹] </a> &nbsp;
+									<a href="/semi/msearch?page=<%= startPage - 10 %>&action=<%=action %>&keyword=<%= keyword %>">[이전그룹] </a> &nbsp;
 							<% }else{ %>
 									[이전그룹] &nbsp;
 							<% } %>
@@ -275,12 +277,12 @@ function changeLogin(element){
 									if (p == currentPage){%>
 										<font color="blue" size="4">[<%= p %>]</font>
 									<% }else{ %>
-										<a href="/semi/mlist?page=<%= p %>"><%= p %></a>
+										<a href="/semi/msearch?page=<%= p %>&action=<%=action %>&keyword=<%= keyword %>"><%= p %></a>
 							<% }} %>
 							&nbsp;
 							<!-- 다음 페이지 그룹으로 이동 -->
 							<% if((currentPage +10 ) > endPage && (currentPage + 10) < maxPage){ %>
-									<a href="/semi/mlist?page=<%= endPage + 10 %>">[다음그룹] </a> &nbsp;
+									<a href="/semi/msearch?page=<%= endPage + 10 %>&action=<%=action %>&keyword=<%= keyword %>">[다음그룹] </a> &nbsp;
 							<% }else{ %>
 									[다음그룹] &nbsp;
 							<% } %>
@@ -288,7 +290,7 @@ function changeLogin(element){
 							<% if(currentPage >= maxPage){ %>
 									[맨끝] &nbsp;
 							<% }else{ %>
-									<a href="/semi/mlist?page=<%= maxPage %>">[맨끝]</a> &nbsp;
+									<a href="/semi/msearch?page=<%= maxPage %>&action=<%=action %>&keyword=<%= keyword %>">[맨끝]</a> &nbsp;
 							<% } %>
 							
 							
@@ -310,10 +312,10 @@ function changeLogin(element){
 	<!-- ---------------------------------------------------------------------------------------- -->
 
 	<!-- jquery vendor -->
-	<!-- <script src="/semi/resources/js/lib/jquery.min.js"></script>
+	<script src="/semi/resources/js/lib/jquery.min.js"></script>
 	<script src="/semi/resources/js/lib/jquery.nanoscroller.min.js"></script>
 	<script src="/semi/resources/js/lib/bootstrap.min.js"></script>
-	<script src="/semi/resources/js/scripts.js"></script> -->
+	<script src="/semi/resources/js/scripts.js"></script>
 	<!-- scripit init-->
 	
 

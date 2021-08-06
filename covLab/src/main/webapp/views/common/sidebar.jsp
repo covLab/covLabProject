@@ -43,7 +43,9 @@ Member loginMember = (Member) session.getAttribute("loginMember");
                            <li><a href="/semi/mlist">회원 관리</a></li>
                            <li><a href="/semi/vcmanage">백신 관리</a></li>
                         </ul></li>
-                  
+                  <%} else if(loginMember.getUserGrade().equals("H")){ %>
+                  		<li><a href="/semi/blist?page=1">접종 후기</a></li>
+                  		<li><a href="/semi/rinfolist">백신 접종 관리</a></li>
                   <% } else {//로그인 %>
                      <li><a href="/semi/blist?page=1">접종 후기</a></li>
                      <li><a href="/semi/uprofile?userid=<%= loginMember.getUserId()%>&user_no=<%= loginMember.getUserNo() %>">MY PAGE</a></li>
@@ -74,6 +76,6 @@ Member loginMember = (Member) session.getAttribute("loginMember");
 	<script src="/semi/resources/js/lib/jquery.min.js"></script>
 	<script src="/semi/resources/js/lib/jquery.nanoscroller.min.js"></script>
 	<script src="/semi/resources/js/lib/bootstrap.min.js"></script>
-		<script src="assets/js/scripts.js"></script>
+		<script src="/semi/resources/js/scripts.js"></script>
 </body>
 </html>

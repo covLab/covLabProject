@@ -8,6 +8,8 @@ int startPage = ((Integer) request.getAttribute("startPage")).intValue();
 int endPage = ((Integer) request.getAttribute("endPage")).intValue();
 int maxPage = ((Integer) request.getAttribute("maxPage")).intValue();
 int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
+String sCondition  = ((String)request.getAttribute("sCondition"));
+String sKeyword = ((String)request.getAttribute("sKeyword"));
 %>
 <!DOCTYPE html>
 <html>
@@ -75,21 +77,7 @@ function updateState(userno, page, inocnt){
 								<h1>백신 목록 페이지</h1>
 							</div>
 						</div>
-					<!-- </div> -->
-					<!-- /# column -->
-					<!-- <div class="col-lg-4 p-l-0 title-margin-left">
-						<div class="page-header">
-							<div class="page-title">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-									<li class="breadcrumb-item active">Table-Row-Select</li>
-								</ol>
-							</div>
-						</div>
-					</div> -->
-					<!-- /# column -->
-				<!-- </div> -->
-				<!-- /# row -->
+					
 				<section id="main-content">
 					<div class="row">
 						<div class="col-lg-12">
@@ -115,6 +103,8 @@ function updateState(userno, page, inocnt){
 								<button class="btn btn-default" onclick="javascript:location.href='/semi/rinfolist';">전체 목록 조회</button>
 								</div>
 								
+
+								</div>
 								<div>
 								<table class="display table table-borderd table-hover">
 									<thead>
@@ -161,11 +151,11 @@ function updateState(userno, page, inocnt){
 							<% if(currentPage <= 1){ %>
 									[맨처음] &nbsp;
 							<% }else{ %>
-									<a href="/semi/rinfolist?page=1">[맨처음]</a> &nbsp;
+									<a href="/semi/risearch?page=1">[맨처음]</a> &nbsp;
 							<% } %>
 							<!-- 이전 페이지 그룹으로 이동 -->
 							<% if((currentPage -10 ) < startPage && (currentPage - 10) > 1){ %>
-									<a href="/semi/rinfolist?page=<%= startPage - 10 %>">[이전그룹] </a> &nbsp;
+									<a href="/semi/risearch?page=<%= startPage - 10 %>&searchCondition=<%=sCondition %>&searchKeyword=<%= sKeyword %>">[이전그룹] </a> &nbsp;
 							<% }else{ %>
 									[이전그룹] &nbsp;
 							<% } %>
@@ -175,12 +165,12 @@ function updateState(userno, page, inocnt){
 									if (p == currentPage){%>
 										<font color="blue" size="4">[<%= p %>]</font>
 									<% }else{ %>
-										<a href="/semi/rinfolist?page=<%= p %>"><%= p %></a>
+										<a href="/semi/risearch?page=<%=p%>&searchCondition=<%=sCondition %>&searchKeyword=<%= sKeyword %>"><%= p %></a>
 							<% }} %>
 							&nbsp;
 							<!-- 다음 페이지 그룹으로 이동 -->
 							<% if((currentPage +10 ) > endPage && (currentPage + 10) < maxPage){ %>
-									<a href="/semi/rinfolist?page=<%= endPage + 10 %>">[다음그룹] </a> &nbsp;
+									<a href="/semi/risearch?page=<%= endPage + 10 %>&searchCondition=<%=sCondition %>&searchKeyword=<%= sKeyword %>">[다음그룹] </a> &nbsp;
 							<% }else{ %>
 									[다음그룹] &nbsp;
 							<% } %>
@@ -188,7 +178,7 @@ function updateState(userno, page, inocnt){
 							<% if(currentPage >= maxPage){ %>
 									[맨끝] &nbsp;
 							<% }else{ %>
-									<a href="/semi/rinfolist?page=<%= maxPage %>">[맨끝]</a> &nbsp;
+									<a href="/semi/risearch?page=<%= maxPage %>&searchCondition=<%=sCondition %>&searchKeyword=<%= sKeyword %>">[맨끝]</a> &nbsp;
 							<% } %>
 							
 						</div>																

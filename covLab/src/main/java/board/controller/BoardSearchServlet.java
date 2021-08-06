@@ -89,7 +89,7 @@ public class BoardSearchServlet extends HttpServlet {
 		// 뷰 지정해서 내보내기
 		RequestDispatcher view = null;
 		if (list.size() > 0) {
-			view = request.getRequestDispatcher("views/board/boardListView.jsp");
+			view = request.getRequestDispatcher("views/board/boardSearchListView.jsp");
 
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
@@ -97,6 +97,8 @@ public class BoardSearchServlet extends HttpServlet {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
+			request.setAttribute("sCondition", sCondition);
+			request.setAttribute("sKeyword", sKeyword);
 
 			view.forward(request, response);
 		} else {

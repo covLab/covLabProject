@@ -66,20 +66,32 @@ public class HospitalService {
 		int result = hdao.updateRInoCntInfo(conn, ri);
 		if(result >0 ) {
 			commit(conn);
-			System.out.println("1");
 		}else {
 			rollback(conn);
 		}close(conn);
-		
-		conn = getConnection();
-		result = hdao.updateRStateInfo(conn, ri);
+			  
+		conn = getConnection(); 
+		result = hdao.updateRStateInfo(conn, ri);	
 		if(result >0 ) {
 			commit(conn);
-			System.out.println("2");
 		}else {
 			rollback(conn);
-		}
+		}close(conn);
 		return result;
+	}
+
+	public int getSearchListCount(String sCondition, String sKeyword) {
+		Connection conn = getConnection();
+		int listCount = hdao.getSearchListCount(conn, sCondition, sKeyword);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<ReservationInfo> selectSearchList(int startRow, int endRow, String sCondition, String sKeyword) {
+		Connection conn = getConnection();
+		ArrayList<ReservationInfo> list = hdao.selectSearchList(conn, startRow, endRow, sCondition, sKeyword);
+		close(conn);
+		return list;
 	}
 
 
