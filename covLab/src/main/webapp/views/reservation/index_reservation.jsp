@@ -11,6 +11,7 @@
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 	int startRow = ((Integer) request.getAttribute("startRow")).intValue();
 	int endRow = ((Integer) request.getAttribute("endRow")).intValue();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,8 @@
 <script
 	src="http://maps.google.com/maps/api/js?q=seoul&key=AIzaSyCZ8XJruaL1nd6GJOryueJE_Av5O6mU5H0"
 	type="text/javascript"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <style>
 <!--
@@ -173,38 +175,24 @@
 			});
 			
 			if (marker) {
-				marker.addListener("click", function() {
-					map.setZoom(15);
-					map.setCenter(this.getPosition());
-					console.log(this.getTitle());
-					var rbn_val=this.getTitle();
-					console.log(rbn_val);
-					var data={"reg_bus_no":rbn_val};
-					$.ajax({
-						url: "/semi/detailhp",
-						type: "post",
-						data: data,
-						dataType: "json",
-						success : function(data){
-							console.log(data);
-						}
-					});
-				});
-			}
-		}
-		
-		/* sortedLocations=locations.sort(function(a,b){
-			if (a.distance>b.distance){
-				return 1;
-			}
-			if (a.distance<b.distance){
-				return -1;
-			}
-			return 0;
-		});
-		return sortedLocations; */
+	            marker.addListener("click", function() {
+	               map.setZoom(15);
+	               map.setCenter(this.getPosition());
+	               reg_bus_no=this.getTitle();
+	               $.ajax({
+	                  url: "/semi/detailhp",
+	                  type: "post",
+	                  data: data,
+	                  dataType: "json",
+	                  success : function(data){
+	                     console.log(data);
+	                  }
+	               }); 
+	            });
+	         }
+	      }
 	}
-
+	
 
 	// 에러콜백 
 	function handleError(err) {
@@ -234,15 +222,28 @@
 	
 	function locationTest() {
 		navigator.geolocation.getCurrentPosition(handleLocation, handleError);
-		console.log(sortedLocations);
-		
+		console.log(sortedLocations);		
 	}
 	
-	function getOrderOpt(){
-		var orderopt = null;
-		request.open("Post","/semi/hosporder?orderopt="+encodeURIComponent(document.getElementById('orderOpt').value),true);
-		request.onreadystatechange=orderProcess;
+	function post_checkedhp(data,lat,lng){
+		var param = "reg_bus_no="+data+"&lat="+lat+"&lng="+lng;
+		
+		location.href='/semi/detailhp?'+param;
+		/* $('input[type=hidden][name=reg_bus_no]').val(reg_bus_no);
+		console.log($("input[type=hidden][name=reg_bus_no]").val()); */
+		
+		/* $.ajax({
+              url: "/semi/detailhp",
+              type: "post",
+              data: {"reg_bus_no":data},
+              dataType: "json",
+              success : function(data){
+                 console.log(data);
+              }
+           }); */
 	}
+	
+
 
 	function orderProcess(){
 		console.log({orderOpt: $("#orderOpt").val()});
@@ -260,33 +261,46 @@
 				if (data=='amnt'){
 					sortByAmnt(hospitals);
 				}
-				for(i=<%=startRow%>-1;i<<%=endRow%>;i++){
-					table.insertRow().insertCell().innerText=" ";
-					
-					const hospname=table.insertRow();
-					hospname.insertCell(0).innerText="병원명";
-					hospname.insertCell(1).innerText=sortedLocations[i].hp_name;
-					
-					const hospaddress=table.insertRow();			
-					hospaddress.insertCell(0).innerText="주소";
-					hospaddress.insertCell(1).innerText=sortedLocations[i].hp_address;
-					
-					const hospphone=table.insertRow();
-					hospphone.insertCell(0).innerText="전화번호";
-					hospphone.insertCell(1).innerText=sortedLocations[i].hp_phone;
-					
-					const hospremain=table.insertRow();
-					hospremain.insertCell(0).innerText="잔여수량";
-					hospremain.insertCell(1).innerText=sortedLocations[i].remain;
-					
-					const btn=table.insertRow();
-					btn.innerHTML="<input type=\"button\" value=\"예약\" onClick=\"location.href=\'+\"/semi/detailhp\"+\'\">";
-				}
-			}
-		})
-		
-	}
+				
+				for(i=<%=startRow%>-1;i<<%=endRow%>
+	; i++) {
 
+							table.insertRow().insertCell().innerHTML = "&nbsp";
+
+							const hospname = table.insertRow();
+							hospname.insertCell(0).innerText = "병원명";
+							hospname.insertCell(1).innerText = sortedLocations[i].hp_name;
+
+							const hospaddress = table.insertRow();
+							hospaddress.insertCell(0).innerText = "주소";
+							hospaddress.insertCell(1).innerText = sortedLocations[i].hp_address;
+
+							const hospphone = table.insertRow();
+							hospphone.insertCell(0).innerText = "전화번호";
+							hospphone.insertCell(1).innerText = sortedLocations[i].hp_phone;
+
+							const hospremain = table.insertRow();
+							hospremain.insertCell(0).innerText = "잔여수량";
+							hospremain.insertCell(1).innerText = sortedLocations[i].remain;
+
+							const btn = table.insertRow();
+							const val = sortedLocations[i].reg_bus_no;
+							const lat = sortedLocations[i].hp_latitude;
+							const lng = sortedLocations[i].hp_longitude;
+							
+							const data = val+"','"+lat+"','"+lng;
+							
+							const str = '<input type="button" name="btn" value="예약" onclick="post_checkedhp(\''
+									+ data + '\');"/>';
+							
+							console.log(str);
+							btn.innerHTML = str;
+
+						}
+					}
+				})
+
+	}
 </script>
 </head>
 
@@ -298,55 +312,94 @@
 				<section id="main-content">
 					<div>
 						<div></div>
-						<input type='radio' name='list_order' value='dist' checked='checked' onclick='orderProcess();' /> 거리순 
-						<input type='radio' name='list_order' value='amnt' onclick='orderProcess();' />수량순 
-						       
-						<select name="list_option_key" onchange="handleOnList(this)">
+						<input type='radio' name='list_order' value='dist'
+							checked='checked' onclick='orderProcess();' /> 거리순 <input
+							type='radio' name='list_order' value='amnt'
+							onclick='orderProcess();' />수량순 <select name="list_option_key"
+							onchange="handleOnList(this)">
 							<option value="none">===백신종류===</option>
 							<option value="pfizer">화이자</option>
 							<option value="janssen">얀센</option>
 							<option value="AZ">아스트라제네카</option>
 						</select>
 						<div class="row">
-							<div class="col-lg-3 p-0">
-							<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
-								
-								<div style="text-align:center;" class="jsgrid-pager">
-							<% if(currentPage <= 1){ %>
+							<div style="text-align: center;" class="col-lg-3 p-0">
+								<form action="/semi/detailhp" method="post">
+
+									<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
+									
+									<input type="hidden" name="reg_bus_no" value="834-23-92223" /> 
+									<!-- <a href="/semi/detailhp?reg_bus_no=></a>-->
+								</form>
+
+								<div style="text-align: center;" class="jsgrid-pager">
+									<%
+									if (currentPage <= 1) {
+									%>
 									[맨처음] &nbsp;
-							<% }else{ %>
+									<%
+									} else {
+									%>
 									<a href="/semi/indexres?page=1">[맨처음]</a> &nbsp;
-							<% } %>
-							<!-- 이전 페이지 그룹으로 이동 -->
-							<% if((currentPage -10 ) < startPage && (currentPage - 10) > 1){ %>
-									<a href="/semi/indexres?page=<%= startPage - 10 %>">[이전그룹] </a> &nbsp;
-							<% }else{ %>
+									<%
+									}
+									%>
+									<!-- 이전 페이지 그룹으로 이동 -->
+									<%
+									if ((currentPage - 10) < startPage && (currentPage - 10) > 1) {
+									%>
+									<a href="/semi/indexres?page=<%=startPage - 10%>">[이전그룹] </a>
+									&nbsp;
+									<%
+									} else {
+									%>
 									[이전그룹] &nbsp;
-							<% } %>
-							
-							<!-- 현재 페이지 그룹의 페이지 숫자 출력 -->
-							<% for(int p = startPage; p<= endPage; p++){ 
-									if (p == currentPage){%>
-										<font color="blue" size="4">[<%= p %>]</font>
-									<% }else{ %>
-										<a href="/semi/indexres?page=<%= p %>"><%= p %></a>
-							<% }} %>
-							&nbsp;
-							<!-- 다음 페이지 그룹으로 이동 -->
-							<% if((currentPage +10 ) > endPage && (currentPage + 10) < maxPage){ %>
-									<a href="/semi/indexres?page=<%= endPage + 10 %>">[다음그룹] </a> &nbsp;
-							<% }else{ %>
+									<%
+									}
+									%>
+
+									<!-- 현재 페이지 그룹의 페이지 숫자 출력 -->
+									<%
+									for (int p = startPage; p <= endPage; p++) {
+										if (p == currentPage) {
+									%>
+									<font color="blue" size="4">[<%=p%>]
+									</font>
+									<%
+									} else {
+									%>
+									<a href="/semi/indexres?page=<%=p%>"><%=p%></a>
+									<%
+									}
+									}
+									%>
+									&nbsp;
+									<!-- 다음 페이지 그룹으로 이동 -->
+									<%
+									if ((currentPage + 10) > endPage && (currentPage + 10) < maxPage) {
+									%>
+									<a href="/semi/indexres?page=<%=endPage + 10%>">[다음그룹] </a>
+									&nbsp;
+									<%
+									} else {
+									%>
 									[다음그룹] &nbsp;
-							<% } %>
-							
-							<% if(currentPage >= maxPage){ %>
+									<%
+									}
+									%>
+
+									<%
+									if (currentPage >= maxPage) {
+									%>
 									[맨끝] &nbsp;
-							<% }else{ %>
-									<a href="/semi/indexres?page=<%= maxPage %>">[맨끝]</a> &nbsp;
-							<% } %>
-							
-							
-						</div>
+									<%
+									} else {
+									%>
+									<a href="/semi/indexres?page=<%=maxPage%>">[맨끝]</a> &nbsp;
+									<%
+									}
+									%>
+								</div>
 							</div>
 
 
@@ -363,8 +416,7 @@
 			</div>
 		</div>
 	</div>
-
-	<%@ include file="../common/script.jsp"%>
+	<script src="/semi/resources/js/lib/menubar/sidebar.js"></script>
 </body>
 
 

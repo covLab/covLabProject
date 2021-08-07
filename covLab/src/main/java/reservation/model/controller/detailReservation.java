@@ -49,13 +49,8 @@ public class detailReservation extends HttpServlet {
 		System.out.println("-----------------------디테일 서블릿----------------------------");
 		String reg_bus_no = request.getParameter("reg_bus_no");
 		System.out.println("reg_bus_no : " + reg_bus_no);
-		
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.append(reg_bus_no);
-		out.flush();
-		out.close();
-//		String reg_bus_no = "252-12-62156";
+		String lat = request.getParameter("lat");
+		String lng = request.getParameter("lng");
 		
 		HttpSession session = request.getSession(true);
 		
@@ -73,7 +68,6 @@ public class detailReservation extends HttpServlet {
 		
 		//병원 정보 가져오기
 		Hospital hp = rservice.selectOneHp(reg_bus_no);
-		
 		
 		// 대리예약 정보 가져오기 위한 대리유저 정보
 		ArrayList<Members> sub_list = rservice.selectOneSubUserRn(mb.getUserNo());
@@ -128,6 +122,7 @@ public class detailReservation extends HttpServlet {
 			}
 		}
 		
+
 		System.out.println("checkRes : "+checkRes);
 		System.out.println("checkSubRes : "+checkSubRes);
 		
@@ -142,6 +137,8 @@ public class detailReservation extends HttpServlet {
 			request.setAttribute("checkSubRes", checkSubRes);
 			request.setAttribute("list_resTime", list_resTime);
 			request.setAttribute("joinvacVacData", joinvacVacData);
+			request.setAttribute("lat", lat);
+			request.setAttribute("lng", lng);
 			
 			view.forward(request, response);
 		}else {
@@ -156,6 +153,9 @@ public class detailReservation extends HttpServlet {
 		
 	}
 
+	/*
+	 * public String regbusno(String reg_bus_no) { mo }
+	 */
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
