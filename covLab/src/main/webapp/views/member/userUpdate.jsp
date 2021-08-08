@@ -18,7 +18,7 @@ function validate(){
 		document.getElementById("nuserpwd").select();
 		return false;  //전송 취소함
 	}else{
-		alert("수정되었습니다. 다시 로그인 해주세요;");
+		alert("수정이 완료 되었습니다.");
 	}
       var phone = document.getElementById("phone").value;
       var rep =/^01[01679]-[0-9]{3,4}-[0-9]{4}$/; 

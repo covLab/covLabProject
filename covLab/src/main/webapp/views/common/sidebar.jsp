@@ -59,13 +59,13 @@ Member loginMember = (Member) session.getAttribute("loginMember");
                   <li><a class="sidebar-sub-toggle"><i class="ti-target"></i>
                         Pages <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                      <ul>
-                        <li><a href="/semi/views/member/login.jsp">Login</a></li>
-                        <li><a href="/semi/views/member/enroll.html">Enroll</a></li>
+                        <li><a href="/semi/views/member/login.jsp" onclick="window.open(this.href, '로그인', 'width=700, height =800 ,top=50, left=400 ,resizeable=no');return false;">Login</a></li>
+                        <li><a href="/semi/views/member/idCheck.jsp">Enroll</a></li>
                         <li><a href="/semi/views/member/findPasswordEmail.jsp">Forgot password</a></li>
                      </ul></li>
                   
-                  <li><a><i class="ti-close"
-                        onclick="javascript:location.href='logout';"></i> Logout</a></li>
+                  <li onclick="javascript:location.href='/semi/logout';"><a><i class="ti-close"
+                       ></i> Logout</a></li>
                </ul>
             </ul>
          </div>

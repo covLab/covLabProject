@@ -162,7 +162,7 @@ public class FindPasswordEmailServlet extends HttpServlet {
 			  RequestDispatcher view = request.getRequestDispatcher("views/member/loginOrChange.jsp");
 			  request.setAttribute("userid", userid);
 			  request.setAttribute("AuthenticationKey", AuthenticationKey);
-			  view.forward(request, response);
+				 view.forward(request, response); 
 			  
 			}else {	
 				RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");

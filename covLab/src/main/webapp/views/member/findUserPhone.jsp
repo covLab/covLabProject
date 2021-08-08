@@ -9,7 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>아이디/비밀번호 찾기</title>
-
+  <%@ include file="../common/stylesheet.jsp"%>
+<%@ include file="../common/sidebar.jsp"%>
+<%@ include file="../common/topbar.jsp"%>
 <!-- ================= Favicon ================== -->
 <!-- Standard -->
 <link href="/semi/resources/css/lib/font-awesome.min.css" rel="stylesheet">
@@ -40,8 +42,8 @@ function validate(){
     
 </head>
 
-<body class="bg-primary">
-
+<body class="">
+<div class="content-wrap">
 	<div class="unix-login">
 		<div class="container-fluid">
 			<div class="row justify-content-center">
@@ -54,9 +56,9 @@ function validate(){
 
 							<form action="/semi/findidphone" method="post" onsubmit= "return validate();">
 								<div class="form-group">
-									<h4>아이디 찾기</h4>
+									<h4 style="weight: bold;">아이디 찾기</h4>
 								<div class="form-group">
-                                    <label>구 분</label>
+                                    <label style="font-size: 15px;  font-weight: bold;">구 분</label>
                                     <Br>
                                     <label> <input type="radio" value="findemail" name="findemail" id="findemail"   onclick="moveemail();">이메일</label> 
                                     &nbsp;
@@ -67,16 +69,16 @@ function validate(){
 									
 										<hr>
 									
-									 <label>이름</label> <input type="text"  name="username" id="username"class="form-control"
+									 <label style="font-size: 15px;  font-weight: bold;">이름</label> <input type="text"  name="username" id="username"class="form-control"
 										placeholder="이름 입력해주세요." required>
 										<Br>
-									<label>핸드폰 번호로 찾기</label> <input type="text" class="form-control"name="userphone" id="userphone"
+									<label style="font-size: 15px;  font-weight: bold;">핸드폰 번호로 찾기</label> <input type="text" class="form-control"name="userphone" id="userphone"
 										placeholder="핸드폰 번호 '-' 포함해 적어주세요." required>
 									
 											<hr>
 										<button type="submit" class="btn btn-primary btn-flat m-b-15">확인</button>
 								</div>
-								<table border="1" width="700" height="100" align="center">
+								<table border="1" width="630" height="100" align="center">
 	<tr>
 	<th class="a" align="left"></th>
 		<td><ul>
@@ -99,7 +101,7 @@ function validate(){
 			</div>
 		</div>
 	</div>
-
+</div>
 </body>
 
 </html>
