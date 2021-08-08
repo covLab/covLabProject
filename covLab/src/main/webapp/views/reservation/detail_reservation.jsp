@@ -10,6 +10,8 @@ ArrayList<Reservation> list_resTime = (ArrayList<Reservation>) request.getAttrib
 Hospital hp = (Hospital) request.getAttribute("hp");
 Reservation resByUserRn = (Reservation) request.getAttribute("resByUserRn");
 Reservation resBySubUserRn = (Reservation) request.getAttribute("resBySubUserRn");
+int checkResByUserRn =  Integer.parseInt(request.getAttribute("checkResByUserRn").toString());
+int checkResBySubUserRn = Integer.parseInt(request.getAttribute("checkResBySubUserRn").toString());
 ArrayList<Object> joinvacVacData = (ArrayList<Object>) request.getAttribute("joinvacVacData");
 int checkRes = Integer.parseInt(request.getAttribute("checkRes").toString());
 int checkSubRes = Integer.parseInt(request.getAttribute("checkSubRes").toString());
@@ -296,6 +298,8 @@ input:focus {
 						<div class="col-lg-4 p-0 border-radius">
 							<div class="card h-100 m-0 border border" style="">
 								<div class="card-header border-top-radius">
+								<span class="align-self-center mr-1 ml-1 "> 
+									<i class="far fa-clock fa-2x"></i></span>
 									<h5 class="card-title text-center" id="hp_name"><%=hp.getHp_name()%></h5>
 								</div>
 								<div class="card-body">
@@ -463,13 +467,15 @@ input:focus {
 										<div class=" mt-3 text-center">
 											<%
 											if (checkRes >= 1) {
-												if (resByUserRn.getReg_bus_no().equals(hp.getReg_bus_no())) {
-											%>
-											<button onclick="cancelRes()"
-												class="btn btn-rounded btn-outline-success" value="self"
-												id="canBtn">예약취소</button>
-											<%
-											}
+												if(checkResByUserRn >=1){
+													if (resByUserRn.getReg_bus_no().equals(hp.getReg_bus_no())) {
+														%>
+														<button onclick="cancelRes()"
+															class="btn btn-rounded btn-outline-success" value="self"
+															id="canBtn">예약취소</button>
+														<%
+														}
+												}
 											} else {
 											%>
 											<button onclick="termsPopup()"
@@ -481,13 +487,15 @@ input:focus {
 
 											<%
 											if (checkSubRes >= 1) {
-												if (resBySubUserRn.getReg_bus_no().equals(hp.getReg_bus_no())) {
-											%>
-											<button onclick="cancelRes()"
-												class="btn btn-rounded btn-outline-info" value="sub"
-												id="canBtn">대리예약취소</button>
-											<%
-											}
+												if(checkResBySubUserRn >=1){
+													if (resBySubUserRn.getReg_bus_no().equals(hp.getReg_bus_no())) {
+														%>
+														<button onclick="cancelRes()"
+															class="btn btn-rounded btn-outline-info" value="sub"
+															id="canBtn">대리예약취소</button>
+														<%
+														}
+												}
 											} else {
 											%>
 											<button onclick="termsPopup()"
@@ -501,8 +509,8 @@ input:focus {
 							</div>
 						</div>
 
-						<div class="col-lg-9 p-0">
-							<div class="row" id="map" style="width: 800px; height: 600px;"></div>
+						<div class="col-lg-8 p-0">
+							<div class="row" id="map" style="width: 100%; height: 100%;"></div>
 						</div>
 					</div>
 

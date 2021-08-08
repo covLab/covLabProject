@@ -29,33 +29,37 @@ function moveIndex(){
 
 </head>
 <body>
-	<div class="container-fluid align-self-center h-100">
-		<div class="row d-flex align-items-center h-100">
-			<div class="card h-100">
-				<div class="card-body text-center ">
-					<div class="welcome-text">
+	<div class="authincation h-100">
+		<div class="container-fluid h-100">
+			<div class="row justify-content-center h-100 align-items-center">
+				<div class="col-md-5">
+					<div class="form-input-content text-center">
+						<div class="mb-5">
 						<%
 						if (type == null) {
 						%>
-						<h5>시간을 선택해주세요.</h5>
+						<h5 class="error-text font-weight-bold">시간을 선택해주세요.</h5>
 						<%
 						} else if (type.equals("cancelError")) {
 						%>
-						<h5>예약취소에 실패하였습니다. 다시 시도해주세요.</h5>
+						<h5 class="error-text font-weight-bold">예약취소에 실패하였습니다. 다시 시도해주세요.</h5>
 						<%
 						}else if(type.equals("insertError")) {
 						%>
-						<h5>예약에 실패하였습니다. 다시 시도해주세요.</h5>
+						<h5 class="error-text font-weight-bold">예약에 실패하였습니다. 다시 시도해주세요.</h5>
 						<%
 						} else if(type.equals("vacChoiceError")) {
 						%>
-						<h5>백신을 선택해 주세요. </h5>
+						<h5 class="error-text font-weight-bold">백신을 선택해 주세요. </h5>
 						<%	
 						}
 						%>
+						</div>
+						<div class="mb-5">
+						<button class="btn btn-rounded btn-primary" onclick="moveIndex()">메인페이지로
+							이동</button>
+						</div>
 					</div>
-					<button class="btn btn-rounded btn-primary" onclick="moveIndex()">메인페이지로
-						이동</button>
 				</div>
 			</div>
 		</div>

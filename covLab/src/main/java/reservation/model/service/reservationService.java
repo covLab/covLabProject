@@ -174,7 +174,17 @@ public class reservationService {
 		return result;
 	}
 
+	public int cehckOneResByUserRn(String user_rn, String reg_bus_no) {
+		Connection conn = getConnection();
+		int check = rdao.cehckOneResByUserRn(conn, user_rn,reg_bus_no);
+		close(conn);
+		return check;
+	}
 	
-	
-	
+	public int cehckOneResBySubUserRn(String user_rn, String reg_bus_no) {
+		Connection conn = getConnection();
+		int check = rdao.cehckOneResBySubUserRn(conn, user_rn,reg_bus_no);
+		close(conn);
+		return check;
+	}
 }

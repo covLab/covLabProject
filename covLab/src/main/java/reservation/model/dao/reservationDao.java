@@ -725,7 +725,61 @@ public int checkNotice(Connection conn,String reg_bus_no) {
 		}
 		return result;
 	}
-	
-	
 
+	public int cehckOneResByUserRn(Connection conn, String user_rn, String reg_bus_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int check = 0;
+		String query = "select count(*) from reservation where user_rn = ? and reg_bus_no = ? and state = 'W' and sub_ok = 'N'";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user_rn);
+			pstmt.setString(2, reg_bus_no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				check = rset.getInt(1);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return check;
+	}
+	
+	public int cehckOneResBySubUserRn(Connection conn, String user_rn, String reg_bus_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int check = 0;
+		String query = "select count(*) from reservation where user_rn = ? and reg_bus_no = ? and state = 'W' and sub_ok = 'Y'";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user_rn);
+			pstmt.setString(2, reg_bus_no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				check = rset.getInt(1);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return check;
+	}
+	
 }

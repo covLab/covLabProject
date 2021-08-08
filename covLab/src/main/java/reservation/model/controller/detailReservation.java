@@ -73,7 +73,8 @@ public class detailReservation extends HttpServlet {
 		String sub_ok = "N";
 		Reservation resByUserRn = rservice.selectOneResByUserRn(user_rn, sub_ok, reg_bus_no);
 		request.setAttribute("resByUserRn", resByUserRn);
-		
+		int checkResByUserRn = rservice.cehckOneResByUserRn(user_rn,reg_bus_no);
+		request.setAttribute("checkResByUserRn", checkResByUserRn);
 		// 대리예약 정보 가져오기 위한 대리유저 정보
 		ArrayList<Members> sub_list = rservice.selectOneSubUserRn(mb.getUserNo());
 		
@@ -91,7 +92,8 @@ public class detailReservation extends HttpServlet {
 				
 				sub_ok = "Y";
 				Reservation resBySubUserRn = rservice.selectOneResByUserRn(sub_mb.getUserRn(), sub_ok, reg_bus_no);
-				
+				int checkResBySubUserRn = rservice.cehckOneResBySubUserRn(user_rn,reg_bus_no);
+				request.setAttribute("checkResBySubUserRn", checkResBySubUserRn);
 				System.out.println("resBySubUserRn : "+resBySubUserRn);
 				
 				request.setAttribute("user_no", user_no);
