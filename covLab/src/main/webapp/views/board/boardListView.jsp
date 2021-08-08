@@ -81,10 +81,11 @@ function moveLogin(){
 								<label>검색어</label>
 								<input id="searchKeyword" name="searchKeyword" type="text">
 								<input type="submit" value="검색" class="btn btn-primary">
-							</form>	</div>							
-								<div style="width=300px; float:right;">
+							</form>	
+							</div>							
+							<div style="width=300px; float:right;">
 								<button class="btn btn-default" onclick="javascript:location.href='/semi/blist';">전체 목록 조회</button>
-								</div>							
+							</div>							
 							
 							</div>
 							<table class="display table table-borderd table-hover">
