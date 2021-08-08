@@ -105,7 +105,8 @@
 	function printTable(){
 		var table =document.getElementById("ajaxTable");
 		table.innerHTML="";
-		for(i=<%=startRow%>-1;i<<%=endRow%>; i++) {
+		for(i=<%=startRow%>-1;i<<%=endRow%>
+	; i++) {
 
 			table.insertRow().insertCell().innerHTML = "&nbsp";
 
@@ -155,7 +156,7 @@
 		});
 		return sortedArr;
 	}
-	
+
 	// 위치콜백 
 	function handleLocation(position) {
 		var outDiv = document.getElementById("result");
@@ -163,7 +164,7 @@
 		// 위치정보 만들고 
 		var latitude = position.coords.latitude;
 		var longitude = position.coords.longitude;
-		
+
 		var latlng = new google.maps.LatLng(latitude, longitude);
 
 		// 지도 옵션 
@@ -196,28 +197,28 @@
 				label : Object.values(hospitals[i])[6]
 			/* icon : "../../resources/images/red_dot_small.png" */
 			});
-			
+
 			if (marker) {
-	            marker.addListener("click", function() {
-	               map.setZoom(15);
-	               map.setCenter(this.getPosition());
-	               reg_bus_no=this.getTitle();
-	               post_checkedhp(reg_bus_no,this.getPosition().lat(),this.getPosition().lng());
-	               /* $.ajax({
-	                  url: "/semi/detailhp",
-	                  type: "post",
-	                  data: reg_bus_no,
-	                  dataType: "json",
-	                  success : function(data){
-	                     console.log(data);
-	                  }
-	               }); */ 
-	               
-	            });
-	         }
-	      }
+				marker.addListener("click", function() {
+					map.setZoom(15);
+					map.setCenter(this.getPosition());
+					reg_bus_no = this.getTitle();
+					post_checkedhp(reg_bus_no, this.getPosition().lat(), this
+							.getPosition().lng());
+					/* $.ajax({
+					   url: "/semi/detailhp",
+					   type: "post",
+					   data: reg_bus_no,
+					   dataType: "json",
+					   success : function(data){
+					      console.log(data);
+					   }
+					}); */
+
+				});
+			}
+		}
 	}
-	
 
 	// 에러콜백 
 	function handleError(err) {
@@ -244,45 +245,45 @@
 		dist = dist * 1.609344
 		return dist;
 	}
-	
+
 	function locationTest() {
 		navigator.geolocation.getCurrentPosition(handleLocation, handleError);
-		console.log(sortedLocations);		
+		console.log(sortedLocations);
 	}
-	
-	function post_checkedhp(data,lat,lng){
-		var param = "reg_bus_no="+data+"&lat="+lat+"&lng="+lng;
-		
-		location.href='/semi/detailhp?'+param;
+
+	function post_checkedhp(data, lat, lng) {
+		var param = "reg_bus_no=" + data + "&lat=" + lat + "&lng=" + lng;
+
+		location.href = '/semi/detailhp?' + param;
 		/* $('input[type=hidden][name=reg_bus_no]').val(reg_bus_no);
 		console.log($("input[type=hidden][name=reg_bus_no]").val()); */
-		
+
 		/* $.ajax({
-              url: "/semi/detailhp",
-              type: "post",
-              data: {"reg_bus_no":data},
-              dataType: "json",
-              success : function(data){
-                 console.log(data);
-              }
-           }); */
+		      url: "/semi/detailhp",
+		      type: "post",
+		      data: {"reg_bus_no":data},
+		      dataType: "json",
+		      success : function(data){
+		         console.log(data);
+		      }
+		   }); */
 	}
-	
 
-
-	function orderProcess(){
-		console.log({orderopt: $("#list_order").val()});
+	function orderProcess() {
+		console.log({
+			orderopt : $("#list_order").val()
+		});
 		$.ajax({
-			url: "/semi/hosporder",
-			type: "post",
-			data: {orderopt:$('input[name=list_order]:checked').val()},
-			success : function(data){
+			url : "/semi/hosporder",
+			type : "post",
+			data : {
+				orderopt : $('input[name=list_order]:checked').val()
+			},
+			success : function(data) {
 				console.log(data);
-				
-				
-				
-					}
-				})
+
+			}
+		})
 		location.href = '/semi/indexresamnt';
 
 	}
@@ -290,114 +291,117 @@
 </head>
 
 <body onload="javascript:printTable();locationTest();">
-
 	<div class="content-wrap">
 		<div class="main">
-			<div class="container-fluid">
-				<section id="main-content">
-					<div class="card h-100 m-0">
-						<form method="post" action="/semi/indexres">
-							<input type='radio' name='list_order' value='dist'
-								checked='checked' /> 거리순 <input
-								type='radio' name='list_order' value='amnt'
-								onclick='orderProcess();' />수량순
-						</form>
-						<div class="row">
-
-							<div style="text-align: center;" class="col-lg-3 p-0">
-								<form action="/semi/detailhp" method="post">
-
-									<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
-
-									<!-- <a href="/semi/detailhp?reg_bus_no=></a>-->
-								</form>
-
-								<div style="text-align: center;" class="jsgrid-pager">
-									<%
-									if (currentPage <= 1) {
-									%>
-									[맨처음] &nbsp;
-									<%
-									} else {
-									%>
-									<a href="/semi/indexres?page=1">[맨처음]</a> &nbsp;
-									<%
-									}
-									%>
-									<!-- 이전 페이지 그룹으로 이동 -->
-									<%
-									if ((currentPage - 4) < startPage && (currentPage - 4) > 1) {
-									%>
-									<a href="/semi/indexres?page=<%=startPage - 10%>">[이전그룹] </a>
-									&nbsp;
-									<%
-									} else {
-									%>
-									[이전그룹] &nbsp;
-									<%
-									}
-									%>
-
-									<!-- 현재 페이지 그룹의 페이지 숫자 출력 -->
-									<%
-									for (int p = startPage; p <= endPage; p++) {
-										if (p == currentPage) {
-									%>
-									<font color="blue" size="4">[<%=p%>]
-									</font>
-									<%
-									} else {
-									%>
-									<a href="/semi/indexres?page=<%=p%>"><%=p%></a>
-									<%
-									}
-									}
-									%>
-									&nbsp;
-									<!-- 다음 페이지 그룹으로 이동 -->
-									<%
-									if ((currentPage + 4) > endPage && (currentPage + 4) < maxPage) {
-									%>
-									<a href="/semi/indexres?page=<%=endPage + 4%>">[다음그룹] </a>
-									&nbsp;
-									<%
-									} else {
-									%>
-									[다음그룹] &nbsp;
-									<%
-									}
-									%>
-
-									<%
-									if (currentPage >= maxPage) {
-									%>
-									[맨끝] &nbsp;
-									<%
-									} else {
-									%>
-									<a href="/semi/indexres?page=<%=maxPage%>">[맨끝]</a> &nbsp;
-									<%
-									}
-									%>
-								</div>
-							</div>
-
-
-							<div class="col-lg-9 p-0">
-								<div id="map" style="width: 95%; height: 600px;"></div>
-							</div>
+			<div class="container ">
+				<div class="row">
+					<div class="col-lg-8 p-r-0 title-margin-right">
+						<div class="page-header">
+							<div class="page-title"></div>
 						</div>
 					</div>
-					
+
+				</div>
+				<section class="span12" id="main-content">
+					<div class="row">
+
+						<div class="col-lg-4 p-0 border-radius">
+							<div class="card h-100 m-0 border border" style="">
+								<form method="post" action="/semi/indexres">
+									<input type='radio' name='list_order' value='dist'
+										checked='checked' /> 거리순 <input type='radio'
+										name='list_order' value='amnt' onclick='orderProcess();' />수량순
+								</form>
 
 
-					<%@ include file="../common/footer.jsp"%>
+								<div class="card-body">
+
+									<form action="/semi/detailhp" method="post">
+										<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
+									</form>
+
+									<div style="text-align: center;" class="jsgrid-pager">
+										<%
+										if (currentPage <= 1) {
+										%>
+										[맨처음] &nbsp;
+										<%
+										} else {
+										%>
+										<a href="/semi/indexres?page=1">[맨처음]</a> &nbsp;
+										<%
+										}
+										%>
+										<!-- 이전 페이지 그룹으로 이동 -->
+										<%
+										if ((currentPage - 4) < startPage && (currentPage - 4) > 1) {
+										%>
+										<a href="/semi/indexres?page=<%=startPage - 10%>">[이전그룹] </a>
+										&nbsp;
+										<%
+										} else {
+										%>
+										[이전그룹] &nbsp;
+										<%
+										}
+										%>
+
+										<!-- 현재 페이지 그룹의 페이지 숫자 출력 -->
+										<%
+										for (int p = startPage; p <= endPage; p++) {
+											if (p == currentPage) {
+										%>
+										<font color="blue" size="4">[<%=p%>]
+										</font>
+										<%
+										} else {
+										%>
+										<a href="/semi/indexres?page=<%=p%>"><%=p%></a>
+										<%
+										}
+										}
+										%>
+										&nbsp;
+										<!-- 다음 페이지 그룹으로 이동 -->
+										<%
+										if ((currentPage + 4) > endPage && (currentPage + 4) < maxPage) {
+										%>
+										<a href="/semi/indexres?page=<%=endPage + 4%>">[다음그룹] </a>
+										&nbsp;
+										<%
+										} else {
+										%>
+										[다음그룹] &nbsp;
+										<%
+										}
+										%>
+
+										<%
+										if (currentPage >= maxPage) {
+										%>
+										[맨끝] &nbsp;
+										<%
+										} else {
+										%>
+										<a href="/semi/indexres?page=<%=maxPage%>">[맨끝]</a> &nbsp;
+										<%
+										}
+										%>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-lg-8 p-0">
+							<div class="row" id="map" style="width: 100%; height: 100%;"></div>
+						</div>
+					</div>
 				</section>
+				<%@ include file="../common/footer.jsp"%>
 			</div>
 		</div>
 	</div>
-	<script src="/semi/resources/js/lib/menubar/sidebar.js"></script>
 </body>
-
-
 </html>

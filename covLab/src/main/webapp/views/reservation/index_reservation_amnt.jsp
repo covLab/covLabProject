@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"
-   import="java.util.ArrayList, reservation.model.vo.Hospital, reservation.model.vo.VaccineData"%>
+	pageEncoding="UTF-8"
+	import="java.util.ArrayList, reservation.model.vo.Hospital, reservation.model.vo.VaccineData"%>
 <%
 	ArrayList<Hospital> hps = (ArrayList<Hospital>)request.getAttribute("hps");
 	ArrayList<VaccineData> vds = (ArrayList<VaccineData>) request.getAttribute("vds");
@@ -29,7 +29,7 @@
 <!-- GOOGLE FONTS-->
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
-   rel='stylesheet' type='text/css' />
+	rel='stylesheet' type='text/css' />
 <script
 	src="http://maps.google.com/maps/api/js?q=seoul&key=AIzaSyCZ8XJruaL1nd6GJOryueJE_Av5O6mU5H0"
 	type="text/javascript"></script>
@@ -39,12 +39,12 @@
 <style>
 <!--
 .supported {
-   width: 300px;
-   border: 1px solid #e3e3e3;
-   padding: 5px;
-   font-family: Arial;
-   font-size: 0.9em;
-   line-height: 160%;
+	width: 300px;
+	border: 1px solid #e3e3e3;
+	padding: 5px;
+	font-family: Arial;
+	font-size: 0.9em;
+	line-height: 160%;
 }
 -->
 </style>
@@ -216,15 +216,15 @@
 		}
 	}
 
-   // 에러콜백 
-   function handleError(err) {
-      var outDiv = document.getElementById("result");
-      if (err.code == 1) {
-         outDiv.innerHTML = "사용자가 위치정보 공유를 거부함";
-      } else {
-         outDiv.innerHTML = "에러발생 : " + err.code;
-      }
-   }
+	// 에러콜백 
+	function handleError(err) {
+		var outDiv = document.getElementById("result");
+		if (err.code == 1) {
+			outDiv.innerHTML = "사용자가 위치정보 공유를 거부함";
+		} else {
+			outDiv.innerHTML = "에러발생 : " + err.code;
+		}
+	}
 
 	function getDistance(lat1, lon1, lat2, lon2) {
 		var radlat1 = Math.PI * lat1 / 180
@@ -250,7 +250,7 @@
 	function post_checkedhp(data, lat, lng) {
 		var param = "reg_bus_no=" + data + "&lat=" + lat + "&lng=" + lng;
 		location.href = '/semi/detailhp?' + param;
-		
+
 	}
 
 	function orderProcess() {
@@ -275,114 +275,118 @@
 </script>
 </head>
 
+
 <body onload="javascript:printTable();locationTest();">
 	<div class="content-wrap">
 		<div class="main">
-			<div class="container-fluid">
-				<section id="main-content">
-					<div class="card h-100 m-0">
-						<form>
-							<input type='radio' name='list_order' value='dist'
-								onclick='orderProcess();' /> 거리순 <input type='radio'
-								name='list_order' value='amnt' checked='checked' />수량순
-						</form>
-						<div class="row">
+			<div class="container ">
+				<div class="row">
+					<div class="col-lg-8 p-r-0 title-margin-right">
+						<div class="page-header">
+							<div class="page-title"></div>
+						</div>
+					</div>
 
-							<div style="text-align: center;" class="col-lg-3 p-0">
-								<form action="/semi/detailhp" method="post">
+				</div>
+				<section class="span12" id="main-content">
+					<div class="row">
 
-									<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
-
-									<!-- <a href="/semi/detailhp?reg_bus_no=></a>-->
+						<div class="col-lg-4 p-0 border-radius">
+							<div class="card h-100 m-0 border border" style="">
+								<form method="post" action="/semi/indexres">
+									<input type='radio' name='list_order' value='dist'
+										checked='checked' /> 거리순 <input type='radio'
+										name='list_order' value='amnt' onclick='orderProcess();' />수량순
 								</form>
 
-								<div style="text-align: center;" class="jsgrid-pager">
-									<%
-									if (currentPage <= 1) {
-									%>
-									[맨처음] &nbsp;
-									<%
-									} else {
-									%>
-									<a href="/semi/indexresamnt?page=1">[맨처음]</a> &nbsp;
-									<%
-									}
-									%>
-									<!-- 이전 페이지 그룹으로 이동 -->
-									<%
-									if ((currentPage - 4) < startPage && (currentPage - 4) > 1) {
-									%>
-									<a href="/semi/indexresamnt?page=<%=startPage - 10%>">[이전그룹]
-									</a> &nbsp;
-									<%
-									} else {
-									%>
-									[이전그룹] &nbsp;
-									<%
-									}
-									%>
 
-									<!-- 현재 페이지 그룹의 페이지 숫자 출력 -->
-									<%
-									for (int p = startPage; p <= endPage; p++) {
-										if (p == currentPage) {
-									%>
-									<font color="blue" size="4">[<%=p%>]
-									</font>
-									<%
-									} else {
-									%>
-									<a href="/semi/indexresamnt?page=<%=p%>"><%=p%></a>
-									<%
-									}
-									}
-									%>
-									&nbsp;
-									<!-- 다음 페이지 그룹으로 이동 -->
-									<%
-									if ((currentPage + 4) > endPage && (currentPage + 4) < maxPage) {
-									%>
-									<a href="/semi/indexresamnt?page=<%=endPage + 4%>">[다음그룹] </a>
-									&nbsp;
-									<%
-									} else {
-									%>
-									[다음그룹] &nbsp;
-									<%
-									}
-									%>
+								<div class="card-body">
 
-									<%
-									if (currentPage >= maxPage) {
-									%>
-									[맨끝] &nbsp;
-									<%
-									} else {
-									%>
-									<a href="/semi/indexresamnt?page=<%=maxPage%>">[맨끝]</a> &nbsp;
-									<%
-									}
-									%>
+									<form action="/semi/detailhp" method="post">
+										<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
+									</form>
+
+									<div style="text-align: center;" class="jsgrid-pager">
+										<%
+										if (currentPage <= 1) {
+										%>
+										[맨처음] &nbsp;
+										<%
+										} else {
+										%>
+										<a href="/semi/indexresamnt?page=1">[맨처음]</a> &nbsp;
+										<%
+										}
+										%>
+										<!-- 이전 페이지 그룹으로 이동 -->
+										<%
+										if ((currentPage - 4) < startPage && (currentPage - 4) > 1) {
+										%>
+										<a href="/semi/indexresamnt?page=<%=startPage - 10%>">[이전그룹]
+										</a> &nbsp;
+										<%
+										} else {
+										%>
+										[이전그룹] &nbsp;
+										<%
+										}
+										%>
+
+										<!-- 현재 페이지 그룹의 페이지 숫자 출력 -->
+										<%
+										for (int p = startPage; p <= endPage; p++) {
+											if (p == currentPage) {
+										%>
+										<font color="blue" size="4">[<%=p%>]
+										</font>
+										<%
+										} else {
+										%>
+										<a href="/semi/indexresamnt?page=<%=p%>"><%=p%></a>
+										<%
+										}
+										}
+										%>
+										&nbsp;
+										<!-- 다음 페이지 그룹으로 이동 -->
+										<%
+										if ((currentPage + 4) > endPage && (currentPage + 4) < maxPage) {
+										%>
+										<a href="/semi/indexresamnt?page=<%=endPage + 4%>">[다음그룹]
+										</a> &nbsp;
+										<%
+										} else {
+										%>
+										[다음그룹] &nbsp;
+										<%
+										}
+										%>
+
+										<%
+										if (currentPage >= maxPage) {
+										%>
+										[맨끝] &nbsp;
+										<%
+										} else {
+										%>
+										<a href="/semi/indexresamnt?page=<%=maxPage%>">[맨끝]</a> &nbsp;
+										<%
+										}
+										%>
+									</div>
+
 								</div>
 							</div>
+						</div>
 
-
-                     <div class="col-lg-9 p-0">
-                        <div id="map" style="width: 95%; height: 600px;"></div>
-                     </div>
-                  </div>
-               </div>
-               <!-- </div> -->
-
-
-               <%@ include file="../common/footer.jsp"%>
-            </section>
-         </div>
-      </div>
-   </div>
-
-   <%@ include file="../common/script.jsp"%>
+						<div class="col-lg-8 p-0">
+							<div class="row" id="map" style="width: 100%; height: 100%;"></div>
+						</div>
+					</div>
+				</section>
+				<%@ include file="../common/footer.jsp"%>
+			</div>
+		</div>
+	</div>
 </body>
-
-
 </html>
