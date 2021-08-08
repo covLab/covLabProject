@@ -8,8 +8,8 @@
 <%
 ArrayList<Reservation> list_resTime = (ArrayList<Reservation>) request.getAttribute("list_resTime");
 Hospital hp = (Hospital) request.getAttribute("hp");
-Reservation resByUserRn =  (Reservation)request.getAttribute("resByUserRn");
-Reservation resBySubUserRn =  (Reservation)request.getAttribute("resBySubUserRn");
+Reservation resByUserRn = (Reservation) request.getAttribute("resByUserRn");
+Reservation resBySubUserRn = (Reservation) request.getAttribute("resBySubUserRn");
 ArrayList<Object> joinvacVacData = (ArrayList<Object>) request.getAttribute("joinvacVacData");
 int checkRes = Integer.parseInt(request.getAttribute("checkRes").toString());
 int checkSubRes = Integer.parseInt(request.getAttribute("checkSubRes").toString());
@@ -43,13 +43,13 @@ float lng = Float.parseFloat(request.getAttribute("lng").toString());
 $(function () {
 	
     var sop = $('.selectpicker');
-    <% for (Object obj: joinvacVacData) {%>
-		<% if( !((ArrayList<String>) obj).isEmpty() ) {%>
-   	 	var text = "<%= ((ArrayList<String>) obj).get(2)%>  -  <%= ((ArrayList<String>) obj).get(0)%>개";
-   	 	var value = "<%= ((ArrayList<String>) obj).get(2) %>";
+    <%for (Object obj : joinvacVacData) {%>
+		<%if (!((ArrayList<String>) obj).isEmpty()) {%>
+   	 	var text = "<%=((ArrayList<String>) obj).get(2)%>  -  <%=((ArrayList<String>) obj).get(0)%>개";
+   	 	var value = "<%=((ArrayList<String>) obj).get(2)%>";
     		sop.append(new Option( text , value ,false, false ));
-		<%} %>
-	<%} %>
+		<%}%>
+	<%}%>
 	
     $('.selectpicker').selectpicker();
     $('.selectpicker').on('click', function(){
@@ -128,7 +128,7 @@ $(function(){
 
 		$('#timeBox').text(cv);
 		$('#timeBox').click();
-		
+
 	});
 });
     
@@ -282,8 +282,7 @@ input:focus {
 				<div class="row">
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
-							<div class="page-title">
-							</div>
+							<div class="page-title"></div>
 						</div>
 					</div>
 					<!-- /# column -->
@@ -302,67 +301,68 @@ input:focus {
 								<div class="card-body">
 
 									<form action="" method="post" name="info" autocomplete="off">
-									
-									
+
+
 										<div class="form-group mt-3 mb-0">
-											<label class="col-sm-5 col-form-label pl-0"  for="hp_address">주소</label>
-											
+											<label class="col-sm-5 col-form-label pl-0" for="hp_address">주소</label>
+
 											<div class="col pl-0">
-											<textarea class="control-form"  name="hp_address" readonly id="areaBox"
-												style="display: block;"><%=hp.getHp_address()%>
+												<textarea class="control-form" name="hp_address" readonly
+													id="areaBox" style="display: block;"><%=hp.getHp_address()%>
                                 			 </textarea>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-form-label pl-0" for="hp_phone">전화번호</label>
 											<div class="col pl-0">
-											<input class="control-form" type="text"
-												name="hp_phone" id= "areaBox" value="<%=hp.getHp_phone()%>" readonly
-												class="inputBox">
+												<input class="control-form" type="text" name="hp_phone"
+													id="areaBox" value="<%=hp.getHp_phone()%>" readonly
+													class="inputBox">
 											</div>
 										</div>
-										
+
 										<div class="form-group">
 											<label class="col form-labe pl-0" for="vac_name">백신 </label>
-												<select name="vac_name" class="selectpicker form-control" multiple>
+											<select name="vac_name" class="selectpicker form-control"
+												multiple>
 												<%-- <% for (Object obj: joinvacVacData) {%>
 													<option  value="" selected disabled hidden >선택해주세요.</option>
 													<% if( !((ArrayList<String>) obj).isEmpty() ) {%>
 												    <option value=<%= ((ArrayList<String>) obj).get(2) %>><%= ((ArrayList<String>) obj).get(2)%>  -  <%= ((ArrayList<String>) obj).get(0)%>개</option>
 													<%} %>
 												<%} %> --%>
-												</select>
+											</select>
 										</div>
 
 
 										<div class="form-group">
-										<label class="col form-labe pl-0">
-											날짜를 선택해주세요.
-										</label>
+											<label class="col form-labe pl-0"> 날짜를 선택해주세요. </label>
 											<div class="input-group input-group-unstyled border rounded">
-												<input class="form-control border-none" type="text" id="datepicker"
-													name="areaBox"> 
-													<span class="align-self-center mr-1 ml-1 "> <i
+												<input class="form-control border-none" type="text"
+													id="datepicker" name="areaBox"> <span
+													class="align-self-center mr-1 ml-1 "> <i
 													class="far fa-calendar-alt fa-2x"></i></span>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<div class="panel-group" id="accordion">
-											
+
 												<div class="panel panel-default">
-												
+
 													<div class="panel-heading">
-															<label class="col form-labe pl-0" >시간 선택</label> 
-															
-															<div class="input-group input-group-unstyled border rounded">
-															<a data-toggle="collapse"
-																data-parent="#accordion" href="#collapse1" id="timeBox" class="form-control border-none">시간대를 선택해주세요.</a>
-																<span class="align-self-center mr-1 ml-1 "> 
-																<i class="far fa-clock fa-2x"></i></span>
-															</div>
-																
-																
+														<label class="col form-labe pl-0">시간 선택</label>
+
+														<div
+															class="input-group input-group-unstyled border rounded">
+															<a data-toggle="collapse" data-parent="#accordion"
+																href="#collapse1" id="timeBox"
+																class="form-control border-none">시간대를 선택해주세요.</a> <span
+																class="align-self-center mr-1 ml-1 "> <i
+																class="far fa-clock fa-2x"></i></span>
+														</div>
+
+
 													</div>
 
 													<div id="collapse1" class="panel-collapse collapse in">
@@ -449,7 +449,7 @@ input:focus {
 
 												</div>
 											</div>
-											</div>
+										</div>
 
 
 										<input type="hidden" name="reg_bus_no"
@@ -457,62 +457,60 @@ input:focus {
 											type="hidden" name="resType" value="null" class="inputBox">
 										<input type="hidden" name="ioc_date" value="null"
 											class="inputBox">
-										</form>
-                              
-											<div class="card-footer mt-5" style="background-color: white;">
-											<div class=" mt-3 text-center">
+									</form>
+
+									<div class="card-footer mt-5" style="background-color: white;">
+										<div class=" mt-3 text-center">
 											<%
-											if ( checkRes >= 1) {
-												if( resByUserRn.getReg_bus_no().equals(hp.getReg_bus_no())){
-												%>
-												<button onclick="cancelRes()" class="btn btn-rounded btn-outline-success" value="self"
-													id="canBtn">예약취소</button>
-												<%
-												}
-											}else {
-												%>
-												<button onclick="termsPopup()" class="btn btn-rounded btn-success" value="self"
-													id="resBtn">예약</button>
-												<%
+											if (checkRes >= 1) {
+												if (resByUserRn.getReg_bus_no().equals(hp.getReg_bus_no())) {
+											%>
+											<button onclick="cancelRes()"
+												class="btn btn-rounded btn-outline-success" value="self"
+												id="canBtn">예약취소</button>
+											<%
+											}
+											} else {
+											%>
+											<button onclick="termsPopup()"
+												class="btn btn-rounded btn-success" value="self" id="resBtn">예약</button>
+											<%
 											}
 											%>
 
 
 											<%
-											if ( checkSubRes >= 1) {
-												if( resBySubUserRn.getReg_bus_no().equals(hp.getReg_bus_no())){
-												%>
-												<button onclick="cancelRes()" class="btn btn-rounded btn-outline-info" value="sub"
-													id="canBtn">대리예약취소</button>
-												<%
-												}
-											}else {
-												%>
-												<button onclick="termsPopup()" class="btn btn-rounded btn-info" value="sub"
-													id="resBtn">대리예약</button>
-												<%
+											if (checkSubRes >= 1) {
+												if (resBySubUserRn.getReg_bus_no().equals(hp.getReg_bus_no())) {
+											%>
+											<button onclick="cancelRes()"
+												class="btn btn-rounded btn-outline-info" value="sub"
+												id="canBtn">대리예약취소</button>
+											<%
+											}
+											} else {
+											%>
+											<button onclick="termsPopup()"
+												class="btn btn-rounded btn-info" value="sub" id="resBtn">대리예약</button>
+											<%
 											}
 											%>
-											</div>
-											</div>
-									
-
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
 						</div>
 
 						<div class="col-lg-9 p-0">
 							<div class="row" id="map" style="width: 800px; height: 600px;"></div>
-
 						</div>
-				</div>
+					</div>
 
 				</section>
 				<%@ include file="../common/footer.jsp"%>
 			</div>
 		</div>
 	</div>
-
 
 
 </body>
