@@ -75,7 +75,17 @@
 									
 									  	<%for( Profile p : list){ %>
 										<td><%= p.getUserName() %></td>
-										<td><%= p.getUserRn() %></td>
+										<% String userrn = p.getUserRn(); %>
+                                  <% char[] rn= new char[userrn.length()]; %>
+                                  <%  for(int i = 0 ; i < userrn.length(); i++) {%>
+                                  <%  rn[i] = userrn.charAt(i) ;} %>
+                                  <%  char[] copy = new char[rn.length];%>
+                                  <% for(int i = 0 ; i < copy.length; i++){%>
+                                  <% if(i <= 7){ %>
+                                  <%  copy[i]= rn[i]; %>
+                                  <% }else{ 	copy[i] = '*'; %>
+                                  <%}} %>
+										<td><%= copy %></td>
 										<td><%= p.getUserPhone() %></td>
 										<td><%= p.getUserAddress() %></td>
 										<td><%= p.getVac_name() %></td>

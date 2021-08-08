@@ -173,7 +173,7 @@
                               <div class="basic-information">
                                 <h4>기본 정보</h4>
                                 <div class="birthday-content">
-                                  <span class="contact-title">주민번호</span>
+                                  <span class="contact-title">주민번호:</span>
                                    <% String userrn = p.getUserRn(); %>
                                   <% char[] rn= new char[userrn.length()]; %>
                                   <%  for(int i = 0 ; i < userrn.length(); i++) {%>

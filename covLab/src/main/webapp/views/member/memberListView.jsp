@@ -95,13 +95,28 @@ function changeLogin(element){
 	<div class="content-wrap">
 		<div class="main">
 			<div class="container-fluid"><!-- ?? -->
-				
+				<!-- <div class="row">
+					<div class="col-lg-8 p-r-0 title-margin-right"> -->
 						<div class="page-header">
 							<div class="page-title">
 								<h1>회원 관리 페이지</h1>
 							</div>
 						</div>
-					
+					<!-- </div> -->
+					<!-- /# column -->
+					<!-- <div class="col-lg-4 p-l-0 title-margin-left">
+						<div class="page-header">
+							<div class="page-title">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+									<li class="breadcrumb-item active">Table-Row-Select</li>
+								</ol>
+							</div>
+						</div>
+					</div> -->
+					<!-- /# column -->
+				<!-- </div> -->
+				<!-- /# row -->
 				<section id="main-content">
 					<div class="row">
 						<div class="col-lg-12">
@@ -109,11 +124,10 @@ function changeLogin(element){
 								<div align="center" class="card-title">
 									회원수 : <%= listCount %> 명
 								</div>
-								
-								<br>
-								<div>
+								<div align=right><button class="btn btn-default" onclick="javascript:location.href='/semi/mlist';">전체 목록 조회</button>
+								</div><br>
 								<%-- 항목별 검색 기능 추가 --%>
-								<fieldset id="ss" style="width=500px; float:left;">
+								<fieldset id="ss">
 									<legend>검색할 항목을 선택하세요.</legend>
 									<input type="radio" name="item" id="uno"> 회원 번호 &nbsp;
 									<input type="radio" name="item" id="uname"> 회원 이름 &nbsp;
@@ -122,10 +136,6 @@ function changeLogin(element){
 									<input type="radio" name="item" id="ulogtype"> 회원 유형 &nbsp;
 								</fieldset>
 								
-								<div style="width=300px; float:right;">
-								<button class="btn btn-default" onclick="javascript:location.href='/semi/mlist';">전체 목록 조회</button>
-								</div>
-								</div>
 								<%-- 아이디 검색 폼 --%>
 								<form id="noform" class="sform" action="/semi/msearch" method="post">
 									<input type="hidden" name="action" value="no">
@@ -310,10 +320,10 @@ function changeLogin(element){
 	<!-- ---------------------------------------------------------------------------------------- -->
 
 	<!-- jquery vendor -->
-	<!-- <script src="/semi/resources/js/lib/jquery.min.js"></script>
+	<script src="/semi/resources/js/lib/jquery.min.js"></script>
 	<script src="/semi/resources/js/lib/jquery.nanoscroller.min.js"></script>
 	<script src="/semi/resources/js/lib/bootstrap.min.js"></script>
-	<script src="/semi/resources/js/scripts.js"></script> -->
+	<script src="assets/js/scripts.js"></script>
 	<!-- scripit init-->
 	
 
