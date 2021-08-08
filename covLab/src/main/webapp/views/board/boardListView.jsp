@@ -63,21 +63,15 @@ function moveLogin(){
 								</h1>
 							</div>
 						</div>
-					<!-- </div> 
-
-				</div>-->
-				<!-- /# row -->
+					
 				<section id="main-content">
-					<!-- <div class="row">
-						<div class="col-lg-12"> -->
+					
 					<div class="card">
-						<!-- <div class="card-title">
-                                    <h4>Bootstrap Data Table </h4>
-                                </div> -->
-						<!-- <div class="bootstrap-data-table-panel">-->
+						
 						<div class="table-responsive">
-							
-							<div><form method="get" action="/semi/bsearch">
+							<div>
+							<div style="width=500px; float:left;">
+							<form method="get" action="/semi/bsearch">
 								<select id="searchForm" name="searchCondition">
 									<option value="selectnone">== 검색 ==</option>
 									<option value="searchboardno">글 번호</option>
@@ -87,9 +81,13 @@ function moveLogin(){
 								<label>검색어</label>
 								<input id="searchKeyword" name="searchKeyword" type="text">
 								<input type="submit" value="검색" class="btn btn-primary">
-							</form></div>
+							</form>	
+							</div>							
+							<div style="width=300px; float:right;">
+								<button class="btn btn-default" onclick="javascript:location.href='/semi/blist';">전체 목록 조회</button>
+							</div>							
 							
-							
+							</div>
 							<table class="display table table-borderd table-hover">
 
 								<thead>
@@ -175,46 +173,13 @@ function moveLogin(){
 					</div>-->
 					<!-- /# row -->
 
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="footer">
-								<p>
-									2018 © Admin Board. - <a href="#">example.com</a>
-								</p>
-							</div>
-						</div>
-					</div>
+					<%@ include file="../common/footer.jsp" %>
 				</section>
 			</div>
 		</div>
 	</div>
 
 
-
-
-	<!-- jquery vendor -->
-	<script src="/semi/resources/js/lib/jquery.min.js"></script>
-	<script src="/semi/resources/js/lib/jquery.nanoscroller.min.js"></script>
-	<!-- nano scroller -->
-	<script src="/semi/resources/js/lib/menubar/sidebar.js"></script>
-	<script src="/semi/resources/js/lib/preloader/pace.min.js"></script>
-	<!-- sidebar
-    
-    bootstrap -->
-
-	<script src="/semi/resources/js/lib/bootstrap.min.js"></script>
-	<script src="/semi/resources/js/scripts.js"></script>
-	<!--  scripit init -->
-	<script src="/semi/resources/js/lib/data-table/datatables.min.js"></script>
-	<script
-		src="/semi/resources/js/lib/data-table/dataTables.buttons.min.js"></script>
-	<script src="/semi/resources/js/lib/data-table/jszip.min.js"></script>
-	<script src="/semi/resources/js/lib/data-table/pdfmake.min.js"></script>
-	<script src="/semi/resources/js/lib/data-table/vfs_fonts.js"></script>
-	<script src="/semi/resources/js/lib/data-table/buttons.html5.min.js"></script>
-	<script src="/semi/resources/js/lib/data-table/buttons.print.min.js"></script>
-	<script src="/semi/resources/js/lib/data-table/buttons.colVis.min.js"></script>
-	<script src="/semi/resources/js/lib/data-table/datatables-init.js"></script>
 </body>
 
 </html>

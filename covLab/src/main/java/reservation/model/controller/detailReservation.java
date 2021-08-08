@@ -69,6 +69,11 @@ public class detailReservation extends HttpServlet {
 		//병원 정보 가져오기
 		Hospital hp = rservice.selectOneHp(reg_bus_no);
 		
+		
+		String sub_ok = "N";
+		Reservation resByUserRn = rservice.selectOneResByUserRn(user_rn, sub_ok, reg_bus_no);
+		request.setAttribute("resByUserRn", resByUserRn);
+		
 		// 대리예약 정보 가져오기 위한 대리유저 정보
 		ArrayList<Members> sub_list = rservice.selectOneSubUserRn(mb.getUserNo());
 		
@@ -83,13 +88,21 @@ public class detailReservation extends HttpServlet {
 				checkSubRes = rservice.checkSubReservation(sub_mb.getUserRn());
 				
 				int user_no = sub_mb.getSubUserNo();
-				request.setAttribute("user_no", user_no);
 				
+				sub_ok = "Y";
+				Reservation resBySubUserRn = rservice.selectOneResByUserRn(sub_mb.getUserRn(), sub_ok, reg_bus_no);
+				
+				System.out.println("resBySubUserRn : "+resBySubUserRn);
+				
+				request.setAttribute("user_no", user_no);
+				request.setAttribute("resBySubUserRn", resBySubUserRn);
 				if(checkSubRes >0) {
 					break;
 				}
 			}
 		}
+		
+		
 		
 		ArrayList<Reservation> list_resTime = rservice.selectTimeRes(reg_bus_no);
 		
@@ -114,6 +127,8 @@ public class detailReservation extends HttpServlet {
 		 * } }
 		 */
 		
+		
+		
 		for(Object obj : joinvacVacData) {
 			System.out.println( "! : "+((ArrayList<String>) obj).get(1));
 			
@@ -127,6 +142,8 @@ public class detailReservation extends HttpServlet {
 		System.out.println("checkSubRes : "+checkSubRes);
 		
 		RequestDispatcher view = null;
+		
+		System.out.println("hp : "+hp);
 		if(hp != null) {
 			view = request.getRequestDispatcher(
 					"views/reservation/detail_reservation.jsp");
@@ -142,12 +159,14 @@ public class detailReservation extends HttpServlet {
 			
 			view.forward(request, response);
 		}else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", 
-					reg_bus_no + "번 병원 조회 실패!");
+			view = request.getRequestDispatcher(
+					"views/reservation/error.jsp");
+			String pageType = "hpInquireError";
+			request.setAttribute("pageType", pageType);
 			view.forward(request, response);
 		}
-	
+		
+		
 	}
 
 	/*

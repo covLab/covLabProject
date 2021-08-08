@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,10 +46,7 @@ public class BoardDetailServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
 
-
 		BoardService bservice = new BoardService();
-
-		bservice.addReadCount(boardNo);
 
 		Board board = bservice.selectBoard(boardNo);
 		//System.out.println(board);
@@ -58,6 +56,32 @@ public class BoardDetailServlet extends HttpServlet {
 
 		Comments comments = cservice.selectRef(boardNo);
 		//System.out.println(comments);
+				
+		Cookie[] cookies = request.getCookies();
+		int visitor =0;
+		
+		for (Cookie cookie : cookies) {
+			System.out.println(cookie.getName());
+			if(cookie.getName().equals("visit")) {
+				visitor = 1;
+				
+				//System.out.println("visit 통과");
+				
+				if(cookie.getValue().contains(request.getParameter("bno"))) {
+					//System.out.println("visit bno 통과");
+				}else {
+					cookie.setValue(cookie.getValue()+"_"+request.getParameter("bno"));
+					response.addCookie(cookie);
+					bservice.addReadCount(boardNo);
+				}
+			}
+		}
+		if(visitor ==0 ) {
+			Cookie cookie1 = new Cookie("visit", request.getParameter("bno"));
+			response.addCookie(cookie1);
+			//System.out.println("visitor : "+visitor+", cookie1 : "+cookie1);
+			bservice.addReadCount(boardNo);
+		}
 		
 		
 		RequestDispatcher view = null;
@@ -70,7 +94,7 @@ public class BoardDetailServlet extends HttpServlet {
 			
 			view.forward(request, response);
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
+			view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", boardNo + "번 글 상세조회 실패..");
 			view.forward(request, response);
 		}

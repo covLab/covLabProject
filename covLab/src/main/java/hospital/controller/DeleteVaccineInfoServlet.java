@@ -34,14 +34,15 @@ public class DeleteVaccineInfoServlet extends HttpServlet {
 		String vname = request.getParameter("vname");
 		System.out.println("vname : "+vname);
 		HospitalService hservice = new HospitalService();
-		if(hservice.deleteVaccineInfo(vname)>0) {
+		int result = hservice.deleteVaccineInfo(vname); 
+		System.out.println("result : "+result);
+		if(result>0) {
 			response.sendRedirect("/semi/vcmanage");
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", vname + " 백신 정보 삭제 실패..");
 			view.forward(request, response);
 		}
-		
 	}
 
 	/**

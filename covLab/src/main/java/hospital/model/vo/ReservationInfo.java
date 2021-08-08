@@ -1,6 +1,5 @@
 package hospital.model.vo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class ReservationInfo implements java.io.Serializable{

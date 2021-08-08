@@ -42,7 +42,7 @@ public class BoardDeleteServlet extends HttpServlet {
 			response.sendRedirect("/semi/blist?page="+currentPage);
 			
 		} else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", boardNo + "번 글 삭제 실패..");
 			view.forward(request, response);
 		}

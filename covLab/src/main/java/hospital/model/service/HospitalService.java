@@ -8,7 +8,6 @@ import static common.JDBCTemp.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import board.model.vo.Board;
 import hospital.model.dao.HospitalDao;
 import hospital.model.vo.ReservationInfo;
 import hospital.model.vo.VaccineInfo;
@@ -59,6 +58,63 @@ public class HospitalService {
 		ArrayList<ReservationInfo> list = hdao.selectReservationList(conn, startRow, endRow);
 		close(conn);
 		return list;
+	}
+
+	public int updateRInoCntInfo(ReservationInfo ri) {
+		Connection conn = getConnection();
+		int result = hdao.updateRInoCntInfo(conn, ri);
+		if(result >0 ) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}close(conn);
+		return result;
+	}
+	
+	public int updateRStateInfo(ReservationInfo ri) {
+		Connection conn = getConnection();
+		conn = getConnection(); 
+		int result = hdao.updateRStateInfo(conn, ri);	
+		if(result >0 ) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}close(conn);
+		return result;
+	}
+		
+	
+
+	public int getSearchListCount(String sCondition, String sKeyword) {
+		Connection conn = getConnection();
+		int listCount = hdao.getSearchListCount(conn, sCondition, sKeyword);
+		close(conn);
+		return listCount;
+	}
+
+	public ArrayList<ReservationInfo> selectSearchList(int startRow, int endRow, String sCondition, String sKeyword) {
+		Connection conn = getConnection();
+		ArrayList<ReservationInfo> list = hdao.selectSearchList(conn, startRow, endRow, sCondition, sKeyword);
+		close(conn);
+		return list;
+	}
+
+	public VaccineInfo selectVaccineInfo(String vname) {
+		Connection conn = getConnection();
+		VaccineInfo vi = hdao.selectVaccineInfo(conn, vname);
+		close(conn);
+		return vi;
+	}
+
+	public int updateVaccineInfo(VaccineInfo vi) {
+		Connection conn = getConnection();
+		int result = hdao.updateVaccineInfo(conn, vi);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}close(conn);
+		return result;
 	}
 
 

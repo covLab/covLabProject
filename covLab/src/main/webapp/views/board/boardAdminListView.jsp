@@ -19,9 +19,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>게시판</title>
 
-<%@ include file="../common/stylesheet.jsp"%>
+<link href="/semi/resources/css/lib/font-awesome.min.css" rel="stylesheet">
+<link href="/semi/resources/css/lib/themify-icons.css" rel="stylesheet">
+<link href="/semi/resources/css/lib/menubar/sidebar.css" rel="stylesheet">
+<link href="/semi/resources/css/lib/bootstrap.min.css" rel="stylesheet">
+<link href="/semi/resources/css/lib/helper.css" rel="stylesheet">
+<link href="/semi/resources/css/style.css" rel="stylesheet">
+
 <%@ include file="../common/sidebar.jsp"%>
 <%@ include file="../common/topbar.jsp"%>
+
 </head>
 <body>
 <script type="text/javascript" src="/semi/resources/js/jquery-3.6.0.min.js"></script>
@@ -30,55 +37,6 @@ function showWriteForm(){
    location.href="/semi/views/board/boardWriteForm.jsp";
 }
 
-<%-- function requestDelete(){
-   if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-      location.href = "/semi/bdeleteadmin?bno=<%= board.getBoardNo() %>";
-   }else{   //취소
-       return;
-   }
-} --%>
-
-/* $(document).ready(function(){
-   $("#delete").click(function(){
-      
-      var checkedArray = [];
-
-      $('input[name="selectCheckbox"]:checked').each(function(i){
-         checkedArray.push($(this).val());
-      });
-      
-      console.log("checkedArray : "+checkedArray);
-      console.log("checkedArray[0] : "+checkedArray[0]);
-      
-      
-      //ajax 호출
-      $.ajax({
-         url: "/semi/bdeleteadmin",
-         type: "post",
-         data: {
-            "checkedArray=" + checkedArray
-        },
-         dataType: "json",
-         contentType: "charset=utf-8",
-         
-         success: function(data){
-            console.log("success : "+data);
-            
-            if(data == "ok"){
-               alert("삭제되었습니다.");
-               location.href = "/semi/blistadmin";
-            } else {
-               alert("다시 시도하세요.");
-            }
-         },
-         
-         error: function(jqXHR, textStatus, errorThrown){
-            console.log("error : "+jqXHR +", "+textStatus+", "+errorThrown);
-         }
-      });
-   
-   });
-}); */
 </script>
 
 
@@ -94,31 +52,29 @@ function showWriteForm(){
                         </h1>
                      </div>
                   </div>
-               <!-- </div> 
-
-            </div>-->
-            <!-- /# row -->
+               
             <section id="main-content">
-               <!-- <div class="row">
-                  <div class="col-lg-12"> -->
+               
                <div class="card">
-                  <!-- <div class="card-title">
-                                    <h4>Bootstrap Data Table </h4>
-                                </div> -->
-                  <!-- <div class="bootstrap-data-table-panel">-->
-                  
-                  <div class="table-responsive">
+               <div class="table-responsive">
                      <div>
-                        <select id="searchForm" name="searchCondition">
-                           <option value="selectnone">== 검색 ==</option>
-                           <option value="searchboardno">글 번호</option>
-                           <option value="searchboardtitle">제 목</option>
-                           <option value="searchboardwriter">작성자</option>
-                           <option value="searchboarddate">작성일</option>
-                        </select> &nbsp;
-                        <input id="searchKeyword" name="searchKeyword" type="text">
-                        <input type="submit" value="검색 " class="btn btn-primary">
-                     </div>
+							<div style="width=500px; float:left;">
+							<form method="get" action="/semi/bsearch">
+								<select id="searchForm" name="searchCondition">
+									<option value="selectnone">== 검색 ==</option>
+									<option value="searchboardno">글 번호</option>
+									<option value="searchboardtitle">제 목</option>
+									<option value="searchboardwriter">작성자</option>
+								</select> &nbsp;
+								<label>검색어</label>
+								<input id="searchKeyword" name="searchKeyword" type="text">
+								<input type="submit" value="검색" class="btn btn-primary">
+							</form>	</div>							
+								<div style="width=300px; float:right;">
+								<button class="btn btn-default" onclick="javascript:location.href='/semi/blistadmin';">전체 목록 조회</button>
+								</div>							
+							
+							</div>
                      
                 <form action="/semi/bdeleteadmin" method="post" id="multidelete">
                 <input type="hidden" name="page" value="<%= currentPage %>">
@@ -225,8 +181,5 @@ function showWriteForm(){
 
 
 
-
-
-   <%@ include file="../common/script.jsp"%>
 </body>
 </html>

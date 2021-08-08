@@ -49,16 +49,12 @@ public class CommentWriteServlet extends HttpServlet {
 		//comments.setComLevel()
 		
 		int result = cservice.insertComments(comments);
-<<<<<<< HEAD
-		
-		
-=======
+
 		System.out.println("comments : "+comments);
->>>>>>> 0be9b48c194e881069ede8d8b7f9d10197c2d038
 		if(result > 0 ) {
 			response.sendRedirect("/semi/bdetail?bno="+boardNo+"&page="+currentPage);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", boardNo+"번 게시글 댓글 등록 실패...");
 			view.forward(request, response);
 		}

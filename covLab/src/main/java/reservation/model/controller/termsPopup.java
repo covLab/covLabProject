@@ -61,6 +61,7 @@ public class termsPopup extends HttpServlet {
 		String vac_name = request.getParameter("vac_name");
 		System.out.println("vac_name : " + vac_name);
 		
+		
 //		mb = rservice.selectOneMember(user_id);
 //		Members sub_mb = rservice.selectOneSubMember(sub_user_no);
 			
@@ -83,6 +84,7 @@ public class termsPopup extends HttpServlet {
 		System.out.println("resType : "+resType);
 		
 		
+		RequestDispatcher view = null;
 		if (resType.equals("sub")){
 				
 				String user_name = request.getParameter("sub_user_name");
@@ -103,18 +105,23 @@ public class termsPopup extends HttpServlet {
 				System.out.println("user_phone : "+mb.getUserPhone());
 				
 				//sub 유저 데이터 삽입
-				int result = rservice.insertSubMember(mb.getUserNo(), mb);
-				System.out.println("result : "+result);
-				
-				if(result > 0) {
+				rservice.insertSubMember(mb.getUserNo(), mb);
+				/*
+				 * System.out.println("result : "+result);
+				 * 
+				 * if(result > 0) {
+				 */
 					request.setAttribute("user_no", mb.getUserNo());
 					
 					
-				}
+					/*
+					 * }else { view = request.getRequestDispatcher( "views/reservation/error.jsp");
+					 * String pageType = "insertSubUserError";
+					 * request.setAttribute("pageType",pageType); view.forward(request, response); }
+					 */
 			
 		}
 		
-		RequestDispatcher view = null;
 		
 		request.setAttribute("hp", hp);
 		request.setAttribute("vac", vac);
@@ -122,6 +129,13 @@ public class termsPopup extends HttpServlet {
 		request.setAttribute("mb", mb);
 		request.setAttribute("resType", resType);
 		
+		if(vac_name == null) {
+			view = request.getRequestDispatcher(
+					"views/reservation/error.jsp");
+			String pageType = "vacChoiceError";
+			request.setAttribute("pageType", pageType);
+			view.forward(request, response);
+		}else
 		if(mb!=null) {
 			
 			view = request.getRequestDispatcher(

@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import board.comments.model.vo.Comments;
 import board.model.vo.Board;
 
 
@@ -350,6 +349,24 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return result.length;
+	}
+
+	public int updateRecommend(Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "update board set RECOMMEND_CNT = RECOMMEND_CNT + 1 " + "where board_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }

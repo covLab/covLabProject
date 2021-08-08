@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -8,6 +9,7 @@ import java.util.Base64;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +18,6 @@ import javax.servlet.http.HttpSession;
 
 import member.model.servcie.MemberService;
 import member.model.vo.Member;
-import member.model.vo.Profile;
 
 
 /**
@@ -64,6 +65,7 @@ public class LoginServelt extends HttpServlet {
 		
 				Member member = new MemberService().selectLogin(userid, cryptoUserpw);
 	           System.out.println();
+	    
 		
 		if(member != null ) { //로그인 성공
 			
@@ -73,10 +75,13 @@ public class LoginServelt extends HttpServlet {
 			
 			
 			session.setAttribute("loginMember", member);
-			
+		
 			//로그인 성공시 내보낼 페이지 지정
 			response.sendRedirect("index.jsp");
 			
+			
+			   
+			 
 			
 		}else { //로그인 실패
 			

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Focus Admin: Tab</title>
+    <title>information</title>
 
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
@@ -34,7 +34,7 @@
 <style type="text/css">
 	.slider {
   width: 1000px;
-  height: 650px;
+  height: 550px;
   position: relative;
 }
 .slide {
@@ -85,7 +85,7 @@
  .btn {
   text-decoration: none;
   font-size:15pt;  
-  background-color: navy;
+  background-color: #1E3269;
   color: white;
   padding:10px 20px 10px 20px;
   margin:10px;
@@ -104,6 +104,7 @@
  }
  
  
+ 
 </style>
 
 
@@ -118,21 +119,12 @@
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>뉴스 /  백신 정보 <span>게시판</span></h1>
+                                <h1>뉴스 /  백신 정보</h1>
                             </div>
                         </div>
                     </div>
                     <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Row-Select</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
+                   
                     <!-- /# column -->
                 </div>
                 <!-- /# row -->
@@ -143,8 +135,15 @@
                                 <div class="card-title">
                                 <!-- 1. 코로나/백신 정보 (자동 슬라이드) -->
                                     <!-- <h4>1. 코로나/백신/QnA</h4> -->
-
+<!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
+ <h5>**메뉴 이동**</h5> 
+<a class="btn" href="coronaInfo.jsp">코로나 정보</a>
+<a class="btn" href="vaccinInfo.jsp">백신/예방접종 정보</a>
+<a class="btn" href="qna.jsp">QnA</a>
+<!-- <a class="btn" href="test2.jsp">test2</a> -->
+<hr>
 <!-- 자동배너 (이미지 넣고, 수정해야함) -->
+<br>
   <div class="slider" >
       <!-- <div class="slide" style="background-image: url(../../resources/images/info_num.jpg);"></div>   -->
       <div class="slide" style="background-image: url(../../resources/images/info_num2.jpeg);">
@@ -159,23 +158,24 @@
       <a class="prev" onclick="button_click(-1)">&#10094</a>
       <a class="next" onclick="button_click(1)">&#10095</a>
     </div>
-  <hr>
-  
- 
-<!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
- <h4>**메뉴 이동**</h4> 
 <br>
-<a class="btn" href="coronaInfo.jsp">코로나 정보</a>
-<a class="btn" href="vaccinInfo.jsp">백신/예방접종 정보</a>
-<a class="btn" href="qna.jsp">QnA</a>
-<!-- <a class="btn" href="test2.jsp">test2</a> -->
+<p><a href="#top">맨 위로 이동</a></p>
 <hr>
 
 <!-- 3. 실시간 뉴스 -->
-<h4>크롤링으로 실시간 뉴스 가져오기</h4>
-
-
-
+<h5>**뉴스 & 이슈**</h5><br>
+<a href="https://www.yna.co.kr/view/AKR20210805071200002?input=1195m" class="new"><u>코로나로 힘든 대형마트 입점업체, 임대료 감액 요청할 수 있다</u></a><br>
+<a href="https://biz.chosun.com/it-science/ict/2021/08/05/MTTS3BYF7JE47KXPKWH4LA6WTQ/?utm_source=naver&utm_medium=original&utm_campaign=biz">
+<u>네이버·카카오 앱으로 18~49세 코로나 백신 예약</u></a><br>
+<a href="https://www.news1.kr/articles/?4394395"><u>두번째 코로나 수능, 백신 맞아도 마스크…점심때만 3면 칸막이</u></a><br>
+<a href="https://newsis.com/view/?id=NISX20210805_0001538550&cID=13102&pID=13100"><u>코로나19, 실내 공간 감염 위험 4배 높다</u></a><br>
+<a href="https://www.hani.co.kr/arti/society/health/1006519.html"><u>코로나19 신규 확진자 1776명…30일째 1천명대</u></a><br>
+<a href="https://www.yna.co.kr/view/AKR20210804130100017?input=1195m"><u>국내 부모 64.2% "우리 아이 코로나 백신 맞히겠다"</u></a><br>
+<a href="https://www.korea.kr/news/policyNewsView.do?newsId=148888328"><u>‘글로벌 백신 허브화 TF’ 출범…“국내 백신 생산역량 강화”</u></a>
+<br>
+<br>
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
   
                                 </div>
                                     </div>

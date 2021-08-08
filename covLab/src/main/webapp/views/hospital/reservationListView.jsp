@@ -17,15 +17,19 @@ int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>회원 관리</title>
-<style type="text/css">
-form.sform{
+<script type="text/javascript" src="/semi/resources/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+function updateState(userno, page, inocnt){
+	console.log("userno : "+userno);
+	console.log("page : "+page);
+	console.log("inocnt : "+inocnt);
+	var param = "userno="+userno+"&page="+page+"&inocnt="+inocnt;
+	location.href="/semi/uprinfo?"+param;
+	
 
-	display: none; 
-}
-</style>
-
-
-
+}	
+							
+</script>
 <!-- ================= Favicon ================== -->
 <!-- Standard -->
 <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
@@ -70,27 +74,30 @@ form.sform{
 								<h1>백신 목록 페이지</h1>
 							</div>
 						</div>
-					<!-- </div> -->
-					<!-- /# column -->
-					<!-- <div class="col-lg-4 p-l-0 title-margin-left">
-						<div class="page-header">
-							<div class="page-title">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-									<li class="breadcrumb-item active">Table-Row-Select</li>
-								</ol>
-							</div>
-						</div>
-					</div> -->
-					<!-- /# column -->
-				<!-- </div> -->
-				<!-- /# row -->
+					
 				<section id="main-content">
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="card">
 								<div align="center" class="card-title">
 									백신 예약 내역 조회 : <%= listCount %> 개 내역
+								</div>
+								<br>
+								<div>
+								<div style="width=500px; float:left;">
+								<form method="get" action="/semi/risearch">
+								<select id="searchForm" name="searchCondition">
+									<option value="selectnone">== 검색 ==</option>
+									<option value="searchhpname">병원이름</option>
+									<option value="searchusername">환자이름</option>
+								</select> &nbsp;
+								<label>검색어</label>
+								<input id="searchKeyword" name="searchKeyword" type="text">
+								<input type="submit" value="검색" class="btn btn-primary">
+								</form>
+								</div>
+								<div style="width=300px; float:right;">
+								<button class="btn btn-default" onclick="javascript:location.href='/semi/rinfolist';">전체 목록 조회</button>
 								</div>
 								
 								<div>
@@ -101,8 +108,8 @@ form.sform{
 											<th>환자이름</th>
 											<th>주민등록번호</th>
 											<th>백신종류</th>
-											<th>예약일시</th>
-											<th>접종상태</th>
+											<th>일련번호</th>
+											<th>접종일시</th>
 											<th> &nbsp; </th>
 										</tr>
 									</thead>
@@ -113,17 +120,18 @@ form.sform{
 											<th><%= ri.getUserName() %></th>
 											<th><%= ri.getUserRn() %></th>
 											<th><%= ri.getVacName() %></th>
+											<th><%= ri.getSerialNum() %></th>
 											<th><%= ri.getIocDate() %></th>
-											<th><%= ri.getState() %></th>
 											<th>
 												<% if(ri.getState().equals("F")){ %>
 													<input type="button" class="btn btn-default" value="완료">
 												<% } else{ //대기, 취소 
 													 if(ri.getInoCnt()==0){%>
-													 	<button class="btn">1차 접종</button>
+													 	<button class="btn" onclick="updateState(<%= ri.getUserNo() %>, <%= currentPage %>, <%= ri.getInoCnt() %>);">1차 접종</button>
 													 <%}else{ %>
-													 	<button class="btn">2차 접종</button>
+													 	<button class="btn" onclick="updateState(<%= ri.getUserNo() %>, <%= currentPage %>, <%= ri.getInoCnt() %>);">2차 접종</button>
 													 <%} %>
+
 												<% } %>
 											</th>
 										</tr>
@@ -168,13 +176,6 @@ form.sform{
 									<a href="/semi/rinfolist?page=<%= maxPage %>">[맨끝]</a> &nbsp;
 							<% } %>
 							
-							<div align="right">
-							<% if(loginMember == null){//로그인 안했을 때 %>
-							<button onclick="moveLogin();" class="btn btn-primary wrtie">글쓰기</button>
-							<% }else{ %>
-							<button onclick="showWriteForm();" class="btn btn-primary wrtie">글쓰기</button>
-							<% } %>
-							</div>
 						</div>																
 								
 							</div>
@@ -194,7 +195,7 @@ form.sform{
 	<script src="/semi/resources/js/lib/jquery.min.js"></script>
 	<script src="/semi/resources/js/lib/jquery.nanoscroller.min.js"></script>
 	<script src="/semi/resources/js/lib/bootstrap.min.js"></script>
-	<script src="assets/js/scripts.js"></script>
+	<script src="/semi/resources/js/scripts.js"></script>
 	<!-- scripit init-->
 	
 

@@ -45,7 +45,9 @@
     <!-- <script src="/semi/resources/js/jquery.timepicker.min.js"></script> -->
     <script src="/semi/resources/js/jquery.timepicker.min.js"></script>
     <script src="/semi/resources/js/bootstrap-datepicker.ko.min.js"></script>
-    
+    <script src="/semi/resources/js/bootstrap-select.min.js"></script>
+    <script src="/semi/resources/js/defaults-ko_KR.min.js"></script>
+    <script src="https://kit.fontawesome.com/2e4a3540ab.js" crossorigin="anonymous"></script>
     
     <!-- scripit init-->
     <script src="/semi/resources/js/dashboard2.js"></script>

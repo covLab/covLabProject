@@ -1,10 +1,6 @@
 package board.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import board.model.service.BoardService;
 import board.model.vo.Board;
@@ -47,15 +42,21 @@ public class BoardInsertServlet extends HttpServlet {
 		board.setBoardTitle(request.getParameter("title"));
 		board.setBoardWriter(request.getParameter("writer"));
 		board.setBoardContent(request.getParameter("content"));
-
+		String userGrade = request.getParameter("user");
+		System.out.println("userGrade : "+userGrade);
 
 		int result = new BoardService().insertBoard(board);
 
 
 		if (result > 0) {
-			response.sendRedirect("blist?page=1");
+			if(userGrade.equals("A")) {
+				response.sendRedirect("blistadmin?page=1");
+			}else {
+				response.sendRedirect("blist?page=1");
+			}
+			
 		} else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", "게시글 작성 실패");
 			view.forward(request, response);
 		}

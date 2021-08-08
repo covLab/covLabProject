@@ -1,9 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <!-- page-register -->
 <head>
+   <%@ include file="../common/stylesheet.jsp"%>
+<%@ include file="../common/sidebar.jsp"%>
+<%@ include file="../common/topbar.jsp"%>
+
+  <style>
+  body{
+  }
+  .check{
+  background: #03a9f4;
+  border-color: #03a9f4;
+  color: #ffffff;
+
+   background: transparent;
+  color: #373757;}
   
+  
+  
+  .check.active,
+  .check:focus,
+  .check:hover{
+   background: #0286c2;
+  border-color: #03a9f4;
+  color: #ffffff;
+  box-shadow: none;
+  
+  
+  }
+  </style>
 
     <title>Focus Admin: Widget</title>
  <meta charset="utf-8">
@@ -15,6 +44,7 @@
     <link href="/semi/resources/css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="/semi/resources/css/lib/helper.css" rel="stylesheet">
     <link href="/semi/resources/css/style.css" rel="stylesheet">
+    <script src="/semi/resources/js/lib/menubar/sidebar.js"></script>
     
     <script src="/semi/resources/js/address.js"></script>
  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -23,7 +53,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
   <!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
  <script type="text/javascript">
  function dupIDCheck(){
 	 $.ajax({
@@ -108,50 +138,56 @@ if(!re4.test(phone)){
 }
  
  </script>
+
+
 </head>
 
-<body class="bg-primary">
+<body class="">
 
-    <div class="unix-login">
+   <div class="content-wrap">
+    <div class="main">
+        
+    
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="login-content">
-                        <div class="login-logo">
-                            <a href="/semi/index.html"><span>CovLab</span></a>
+             <div class="col-lg-6">
+                <div class="login-content">
+                     <div class="login-logo">
+                         <a href="/semi/index.html"><span>CovLab</span></a>
                         </div>
                         <div class="login-form">
-                            <h4>회원가입</h4>
+                        
+                            <h4  style="font-weight: bold; ">회원가입</h4>
                             <form action="/semi/enroll" method="post" onsubmit="return validate();">
                                 <div class="form-group">
-                                    <label>이름</label>
+                                    <label style="font-size: 15px;  font-weight: bold;">이름</label>
                                     <input type="text" name="username" id="username" class="form-control" placeholder="이름">
                                 </div>
                                  <div class="form-group">
-                                    <label>아이디</label>
+                                    <label style="font-size: 15px;  font-weight: bold; ">아이디</label>
                                     <input type="text" class="form-control" name="userid" id="userid" placeholder="아이디" required>
-                                    <input type="button" value="중복체크" onclick="return dupIDCheck();">
+                                    <input type="button"class="check"value="중복체크" onclick="return dupIDCheck();">
                                    
                                 </div>
                                  <div class="form-group">
-                                    <label>비밀번호</label>
+                                    <label  style="font-size: 15px;  font-weight: bold; ">비밀번호</label>
                                     <input type="password" name="userpw" id="userpw" class="form-control" placeholder="비밀번호" required>
                                 </div>
                                  <div class="form-group">
-                                    <label>비밀번호 확인</label>
+                                    <label  style="font-size: 15px;  font-weight: bold; ">비밀번호 확인</label>
                                     <input type="password" name="userpw2" id="userpw2" class="form-control" placeholder="비밀번호" required>
                                 </div>
                                  <div class="form-group">
-                                     <label>주민번호</label>
+                                     <label  style="font-size: 15px;  font-weight: bold; ">주민번호</label>
                                       <br>
                                   <input type="text"class="form-control" name="userrn" id="userrn" placeholder="주민번호" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>이메일</label>
+                                    <label  style="font-size: 15px;  font-weight: bold; ">이메일</label>
                                     <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
                                 </div>
                                  <div class="form-group">
-                                    <label>전화번호</label>
+                                    <label  style="font-size: 15px;  font-weight: bold; ">전화번호</label>
                                     <input type="text" name="phone" id="phone" class="form-control" placeholder="전화번호" onclick="popupcode();">
                                      <script>
                                     function popupcode(){
@@ -162,15 +198,15 @@ if(!re4.test(phone)){
                                 
                                 </div>
                                  <div class="form-group">
-                                    <label>주소</label>
-                                     <input type="text" name="address1"id="sample6_postcode" class="form-control" placeholder="우편번호">
-                                    <input type="button"name="address2"  class="form-control"onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                                    <label  style="font-size: 15px;  font-weight: bold; ">주소</label>
+                                     <input type="text" name="address1"id="sample6_postcode" class="form-control" placeholder="우편번호"><Br>
+                                    <input type="button"name="address2"  class="check"onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><Br>
                                     <input type="text" name="address"id="sample6_address"  class="form-control" placeholder="주소"><br>
-                                    <input type="text" name="address3"id="sample6_detailAddress" class="form-control" placeholder="상세주소">
                                     <input type="text" name="address4"id="sample6_extraAddress" class="form-control" placeholder="참고항목">
+                                    <input type="text" name="address5"id="sample6_detailAddress" class="form-control" placeholder="상세주소">
                                 </div>
                                  <div class="form-group">
-                                    <label>수신동의</label>
+                                    <label  style="font-size: 15px;  font-weight: bold; ">수신동의</label>
                                     <Br>
                                     <label> <input type="radio" value="Y" name="smsagr" id="smsagr"  checked >네.</label> &nbsp;
                                     <label> <input type="radio" value="N" name="smsagr" id="smsagr"  >아니오.</label>
@@ -180,7 +216,7 @@ if(!re4.test(phone)){
                                 <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">가입하기</button>
                                 
                                 <div class="register-link m-t-15 text-center">
-                                    <p>이미 등록이 되어있나요? ? <a href="/semi/views/member/login.jsp"> 로그인</a></p>
+                                    <p>이미 등록이 되어있나요? ? <a href="/semi/views/member/login.jsp" onclick="window.open(this.href, '로그인', 'width=700, height =800 ,top=50, left=400 ,resizeable=no');return false;"> 로그인</a></p>
                                 </div>
                             </form>
                         </div>
@@ -188,7 +224,9 @@ if(!re4.test(phone)){
                 </div>
             </div>
         </div>
-    </div>
+        
+  </div>
+  </div>
 
 </body>
 

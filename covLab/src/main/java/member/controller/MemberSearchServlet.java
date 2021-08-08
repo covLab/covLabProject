@@ -108,7 +108,7 @@ public class MemberSearchServlet extends HttpServlet {
 
 		RequestDispatcher view = null;
 		if (list.size() > 0) {
-			view = request.getRequestDispatcher("views/member/memberListView.jsp");
+			view = request.getRequestDispatcher("views/member/memberSearchListView.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("maxPage", maxPage);
@@ -116,6 +116,8 @@ public class MemberSearchServlet extends HttpServlet {
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listCount", listCount);
 			request.setAttribute("rlist", rlist);
+			request.setAttribute("action", action);
+			request.setAttribute("keyword", keyword);
 			view.forward(request, response);
 		} else {
 			view = request.getRequestDispatcher("views/common/error.jsp");

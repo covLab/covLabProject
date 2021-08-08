@@ -14,11 +14,32 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>백신 후기</title>
-<!-- <style type="text/css">
-form.rform{
-	display: none;
-}  
-</style> -->
+<style type="text/css">
+div pre{
+	font-family: 'Roboto', sans-serif;
+    margin: 0;
+    color: #868e96;
+    font-size: 13px;
+}
+.right-button{
+	display:inline-block;
+ 	float:right;
+	left-margin: 10px;
+}
+.cform, .rform{
+	background : #e7e7e7;
+	margin: 10px;
+	border-radius: 3px;
+}
+.card{
+	padding-left:100px !important;
+	padding-right:100px !important;
+}
+div{
+	padding: 1px;
+}
+
+</style>
 
 <script type="text/javascript" src="/semi/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -78,13 +99,6 @@ function moveCommentsUpdate(comNo, boardRef, page){
 	
 	location.href = "/semi/cupview?"+param;
 
-	
-	/* httpRequest = getXMLHttpRequest();
-	httpRequest.onreadystatechange = checkFunc;
-	httpRequest.open("POST", "cupview", true);
-	httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-	httpRequest.send(param);
- */
 }
 
 //댓글 삭제
@@ -122,28 +136,30 @@ function moveLogin(){
 	}
 }
 
-//답글 폼 보이기
-/* $(document).ready(function(){
-
- 	//버튼 클릭시 보이기 및 숨기기
-	$("a.showReplyForm").click(function(){
-		$("form.rform").css("display", "none");
-	}); 
-});  */
+//답글
 function showReplyForm(comlevel){
 	console.log("comlevel : "+comlevel);
-	var con = document.getElementById("reply");
+	var con = document.getElementById(comlevel);
 	if(con.style.display=='none'){
 		con.style.display = 'block';
 	}else{
 		con.style.display = 'none';
 	}
 }
-
-//답글 작성
-<%-- function requestReply(){
-	location.href = "/semi/views/board/commentsWriteForm.jsp?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>"
-} --%>
+//댓글
+function showCommentForm(){
+	var con = document.getElementById("cform");
+	if(con.style.display=='none'){
+		con.style.display = 'block';
+	}else{
+		con.style.display = 'none';
+	}
+}
+//
+function recommend(){
+	location.href = "/semi/brecommend?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>";
+	//location.reload();
+}
 </script>
 
 <%@ include file="../common/stylesheet.jsp"%>
@@ -160,177 +176,51 @@ function showReplyForm(comlevel){
 				<div class="page-header">
 					<div class="page-title">
 						<h1>
-							접종후기 <span> <%= board.getBoardNo() %>번 글 보기</span>
+							접종후기 <span> <%= board.getBoardNo() %>번 글 보기</span><br>
+							
 						</h1>
 					</div>
 				</div>
 				<div id="main-content">
 					<div class="card">
+						<div>
+						<div style="font-size: 30px;font-weight:500;"><%= board.getBoardTitle() %></div>
+						<div style="display:inline-block">
+							<div>
+								<span>글쓴이 <%= board.getBoardWriter() %></span><br>
+								<span>작성일 <%= board.getBoardDate() %></span> <br>
+								<span>조회수 <%= board.getViewCnt() %></span> &nbsp;
+								<span>추천수 <%= board.getRecommendCnt() %></span> &nbsp;
+								<span>댓글 <%=clist.size() %></span>
+							</div>
+						</div>
+						<div class="right-button">
+							<div><% if(loginMember != null){%>
+									<a href=# onclick="showCommentForm();">[댓글달기]</a><br>
+									<a href=# onclick="recommend();">[추천하기]</a><br>
 
-						<table align="center">
-							<tr>
-								<th width="100">제 목</th>
-								<td><%= board.getBoardTitle() %></td>
-							</tr>
-							<tr>
-								<th>작성자</th>
-								<td><%= board.getBoardWriter() %></td>
-							</tr>
-							<tr>
-								<th>작성일</th>
-								<td><%= board.getBoardDate() %></td>
-							</tr>
-							<tr>
-								<th>내 용</th>
-								<td><pre><%= board.getBoardContent() %></pre></td>
-							</tr>		
-						</table>
-						
-						
-						<table align="center">		
-							<tr>
-								<th colspan="2">
-									<%-- 댓글달기 버튼은 로그인한 경우에만 보이게 함 --%>
-									<% if(loginMember != null){ 
-											if(loginMember.getUserName().equals(board.getBoardWriter())) { //본인글일때%>
-											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
-											<button onclick="requestBoardDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
-										<% } else if(loginMember.getUserGrade().equals("A")){ //관리자%>
-												<button onclick="requestBoardDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;	
-												<button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp;
-										<% } else { //로그인했는데 본인글이 아닐때 %>
-												<!-- <button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp; --> 
-										<% } %>
-									<% } %>
-									<%-- 테스트용 버튼
-											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
-											<button onclick="requestBoardDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
-									 --%>
-								</th>
-							</tr>
-						</table>
-						
-						
-						
-						<%-- 댓글이 있을 때 --%>
-						<% if (clist != null){ %>
-						<% for(Comments c : clist){ %>
-						
-						<% if(c.getComLevel() == c.getComNo()){ %>
-							<hr>		
-						<% } else { %><% } %>
-						<table align="center">
-
-							<tr>
-								<td width="50px" rowspan="3" valign="top">
-								<% if(c.getComLevel() != c.getComNo()){ //댓글의 답글 %>
-									&nbsp; &nbsp; └ &nbsp; &nbsp;
-								<% }else{ %>
-									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+									<% if(loginMember.getUserName().equals(board.getBoardWriter())){ //본인글일때 %>
+										<a href=# onclick="moveUpdateView(); return false;">[수정하기]</a><br>
+										<a href=# onclick="requestBoardDelete(); return false;">[글 삭제]</a>
+									<%} else if(loginMember.getUserGrade().equals("A")){ //관리자 %>
+										<a href=# onclick="requestBoardDelete(); return false;">[글 삭제]</a><br>
+									<%} else { //로그인했는데 본인 글이 아닐 때 %>
+								<% }}else{// 로그인 안했을 때 %>
+									<a href=# onclick="moveLogin(); return false;">[댓글달기]</a><br>
 								<% } %>
-								</td>
-								<th width="100">아이디</th>
-								<td width="200" align="center"><%= c.getComWriter() %></td>
-								<td rowspan="3" width="100" align="right">
-									<%-- <% if(c.getComLevel() == c.getComNo()){ // 답글이면 안보이게%> --%>
-									
-										 <% if(loginMember == null){ %>
-										 	<a href="#" onclick="moveLogin()">[답변]</a>
-										 <% }else{ %>
-										 		<a href="#" onclick="showReplyForm(<%= c.getComLevel() %>)">[답변]</a><br>
-										 	<% if(loginMember.getUserId().equals(c.getComWriter())){ //본인글일때 %>
-												<a href="#" onclick="moveCommentsUpdate(<%= c.getComNo() %>, <%= c.getBoardRef() %>, <%= currentPage %>); return false;">[수정하기]</a><br>
-												<a href="#" onclick="requestCommentsDelete(<%= c.getComNo() %>, <%= c.getBoardRef() %>, <%= currentPage %>);return false;">[댓글삭제]</a>
-											<% }else if(loginMember.getUserGrade().equals("A")){ %>
-												<a href="#" onclick="requestCommentsDelete(<%= c.getComNo() %>, <%= c.getBoardRef() %>, <%= currentPage %>);return false;">[댓글삭제]</a>
-											<% } %>
-										 <% } %>
-									<%-- <% } %> --%>
-									<!-- 작성자와 로그인한 사람이 같을 경우 -->
-									<br>
-									
-								</td>
-							</tr>
-							<tr>
-								<th>작성일시</th>
-								<td align="center"><%= c.getComDate() %></td>
-							</tr>
-							<tr>
-								<th>댓글 내용</th>
-								<td align="center"><pre><%= c.getComContent() %></pre></td>
-							</tr>	
-						</table>
-						
-						
-						
-						
-						<% if(c.getComLevel() == c.getComNo()){ //원글의 댓글 %>
-						<br>
-						<%-- <div align="center" id="reply" style="display:none;">
-						<div>
-							<input type="text" name="writer" size="50"><br>
-							<textarea rows="3" cols="50" name="content" placeholder="댓글 내용을 입력하세요"></textarea>
+								</div>
+						</div><hr>
+						<div><pre style="font-size: 20px;"><%= board.getBoardContent() %></pre></div>
+						<div></div>
 						</div>
-						<div>
-							<input type="submit" value="댓글달기" class="btn btn-primary"> &nbsp; 
-							<input type="reset" value="작성취소" class="btn btn-default"> &nbsp; 
-							<input type="button" value="목록" class="btn btn-default"
-									onclick="javascript:location.href='/semi/blist?page=<%= currentPage %>'; return false;">
-						</div>
-						</div> --%>
-						<!-- 답글달기 폼 -->
-						
-						<% if (loginMember != null){ %>
-						<form action="/semi/creplywrite" method="post" class="rform" id="reply">
-						<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
-						<input type="hidden" name="page" value="<%= currentPage %>">
-						<input type="hidden" name="cno" value="<%= c.getComNo() %>">
-						<table align="center">
-	
-								<tr>
-									<th colspan="2">답글달기</th>
-								</tr>
-								<tr>
-									<td>작성자 :</td>
-									<td><input type="text" name="writer" size="50" readonly value="<%= loginMember.getUserId() %>"></td>
-								</tr>
-								<tr>
-									<td>내 용 : </td>
-									<td><textarea rows="5" cols="50" name="content" placeholder="답글 내용을 입력하세요" wrap="hard"></textarea></td>
-								</tr>
-								
-								<tr align="center">
-								<th colspan="2">
-								<input type="submit" value="답글달기" class="btn btn-primary"> &nbsp; 
-								<input type="reset" value="작성취소" class="btn btn-default"> &nbsp; 
-								<input type="button" value="목록" class="btn btn-default"
-									onclick="javascript:location.href='/semi/blist?page=<%= currentPage %>'; return false;">
-								</th>
-							</tr>
-								
-						</table>
-						</form> 
-						<% }//답글달기 폼 %>
-						
-						<% }//원글의 댓글 %>
-						
-						
-						<% }//for문 %>
-						
-						
-						<hr>
-						<% if(loginMember == null){ %>
-								<div align="center">
-								<button onclick="moveLogin(); return false;" class="btn btn-primary">댓글달기</button>
-									<input type="button" value="목록" class="btn btn-default"
-									onclick="javascript:location.href='/semi/blist?page=<%= currentPage %>'; return false;"></div>
-						<% }else{ %>
+
+						<%if (loginMember != null){ %>
 						<!-- 댓글달기 폼 -->
-						<form action="/semi/cwrite" method="post">
-						<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
+						<form action="/semi/cwrite" method="post" id="cform" style="display:none;">				
+						<input type="hidden" name="bno" value=	"<%= board.getBoardNo() %>">
 						<input type="hidden" name="page" value="<%= currentPage %>">
-						<table align="center">
-	
+						<table align="center" class="cform">
+						<hr>
 								<tr>
 									<th colspan="2">댓글달기</th>
 								</tr>
@@ -343,24 +233,117 @@ function showReplyForm(comlevel){
 									<td>내 용 : </td>
 									<td><textarea rows="5" cols="50" name="content" placeholder="내용을 입력하세요" wrap="hard"></textarea></td>
 								</tr>
+								<tr align="center">
+								<th colspan="2">
+								<input type="submit" value="댓글달기" class="btn btn-primary"> &nbsp; 
+								<input type="reset" value="작성취소" class="btn btn-default"> &nbsp; 
+								</th>
+							</tr>
+						</table>
+						</form>	
+						<%} %>
+						
+						<%-- 댓글이 있을 때 --%>
+						<% if (clist != null){ %>
+						
+						<% for(Comments c : clist){ %>
+						<% if(c.getComLevel() == c.getComNo()){ %>
+							<hr>		
+						<% }else{ %><br><% } %>
+						<ul>
+							<li>
+								<div>
+									<% if(c.getComLevel() != c.getComNo()){ //댓글의 답글 %>
+										<div style="padding-left: 30px;">
+									<% }else{ %>
+										<div>
+									<% } %>
+										<div style="float: left;">
+												<img src="/semi/resources/images/bookingSystem/2.png"
+													style="width: 25px; height: 25px;" />
+										</div>
+										</div>
+										<% if(c.getComLevel() != c.getComNo()){ //댓글의 답글 %>
+										<div style="padding-left: 70px;">
+										<% }else{ %>
+										<div style="padding-left: 40px;">
+										<% } %>
+										
+											<div style="display:inline-block;">
+
+												<div>
+													<b><%=c.getComWriter() %></b>
+												</div>
+												<div>
+													<pre><%=c.getComContent() %></pre>
+												</div>
+												<div><%= c.getComDate() %></div>
+
+											</div>
+
+											<div class="right-button">
+												<% if(loginMember == null){ %>
+												<a href="#" onclick="moveLogin()">[답변]</a>
+												<% }else{ %>
+												<a href="#" onclick="showReplyForm(<%= c.getComLevel() %>)">[답변]</a><br>
+												<% if(loginMember.getUserId().equals(c.getComWriter())){ //본인글일때 %>
+												<a href="#"
+													onclick="moveCommentsUpdate(<%= c.getComNo() %>, <%= c.getBoardRef() %>, <%= currentPage %>); return false;">[수정하기]</a><br>
+												<a href="#"
+													onclick="requestCommentsDelete(<%= c.getComNo() %>, <%= c.getBoardRef() %>, <%= currentPage %>);return false;">[댓글삭제]</a>
+												<% }else if(loginMember.getUserGrade().equals("A")){ %>
+												<a href="#"
+													onclick="requestCommentsDelete(<%=c.getComNo()%>, <%=c.getBoardRef()%>, <%=currentPage%>);return false;">[댓글삭제]</a>
+												<% }} %>
+											</div>
+										</div>
+									
+								</div>
+							</li>
+						</ul>
+	
+						<% if(c.getComLevel() == c.getComNo()){ //원글의 댓글 %>
+						
+						<% if (loginMember != null){ %>
+						<form action="/semi/creplywrite" method="post" id="<%= c.getComLevel() %>" style="display:none;">
+						<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
+						<input type="hidden" name="page" value="<%= currentPage %>">
+						<input type="hidden" name="cno" value="<%= c.getComNo() %>">
+						<table align="center" class="rform">
+	
+								<tr>
+									<th colspan="2">답글달기</th>
+								</tr>
+								<tr>
+									<td>작성자 :</td>
+									<td><input type="text" name="writer" readonly value="<%= loginMember.getUserId() %>"></td>
+								</tr>
+								<tr>
+									<td>내 용 : </td>
+									<td><textarea rows="5" cols="50" name="content" placeholder="답글 내용을 입력하세요" wrap="hard"></textarea></td>
+								</tr>
 								
 								<tr align="center">
 								<th colspan="2">
-								
-								<input type="submit" value="댓글달기" class="btn btn-primary"> &nbsp; 
-								
+								<input type="submit" value="답글달기" class="btn btn-primary"> &nbsp; 
 								<input type="reset" value="작성취소" class="btn btn-default"> &nbsp; 
-								<input type="button" value="목록" class="btn btn-default"
-									onclick="javascript:location.href='/semi/blist?page=<%= currentPage %>'; return false;">
 								</th>
 							</tr>
 								
 						</table>
-						</form>	
-						<% } %>
-												
-						<% } %>
+						</form> 
+						<% }//답글달기 폼 %>
 						
+						<% }//원글의 댓글 %>
+						
+						<% }//for문 %>
+						
+						<% } %>
+						<hr>
+						<div align="right">
+						<input type="button" value="목록" class="btn btn-default"
+									onclick="javascript:location.href='/semi/blist?page=<%= currentPage %>'; return false;">
+						</div>		
 
 				</div>
 				</div>

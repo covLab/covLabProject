@@ -1,4 +1,3 @@
-@@ -0,0 +1,216 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,7 +37,7 @@
  .btn {
   text-decoration: none;
   font-size:15pt;  
-  background-color: navy;
+  background-color: #1E3269;
   color: white;
   padding:10px 20px 10px 20px;
   margin:10px;
@@ -57,7 +56,7 @@
  }
  
  table th {
-	background-color:navy;
+	background-color:#1E3269;
 	color: #fff;
 	text-align:center;
 	font-size:15pt;
@@ -89,21 +88,12 @@ table td {
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>뉴스 /  백신 정보 <span>게시판</span></h1>
+                                <h1>뉴스 /  백신 정보</h1>
                             </div>
                         </div>
                     </div>
                     <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Row-Select</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
+                  
                     <!-- /# column -->
                 </div>
                 <!-- /# row -->
@@ -119,12 +109,12 @@ table td {
 									  	<a class="btn" href="#coronainfo04">코로나의 예방법</a>
 									  	<hr>
 									  	<br>
-	<h3 id="coronainfo01">1. 확진자 수/격리해제 수/검사중 수/사망자 수 (실시간, 누적 모두)</h3>
-		
-	
-	
-		<hr>
-<h3 id="coronainfo02">2. 코로나19란?</h3>
+	<h5 id="coronainfo01">1. 확진자 수 (클릭시 이동)</h5>
+	<a href="http://ncov.mohw.go.kr/"><img src="../../resources/images/캡처.PNG"></a>
+<br>
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
+<h5 id="coronainfo02">2. 코로나19란?</h5>
 <p class="ta_r mgt36">* 현재까지 알려진 정보(2021년 3월 2일 기준) </p>
                         <h4 class="s_title_1">코로나바이러스감염증-19(COVID-19) 정보</h4>
 						<div class="data_table">
@@ -203,10 +193,11 @@ table td {
 					        </tr>
 					      </table>
 						</div>   
+<br>
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 <!-- ---------------------------------------------------------------------------------- -->
-<h3 id="coronainfo03">3. 코로나19의 증상</h3>
+<h5 id="coronainfo03">3. 코로나19의 증상</h5>
 	<ul>
 		<li><font size="4">
 			<p> <li>◎ 코로나19의 주요 증상으로는 발열 (37.5℃ 이상), 기침, 호흡곤란, 오한, 근육통, 두통, 인후통, 후각/미각 손실</li></p>
@@ -263,20 +254,26 @@ table td {
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 
-<h3 id="coronainfo04">4. 코로나19 예방법</h3>
+<h5 id="coronainfo04">4. 코로나19 예방법</h5>
 	<ul>
 		<li><font size="4">
-			<p> <li>식약처에서 승인된 코로나 19 <a href="vaccinInfo.jsp#vaccineinfo02"><u>백신</u></a></li></p>
-			<p> <li>올바른 손씻기</li></p>
-			<p> <li>기침 예절 준수</li></p>
-			<p> <li>씻지 않은 손으로 눈, 코, 입 만지지 않기</li></p>
-			<p> <li>주위환경을 자주 소독하고 환기하기</li>
-			</p></font>
+			<p> <li>식약처에서 승인된 코로나 19 <a href="vaccinInfo.jsp#vaccineinfo02"><u>백신</u> </a>예방접종</li></p>
+			<p> <li>실내 시설, 밀집 된 실에외에서는 반드시 마스크 착용하기</li></p>
+			<p> <li>흐르는 물에 비누로 손을 30초 이상 꼼꼼하게 자주 씻기</li></p>
+			<p> <li>환기가 안되고 많은 사람이 가까이 모이는 장소는 방문 자제하기</li></p>
+			<p> <li>사람과 사람 사이, 두 팔 간격 2M(최고 1M) 거리두기</li> </p>
+			<p> <li>씻지 않은 손으로 눈/코/입 만지지 않기</li></p>
+			<p> <li>기침이나 재채기 할 때 옷소매나 휴지로 입과 코를 가리기</li></p>
+			<p> <li>매일 주기적으로 환기하고 자주 만지는 표면은 청소/소독하기</li></p>
+			<p> <li>발열/호흡기 증상(기침, 호흡곤란 등)이 있는 사람과 접촉 피하기</li></p>
+			</font>
 		</li>
 	</ul>
-</div>
+	<br>
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+</div>
+
 
 <!-- ---------------------------------------------------------------------------------- -->									
                                 </div>
