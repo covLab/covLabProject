@@ -139,21 +139,12 @@ table td {
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>뉴스 /  백신 정보 <span>게시판</span></h1>
+                                <h1>뉴스 /  백신 정보</h1>
                             </div>
                         </div>
                     </div>
                     <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Row-Select</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!-- /# column -->
                 </div>
                 <!-- /# row -->
@@ -178,10 +169,10 @@ table td {
 <p><a href="#top">맨 위로 이동</a></p>
 <hr> -->
 
-<h3 id="vaccineinfo02">1. 우리나라에 들어오는 백신</h3>
-<table border="1" height="600" width="1200">
+<h5 id="vaccineinfo02">1. 우리나라에 들어오는 백신</h5>
+<table border="1" height="600" width="1300">
 	<tr align="center">
-		<th class="a">백신이름</th>
+		<th class="a">이름</th>
 		<th class="a">아스트라제네카</th>
 		<th class="a">화이자</th>
 		<th class="a">모더나</th>
@@ -234,10 +225,10 @@ table td {
 </table>
  <p><a href="#top">맨 위로 이동</a></p>
 <hr>
-<h3 id="vaccineinfo03">2.  예방접종 주의사항</h3>
+<h5 id="vaccineinfo03">2.  예방접종 주의사항</h5>
 <br>
 <div>
-	<h4>* 예방접종할 때 주의 사항(사진을 누르면 영상이 재생됩니다.)</h4><br>
+	<h6>* 예방접종할 때 주의 사항(사진을 누르면 영상이 재생됩니다.)</h6><br>
 	<a href="https://www.youtube.com/watch?v=APOt56usrt4"><img src="../../resources/images/info_video.jpg"></a>
 	<br>
 	<!-- 아코디언 메뉴 -->
@@ -296,7 +287,7 @@ table td {
 
 <hr width="40% "align="left">
 <div>
-	<h3 id="vaccineinfo04">3. 예방접종 이후 이상반응</h3><br>
+	<h5  id="vaccineinfo04">3. 예방접종 이후 이상반응</h5><br>
 	<img src="../../resources/images/vaccination02.png" ><br>
 	<br>
 <table border="1" width="1300" height="600">
@@ -345,7 +336,7 @@ table td {
 
 
 <div>
-	<h4>** 백신별 예방접종 후 이상반응 **</h4>
+	<h6>** 백신별 예방접종 후 이상반응 **</h6>
 		<table border="1" width="1300" height="700">
 			<tr>
 				<th class="a" rowspan="3">구분</th>
@@ -459,7 +450,7 @@ table td {
 
 <div>
 <hr width="40%" align="left">
-	<h3 id="vaccineinfo05">4. 이상반응 나타날 시 대처법</h3><br>
+	<h5 id="vaccineinfo05">4. 이상반응 나타날 시 대처법</h5><br>
 	<img src="../../resources/images/vaccination06.png">
 	<br>
 	<br>

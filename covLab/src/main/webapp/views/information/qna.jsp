@@ -36,71 +36,46 @@
 
 <style>
 /*a 태그의 버튼들*/
- .btn {
-  text-decoration: none;
-  font-size:15pt;  
-  background-color: navy;
-  color: white;
-  padding:10px 20px 10px 20px;
-  margin:10px;
-  display:inline-block;
-  border-radius: 10px;
-  transition:all 0.2s;
- }
- .btn:active {
-  transform:translateY(5px);
- }
- 
- .btn:hover {
- 	background:lightgray;
- 	color:black;
- 	transition:all 0.2s;
- }
+
   /*테이블 모양 버튼들*/
+
+  
+
  .t{
- 	width: 1000px;
- 	height: 250px;
- 	background:navy;
+  	width: 950px;
+ 	height: 100px;
+ 	background:#00008C;
+ 	color:#000;
  	text-align:center;
  	transition:all 0.2s;
- 	
- }
+ } 
  
  .c1 {
  	font-size:15pt;
- 	font-color:white;
  }
   .c2 {
  	font-size:15pt;
- 	font-color:white;
  }
   .c3 {
  	font-size:15pt;
- 	font-color:white;
  }
   .c4 {
  	font-size:15pt;
- 	font-color:white;
  }
   .c5 {
  	font-size:15pt;
- 	font-color:white;
  }
   .c6 {
  	font-size:15pt;
- 	font-color:white;
  }
   .c7 {
  	font-size:15pt;
- 	font-color:white;
  }
   .c8 {
  	font-size:15pt;
- 	font-color:white;
  }
   .c9 {
  	font-size:15pt;
- 	font-color:white;
  }
  
  
@@ -213,21 +188,12 @@ dl.faq button[aria-expanded="true"]::before {
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>뉴스 /  백신 정보 <span>게시판</span></h1>
+                                <h1>뉴스 /  백신 정보</h1>
                             </div>
                         </div>
                     </div>
                     <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Row-Select</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- /# column -->
                 </div>
                 <!-- /# row -->
@@ -239,7 +205,7 @@ dl.faq button[aria-expanded="true"]::before {
                                     <h4>QnA</h4>
 <hr>
 
-<table border="1"  class="t">
+<table class="t" cellspacing="3">
 	<tr>
 		<td class="c1" ><a href="#qna01">코로나란?</a></td>
 		<td class="c2" ><a href="#qna02">코로나의 증상/검사</a></td>
@@ -256,6 +222,8 @@ dl.faq button[aria-expanded="true"]::before {
 		<td class="c9" ><a href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a></td>
 	</tr>
 </table>
+
+
 <!-- 
 <a class="btn" href="#qna01">코로나란?</a>
 <a class="btn" href="#qna02">코로나의 증상/검사</a>
@@ -274,8 +242,7 @@ dl.faq button[aria-expanded="true"]::before {
 <!-- 각 목록의 내용을 번호를 붙여서 작성 -->
 <!-- qna01 버튼 내용 ---------------------------------------------------------- -->
 <hr>
-<br>
-<h3 id="qna01">1. 코로나란?</h3>
+<h5 id="qna01">1. 코로나란?</h5>
 <dl class="faq">
    <dt>
     <button aria-expanded="false" aria-controls="faq2_desc">
@@ -370,7 +337,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna02 버튼 내용-------------------------------------------------------- -->
-<h3 id="qna02">2.코로나의 증상/검사</h3>
+<h5 id="qna02">2.코로나의 증상/검사</h5>
  <dl class="faq">
    <dt>
     <button aria-expanded="false" aria-controls="faq9_desc">
@@ -522,7 +489,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna03 버튼 내용-------------------------------------------------------- -->
-<h3 id="qna03">3. 치료 및 예방</h3>
+<h5 id="qna03">3. 치료 및 예방</h5>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq25_desc">
@@ -567,7 +534,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna04 버튼 내용-------------------------------------------------------- -->
-<h3 id="qna04">4. 접촉자 및 확진환자</h3>
+<h5 id="qna04">4. 접촉자 및 확진환자</h5>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq28_desc">
@@ -669,7 +636,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna05 버튼 내용-------------------------------------------------------- -->
-<h3 id="qna05">5. 격리 및 격리해제</h3>
+<h5 id="qna05">5. 격리 및 격리해제</h5>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq35_desc">
@@ -764,7 +731,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna06 버튼 내용-------------------------------------------------------- -->
-<h3 id="qna06">6. 백신 관련</h3>
+<h5 id="qna06">6. 백신 관련</h5>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq41_desc">
@@ -858,7 +825,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna07 버튼 내용-------------------------------------------------------- -->
-<h3 id="qna07">7. 예방접종 이상반응</h3>
+<h5 id="qna07">7. 예방접종 이상반응</h5>
 <dl class="faq">
   
   <dt>
@@ -909,7 +876,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna08 버튼 내용-------------------------------------------------------- -->
-<h3 id="qna08">8. 코로나 19 예방접종 관련 피해보상</h3>
+<h5 id="qna08">8. 코로나 19 예방접종 관련 피해보상</h5>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq53_desc">
@@ -964,7 +931,7 @@ dl.faq button[aria-expanded="true"]::before {
 <hr>
 
 <!-- qna09 버튼 내용-------------------------------------------------------- -->
-<h3 id="qna09">9. 의료비 지원사업</h3>
+<h5 id="qna09" >9. 의료비 지원사업</h5>
 <dl class="faq">
   <dt>
     <button aria-expanded="false" aria-controls="faq57_desc">
