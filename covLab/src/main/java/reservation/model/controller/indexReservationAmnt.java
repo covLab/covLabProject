@@ -17,14 +17,14 @@ import reservation.model.vo.VaccineData;
 /**
  * Servlet implementation class indexReservation
  */
-@WebServlet("/indexres")
-public class indexReservation extends HttpServlet {
+@WebServlet("/indexresamnt")
+public class indexReservationAmnt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public indexReservation() {
+	public indexReservationAmnt() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -89,13 +89,10 @@ public class indexReservation extends HttpServlet {
 		int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
 		int endPage = startPage + limit - 1;
 		// 병원 목록 정렬 옵션
-		String orderopt = request.getParameter("list_order");
-		System.out.println("정렬" + orderopt);
-
 		// 뷰 지정해서 내보내기
 		RequestDispatcher view = null;
 		if (hps.size() > 0 && vds.size() > 0) {
-			view = request.getRequestDispatcher("views/reservation/index_reservation.jsp");
+			view = request.getRequestDispatcher("views/reservation/index_reservation_amnt.jsp");
 
 			request.setAttribute("hps", hps);
 			request.setAttribute("vds", vds);

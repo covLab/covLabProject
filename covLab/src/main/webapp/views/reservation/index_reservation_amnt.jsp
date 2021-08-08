@@ -11,6 +11,7 @@
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 	int startRow = ((Integer) request.getAttribute("startRow")).intValue();
 	int endRow = ((Integer) request.getAttribute("endRow")).intValue();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,8 @@
 <script
 	src="http://maps.google.com/maps/api/js?q=seoul&key=AIzaSyCZ8XJruaL1nd6GJOryueJE_Av5O6mU5H0"
 	type="text/javascript"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <style>
 <!--
@@ -93,29 +95,10 @@
 	<%
 	}
 	%>
-	for (i = 0; i < hospitals.length; i++) {
-		let distance = getDistance(latitude, longitude,
-				hospitals[i].hp_latitude, hospitals[i].hp_longitude);
-		hospitals[i].distance = distance;
-	}
-	sortedLocations = sortByDist(hospitals);
+	
+	sortedLocations = sortByAmnt(hospitals);
 	/* 병원 정보 + 백신 정보 + 거리 정보 담긴 배열 */
 	
-
-	/*거리순 정렬 함수*/
-	function sortByDist(arr) {
-		sortedArr = [];
-		sortedArr = arr.sort(function(a, b) {
-			if (a.distance > b.distance) {
-				return 1;
-			}
-			if (a.distance < b.distance) {
-				return -1;
-			}
-			return 0;
-		});
-		return sortedArr;
-	}
 	/*수량순 정렬 함수*/
 	function sortByAmnt(arr) {
 		sortedArr = [];
@@ -152,46 +135,86 @@
       // 지도만들고 
       var map = new google.maps.Map(document.getElementById("map"), mapOption);
 
-      // 위치표시 
-      new google.maps.Marker({
-         position : latlng,
-         map : map,
-         title : "현위치"
-      });
-      var infowindow = new google.maps.InfoWindow();
-      var marker, i;
+		// 위치표시 
+		new google.maps.Marker({
+			position : latlng,
+			map : map,
+			title : "현위치"
+		});
+		var infowindow = new google.maps.InfoWindow();
+		var marker, i;
+		var chosen_hp;
+		console.log(Object.values(hospitals[1]));
+		for (i = 0; i < hospitals.length; i++) {
+			marker = new google.maps.Marker({
+				position : new google.maps.LatLng(hospitals[i].hp_latitude,
+						hospitals[i].hp_longitude),
+				map : map,
+				title : Object.values(hospitals[i])[0],
+				label : Object.values(hospitals[i])[6]
+			/* icon : "../../resources/images/red_dot_small.png" */
+			});
+			
+			if (marker) {
+	            marker.addListener("click", function() {
+	               map.setZoom(15);
+	               map.setCenter(this.getPosition());
+	               reg_bus_no=this.getTitle();
+	               post_checkedhp(reg_bus_no,this.getPosition().lat(),this.getPosition().lng());
+	               /* $.ajax({
+	                  url: "/semi/detailhp",
+	                  type: "post",
+	                  data: reg_bus_no,
+	                  dataType: "json",
+	                  success : function(data){
+	                     console.log(data);
+	                  }
+	               }); */ 
+	               
+	            });
+	         }
+	      }
+	}
+	
+	function printTable(){
+		var table =document.getElementById("ajaxTable");
+		table.innerHTML="";
+		for(i=<%=startRow%>-1;i<<%=endRow%>
+	; i++) {
 
-      for (i = 0; i < hospitals.length; i++) {
-         marker = new google.maps.Marker({
-            position : new google.maps.LatLng(hospitals[i].hp_latitude,
-                  hospitals[i].hp_longitude),
-            map : map,
-            title : hospitals[i].hp_name,
-            label : hospitals[i].remain
-         /* icon : "../../resources/images/red_dot_small.png" */
-         });
-         if (marker) {
-            marker.addListener("click", function() {
-               map.setZoom(15);
-               map.setCenter(this.getPosition());
-               chosen_hp = hospital[i].reg_bus_no;
-            });
-         }
-      }
-      const infoWindow = new google.maps.InfoWindow();
+			table.insertRow().insertCell().innerHTML = "&nbsp";
 
-      /* sortedLocations=locations.sort(function(a,b){
-         if (a.distance>b.distance){
-            return 1;
-         }
-         if (a.distance<b.distance){
-            return -1;
-         }
-         return 0;
-      });
-      return sortedLocations; */
-   }
+			const hospname = table.insertRow();
+			hospname.insertCell(0).innerText = "병원명";
+			hospname.insertCell(1).innerText = sortedLocations[i].hp_name;
 
+			const hospaddress = table.insertRow();
+			hospaddress.insertCell(0).innerText = "주소";
+			hospaddress.insertCell(1).innerText = sortedLocations[i].hp_address;
+
+			const hospphone = table.insertRow();
+			hospphone.insertCell(0).innerText = "전화번호";
+			hospphone.insertCell(1).innerText = sortedLocations[i].hp_phone;
+
+			const hospremain = table.insertRow();
+			hospremain.insertCell(0).innerText = "잔여수량";
+			hospremain.insertCell(1).innerText = sortedLocations[i].remain;
+
+			const btn = table.insertRow();
+			const val = sortedLocations[i].reg_bus_no;
+			const lat = sortedLocations[i].hp_latitude;
+			const lng = sortedLocations[i].hp_longitude;
+
+			const data = val + "','" + lat + "','" + lng;
+
+			const str = '<input type="button" name="btn" value="예약" onclick="post_checkedhp(\''
+					+ data + '\');"/>';
+
+			console.log(str);
+			btn.innerHTML = str;
+
+		}
+	}
 
    // 에러콜백 
    function handleError(err) {
@@ -218,122 +241,129 @@
 		dist = dist * 1.609344
 		return dist;
 	}
-	
+
 	function locationTest() {
 		navigator.geolocation.getCurrentPosition(handleLocation, handleError);
 		console.log(sortedLocations);
-		
-	}
-	
-	function getOrderOpt(){
-		var orderopt = null;
-		request.open("Post","/semi/hosporder?orderopt="+encodeURIComponent(document.getElementById('orderOpt').value),true);
-		request.onreadystatechange=orderProcess;
 	}
 
-	function orderProcess(){
-		console.log({orderOpt: $("#orderOpt").val()});
+	function post_checkedhp(data, lat, lng) {
+		var param = "reg_bus_no=" + data + "&lat=" + lat + "&lng=" + lng;
+		location.href = '/semi/detailhp?' + param;
+		
+	}
+
+	function orderProcess() {
+		console.log({
+			orderopt : $("#orderopt").val()
+		});
 		$.ajax({
-			url: "/semi/hosporder",
-			type: "post",
-			data: {orderOpt:$('input[name=list_order]:checked').val()},
-			success : function(data){
+			url : "/semi/hosporder",
+			type : "post",
+			data : {
+				orderopt : $('input[name=list_order]:checked').val()
+			},
+			success : function(data) {
 				console.log(data);
-				var table =document.getElementById("ajaxTable");
-				table.innerHTML="";
-				if (data=='dist'){
-					sortByDist(hospitals);
-				}
-				if (data=='amnt'){
-					sortByAmnt(hospitals);
-				}
-				for(i=<%=startRow%>-1;i<<%=endRow%>;i++){
-					table.insertRow();
-					
-					const hospname=table.insertRow();
-					hospname.insertCell(0).innerText="병원명";
-					hospname.insertCell(1).innerText=sortedLocations[i].hp_name;
-					
-					const hospaddress=table.insertRow();			
-					hospaddress.insertCell(0).innerText="주소";
-					hospaddress.insertCell(1).innerText=sortedLocations[i].hp_address;
-					
-					const hospphone=table.insertRow();
-					hospphone.insertCell(0).innerText="전화번호";
-					hospphone.insertCell(1).innerText=sortedLocations[i].hp_phone;
-					
-					const hospremain=table.insertRow();
-					hospremain.insertCell(0).innerText="잔여수량";
-					hospremain.insertCell(1).innerText=sortedLocations[i].remain;
-					
-					const btn=table.insertRow();
-					btn.innerHTML="<input type=\"button\" value=\"예약\" onClick=\"location.href=\'+\"detail_reservation.jsp\"+\'\">";
-				}
+				var table = document.getElementById("ajaxTable");
+				table.innerHTML = "";
+
 			}
 		})
-		
+		location.href = '/semi/indexres';
 	}
-
 </script>
 </head>
 
-<body onload="javascript:orderProcess();locationTest();">
-
+<body onload="javascript:printTable();locationTest();">
 	<div class="content-wrap">
 		<div class="main">
 			<div class="container-fluid">
 				<section id="main-content">
-					<div>
-						<div></div>
-						<input type='radio' name='list_order' value='dist' checked='checked' onclick='orderProcess();' /> 거리순 
-						<input type='radio' name='list_order' value='amnt' onclick='orderProcess();' />수량순 
-						       
-						<select name="list_option_key" onchange="handleOnList(this)">
-							<option value="none">===백신종류===</option>
-							<option value="pfizer">화이자</option>
-							<option value="janssen">얀센</option>
-							<option value="AZ">아스트라제네카</option>
-						</select>
+					<div class="card h-100 m-0">
+						<form>
+							<input type='radio' name='list_order' value='dist'
+								onclick='orderProcess();' /> 거리순 <input type='radio'
+								name='list_order' value='amnt' checked='checked' />수량순
+						</form>
 						<div class="row">
-							<div class="col-lg-3 p-0">
-							<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
-								
-								<div style="text-align:center;" class="jsgrid-pager">
-							<% if(currentPage <= 1){ %>
+
+							<div style="text-align: center;" class="col-lg-3 p-0">
+								<form action="/semi/detailhp" method="post">
+
+									<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
+
+									<!-- <a href="/semi/detailhp?reg_bus_no=></a>-->
+								</form>
+
+								<div style="text-align: center;" class="jsgrid-pager">
+									<%
+									if (currentPage <= 1) {
+									%>
 									[맨처음] &nbsp;
-							<% }else{ %>
-									<a href="/semi/indexres?page=1">[맨처음]</a> &nbsp;
-							<% } %>
-							<!-- 이전 페이지 그룹으로 이동 -->
-							<% if((currentPage -10 ) < startPage && (currentPage - 10) > 1){ %>
-									<a href="/semi/indexres?page=<%= startPage - 10 %>">[이전그룹] </a> &nbsp;
-							<% }else{ %>
+									<%
+									} else {
+									%>
+									<a href="/semi/indexresamnt?page=1">[맨처음]</a> &nbsp;
+									<%
+									}
+									%>
+									<!-- 이전 페이지 그룹으로 이동 -->
+									<%
+									if ((currentPage - 4) < startPage && (currentPage - 4) > 1) {
+									%>
+									<a href="/semi/indexresamnt?page=<%=startPage - 10%>">[이전그룹]
+									</a> &nbsp;
+									<%
+									} else {
+									%>
 									[이전그룹] &nbsp;
-							<% } %>
-							
-							<!-- 현재 페이지 그룹의 페이지 숫자 출력 -->
-							<% for(int p = startPage; p<= endPage; p++){ 
-									if (p == currentPage){%>
-										<font color="blue" size="4">[<%= p %>]</font>
-									<% }else{ %>
-										<a href="/semi/indexres?page=<%= p %>"><%= p %></a>
-							<% }} %>
-							&nbsp;
-							<!-- 다음 페이지 그룹으로 이동 -->
-							<% if((currentPage +10 ) > endPage && (currentPage + 10) < maxPage){ %>
-									<a href="/semi/indexres?page=<%= endPage + 10 %>">[다음그룹] </a> &nbsp;
-							<% }else{ %>
+									<%
+									}
+									%>
+
+									<!-- 현재 페이지 그룹의 페이지 숫자 출력 -->
+									<%
+									for (int p = startPage; p <= endPage; p++) {
+										if (p == currentPage) {
+									%>
+									<font color="blue" size="4">[<%=p%>]
+									</font>
+									<%
+									} else {
+									%>
+									<a href="/semi/indexresamnt?page=<%=p%>"><%=p%></a>
+									<%
+									}
+									}
+									%>
+									&nbsp;
+									<!-- 다음 페이지 그룹으로 이동 -->
+									<%
+									if ((currentPage + 4) > endPage && (currentPage + 4) < maxPage) {
+									%>
+									<a href="/semi/indexresamnt?page=<%=endPage + 4%>">[다음그룹] </a>
+									&nbsp;
+									<%
+									} else {
+									%>
 									[다음그룹] &nbsp;
-							<% } %>
-							
-							<% if(currentPage >= maxPage){ %>
+									<%
+									}
+									%>
+
+									<%
+									if (currentPage >= maxPage) {
+									%>
 									[맨끝] &nbsp;
-							<% }else{ %>
-									<a href="/semi/indexres?page=<%= maxPage %>">[맨끝]</a> &nbsp;
-							<% } %>
-							
-							
-						</div>
+									<%
+									} else {
+									%>
+									<a href="/semi/indexresamnt?page=<%=maxPage%>">[맨끝]</a> &nbsp;
+									<%
+									}
+									%>
+								</div>
 							</div>
 
 

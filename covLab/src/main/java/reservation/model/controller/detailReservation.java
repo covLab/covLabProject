@@ -1,6 +1,7 @@
 package reservation.model.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -46,8 +47,10 @@ public class detailReservation extends HttpServlet {
 		
 		
 		System.out.println("-----------------------디테일 서블릿----------------------------");
-//		String reg_bus_no = request.getParameter("reg_bus_no");
-		String reg_bus_no = "252-12-62156";
+		String reg_bus_no = request.getParameter("reg_bus_no");
+		System.out.println("reg_bus_no : " + reg_bus_no);
+		String lat = request.getParameter("lat");
+		String lng = request.getParameter("lng");
 		
 		HttpSession session = request.getSession(true);
 		
@@ -134,6 +137,7 @@ public class detailReservation extends HttpServlet {
 			}
 		}
 		
+
 		System.out.println("checkRes : "+checkRes);
 		System.out.println("checkSubRes : "+checkSubRes);
 		
@@ -150,6 +154,8 @@ public class detailReservation extends HttpServlet {
 			request.setAttribute("checkSubRes", checkSubRes);
 			request.setAttribute("list_resTime", list_resTime);
 			request.setAttribute("joinvacVacData", joinvacVacData);
+			request.setAttribute("lat", lat);
+			request.setAttribute("lng", lng);
 			
 			view.forward(request, response);
 		}else {
@@ -163,12 +169,16 @@ public class detailReservation extends HttpServlet {
 		
 	}
 
+	/*
+	 * public String regbusno(String reg_bus_no) { mo }
+	 */
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
 	}
 
 }
