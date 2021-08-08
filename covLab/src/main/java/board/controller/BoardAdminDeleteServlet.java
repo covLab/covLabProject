@@ -40,9 +40,6 @@ public class BoardAdminDeleteServlet extends HttpServlet {
       for(int i = 0 ; i<checkedList.length; i++) {
       System.out.println("checkedList at servlet : "+checkedList[i]);  
       }
-//      System.out.println(Arrays.toString(checkedList));
-//      System.out.println("checkedList.length : "+ checkedList.length);
-
   
       // 출력할 페이지 작성
       int currentPage = 1;
@@ -51,13 +48,12 @@ public class BoardAdminDeleteServlet extends HttpServlet {
          currentPage = Integer.parseInt(request.getParameter("page"));
       }
       
-
       int result = new BoardService().deleteBoard(checkedList);
 
       if (result > 0) {
          response.sendRedirect("/semi/blistadmin?page="+currentPage);
       } else {
-         RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+         RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
          request.setAttribute("message", Arrays.toString(checkedList)+"번 공지글 삭제 실패");
          view.forward(request, response);
       }

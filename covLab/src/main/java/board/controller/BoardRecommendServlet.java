@@ -1,28 +1,28 @@
-package board.comments.controller;
+package board.controller;
 
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.comments.model.service.CommentsService;
-import board.comments.model.vo.Comments;
+import board.model.service.BoardService;
 
 /**
- * Servlet implementation class CommentsReplyWriteServlet
+ * Servlet implementation class BoardRecommendServlet
  */
-@WebServlet("/creplywrite")
-public class CommentsReplyWriteServlet extends HttpServlet {
+@WebServlet("/brecommend")
+public class BoardRecommendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentsReplyWriteServlet() {
+    public BoardRecommendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,33 +31,39 @@ public class CommentsReplyWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//답글 등록
-		
-		//1. 전송온 값에 한글이 있으며 인코딩 처리함
-		request.setCharacterEncoding("utf-8");
-		
-		//2. 전송온 값 꺼내서 변수 | 객체에 기록 저장
+		// 게시글 추천 처리용 컨트롤러
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		int currentPage = Integer.parseInt(request.getParameter("page"));
-		int comLevel =Integer.parseInt(request.getParameter("cno"));
 		
-		Comments comments = new Comments();
+		BoardService bservice = new BoardService();
+		int result = 0;
 		
-		comments.setComWriter(request.getParameter("writer"));
-		comments.setComContent(request.getParameter("content"));
-		comments.setBoardRef(boardNo);
-		comments.setComLevel(comLevel);
+		Cookie[] cookies = request.getCookies();
+		int recommended =0;
 		
-		System.out.println("comment : "+comments);
+		for (Cookie cookie : cookies) {
+			System.out.println(cookie.getName());
+			if(cookie.getName().equals("recommend")) {
+				recommended = 1;
 		
-		CommentsService cservice = new CommentsService();
-		int result = cservice.insertReplyComments(comments);
-		
-		if(result > 0 ) {
+				if(cookie.getValue().contains(request.getParameter("bno"))) {
+				}else {
+					cookie.setValue(cookie.getValue()+"_"+request.getParameter("bno"));
+					response.addCookie(cookie);
+					result = bservice.updateRecommend(boardNo);
+				}
+			}
+		}
+		if(recommended ==0 ) {
+			Cookie cookie1 = new Cookie("recommend", request.getParameter("bno"));
+			response.addCookie(cookie1);
+			result = bservice.updateRecommend(boardNo);
+		}
+		if(result > 0) {
 			response.sendRedirect("/semi/bdetail?bno="+boardNo+"&page="+currentPage);
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
-			request.setAttribute("message", boardNo+"번 게시글 댓글 등록 실패...");
+			request.setAttribute("message", "추천은 한번만 가능합니다.");
 			view.forward(request, response);
 		}
 	}

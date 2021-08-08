@@ -102,7 +102,7 @@ public class BoardSearchServlet extends HttpServlet {
 
 			view.forward(request, response);
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
+			view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", currentPage + " 페이지에 대한 검색 목록 조회 실패..");
 			view.forward(request, response);
 		}

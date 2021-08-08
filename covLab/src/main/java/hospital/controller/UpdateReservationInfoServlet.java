@@ -38,7 +38,9 @@ public class UpdateReservationInfoServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		int userNo = Integer.parseInt(request.getParameter("userno"));
+		int inoCnt = Integer.parseInt(request.getParameter("inocnt"));
 		System.out.println("userno : "+userNo);
+		System.out.println("inocnt 1 : "+inoCnt);
 		
 		// 출력할 페이지 작성
 		int currentPage = 1;
@@ -49,9 +51,16 @@ public class UpdateReservationInfoServlet extends HttpServlet {
 
 		ReservationInfo ri = new ReservationInfo();
 		ri.setUserNo(userNo);
-		ri.setInoCnt(Integer.parseInt(request.getParameter("inocnt")));
+		ri.setInoCnt(inoCnt);
 		
-		int result = new HospitalService().updateReservationInfo(ri);
+		HospitalService hservice = new HospitalService();
+		int result =0;
+		if(hservice.updateRInoCntInfo(ri)>0) {
+			System.out.println("inocnt 2 : "+inoCnt);
+			result = hservice.updateRStateInfo(ri);
+			System.out.println("inocnt 3 : "+inoCnt);
+		}
+		
 		if (result > 0) {
 			response.sendRedirect("/semi/rinfolist?page=" + currentPage);
 		} else {

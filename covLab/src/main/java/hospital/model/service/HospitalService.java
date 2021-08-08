@@ -60,7 +60,7 @@ public class HospitalService {
 		return list;
 	}
 
-	public int updateReservationInfo(ReservationInfo ri) {
+	public int updateRInoCntInfo(ReservationInfo ri) {
 		Connection conn = getConnection();
 		int result = hdao.updateRInoCntInfo(conn, ri);
 		if(result >0 ) {
@@ -68,9 +68,13 @@ public class HospitalService {
 		}else {
 			rollback(conn);
 		}close(conn);
-			  
+		return result;
+	}
+	
+	public int updateRStateInfo(ReservationInfo ri) {
+		Connection conn = getConnection();
 		conn = getConnection(); 
-		result = hdao.updateRStateInfo(conn, ri);	
+		int result = hdao.updateRStateInfo(conn, ri);	
 		if(result >0 ) {
 			commit(conn);
 		}else {
@@ -78,6 +82,8 @@ public class HospitalService {
 		}close(conn);
 		return result;
 	}
+		
+	
 
 	public int getSearchListCount(String sCondition, String sKeyword) {
 		Connection conn = getConnection();
@@ -91,6 +97,24 @@ public class HospitalService {
 		ArrayList<ReservationInfo> list = hdao.selectSearchList(conn, startRow, endRow, sCondition, sKeyword);
 		close(conn);
 		return list;
+	}
+
+	public VaccineInfo selectVaccineInfo(String vname) {
+		Connection conn = getConnection();
+		VaccineInfo vi = hdao.selectVaccineInfo(conn, vname);
+		close(conn);
+		return vi;
+	}
+
+	public int updateVaccineInfo(VaccineInfo vi) {
+		Connection conn = getConnection();
+		int result = hdao.updateVaccineInfo(conn, vi);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}close(conn);
+		return result;
 	}
 
 

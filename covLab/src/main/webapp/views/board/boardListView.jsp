@@ -63,18 +63,11 @@ function moveLogin(){
 								</h1>
 							</div>
 						</div>
-					<!-- </div> 
-
-				</div>-->
-				<!-- /# row -->
+					
 				<section id="main-content">
-					<!-- <div class="row">
-						<div class="col-lg-12"> -->
+					
 					<div class="card">
-						<!-- <div class="card-title">
-                                    <h4>Bootstrap Data Table </h4>
-                                </div> -->
-						<!-- <div class="bootstrap-data-table-panel">-->
+						
 						<div class="table-responsive">
 							<div>
 							<div style="width=500px; float:left;">
@@ -90,7 +83,7 @@ function moveLogin(){
 								<input type="submit" value="검색" class="btn btn-primary">
 							</form>	</div>							
 								<div style="width=300px; float:right;">
-								<button class="btn btn-default" onclick="javascript:location.href='/semi/rinfolist';">전체 목록 조회</button>
+								<button class="btn btn-default" onclick="javascript:location.href='/semi/blist';">전체 목록 조회</button>
 								</div>							
 							
 							</div>

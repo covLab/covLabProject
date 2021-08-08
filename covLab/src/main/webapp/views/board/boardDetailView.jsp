@@ -125,14 +125,7 @@ function moveLogin(){
 	}
 }
 
-//답글 폼 보이기
-/* $(document).ready(function(){
-
- 	//버튼 클릭시 보이기 및 숨기기
-	$("a.showReplyForm").click(function(){
-		$("form.rform").css("display", "none");
-	}); 
-});  */
+//답글
 function showReplyForm(comlevel){
 	console.log("comlevel : "+comlevel);
 	var con = document.getElementById(comlevel);
@@ -142,6 +135,7 @@ function showReplyForm(comlevel){
 		con.style.display = 'none';
 	}
 }
+//댓글
 function showCommentForm(){
 	var con = document.getElementById("cform");
 	if(con.style.display=='none'){
@@ -150,7 +144,11 @@ function showCommentForm(){
 		con.style.display = 'none';
 	}
 }
-
+//
+function recommend(){
+	location.href = "/semi/brecommend?bno=<%= board.getBoardNo() %>&page=<%= currentPage %>";
+	//location.reload();
+}
 </script>
 
 <%@ include file="../common/stylesheet.jsp"%>
@@ -167,13 +165,26 @@ function showCommentForm(){
 				<div class="page-header">
 					<div class="page-title">
 						<h1>
-							접종후기 <span> <%= board.getBoardNo() %>번 글 보기</span>
+							접종후기 <span> <%= board.getBoardNo() %>번 글 보기</span><br>
+							
 						</h1>
 					</div>
 				</div>
 				<div id="main-content">
 					<div class="card">
-
+						<%-- <div>
+						<div><%= board.getBoardTitle() %></div>
+						<div>
+							<div><%= board.getBoardWriter() %></div>
+							<div>
+								<span><%= board.getBoardDate() %></span>
+								<span><%= board.getViewCnt() %></span>
+								<span><%= board.getRecommendCnt() %></span>
+							</div>
+						</div><hr>
+						<div><%= board.getBoardContent() %></div>
+						
+						</div> --%>
 						<table align="center">
 						
 							<tr><td width="50px" rowspan="4" valign="top"></td>
@@ -182,7 +193,7 @@ function showCommentForm(){
 								<td rowspan="4" width="100" align="right">
 								<% if(loginMember != null){%>
 									<a href=# onclick="showCommentForm();">[댓글달기]</a><br>
-									<a href=# onclick="recommend(); return false;">[추천하기]</a><br>
+									<a href=# onclick="recommend();">[추천하기]</a><br>
 
 									<% if(loginMember.getUserName().equals(board.getBoardWriter())){ //본인글일때 %>
 										<a href=# onclick="moveUpdateView(); return false;">[수정하기]</a><br>
@@ -208,7 +219,7 @@ function showCommentForm(){
 								<td><pre><%= board.getBoardContent() %></pre></td>
 							</tr>	
 						</table>
-				
+						<%if (loginMember != null){ %>
 						<!-- 댓글달기 폼 -->
 						<form action="/semi/cwrite" method="post" class="cform" id="cform" style="display:none;">				
 						<input type="hidden" name="bno" value="<%= board.getBoardNo() %>">
@@ -236,7 +247,7 @@ function showCommentForm(){
 							</tr>
 						</table>
 						</form>	
-						
+						<%} %>
 						
 						<%-- 댓글이 있을 때 --%>
 						<% if (clist != null){ %>
@@ -327,7 +338,6 @@ function showCommentForm(){
 						
 						<% }//for문 %>
 						
-												
 						<% } %>
 						<hr>
 						<div align="right">

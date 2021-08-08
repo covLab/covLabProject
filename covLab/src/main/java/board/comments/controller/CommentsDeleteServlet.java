@@ -35,22 +35,17 @@ public class CommentsDeleteServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		int comNo = Integer.parseInt(request.getParameter("comNo"));
-		System.out.println("comNo : "+comNo);
 		int boardRef = Integer.parseInt(request.getParameter("boardRef"));
-		System.out.println("boardRef : "+boardRef);
 		int currentPage = Integer.parseInt(request.getParameter("page"));
-		System.out.println("page : "+currentPage);
 		
 		CommentsService cservice = new CommentsService();
 		int result = cservice.deleteComments(comNo);
-		
-		
+				
 		RequestDispatcher view = null;
 		if(result > 0) {
 			response.sendRedirect("/semi/bdetail?bno="+boardRef+"&page="+currentPage);
-			
 		}else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
+			view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", boardRef+"번 글의 댓글 삭제 실패...");
 			view.forward(request, response);
 		}

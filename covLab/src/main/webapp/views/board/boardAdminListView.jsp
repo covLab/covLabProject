@@ -71,7 +71,7 @@ function showWriteForm(){
 								<input type="submit" value="검색" class="btn btn-primary">
 							</form>	</div>							
 								<div style="width=300px; float:right;">
-								<button class="btn btn-default" onclick="javascript:location.href='/semi/rinfolist';">전체 목록 조회</button>
+								<button class="btn btn-default" onclick="javascript:location.href='/semi/blistadmin';">전체 목록 조회</button>
 								</div>							
 							
 							</div>
