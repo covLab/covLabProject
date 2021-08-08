@@ -37,7 +37,7 @@
  .btn {
   text-decoration: none;
   font-size:15pt;  
-  background-color: navy;
+  background-color: #1E3269;
   color: white;
   padding:10px 20px 10px 20px;
   margin:10px;
@@ -56,7 +56,7 @@
  }
  
  table th {
-	background-color:navy;
+	background-color:#1E3269;
 	color: #fff;
 	text-align:center;
 	font-size:15pt;
@@ -111,7 +111,9 @@ table td {
 									  	<br>
 	<h5 id="coronainfo01">1. 확진자 수 (클릭시 이동)</h5>
 	<a href="http://ncov.mohw.go.kr/"><img src="../../resources/images/캡처.PNG"></a>
-		<hr>
+<br>
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
 <h5 id="coronainfo02">2. 코로나19란?</h5>
 <p class="ta_r mgt36">* 현재까지 알려진 정보(2021년 3월 2일 기준) </p>
                         <h4 class="s_title_1">코로나바이러스감염증-19(COVID-19) 정보</h4>
@@ -191,6 +193,7 @@ table td {
 					        </tr>
 					      </table>
 						</div>   
+<br>
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
 <!-- ---------------------------------------------------------------------------------- -->
@@ -266,9 +269,11 @@ table td {
 			</font>
 		</li>
 	</ul>
-</div>
+	<br>
 <p><a href="#top">맨 위로 이동</a></p>
 <hr>
+</div>
+
 
 <!-- ---------------------------------------------------------------------------------- -->									
                                 </div>

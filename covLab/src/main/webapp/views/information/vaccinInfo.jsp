@@ -38,7 +38,7 @@
  .btn {
   text-decoration: none;
   font-size:15pt;  
-  background-color: navy;
+  background-color: #1E3269;
   color: white;
   padding:10px 20px 10px 20px;
   margin:10px;
@@ -111,7 +111,7 @@ dl.faq button[aria-expanded="true"]::before {
 }
 
 table th {
-	background-color:navy;
+	background-color:#1E3269;
 	color: #fff;
 	text-align:center;
 	font-size:15pt;

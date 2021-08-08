@@ -85,7 +85,7 @@
  .btn {
   text-decoration: none;
   font-size:15pt;  
-  background-color: navy;
+  background-color: #1E3269;
   color: white;
   padding:10px 20px 10px 20px;
   margin:10px;
@@ -135,7 +135,13 @@
                                 <div class="card-title">
                                 <!-- 1. 코로나/백신 정보 (자동 슬라이드) -->
                                     <!-- <h4>1. 코로나/백신/QnA</h4> -->
-
+<!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
+ <h5>**메뉴 이동**</h5> 
+<a class="btn" href="coronaInfo.jsp">코로나 정보</a>
+<a class="btn" href="vaccinInfo.jsp">백신/예방접종 정보</a>
+<a class="btn" href="qna.jsp">QnA</a>
+<!-- <a class="btn" href="test2.jsp">test2</a> -->
+<hr>
 <!-- 자동배너 (이미지 넣고, 수정해야함) -->
 <br>
   <div class="slider" >
@@ -152,13 +158,8 @@
       <a class="prev" onclick="button_click(-1)">&#10094</a>
       <a class="next" onclick="button_click(1)">&#10095</a>
     </div>
-  <hr>
-<!-- 2. 코로나/ 백신 정보로 넘어가는 버튼 -->
- <h5>**메뉴 이동**</h5> 
-<a class="btn" href="coronaInfo.jsp">코로나 정보</a>
-<a class="btn" href="vaccinInfo.jsp">백신/예방접종 정보</a>
-<a class="btn" href="qna.jsp">QnA</a>
-<!-- <a class="btn" href="test2.jsp">test2</a> -->
+<br>
+<p><a href="#top">맨 위로 이동</a></p>
 <hr>
 
 <!-- 3. 실시간 뉴스 -->
@@ -171,7 +172,10 @@
 <a href="https://www.hani.co.kr/arti/society/health/1006519.html"><u>코로나19 신규 확진자 1776명…30일째 1천명대</u></a><br>
 <a href="https://www.yna.co.kr/view/AKR20210804130100017?input=1195m"><u>국내 부모 64.2% "우리 아이 코로나 백신 맞히겠다"</u></a><br>
 <a href="https://www.korea.kr/news/policyNewsView.do?newsId=148888328"><u>‘글로벌 백신 허브화 TF’ 출범…“국내 백신 생산역량 강화”</u></a>
-
+<br>
+<br>
+<p><a href="#top">맨 위로 이동</a></p>
+<hr>
   
                                 </div>
                                     </div>
