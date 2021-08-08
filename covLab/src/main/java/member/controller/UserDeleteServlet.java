@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -61,9 +62,16 @@ public class UserDeleteServlet extends HttpServlet {
 		int result = new MemberService().deleteMember(userid , cryptoUserpwd); 
 		   System.out.println(userid);
 	       System.out.println(userpwd);
+	    
 		if(result > 0) {
 			//회원 정보 삭제 성공하면, 자동 로그아웃되게 함
 			response.sendRedirect("/semi/logout");
+
+		
+			   
+		
+
+			 
 		}else {
 			RequestDispatcher view = 
 					request.getRequestDispatcher(

@@ -81,7 +81,7 @@ public class EnrollServlet extends HttpServlet {
 	
 		if(result > 0) {
 			
-			response.sendRedirect("/semi/views/member/login.jsp");
+			response.sendRedirect("/semi/index.jsp");
 		}else {
 			
 			RequestDispatcher view = 

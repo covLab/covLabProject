@@ -72,7 +72,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		int result = new MemberService().updatePw(cryptoUserpw ,userid);
 		System.out.println("변경?"+cryptoUserpw);
 		if(result >0 ) {
-			response.sendRedirect("/semi/views/member/login.jsp");
+			response.sendRedirect("/semi/index.jsp");
 			
 //			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
 //			request.setAttribute("cryptoUserpw", 

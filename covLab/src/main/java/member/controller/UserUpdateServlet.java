@@ -86,7 +86,7 @@ public class UserUpdateServlet extends HttpServlet {
 //			response.sendRedirect("/semi/myInfo?username=" 
 //								+ member.getUserName());
 //			response.sendRedirect("/semi/views/member/login.jsp");
-			RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			
 			view.forward(request, response);
 			
