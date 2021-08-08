@@ -38,9 +38,14 @@
 /*a 태그의 버튼들*/
 
   /*테이블 모양 버튼들*/
-
+table th {
+	background-color:#C8FFFF;
+	color: white;
+	text-align:center;
+	font-size:15pt;
+}
   
-
+/*
  .t{
   	width: 950px;
  	height: 100px;
@@ -48,7 +53,7 @@
  	color:#000;
  	text-align:center;
  	transition:all 0.2s;
- } 
+ } */
  
  .c1 {
  	font-size:15pt;
@@ -207,19 +212,19 @@ dl.faq button[aria-expanded="true"]::before {
 
 <table class="t" cellspacing="3">
 	<tr>
-		<td class="c1" ><a href="#qna01">코로나란?</a></td>
-		<td class="c2" ><a href="#qna02">코로나의 증상/검사</a></td>
-		<td class="c3" ><a href="#qna03">치료 및 예방</a></td>
+		<th class="c1" ><a href="#qna01">코로나란?</a></th>
+		<th class="c2" ><a href="#qna02">코로나의 증상/검사</a></th>
+		<th class="c3" ><a href="#qna03">치료 및 예방</a></th>
 	</tr>
 	<tr>
-		<td class="c4" ><a href="#qna04">접촉자 및 확진환자</a></td>
-		<td class="c5" ><a href="#qna05">격리 및 격리해제</a></td>
-		<td class="c6" ><a href="#qna06">백신 관련</a></td>
+		<th class="c4" ><a href="#qna04">접촉자 및 확진환자</a></th>
+		<th class="c5" ><a href="#qna05">격리 및 격리해제</a></th>
+		<th class="c6" ><a href="#qna06">백신 관련</a></th>
 	</tr>
 	<tr>
-		<td class="c7" ><a href="#qna07">예방접종 이상반응</a></td>
-		<td class="c8" ><a href="#qna08">코로나19 예방접종 관련 피해보상</a></td>
-		<td class="c9" ><a href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a></td>
+		<th class="c7" ><a href="#qna07">예방접종 이상반응</a></th>
+		<th class="c8" ><a href="#qna08">코로나19 예방접종 관련 피해보상</a></th>
+		<th class="c9" ><a href="#qna09">인과성 불충분한 중증 환자 의료비 지원사업</a></th>
 	</tr>
 </table>
 
