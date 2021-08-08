@@ -105,8 +105,7 @@
 	function printTable(){
 		var table =document.getElementById("ajaxTable");
 		table.innerHTML="";
-		for(i=<%=startRow%>-1;i<<%=endRow%>
-	; i++) {
+		for(i=<%=startRow%>-1;i<<%=endRow%>; i++) {
 
 			table.insertRow().insertCell().innerHTML = "&nbsp";
 

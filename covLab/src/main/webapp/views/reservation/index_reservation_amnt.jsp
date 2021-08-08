@@ -249,20 +249,8 @@
 
 	function post_checkedhp(data, lat, lng) {
 		var param = "reg_bus_no=" + data + "&lat=" + lat + "&lng=" + lng;
-
 		location.href = '/semi/detailhp?' + param;
-		/* $('input[type=hidden][name=reg_bus_no]').val(reg_bus_no);
-		console.log($("input[type=hidden][name=reg_bus_no]").val()); */
-
-		/* $.ajax({
-		      url: "/semi/detailhp",
-		      type: "post",
-		      data: {"reg_bus_no":data},
-		      dataType: "json",
-		      success : function(data){
-		         console.log(data);
-		      }
-		   }); */
+		
 	}
 
 	function orderProcess() {
