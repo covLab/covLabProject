@@ -241,7 +241,7 @@ function handleLocation(position) {
 
 	// 지도 옵션 
 	var mapOption = {
-		zoom : 11.5,
+		zoom : 15,
 		center : latlng,
 		mapTypeControl : false,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
@@ -317,7 +317,7 @@ input:focus {
 								<div class="card-header">
 									<h5 class="card-title text-center" id="hp_name"><%=hp.getHp_name()%></h5>
 								</div>
-								<div class="card-body d-flex align-items-center">
+								<div  class="card-body d-flex align-items-center">
 
 									<form action="" method="post" name="info" autocomplete="off">
 										<div class="form-group">

@@ -3,12 +3,14 @@ package reservation.model.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import reservation.model.service.reservationService;
 
 /**
  * Servlet implementation class indexReservation
@@ -24,22 +26,24 @@ public class hospOrder extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		String orderopt = request.getParameter("orderOpt");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String orderopt = request.getParameter("orderopt");
 		System.out.println(orderopt);
-		
+
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.append(orderopt);
 		out.flush();
 		out.close();
-	}	
+
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -49,7 +53,9 @@ public class hospOrder extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
+
 	}
 
+
+	 
 }

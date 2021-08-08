@@ -179,15 +179,17 @@
 	               map.setZoom(15);
 	               map.setCenter(this.getPosition());
 	               reg_bus_no=this.getTitle();
-	               $.ajax({
+	               post_checkedhp(reg_bus_no,this.getPosition().lat(),this.getPosition().lng());
+	               /* $.ajax({
 	                  url: "/semi/detailhp",
 	                  type: "post",
-	                  data: data,
+	                  data: reg_bus_no,
 	                  dataType: "json",
 	                  success : function(data){
 	                     console.log(data);
 	                  }
-	               }); 
+	               }); */ 
+	               
 	            });
 	         }
 	      }
@@ -246,11 +248,11 @@
 
 
 	function orderProcess(){
-		console.log({orderOpt: $("#orderOpt").val()});
+		console.log({orderopt: $("#orderopt").val()});
 		$.ajax({
 			url: "/semi/hosporder",
 			type: "post",
-			data: {orderOpt:$('input[name=list_order]:checked').val()},
+			data: {orderopt:$('input[name=list_order]:checked').val()},
 			success : function(data){
 				console.log(data);
 				var table =document.getElementById("ajaxTable");
@@ -310,25 +312,18 @@
 		<div class="main">
 			<div class="container-fluid">
 				<section id="main-content">
-					<div>
-						<div></div>
-						<input type='radio' name='list_order' value='dist'
-							checked='checked' onclick='orderProcess();' /> 거리순 <input
-							type='radio' name='list_order' value='amnt'
-							onclick='orderProcess();' />수량순 <select name="list_option_key"
-							onchange="handleOnList(this)">
-							<option value="none">===백신종류===</option>
-							<option value="pfizer">화이자</option>
-							<option value="janssen">얀센</option>
-							<option value="AZ">아스트라제네카</option>
-						</select>
+					<div class="card h-100 m-0">
+					<form>
+						<input type='radio' name='list_order' value='dist' checked='checked' onclick='orderProcess();' /> 거리순 
+						<input type='radio' name='list_order' value='amnt' onclick='orderProcess();' />수량순 
+					</form>
 						<div class="row">
+					
 							<div style="text-align: center;" class="col-lg-3 p-0">
 								<form action="/semi/detailhp" method="post">
 
 									<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
 									
-									<input type="hidden" name="reg_bus_no" value="834-23-92223" /> 
 									<!-- <a href="/semi/detailhp?reg_bus_no=></a>-->
 								</form>
 
@@ -346,7 +341,7 @@
 									%>
 									<!-- 이전 페이지 그룹으로 이동 -->
 									<%
-									if ((currentPage - 10) < startPage && (currentPage - 10) > 1) {
+									if ((currentPage - 4) < startPage && (currentPage - 4) > 1) {
 									%>
 									<a href="/semi/indexres?page=<%=startPage - 10%>">[이전그룹] </a>
 									&nbsp;
@@ -376,9 +371,9 @@
 									&nbsp;
 									<!-- 다음 페이지 그룹으로 이동 -->
 									<%
-									if ((currentPage + 10) > endPage && (currentPage + 10) < maxPage) {
+									if ((currentPage + 4) > endPage && (currentPage + 4) < maxPage) {
 									%>
-									<a href="/semi/indexres?page=<%=endPage + 10%>">[다음그룹] </a>
+									<a href="/semi/indexres?page=<%=endPage + 4%>">[다음그룹] </a>
 									&nbsp;
 									<%
 									} else {

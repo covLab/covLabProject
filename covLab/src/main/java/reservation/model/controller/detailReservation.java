@@ -142,15 +142,12 @@ public class detailReservation extends HttpServlet {
 			
 			view.forward(request, response);
 		}else {
-			view = request.getRequestDispatcher(
-					"views/common/error.jsp");
+			view = request.getRequestDispatcher("views/common/error.jsp");
 			request.setAttribute("message", 
 					reg_bus_no + "번 병원 조회 실패!");
 			view.forward(request, response);
 		}
-		
-		
-		
+	
 	}
 
 	/*
