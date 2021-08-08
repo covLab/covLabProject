@@ -8,7 +8,8 @@
 <%
 ArrayList<Reservation> list_resTime = (ArrayList<Reservation>) request.getAttribute("list_resTime");
 Hospital hp = (Hospital) request.getAttribute("hp");
-Reservation res = new Reservation();
+Reservation resByUserRn =  (Reservation)request.getAttribute("resByUserRn");
+Reservation resBySubUserRn =  (Reservation)request.getAttribute("resBySubUserRn");
 ArrayList<Object> joinvacVacData = (ArrayList<Object>) request.getAttribute("joinvacVacData");
 int checkRes = Integer.parseInt(request.getAttribute("checkRes").toString());
 int checkSubRes = Integer.parseInt(request.getAttribute("checkSubRes").toString());
@@ -37,6 +38,25 @@ int checkSubRes = Integer.parseInt(request.getAttribute("checkSubRes").toString(
 
 
 <script type="text/javascript">
+$(function () {
+	
+    var sop = $('.selectpicker');
+    <% for (Object obj: joinvacVacData) {%>
+		<% if( !((ArrayList<String>) obj).isEmpty() ) {%>
+   	 	var text = "<%= ((ArrayList<String>) obj).get(2)%>  -  <%= ((ArrayList<String>) obj).get(0)%>개";
+   	 	var value = "<%= ((ArrayList<String>) obj).get(2) %>";
+    		sop.append(new Option( text , value ,false, false ));
+		<%} %>
+	<%} %>
+	
+    $('.selectpicker').selectpicker();
+    $('.selectpicker').on('click', function(){
+    	$(".selectpicker").hide();
+    });
+    
+
+});	
+
 
 $(function() {
     //input을 datepicker로 선언
@@ -59,6 +79,7 @@ $(function() {
        toggleActive : true,   //이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
        weekStart : 0 ,//달력 시작 요일 선택하는 것 기본값은 0인 일요일 
        language : "ko",   //달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+       showAnim: "slide", 
        buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
        maxDate:"6"
     });                    
@@ -89,6 +110,13 @@ function leadingZeros(n, digits) {
     }
     return zero + n;
 }
+
+$(function (){
+	$("#timeBox").click(function (){
+		$("#timeBox").toggle();
+	});
+});
+
 $(function(){
 		
 	$('.selectTime').click(function(){
@@ -98,8 +126,6 @@ $(function(){
 
 		$('#timeBox').text(cv);
 		$('#timeBox').click();
-		
-		
 		
 	});
 });
@@ -207,14 +233,11 @@ input:focus {
 <body>
 	<div class="content-wrap">
 		<div class="main">
-			<div class="container-fluid ">
+			<div class="container ">
 				<div class="row">
 					<div class="col-lg-8 p-r-0 title-margin-right">
 						<div class="page-header">
 							<div class="page-title">
-								<h1>
-									안녕하세요. <span>코로나 백신 예약 사ddsd이트 Covlab입니다.</span>
-								</h1>
 							</div>
 						</div>
 					</div>
@@ -223,53 +246,78 @@ input:focus {
 					<!-- /# column -->
 				</div>
 				<!-- /# row -->
-				<section id="main-content">
+				<section class="span12" id="main-content">
 					<div class="row">
 
-						<div class="col-lg-3 p-0 ">
-							<div class="card h-100 m-0">
-								<div class="card-header">
+						<div class="col-lg-4 p-0 border-radius">
+							<div class="card h-100 m-0 border border" style="">
+								<div class="card-header border-top-radius">
 									<h5 class="card-title text-center" id="hp_name"><%=hp.getHp_name()%></h5>
 								</div>
-								<div class="card-body d-flex align-items-center">
+								<div class="card-body">
 
 									<form action="" method="post" name="info" autocomplete="off">
-										<div class="form-group">
-											<label for="hp_address">주소 : </label>
-											<textarea name="hp_address" readonly id="areaBox"
+									
+									
+										<div class="form-group mt-3 mb-0">
+											<label class="col-sm-5 col-form-label pl-0"  for="hp_address">주소</label>
+											
+											<div class="col pl-0">
+											<textarea class="control-form"  name="hp_address" readonly id="areaBox"
 												style="display: block;"><%=hp.getHp_address()%>
-                                 </textarea>
+                                			 </textarea>
+											</div>
 										</div>
 										<div class="form-group">
-											<label class="text-label" for="hp_phone">전화번호 : </label><input class="control-form" type="text"
+											<label class="col form-labe pl-0" for="hp_phone">전화번호</label>
+											<div class="col pl-0">
+											<input class="control-form" type="text"
 												name="hp_phone" id= "areaBox" value="<%=hp.getHp_phone()%>" readonly
 												class="inputBox">
-										</div>
-										<div class="form-group">
-											<label for="">백신 : </label>
-												<select name="vac_name" class="select2-selection select2-selection--single">
-												<% for (Object obj: joinvacVacData) {%>
-													<option class="select2-results__option select2-results__option--highlighted" value="" selected disabled hidden >선택해주세요.</option>
-													<% if( !((ArrayList<String>) obj).isEmpty() ) {%>
-												    <option class="select2-results__option select2-results__option--highlighted" value=<%= ((ArrayList<String>) obj).get(2) %>><%= ((ArrayList<String>) obj).get(2)%>  -  <%= ((ArrayList<String>) obj).get(0)%>개</option>
-													<%} %>
-												<%} %>
-												</select>
+											</div>
 										</div>
 										
 										<div class="form-group">
-											<p>
-												날짜를 선택해주세요. 
-												<input class= "form-control" type="text" id="datepicker" name="areaBox">
-											</p>
+											<label class="col form-labe pl-0" for="vac_name">백신 </label>
+												<select name="vac_name" class="selectpicker form-control" multiple>
+												<%-- <% for (Object obj: joinvacVacData) {%>
+													<option  value="" selected disabled hidden >선택해주세요.</option>
+													<% if( !((ArrayList<String>) obj).isEmpty() ) {%>
+												    <option value=<%= ((ArrayList<String>) obj).get(2) %>><%= ((ArrayList<String>) obj).get(2)%>  -  <%= ((ArrayList<String>) obj).get(0)%>개</option>
+													<%} %>
+												<%} %> --%>
+												</select>
+										</div>
+
+
+										<div class="form-group">
+										<label class="col form-labe pl-0">
+											날짜를 선택해주세요.
+										</label>
+											<div class="input-group input-group-unstyled border rounded">
+												<input class="form-control border-none" type="text" id="datepicker"
+													name="areaBox"> 
+													<span class="align-self-center mr-1 ml-1 "> <i
+													class="far fa-calendar-alt fa-2x"></i></span>
+											</div>
+										</div>
+
+										<div class="form-group">
 											<div class="panel-group" id="accordion">
+											
 												<div class="panel panel-default">
+												
 													<div class="panel-heading">
-														<p class="panel-title">
-															<label>시간 선택: </label> 
+															<label class="col form-labe pl-0" >시간 선택</label> 
+															
+															<div class="input-group input-group-unstyled border rounded">
 															<a data-toggle="collapse"
-																data-parent="#accordion" href="#collapse1" id="timeBox">시간대를 선택해주세요.</a>
-														</p>
+																data-parent="#accordion" href="#collapse1" id="timeBox" class="form-control border-none">시간대를 선택해주세요.</a>
+																<span class="align-self-center mr-1 ml-1 "> 
+																<i class="far fa-clock fa-2x"></i></span>
+															</div>
+																
+																
 													</div>
 
 													<div id="collapse1" class="panel-collapse collapse in">
@@ -355,55 +403,60 @@ input:focus {
 
 												</div>
 											</div>
+											</div>
 
-										</div>
 
 										<input type="hidden" name="reg_bus_no"
 											value="<%=hp.getReg_bus_no()%>" class="inputBox"> <input
 											type="hidden" name="resType" value="null" class="inputBox">
 										<input type="hidden" name="ioc_date" value="null"
 											class="inputBox">
-										<!--  
-                              <input type="hidden" name="sub_user_rn" value="null" class="inputBox" id="sub_user_rn">
-                              --></form>
-								</div>
+										</form>
                               
-											<div class="card-footer text-center d-inline" style="background-color: white;">
+											<div class="card-footer mt-5" style="background-color: white;">
+											<div class=" mt-3 text-center">
 											<%
 											if ( checkRes >= 1) {
-											%>
-											<button onclick="cancelRes()" class="btn btn-rounded btn-outline-success" value="self"
-												id="canBtn">예약취소</button>
-											<%
-											} else {
-											%>
-											<button onclick="termsPopup()" class="btn btn-rounded btn-success" value="self"
-												id="resBtn">예약</button>
-											<%
+												if( resByUserRn.getReg_bus_no().equals(hp.getReg_bus_no())){
+												%>
+												<button onclick="cancelRes()" class="btn btn-rounded btn-outline-success" value="self"
+													id="canBtn">예약취소</button>
+												<%
+												}
+											}else {
+												%>
+												<button onclick="termsPopup()" class="btn btn-rounded btn-success" value="self"
+													id="resBtn">예약</button>
+												<%
 											}
 											%>
 
+
 											<%
 											if ( checkSubRes >= 1) {
-											%>
-											<button onclick="cancelRes()" class="btn btn-rounded btn-outline-info" value="sub"
-												id="canBtn">대리예약취소</button>
-											<%
-											} else {
-											%>
-											<button onclick="termsPopup()" class="btn btn-rounded btn-info" value="sub"
-												id="resBtn">대리예약</button>
-											<%
+												if( resBySubUserRn.getReg_bus_no().equals(hp.getReg_bus_no())){
+												%>
+												<button onclick="cancelRes()" class="btn btn-rounded btn-outline-info" value="sub"
+													id="canBtn">대리예약취소</button>
+												<%
+												}
+											}else {
+												%>
+												<button onclick="termsPopup()" class="btn btn-rounded btn-info" value="sub"
+													id="resBtn">대리예약</button>
+												<%
 											}
 											%>
+											</div>
 											</div>
 									
 
 							</div>
 						</div>
+						</div>
 
-						<div class="col-lg-9 p-0">
-							<div class="row" id="map" style="width: 800px; height: 600px;"></div>
+						<div class="col-lg-8 p-0" >
+							<div class="row" id="map" style="width: 100%; height: 100%;"></div>
 							<script type="text/javascript">
 
     var locations = [  
@@ -505,7 +558,7 @@ input:focus {
 
   </script>
 						</div>
-					</div>
+				</div>
 
 				</section>
 				<%@ include file="../common/footer.jsp"%>

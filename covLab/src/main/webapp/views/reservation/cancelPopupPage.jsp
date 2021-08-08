@@ -29,6 +29,15 @@ input:focus {
 }
 </style>
 <script type="text/javascript">
+
+$(function(){
+	
+var ioc = $('#ioc').val();
+var ioc2 = ioc.substr(0,16);
+document.info.ioc.value = ioc2;
+});
+
+
 function cancel(){
 	
 	var url="/semi/cancelres";
@@ -52,33 +61,77 @@ function cancel(){
 					<h5 class="card-title text-center">접종 정보</h5>
 
 					<form action="/semi/cancelres" method="post" name="info">
-						<div class="form-group">
-							<label class= "col-sm-2 col-form-label" for="user_name">이름 </label> <input class="form-control inputBox" type="text"
-								name="user_name" value="<%=mb.getUserName()%>" readonly
-								class="inputBox">
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label class="control-label mb-0" for="user_name">이름</label>
+							</div>
+							<div class= "col-9">
+								<input type="text"
+									name="user_name" value="<%=mb.getUserName()%>" readonly
+									class="form-control input-rounded inputBox ">
+							</div>
 						</div>
-						<div class="form-group">
-							<label class= "col-sm-2 col-form-label"  for="hp_phone">주민번호</label><input class="form-control inputBox" type="text"
-								name="user_rn" value="<%=mb.getUserRn()%>" readonly
-								class="inputBox" id="rn">
+						
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label class="control-label mb-0" for="hp_phone">주민번호</label>
+							</div>
+							<div class= "col-9">
+								<input type="text"
+									name="user_rn" value="<%=mb.getUserRn()%>" readonly
+									class="form-control input-rounded inputBox" id="rn">
+							</div>
 						</div>
-						<div class="form-group">
-							<label class= "col-sm-2 col-form-label"  for="user_address">주소</label><input class="form-control inputBox" type="text"
-								name="user_address" value="<%=mb.getUserAddress()%>" readonly
-								class="inputBox">
+						<div class="form-inline form-group rounded mt-3">
+						
+							<div class="col-3">
+								<label class="control-label mb-0" for="user_address">주소</label>
+							</div>
+							<div class= "col-9">
+								<textarea 
+								name="user_address" readonly
+								class="form-control input-rounded inputBox" style="height:60px; overflow: hidden; resize: none;"><%=mb.getUserAddress()%>
+								</textarea>
+							</div>
 						</div>
-						<div class="form-group">
-							<label class= "col-sm-2 col-form-label"  for="">기관명</label> <input class="form-control inputBox" type="text" name="hp_name"
-								value="<%=hp.getHp_name()%>" readonly class="inputBox">
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label class="control-label mb-0" for="user_phone">전화번호</label>
+							</div>
+							<div class= "col-9">
+							<input type="text"
+								name="user_phone" value="<%=mb.getUserPhone()%>" readonly
+								class="form-control input-rounded inputBox">
+							</div>
 						</div>
-						<div class="form-group">
-							<label class= "col-sm-2 col-form-label" >백신</label> <input class="form-control inputBox" type="text" name="vac_name"
-								value="<%=vac.getVac_name()%>" readonly class="inputBox">
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label class="control-label mb-0" for="">기관명</label> 
+							</div>
+							<div class= "col-9">
+							<input type="text" name="hp_name"
+								value="<%=hp.getHp_name()%>" readonly class="form-control input-rounded inputBox">
+							</div>
 						</div>
-						<div class="form-group">
-							<label class= "col-sm-2 col-form-label" >예약 날짜</label> <input class="form-control inputBox" type="text" name="rev_date"
-								value="<%= res.getIoc_date() %>" readonly class="inputBox" id="ioc">
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label  class="control-label mb-0">백신</label> 
+							</div>
+							<div class= "col-9">
+							<input type="text" name="vac_name"
+								value="<%=vac.getVac_name()%>" readonly class="form-control input-rounded inputBox">
+							</div>
 						</div>
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label  class="control-label mb-0">예약 날짜</label> 
+							</div>
+							<div class= "col-9">
+							<input type="text" name="ioc_date" 
+								value="<%= res.getIoc_date() %>" readonly class="form-control input-rounded inputBox" id="ioc">
+							</div>
+						</div>
+						<input type="hidden" name="rev_date" value= "<%= res.getRev_date() %>" class="inputBox" id="rev_date">
 						<input type="hidden" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" id="serial">
 						<input type="hidden" name="reg_bus_no" value=<%= hp.getReg_bus_no() %> class="inputBox" id="reg">
 						<!-- 						<div class="form-group">

@@ -70,38 +70,88 @@ input:focus {
 
 					<form action="/semi/insertres" method="post" name="info">
 					
-						<div class="form-group">
-							<label class="col-sm-2 col-form-label" for="user_name">이름</label> <input type="text"
+					
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label class="control-label mb-0" for="user_name">이름</label>
+							</div>
+							<div class= "col-9">
+								<input type="text"
 								name="user_name" value="<%=mb.getUserName()%>" readonly
-								class="form-control inputBox">
+								class="form-control input-rounded inputBox">
+								
+							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-2 col-form-label" for="hp_phone">주민번호</label><input type="text"
-								name="user_rn" value="<%=mb.getUserRn()%>" readonly
-								class="form-control inputBox" id="rn">
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label class="control-label mb-0" for="user_rn">주민번호</label>
+							</div>
+							<div class= "col-9">
+								<input type="text"
+									name="user_rn"
+									class="form-control input-rounded inputBox"value="<%=mb.getUserRn()%>" id="user_rn" readonly>
+								
+							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-2 col-form-label" for="user_address">주소</label><textarea 
-								name="user_address" readonly
-								class="form-control inputBox"><%=mb.getUserAddress()%></textarea>
+						
+						<div class="form-inline form-group rounded mt-3">
+						
+							<div class="col-3">
+								<label class="control-label mb-0" for="user_address">주소</label>
+							</div>
+							<div class= "col-9">
+								<textarea 
+								name="user_address" readonly style="height: 60px; resize:none;overflow: hidden "
+								class="form-control input-rounded inputBox"><%=mb.getUserAddress()%></textarea>
+							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-2 col-form-label" for="user_phone">전화번호</label><input type="text"
+						
+						
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label class="control-label mb-0" for="user_phone">전화번호</label>
+							</div>
+							<div class= "col-9">
+							<input type="text"
 								name="user_phone" value="<%=mb.getUserPhone()%>" readonly
-								class="form-control inputBox">
+								class="form-control input-rounded inputBox">
+							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-2 col-form-label" for="">기관명</label> <input type="text" name="hp_name"
-								value="<%=hp.getHp_name()%>" readonly class="form-control inputBox">
+						
+						
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label class="control-label mb-0" for="hp_name">기관명</label>
+							</div>
+							<div class= "col-9">
+							<input type="text"
+								name="hp_name" value="<%=hp.getHp_name()%>" readonly
+								class="form-control input-rounded inputBox">
+							</div>
 						</div>
-						<div class="form-group">
-							<label  class="col-sm-2 col-form-label">백신</label> <input type="text" name="vac_name"
-								value="<%=vac.getVac_name()%>" readonly class="form-control inputBox">
+						
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label class="control-label mb-0" for="vac_name">백신</label>
+							</div>
+							<div class= "col-9">
+							<input type="text"
+								name="vac_name" value="<%=vac.getVac_name()%>" readonly
+								class="form-control input-rounded inputBox">
+							</div>
 						</div>
-						<div class="form-group">
-							<label  class="col-sm-2 col-form-label">예약 날짜</label> <input type="text" name="ioc_date"
-								value="<%= request.getAttribute("ioc_date") %>" readonly class="form-control inputBox">
+						
+						<div class="form-inline form-group rounded mt-3">
+							<div class="col-3">
+								<label class="control-label mb-0" for="ioc_date">예약 날짜</label>
+							</div>
+							<div class= "col-9">
+							<input type="text"
+								name="ioc_date" value="<%= request.getAttribute("ioc_date") %>" readonly
+								class="form-control input-rounded inputBox">
+							</div>
 						</div>
+						
 						<input type="hidden" name="serial_num" value=<%= vac.getSerial_num() %> class="inputBox" >
 						<input type="hidden" name="reg_bus_no" value=<%= hp.getReg_bus_no() %> class="inputBox" >
 						<input type="hidden" name="resType" value=<%= request.getAttribute("resType") %> class="inputBox">
@@ -122,11 +172,11 @@ input:focus {
 
 3. “고객”이란 계약의 한쪽 당사자로서 사업자로부터 약관을 계약의 내용으로 할 것을 제안받은 자를 말한다.
 						</textarea>
-						<div class="text-center">
-							<input type="checkbox" id="agreeCheck" ><span>약관에 동의합니다.</span>
+						<div class="text-center mt-3">
+							<input type="checkbox" id="agreeCheck" ><label class="form-check-label" for="agreeCheck">약관에 동의합니다</label>
 							<br>
 						</div>
-						<div class="text-center">
+						<div class="text-center m-4">
 						<input class="btn btn-rounded btn-primary" type="button" onclick="agree()" value="예약확인">
 						</div>
 

@@ -129,12 +129,12 @@ public class reservationService {
 		return cntVac;
 	}
 	
-	public String selectSericalNumVaccineData(String reg_bus_no) {
-		Connection conn = getConnection();
-		String serialNumVac = rdao.selectSericalNumVaccineData(conn, reg_bus_no);
-		close(conn);
-		return serialNumVac;
-	}
+//	public String selectSericalNumVaccineData(String reg_bus_no) {
+//		Connection conn = getConnection();
+//		String serialNumVac = rdao.selectSericalNumVaccineData(conn, reg_bus_no);
+//		close(conn);
+//		return serialNumVac;
+//	}
 	
 	
 	public ArrayList<Object> joinvacVacName(String reg_bus_no) {
@@ -152,11 +152,29 @@ public class reservationService {
 		return serial_num;
 	}
 	
-	public Reservation selectOneResByUserRn(String user_rn, String sub_ok) {
+	public Reservation selectOneResByUserRn(String user_rn, String sub_ok, String reg_bus_no) {
 		Connection conn = getConnection();
-		Reservation resByUserRn= rdao.selectOneResByUserRn(conn, user_rn, sub_ok);
+		Reservation resByUserRn= rdao.selectOneResByUserRn(conn, user_rn, sub_ok, reg_bus_no);
 		close(conn);
 		return resByUserRn;
 	}
+	
+//	public ArrayList<Notice> selectSetialNumOfNotice(String user_id) {
+//		Connection conn = getConnection();
+//		ArrayList<Notice> reg_bus_no= rdao.selectSetialNumOfNotice(conn,user_id);
+//		close(conn);
+//		return reg_bus_no;
+//	}
+	
+
+	public int checkNotice(String reg_bus_no) {
+		Connection conn = getConnection();
+		int result = rdao.checkNotice(conn, reg_bus_no);
+		close(conn);
+		return result;
+	}
+
+	
+	
 	
 }

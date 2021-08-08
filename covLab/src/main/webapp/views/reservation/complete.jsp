@@ -29,11 +29,13 @@ function moveIndex(){
 
 </head>
 <body>
-	<div class="container-fluid align-self-center h-100">
-		<div class="row d-flex align-items-center h-100">
-			<div class="card h-100">
-				<div class="card-body text-center ">
-					<div class="welcome-text">
+
+<div class="authincation h-100">
+        <div class="container-fluid h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-5">
+                    <div class="form-input-content text-center">
+                        <div class="welcome-text">
 						<%
 						if (type.equals("insertSuccess")) {
 						%>
@@ -46,11 +48,16 @@ function moveIndex(){
 						}
 						%>
 					</div>
-					<button class="btn btn-rounded btn-primary" onclick="moveIndex()">메인페이지로
+					<button class="btn btn-rounded btn-primary mt-5" onclick="moveIndex()">메인페이지로
 						이동</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+	
 </body>
+
 </html>
