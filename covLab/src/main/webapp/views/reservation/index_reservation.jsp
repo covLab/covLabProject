@@ -101,8 +101,46 @@
 		hospitals[i].distance = distance;
 	}
 	sortedLocations = sortByDist(hospitals);
-	/* 병원 정보 + 백신 정보 + 거리 정보 담긴 배열 */
 	
+	function printTable(){
+		var table =document.getElementById("ajaxTable");
+		table.innerHTML="";
+		for(i=<%=startRow%>-1;i<<%=endRow%>
+	; i++) {
+
+			table.insertRow().insertCell().innerHTML = "&nbsp";
+
+			const hospname = table.insertRow();
+			hospname.insertCell(0).innerText = "병원명";
+			hospname.insertCell(1).innerText = sortedLocations[i].hp_name;
+
+			const hospaddress = table.insertRow();
+			hospaddress.insertCell(0).innerText = "주소";
+			hospaddress.insertCell(1).innerText = sortedLocations[i].hp_address;
+
+			const hospphone = table.insertRow();
+			hospphone.insertCell(0).innerText = "전화번호";
+			hospphone.insertCell(1).innerText = sortedLocations[i].hp_phone;
+
+			const hospremain = table.insertRow();
+			hospremain.insertCell(0).innerText = "잔여수량";
+			hospremain.insertCell(1).innerText = sortedLocations[i].remain;
+
+			const btn = table.insertRow();
+			const val = sortedLocations[i].reg_bus_no;
+			const lat = sortedLocations[i].hp_latitude;
+			const lng = sortedLocations[i].hp_longitude;
+
+			const data = val + "','" + lat + "','" + lng;
+
+			const str = '<input type="button" name="btn" value="예약" onclick="post_checkedhp(\''
+					+ data + '\');"/>';
+
+			console.log(str);
+			btn.innerHTML = str;
+
+		}
+	}
 
 	/*거리순 정렬 함수*/
 	function sortByDist(arr) {
@@ -112,20 +150,6 @@
 				return 1;
 			}
 			if (a.distance < b.distance) {
-				return -1;
-			}
-			return 0;
-		});
-		return sortedArr;
-	}
-	/*수량순 정렬 함수*/
-	function sortByAmnt(arr) {
-		sortedArr = [];
-		sortedArr = arr.sort(function(a, b) {
-			if (a.remain < b.remain) {
-				return 1;
-			}
-			if (a.remain > b.remain) {
 				return -1;
 			}
 			return 0;
@@ -248,82 +272,44 @@
 
 
 	function orderProcess(){
-		console.log({orderopt: $("#orderopt").val()});
+		console.log({orderopt: $("#list_order").val()});
 		$.ajax({
 			url: "/semi/hosporder",
 			type: "post",
 			data: {orderopt:$('input[name=list_order]:checked').val()},
 			success : function(data){
 				console.log(data);
-				var table =document.getElementById("ajaxTable");
-				table.innerHTML="";
-				if (data=='dist'){
-					sortByDist(hospitals);
-				}
-				if (data=='amnt'){
-					sortByAmnt(hospitals);
-				}
 				
-				for(i=<%=startRow%>-1;i<<%=endRow%>
-	; i++) {
-
-							table.insertRow().insertCell().innerHTML = "&nbsp";
-
-							const hospname = table.insertRow();
-							hospname.insertCell(0).innerText = "병원명";
-							hospname.insertCell(1).innerText = sortedLocations[i].hp_name;
-
-							const hospaddress = table.insertRow();
-							hospaddress.insertCell(0).innerText = "주소";
-							hospaddress.insertCell(1).innerText = sortedLocations[i].hp_address;
-
-							const hospphone = table.insertRow();
-							hospphone.insertCell(0).innerText = "전화번호";
-							hospphone.insertCell(1).innerText = sortedLocations[i].hp_phone;
-
-							const hospremain = table.insertRow();
-							hospremain.insertCell(0).innerText = "잔여수량";
-							hospremain.insertCell(1).innerText = sortedLocations[i].remain;
-
-							const btn = table.insertRow();
-							const val = sortedLocations[i].reg_bus_no;
-							const lat = sortedLocations[i].hp_latitude;
-							const lng = sortedLocations[i].hp_longitude;
-							
-							const data = val+"','"+lat+"','"+lng;
-							
-							const str = '<input type="button" name="btn" value="예약" onclick="post_checkedhp(\''
-									+ data + '\');"/>';
-							
-							console.log(str);
-							btn.innerHTML = str;
-
-						}
+				
+				
 					}
 				})
+		location.href = '/semi/indexresamnt';
 
 	}
 </script>
 </head>
 
-<body onload="javascript:orderProcess();locationTest();">
+<body onload="javascript:printTable();locationTest();">
 
 	<div class="content-wrap">
 		<div class="main">
 			<div class="container-fluid">
 				<section id="main-content">
 					<div class="card h-100 m-0">
-					<form>
-						<input type='radio' name='list_order' value='dist' checked='checked' onclick='orderProcess();' /> 거리순 
-						<input type='radio' name='list_order' value='amnt' onclick='orderProcess();' />수량순 
-					</form>
+						<form method="post" action="/semi/indexres">
+							<input type='radio' name='list_order' value='dist'
+								checked='checked' /> 거리순 <input
+								type='radio' name='list_order' value='amnt'
+								onclick='orderProcess();' />수량순
+						</form>
 						<div class="row">
-					
+
 							<div style="text-align: center;" class="col-lg-3 p-0">
 								<form action="/semi/detailhp" method="post">
 
 									<table id="ajaxTable" style="width: 100%" bgcolor="white"></table>
-									
+
 									<!-- <a href="/semi/detailhp?reg_bus_no=></a>-->
 								</form>
 

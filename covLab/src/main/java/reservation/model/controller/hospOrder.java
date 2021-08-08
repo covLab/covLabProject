@@ -35,7 +35,7 @@ public class hospOrder extends HttpServlet {
 			throws ServletException, IOException {
 
 		String orderopt = request.getParameter("orderopt");
-		System.out.println(orderopt);
+		System.out.println("orderopt"+orderopt);
 
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -43,6 +43,9 @@ public class hospOrder extends HttpServlet {
 		out.flush();
 		out.close();
 
+		if (orderopt.equals("amnt")) {
+			
+		}
 	}
 
 	/**
