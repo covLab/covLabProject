@@ -1,4 +1,4 @@
-package board.comments.controller;
+package hospital.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.comments.model.service.CommentsService;
-import board.comments.model.vo.Comments;
+import hospital.model.service.HospitalService;
+import hospital.model.vo.VaccineInfo;
 
 /**
- * Servlet implementation class CommentsReplyUpdateServlet
+ * Servlet implementation class UpdateVaccineInfoViewServlet
  */
-@WebServlet("/cupdate")
-public class CommentsUpdateServlet extends HttpServlet {
+@WebServlet("/upvcinfoview")
+public class UpdateVaccineInfoViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentsUpdateServlet() {
+    public UpdateVaccineInfoViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +31,19 @@ public class CommentsUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.setCharacterEncoding("utf-8");
 		
-		Comments comments = new Comments();
+		String vname = request.getParameter("vname");
+		VaccineInfo vi = new HospitalService().selectVaccineInfo(vname);
 		
-		comments.setComNo(Integer.parseInt(request.getParameter("comNo")));
-		comments.setComContent(request.getParameter("content"));
-		comments.setBoardRef(Integer.parseInt(request.getParameter("boardRef")));
-		
-		int currentPage = Integer.parseInt(request.getParameter("page"));
-		
-		System.out.println("cupdate : "+comments);
-		int result = new CommentsService().updateComments(comments);
-		
-		if(result > 0) {
-			response.sendRedirect("bdetail?bno="+comments.getBoardRef()+"&page="+currentPage);
+		RequestDispatcher view = null;
+		if(vi != null) {
+			view = request.getRequestDispatcher("views/hospital/vaccineInfoUpdateView.jsp");
+			request.setAttribute("vi", vi);
+			view.forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
-			request.setAttribute("message", comments.getBoardRef()+"번 글 "+comments.getComNo()+"번 댓글 수정 실패...");
+			view = request.getRequestDispatcher("views/board/boardError.jsp");
+			request.setAttribute("message", vname+" 백신 정보 수정 실패..");
 			view.forward(request, response);
 		}
 	}

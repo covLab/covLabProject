@@ -48,7 +48,7 @@ public class CommentsUpdateViewServlet extends HttpServlet {
 			
 			view.forward(request, response);
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
+			view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", boardRef+"번째 글 댓글번호 "+comNo+"번 수정 실패...");
 			view.forward(request, response);
 		}

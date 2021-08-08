@@ -106,6 +106,18 @@ public class BoardService {
 		return result;
 	}
 
+	public int updateRecommend(int boardNo) {
+		Connection conn = getConnection();
+		int result = bdao.updateRecommend(conn, boardNo);
+		if(result >0 ) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 	
 
 

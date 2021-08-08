@@ -46,8 +46,8 @@ public class BoardUpdateViewServlet extends HttpServlet {
 			request.setAttribute("page", currentPage);
 			view.forward(request, response);
 		} else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", boardNo + "�� �Խñ� ���� �������� �̵� ����..");
+			view = request.getRequestDispatcher("views/board/boardError.jsp");
+			request.setAttribute("message", boardNo + "번 게시글 수정페이지 이동 실패..");
 			view.forward(request, response);
 		}
 	}

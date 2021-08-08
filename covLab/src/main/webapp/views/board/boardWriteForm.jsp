@@ -31,6 +31,7 @@
 					<div class="card">
 
 					<form action="/semi/binsert" method="post">
+					<input type="hidden" name="user" value="<%=loginMember.getUserGrade() %>">
 						<table align="center">
 							<tr>
 								<th>제 목</th>

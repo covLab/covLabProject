@@ -42,15 +42,21 @@ public class BoardInsertServlet extends HttpServlet {
 		board.setBoardTitle(request.getParameter("title"));
 		board.setBoardWriter(request.getParameter("writer"));
 		board.setBoardContent(request.getParameter("content"));
-
+		String userGrade = request.getParameter("user");
+		System.out.println("userGrade : "+userGrade);
 
 		int result = new BoardService().insertBoard(board);
 
 
 		if (result > 0) {
-			response.sendRedirect("blist?page=1");
+			if(userGrade.equals("A")) {
+				response.sendRedirect("blistadmin?page=1");
+			}else {
+				response.sendRedirect("blist?page=1");
+			}
+			
 		} else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", "게시글 작성 실패");
 			view.forward(request, response);
 		}

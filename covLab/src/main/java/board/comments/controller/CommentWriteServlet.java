@@ -54,7 +54,7 @@ public class CommentWriteServlet extends HttpServlet {
 		if(result > 0 ) {
 			response.sendRedirect("/semi/bdetail?bno="+boardNo+"&page="+currentPage);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", boardNo+"번 게시글 댓글 등록 실패...");
 			view.forward(request, response);
 		}

@@ -92,10 +92,11 @@ public class HospitalDao {
 		ResultSet rset = null;
 
 		String query = "select count(*) "
-				+ "from reservation "
+				+ "from reservation  "
 				+ "left join vaccine using(serial_num) "
-				+ "left join members using(user_rn) "
-				+ "left join hospital using(reg_bus_no)";
+				+ "left join members using(user_rn)  "
+				+ "left join hospital using(reg_bus_no) "
+				+ "where can_date is null or rev_date > can_date";
 
 		try {
 			stmt = conn.createStatement();
@@ -128,6 +129,7 @@ public class HospitalDao {
 				+ "left join vaccine using(serial_num) "
 				+ "left join members using(user_rn) "
 				+ "left join hospital using(reg_bus_no) "
+				+ "where (can_date is null) or rev_date>can_date "
 				+ "order by hp_name)) "
 				+ "where rnum between ? and ?";
 
@@ -182,7 +184,8 @@ public class HospitalDao {
 			} else {
 				pstmt.setInt(1, 2);
 			}
-			pstmt.setInt(2, ri.getUserNo());			result = pstmt.executeUpdate();
+			pstmt.setInt(2, ri.getUserNo());			
+			result = pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -346,6 +349,59 @@ public class HospitalDao {
 		}
 	
 		return list;
+	}
+
+	public VaccineInfo selectVaccineInfo(Connection conn, String vname) {
+		VaccineInfo vi = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from vaccine_info where vac_name = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, vname);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				vi = new VaccineInfo();
+				vi.setVacName(vname);
+				vi.setMadeByCompany(rset.getString("made_by_company"));
+				vi.setMadeInCountry(rset.getString("made_in_country"));
+				vi.setMaxIocCount(rset.getInt("max_ioc_count"));
+				vi.setExpDur(rset.getString("exp_dur"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return vi;
+	}
+
+	public int updateVaccineInfo(Connection conn, VaccineInfo vi) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "update vaccine_info set "
+				+ "MADE_BY_COMPANY = ?, "
+				+ "MADE_IN_COUNTRY = ?, "
+				+ "MAX_IOC_COUNT = ?, "
+				+ "EXP_DUR = ? "
+				+ "where VAC_NAME = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, vi.getMadeByCompany());
+			pstmt.setString(2, vi.getMadeInCountry());
+			pstmt.setInt(3, vi.getMaxIocCount());
+			pstmt.setString(4, vi.getExpDur());
+			pstmt.setString(5, vi.getVacName());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 	}
 
 	

@@ -51,14 +51,10 @@ public class BoardUpdateServlet extends HttpServlet {
 
 		
 		if (result > 0) {
-			
-			//response.sendRedirect("blist?page="+currentPage);
-			
-			
 			response.sendRedirect("bdetail?bno=" + board.getBoardNo() +"&page="+currentPage);
 			
 		} else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/board/boardError.jsp");
 			request.setAttribute("message", board.getBoardNo() + "번 글 수정 실패..");
 			view.forward(request, response);
 		}
