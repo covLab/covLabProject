@@ -216,7 +216,7 @@ public class reservationDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int check = 0;
-		String query = "select count(*) from reservation where user_rn = ? and state = 'W' and sub_ok = 'N' ";
+		String query = "select count(*) from reservation where user_rn = ? and state = 'W' and sub_ok = 'N'";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -625,17 +625,18 @@ public class reservationDao {
 	}
 	
 	
-	public Reservation selectOneResByUserRn(Connection conn, String user_rn, String sub_ok) {
+	public Reservation selectOneResByUserRn(Connection conn, String user_rn, String sub_ok, String reg_bus_no) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Reservation res = null;
 		
-		String query = "select * from reservation where user_rn = ? and sub_ok =? ";
+		String query = "select * from reservation where user_rn = ? and reg_bus_no = ? and sub_ok =? and state = 'W'";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, user_rn);			
-			pstmt.setString(2, sub_ok);
+			pstmt.setString(1, user_rn);	
+			pstmt.setString(2, reg_bus_no);
+			pstmt.setString(3, sub_ok);
 			
 			rset = pstmt.executeQuery();
 			
@@ -661,5 +662,70 @@ public class reservationDao {
 		
 		return res;
 	}
+	
+//	public ArrayList<Notice> selectSetialNumOfNotice(Connection conn, String user_id) {
+//		ArrayList<Notice> list = new ArrayList<Notice>();
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		
+//		String query = "select * from notice where user_id = ?";
+//		
+//		try {
+//			pstmt = conn.prepareStatement(query);
+//			
+//			pstmt.setString(1, user_id);
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			while(rset.next()) {
+//				Notice no = new Notice();
+//				
+//				// 컬럼 값 꺼내서 필드에 옮겨 기록하기 : 결과 매핑
+//				no.setReg_bus_no(rset.getString("reg_bus_no"));
+//				
+//				list.add(no);
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		
+//		return list;
+//	}
+
+	
+public int checkNotice(Connection conn,String reg_bus_no) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query ="select count(*) from vaccine_data where reg_bus_no = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, reg_bus_no);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				result = rset.getInt(1);
+				System.out.println(result);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 
 }

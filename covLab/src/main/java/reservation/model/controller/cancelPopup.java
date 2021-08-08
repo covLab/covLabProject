@@ -94,10 +94,11 @@ public class cancelPopup extends HttpServlet {
 		}
 
 		
-		Reservation res = rservice.selectOneResByUserRn(mb.getUserRn(), sub_ok);
+		Reservation res = rservice.selectOneResByUserRn(mb.getUserRn(), sub_ok, reg_bus_no);
 		
 		Vaccine vac = rservice.selectOneVac(res.getSerial_num());
 		Hospital hp = rservice.selectOneHp(reg_bus_no);
+		
 		
 		request.setAttribute("mb", mb);
 		request.setAttribute("vac", vac);

@@ -40,6 +40,7 @@
     <link href="/semi/resources/css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="/semi/resources/css/lib/helper.css" rel="stylesheet">
     <link href="/semi/resources/css/style.css" rel="stylesheet">
+    <link href="/semi/resources/css/bootstrap-select.min.css" rel="stylesheet">
 
    <!-- boardMain
     <link href="/semi/resources/css/lib/font-awesome.min.css" rel="stylesheet">
