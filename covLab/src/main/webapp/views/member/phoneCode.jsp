@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+ 
+
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +13,7 @@
     <link href="/semi/resources/css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="/semi/resources/css/lib/helper.css" rel="stylesheet">
     <link href="/semi/resources/css/style.css" rel="stylesheet">
+     <script src="/semi/resources/js/lib/menubar/sidebar.js"></script>
 <title>본인 인증</title>
 
 
@@ -78,7 +81,7 @@ function setParentText(){
 </script>
 </head>
 
-<body class="bg-primary">
+<body class="">
 
     <div class="unix-login">
         <div class="container-fluid">

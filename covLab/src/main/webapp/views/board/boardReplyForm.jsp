@@ -65,7 +65,7 @@ function requestReply(){
 							<tr align="center">
 								<th colspan="2">
 									<%-- 댓글달기 버튼은 로그인한 경우에만 보이게 함 --%>
-									<%-- <% if(loginMember != null){ 
+									<% if(loginMember != null){ 
 											if(loginMember.getUserName().equals(board.getBoardWriter())) { //본인글일때%>
 											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
 											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
@@ -75,14 +75,13 @@ function requestReply(){
 									<% } else { //로그인했는데 본인글이 아닐때 %>
 										
 											<button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp; 
-									<% } %> --%>
+									<% } %> 
 									
-									<%-- 테스트용 버튼 --%>
-											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
+											<!-- <button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
 											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
 											<button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp;
-											
-									<%-- --%>	
+											 -->
+									
 									
 									
 									<button onclick="javascript:location.href='/semi/blist?page=<%= currentPage %>'; return false;" class="btn btn-default">목록</button>
