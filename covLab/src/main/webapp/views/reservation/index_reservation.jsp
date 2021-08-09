@@ -133,7 +133,7 @@
 
 			const data = val + "','" + lat + "','" + lng;
 
-			const str = '<input type="button" name="btn" value="예약" onclick="post_checkedhp(\''
+			const str = '<input type="button" class="btn" name="btn" value="예약" onclick="post_checkedhp(\''
 					+ data + '\');"/>';
 
 			console.log(str);

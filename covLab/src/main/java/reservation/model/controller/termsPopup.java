@@ -47,11 +47,13 @@ public class termsPopup extends HttpServlet {
 		reservationService rservice = new reservationService();
 		
 		//테스트용 세션 받아오기
+		//HttpSession session = request.getSession(true);
 		HttpSession session = request.getSession(true);
 		
 		/*테스트용 세션 생성*/
 		Member mbs = (Member) session.getAttribute("loginMember");
 		String user_id = mbs.getUserId();
+		System.out.println("user_id : "+user_id);
 		
 		//테스트용 reg_bus_no 받아오기
 		String reg_bus_no = request.getParameter("reg_bus_no");
