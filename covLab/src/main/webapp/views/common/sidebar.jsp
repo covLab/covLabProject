@@ -19,7 +19,7 @@ Member loginMember = (Member) session.getAttribute("loginMember");
          <div class="nano-content">
             <ul>
                <div class="logo">
-                  <a href="index1.html"> <!-- <img src="assets/images/logo.png" alt="" /> -->
+                  <a href="/semi/indexres"> <!-- <img src="assets/images/logo.png" alt="" /> -->
                      <span>CovLab</span></a>
                </div>
                <li class="label">Menu</li>

@@ -28,7 +28,7 @@
                   </div>
                </div>
                <div class="float-right">
-                  <div class="dropdown dib">
+                  <!-- <div class="dropdown dib">
                      <div class="header-icon" data-toggle="dropdown">
                         <i class="ti-bell"></i>
                      </div>
@@ -38,7 +38,7 @@
                         <i class="ti-email"></i>
                         
                      </div>
-                  </div>
+                  </div> -->
                   <div class="dropdown dib">
                      <div class="header-icon" data-toggle="dropdown">
                         <span class="user-avatar" onclick="javascript:location.href='/semi/views/member/login.jsp'">로그인
