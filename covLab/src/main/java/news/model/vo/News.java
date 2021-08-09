@@ -8,16 +8,14 @@ public class News implements Serializable {
 	
 	private String title;
 	private String url;
-	private Date wrtn_tm;
 	public News() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public News(String title, String url, Date wrtn_tm) {
+	public News(String title, String url) {
 		super();
 		this.title = title;
 		this.url = url;
-		this.wrtn_tm = wrtn_tm;
 	}
 	
 	public String getTitle() {
@@ -32,11 +30,6 @@ public class News implements Serializable {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Date getWrtn_tm() {
-		return wrtn_tm;
-	}
-	public void setWrtn_tm(Date wrtn_tm) {
-		this.wrtn_tm = wrtn_tm;
-	}
+	
 }
 	

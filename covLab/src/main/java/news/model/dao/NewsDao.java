@@ -35,9 +35,7 @@ public class NewsDao {
 				News ns = new News();
 				
 				ns.setTitle(rset.getString("title"));
-				ns.setTitle(rset.getString("title"));
-				ns.setTitle(rset.getString("title"));
-
+				ns.setUrl(rset.getString("url"));
 				list.add(ns);
 			}
 		} catch (SQLException e) {
