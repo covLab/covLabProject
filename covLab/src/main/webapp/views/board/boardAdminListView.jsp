@@ -166,11 +166,7 @@ function showWriteForm(){
                   </div>
                </div>
 
-               <!-- /# card -->
-               <!-- </div> -->
-               <!-- /# column 
-               </div>-->
-               <!-- /# row -->
+
 
                <%@ include file="../common/footer.jsp" %>
             </section>

@@ -51,75 +51,6 @@ function requestReply(){
 				</div>
 				<div id="main-content">
 					<div class="card">
-
-						<%--<table align="center">
-							<tr>
-								<th>제 목</th>
-								<td><%= board.getBoardTitle() %></td>
-							</tr>
-							<tr>
-								<th>작성자</th>
-								<td><%= board.getBoardWriter() %></td>
-							</tr>
-							<tr>
-								<th>작성일</th>
-								<td><%= board.getBoardDate() %></td>
-							</tr>
-							<tr>
-								<th>내 용</th>
-								<td><%= board.getBoardContent() %></td>
-							</tr>		
-						</table>
-						<hr> 
-						
-						<table align="center">		
-							<tr>
-								<th colspan="2">
-									 댓글달기 버튼은 로그인한 경우에만 보이게 함 --%>
-									<%-- <% if(loginMember != null){ 
-											if(loginMember.getUserName().equals(board.getBoardWriter())) { //본인글일때%>
-											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
-											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
-									<% }else if(loginMember.getUserGrade().equals("U")){ %>
-											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;	
-											<button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp;
-									<% } else { //로그인했는데 본인글이 아닐때 %>
-										
-											<button onclick="requestReply(); return false;" class="btn btn-primary">댓글달기</button> &nbsp; 
-									<% } %> --%>
-									
-									<%-- 테스트용 버튼 
-											<button onclick="moveUpdateView(); return false;" class="btn btn-primary">수정하기</button> &nbsp; 
-											<button onclick="requestDelete(); return false;" class="btn btn-danger">글 삭제</button> &nbsp;
-									
-								</th>
-							</tr>
-						</table>
-						
-						
-						
-						댓글이 있을 때
-						<% if (clist != null){ %>
-						<% for(Comments c : clist){ %>
-						<hr>
-						<table align="center">
-							<tr>
-								<th>아이디</th>
-								<td><%= c.getComWriter() %></td>
-							</tr>
-							<tr>
-								<th>작성일시</th>
-								<td><%= c.getComDate() %></td>
-							</tr>
-							<tr>
-								<th>댓글 내용</th>
-								<td><%= c.getComContent() %></td>
-							</tr>	
-						</table>
-						
-						<% } %>
-						--%>
-						
 						<hr>
 						
 						<fieldset>
@@ -128,22 +59,7 @@ function requestReply(){
 							<label>내 용 : <textarea rows="2" cols="50" id="content"></textarea></label>
 						</fieldset>
 						<button id="reply" class="btn btn-primary">확인</button>
-						<!-- <script type="text/javascript">
-						$(function(){
-							$('#reply').click(function(){
-								//$.post()
-								$.post("/cwrite", {writer: $('#writer').val(), content: $('#content').val() });
-								
-								//$.ajax()
-								$.ajax({
-									url: "/cwrite",
-									type: "post",
-									data: {writer: $('#writer').val(), content: $('#content').val() }
-								});								
-							});	
-						});
-						</script> -->
-						
+
 						<hr>
 						<table align="center">		
 							<tr>
@@ -153,8 +69,7 @@ function requestReply(){
 								</th>
 							</tr>
 						</table>
-						<%-- <% } %>  --%>
-						
+
 
 				</div>
 				</div>
