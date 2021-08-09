@@ -302,7 +302,7 @@ input:focus {
                               <div class="col-2 pl-0" style="display: inline-block">
    
                                  <a href="/semi/indexres" class="align-self-center mr-1 ml-1 ">
-                                 <i class="fas fa-arrow-left fa-3x"></i>
+                                 <i class="fas fa-arrow-left fa-2x"></i>
                                  </a>
                               </div>
                               <div class="col-10" style="display: inline-block">
