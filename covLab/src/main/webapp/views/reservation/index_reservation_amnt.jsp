@@ -295,8 +295,8 @@
 							<div class="card h-100 m-0 border border" style="">
 								<form method="post" action="/semi/indexres">
 									<input type='radio' name='list_order' value='dist'
-										checked='checked' /> 거리순 <input type='radio'
-										name='list_order' value='amnt' onclick='orderProcess();' />수량순
+										 /> 거리순 <input type='radio'
+										name='list_order' value='amnt' checked='checked' onclick='orderProcess();' />수량순
 								</form>
 
 
