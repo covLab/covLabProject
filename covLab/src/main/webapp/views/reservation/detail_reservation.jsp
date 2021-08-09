@@ -297,11 +297,19 @@ input:focus {
 
 						<div class="col-lg-4 p-0 border-radius">
 							<div class="card h-100 m-0 border border" style="">
-								<div class="card-header border-top-radius">
-								<span class="align-self-center mr-1 ml-1 "> 
-									<i class="far fa-clock fa-2x"></i></span>
-									<h5 class="card-title text-center" id="hp_name"><%=hp.getHp_name()%></h5>
-								</div>
+								<div class="card-header border-top-radius bg-white">
+								<div class="row">
+                              <div class="col-2 pl-0" style="display: inline-block">
+   
+                                 <a href="/semi/indexres" class="align-self-center mr-1 ml-1 ">
+                                 <i class="fas fa-arrow-left fa-2x"></i>
+                                 </a>
+                              </div>
+                              <div class="col-10" style="display: inline-block">
+                                 <h5 class="card-title text-center align-self-center mr-1 ml-1" id="hp_name"><%=hp.getHp_name()%></h5>
+                              </div>
+                           </div>
+                           </div>
 								<div class="card-body">
 
 									<form action="" method="post" name="info" autocomplete="off">
@@ -312,7 +320,7 @@ input:focus {
 
 											<div class="col pl-0">
 												<textarea class="control-form" name="hp_address" readonly
-													id="areaBox" style="display: block;"><%=hp.getHp_address()%>
+													id="areaBox" style="display: block; width:100%"><%=hp.getHp_address()%>
                                 			 </textarea>
 											</div>
 										</div>
@@ -475,6 +483,11 @@ input:focus {
 															id="canBtn">예약취소</button>
 														<%
 														}
+												}else{
+													%>
+													<button onclick="termsPopup()" class="btn btn-rounded btn-info"disabled style="background-color: grey;"  value="sub"
+						                                    id="resBtn">예약</button>
+						                                    <%
 												}
 											} else {
 											%>
@@ -495,6 +508,11 @@ input:focus {
 															id="canBtn">대리예약취소</button>
 														<%
 														}
+												}else{
+													%>
+													<button onclick="termsPopup()" class="btn btn-rounded btn-info"disabled style="background-color: grey;"  value="sub"
+						                                    id="resBtn">예약</button>
+						                                    <%
 												}
 											} else {
 											%>

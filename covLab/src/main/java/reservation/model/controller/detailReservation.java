@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.model.vo.Member;
 import reservation.model.service.reservationService;
 import reservation.model.vo.Hospital;
 import reservation.model.vo.Members;
@@ -55,12 +56,16 @@ public class detailReservation extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		
 		/*테스트용 세션 생성*/
-		session.setAttribute("user_id", "user18");
+		Member mbs = (Member) session.getAttribute("loginMember");
+		String user_id = mbs.getUserId();
+		
+		//session.setAttribute("user_id", "user00");
 		
 		//세션 아이디 설정
-		String user_id = (String) session.getAttribute("user_id");
+		//String user_id = (String) session.getAttribute("user_id");
 		
 		Members mb = rservice.selectOneMember(user_id);
+		System.out.println("user_id : "+user_id);
 		String user_rn = mb.getUserRn();
 		
 		System.out.println("user_rn : "+user_rn);
@@ -80,30 +85,32 @@ public class detailReservation extends HttpServlet {
 		
 		int checkRes = rservice.checkReservation(user_rn);
 		int checkSubRes = 0;
-		
+		int checkResBySubUserRn =0;
+		int user_no = 0;
+		Reservation resBySubUserRn = new Reservation();
 		System.out.println("sub_list.size() : " + sub_list.size());
 		
 		if(sub_list.size() > 0) {
 			for(Members sub_mb : sub_list) {
 				System.out.println("sub_mb.getUserRn() : "+sub_mb.getUserRn());
-				checkSubRes = rservice.checkSubReservation(sub_mb.getUserRn());
 				
-				int user_no = sub_mb.getSubUserNo();
+				user_no = sub_mb.getSubUserNo();
+				checkSubRes = rservice.checkSubReservation(sub_mb.getUserRn());
+				resBySubUserRn = rservice.selectOneResByUserRn(sub_mb.getUserRn(), sub_ok, reg_bus_no);
 				
 				sub_ok = "Y";
-				Reservation resBySubUserRn = rservice.selectOneResByUserRn(sub_mb.getUserRn(), sub_ok, reg_bus_no);
-				int checkResBySubUserRn = rservice.cehckOneResBySubUserRn(user_rn,reg_bus_no);
-				request.setAttribute("checkResBySubUserRn", checkResBySubUserRn);
-				System.out.println("resBySubUserRn : "+resBySubUserRn);
+				checkResBySubUserRn = rservice.cehckOneResBySubUserRn(user_rn,reg_bus_no);
 				
-				request.setAttribute("user_no", user_no);
-				request.setAttribute("resBySubUserRn", resBySubUserRn);
 				if(checkSubRes >0) {
 					break;
 				}
 			}
 		}
 		
+		request.setAttribute("user_no", user_no);
+		request.setAttribute("checkResBySubUserRn", checkResBySubUserRn);
+		request.setAttribute("resBySubUserRn", resBySubUserRn);
+		System.out.println("resBySubUserRn : "+resBySubUserRn);
 		
 		
 		ArrayList<Reservation> list_resTime = rservice.selectTimeRes(reg_bus_no);
@@ -116,20 +123,6 @@ public class detailReservation extends HttpServlet {
 		
 //		String serialNumVac = rservice.selectSericalNumVaccineData(reg_bus_no);
 		ArrayList<Object> joinvacVacData = rservice.joinvacVacName(reg_bus_no);
-		
-		/*
-		 * for(int i =0 ; i< joinvacVacData.size() ; i++) { ArrayList<String> list = new
-		 * ArrayList<String>(); for(int j =0 ; j < ((ArrayList<String>)
-		 * joinvacVacData.get(i)).size() ; j++) {
-		 * 
-		 * System.out.println("join_list : "+ ((ArrayList<String>)
-		 * joinvacVacData.get(i)).get(j)); list.add(((ArrayList<String>)
-		 * joinvacVacData.get(i)).get(j));
-		 * 
-		 * } }
-		 */
-		
-		
 		
 		for(Object obj : joinvacVacData) {
 			System.out.println( "! : "+((ArrayList<String>) obj).get(1));
