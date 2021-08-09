@@ -25,7 +25,7 @@ Member loginMember = (Member) session.getAttribute("loginMember");
                <li class="label">Menu</li>
                <ul>
                   <li><a href="/semi/indexres?page=1">홈페이지</a></li>
-                  <li><a href="/semi/views/information/information.jsp">뉴스/백신
+                  <li><a href="/semi/newslet">뉴스/백신
                         정보</a></li>
 
                   <%if (loginMember == null) { //일반유져%>
