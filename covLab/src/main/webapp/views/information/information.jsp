@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="java.util.ArrayList, news.model.vo.News"%>
+<% ArrayList<News> newsList = (ArrayList<News>) request.getAttribute("news"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,15 +147,15 @@
 <!-- 자동배너 (이미지 넣고, 수정해야함) -->
 <br>
   <div class="slider" >
-      <!-- <div class="slide" style="background-image: url(../../resources/images/info_num.jpg);"></div>   -->
-      <div class="slide" style="background-image: url(../../resources/images/info_num2.jpeg);">
-      	<a href="coronaInfo.jsp"><img src="../../resources/images/info_num2.jpeg" class="imga"></a>
+      <!-- <div class="slide" style="background-image: url(/semi/resources/images/info_num.jpg);"></div>   -->
+      <div class="slide" style="background-image: url(/semi/resources/images/info_num2.jpeg);">
+      	<a href="coronaInfo.jsp"><img src="/semi/resources/images/info_num2.jpeg" class="imga"></a>
       </div>
-      <div class="slide" style="background-image: url(../../resources/images/info_vac.gif);">
-      	<a href="vaccinInfo.jsp"><img src="../../resources/images/info_vac.gif" class="imga"></a>
+      <div class="slide" style="background-image: url(/semi/resources/images/info_vac.gif);">
+      	<a href="vaccinInfo.jsp"><img src="/semi/resources/images/info_vac.gif" class="imga"></a>
       </div>
-      <div class="slide" style="background-image: url(../../resources/images/info_qna2.jpg);">
-      	<a href="qna.jsp"><img src="../../resources/images/info_qna2.jpg" class="imga"></a>
+      <div class="slide" style="background-image: url(/semi/resources/images/info_qna2.jpg);">
+      	<a href="qna.jsp"><img src="/semi/resources/images/info_qna2.jpg" class="imga"></a>
       </div>
       <a class="prev" onclick="button_click(-1)">&#10094</a>
       <a class="next" onclick="button_click(1)">&#10095</a>
@@ -164,14 +166,10 @@
 
 <!-- 3. 실시간 뉴스 -->
 <h5>**뉴스 & 이슈**</h5><br>
-<a href="https://www.yna.co.kr/view/AKR20210805071200002?input=1195m" class="new"><u>코로나로 힘든 대형마트 입점업체, 임대료 감액 요청할 수 있다</u></a><br>
-<a href="https://biz.chosun.com/it-science/ict/2021/08/05/MTTS3BYF7JE47KXPKWH4LA6WTQ/?utm_source=naver&utm_medium=original&utm_campaign=biz">
-<u>네이버·카카오 앱으로 18~49세 코로나 백신 예약</u></a><br>
-<a href="https://www.news1.kr/articles/?4394395"><u>두번째 코로나 수능, 백신 맞아도 마스크…점심때만 3면 칸막이</u></a><br>
-<a href="https://newsis.com/view/?id=NISX20210805_0001538550&cID=13102&pID=13100"><u>코로나19, 실내 공간 감염 위험 4배 높다</u></a><br>
-<a href="https://www.hani.co.kr/arti/society/health/1006519.html"><u>코로나19 신규 확진자 1776명…30일째 1천명대</u></a><br>
-<a href="https://www.yna.co.kr/view/AKR20210804130100017?input=1195m"><u>국내 부모 64.2% "우리 아이 코로나 백신 맞히겠다"</u></a><br>
-<a href="https://www.korea.kr/news/policyNewsView.do?newsId=148888328"><u>‘글로벌 백신 허브화 TF’ 출범…“국내 백신 생산역량 강화”</u></a>
+<%for (News news : newsList) {%>
+	<a href=<%=news.getUrl()%>" class="new"><u><%=news.getTitle()%></u></a><br>
+<%} %>
+
 <br>
 <br>
 <p><a href="#top">맨 위로 이동</a></p>

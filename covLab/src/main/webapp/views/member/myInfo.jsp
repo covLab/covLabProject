@@ -132,8 +132,8 @@
                         <div class="user-profile-name">이 름   <%= p.getUserName() %></div>
                         
                         <div class="user-send-message">
-                          <button class="btn btn-primary " type="button" onclick="javascript:location.href='/semi/views/reservation/detail_reservation.jsp'">
-                            예약 상세 확인</button>
+                          <!-- <button class="btn btn-primary " type="button" onclick="javascript:location.href='/semi/views/reservation/detail_reservation.jsp'">
+                            예약 상세 확인</button> -->
                         </div>
                         <div class="custom-tab user-profile-tab">
                           <ul class="nav nav-tabs" role="tablist">
