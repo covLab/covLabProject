@@ -93,13 +93,14 @@ public class detailReservation extends HttpServlet {
 		if(sub_list.size() > 0) {
 			for(Members sub_mb : sub_list) {
 				System.out.println("sub_mb.getUserRn() : "+sub_mb.getUserRn());
+				sub_ok = "Y";
 				
 				user_no = sub_mb.getSubUserNo();
 				checkSubRes = rservice.checkSubReservation(sub_mb.getUserRn());
 				resBySubUserRn = rservice.selectOneResByUserRn(sub_mb.getUserRn(), sub_ok, reg_bus_no);
 				
-				sub_ok = "Y";
-				checkResBySubUserRn = rservice.cehckOneResBySubUserRn(user_rn,reg_bus_no);
+				System.out.println("sub_mb.getUserRn() :"+sub_mb.getUserRn());
+				checkResBySubUserRn = rservice.cehckOneResBySubUserRn(sub_mb.getUserRn(),reg_bus_no);
 				
 				if(checkSubRes >0) {
 					break;

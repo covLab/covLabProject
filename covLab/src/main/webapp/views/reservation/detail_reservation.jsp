@@ -511,7 +511,7 @@ input:focus {
 												}else{
 													%>
 													<button onclick="termsPopup()" class="btn btn-rounded btn-info"disabled style="background-color: grey;"  value="sub"
-						                                    id="resBtn">예약</button>
+						                                    id="resBtn">대리예약</button>
 						                                    <%
 												}
 											} else {

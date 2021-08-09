@@ -832,7 +832,7 @@ public class MemberDao {
 
 	
 
-		public Member searchUserPwPhone(Connection conn, String userid, String phone) {
+	public Member searchUserPwPhone(Connection conn, String userid, String phone) {
 		Member member = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset =null;
@@ -851,6 +851,14 @@ public class MemberDao {
 				
 				member.setUserId(userid);
 				member.setUserPw(phone);
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
 					   
 		return member;
 	}

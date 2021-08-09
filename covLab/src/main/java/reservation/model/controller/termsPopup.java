@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import member.model.vo.Member;
 import reservation.model.service.reservationService;
 import reservation.model.vo.Hospital;
 import reservation.model.vo.Members;
@@ -47,7 +48,10 @@ public class termsPopup extends HttpServlet {
 		
 		//테스트용 세션 받아오기
 		HttpSession session = request.getSession(true);
-		String user_id = (String) session.getAttribute("user_id");
+		
+		/*테스트용 세션 생성*/
+		Member mbs = (Member) session.getAttribute("loginMember");
+		String user_id = mbs.getUserId();
 		
 		//테스트용 reg_bus_no 받아오기
 		String reg_bus_no = request.getParameter("reg_bus_no");
