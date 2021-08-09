@@ -11,7 +11,7 @@
 		<div class="col-lg-12">
 			<div class="footer">
 				<p>
-					2018 © Admin Board. - <a href="#">example.com</a>
+					2021 © CovLab - <a href="#">02) 123-4567</a>
 				</p>
 			</div>
 		</div>

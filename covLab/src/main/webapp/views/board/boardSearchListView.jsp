@@ -56,8 +56,7 @@ function moveLogin(){
 	<div class="content-wrap">
 		<div class="main">
 			<div class="container-fluid">
-				<!--<div class="row">
-					 <div class="col-lg-8 p-r-0 title-margin-right"> -->
+				
 						<div class="page-header">
 							<div class="page-title">
 								<h1>
@@ -65,18 +64,11 @@ function moveLogin(){
 								</h1>
 							</div>
 						</div>
-					<!-- </div> 
-
-				</div>-->
-				<!-- /# row -->
+		
 				<section id="main-content">
-					<!-- <div class="row">
-						<div class="col-lg-12"> -->
+					
 					<div class="card">
-						<!-- <div class="card-title">
-                                    <h4>Bootstrap Data Table </h4>
-                                </div> -->
-						<!-- <div class="bootstrap-data-table-panel">-->
+						
 						<div class="table-responsive">
 							<div>
 							<div style="width=500px; float:left;">
@@ -179,11 +171,7 @@ function moveLogin(){
 							</div>
 						</div>
 					</div>
-					<!-- /# card -->
-					<!-- </div> -->
-					<!-- /# column 
-					</div>-->
-					<!-- /# row -->
+			
 
 					<%@ include file="../common/footer.jsp" %>
 				</section>
